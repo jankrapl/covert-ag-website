@@ -6,7 +6,7 @@
 <title>Covert AG — Ein Partner. Alles im Blick.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#0B0B0C;
@@ -31,15 +31,15 @@
     -webkit-font-smoothing:antialiased;
   }
   h1,h2,h3,.serif{
-    font-family:'Fraunces',serif;
-    font-weight:500;
-    letter-spacing:-0.01em;
+    font-family:'Plus Jakarta Sans','Inter',sans-serif;
+    font-weight:700;
+    letter-spacing:-0.02em;
     margin:0;
     color:var(--ink);
   }
-  h1{font-size:clamp(2.5rem,5.2vw,4.6rem); line-height:1.04; font-weight:500;}
-  h2{font-size:clamp(1.9rem,3.4vw,2.9rem); line-height:1.12;}
-  h3{font-size:1.4rem; line-height:1.25; font-weight:500;}
+  h1{font-size:clamp(2.5rem,5.2vw,4.6rem); line-height:1.05; font-weight:800;}
+  h2{font-size:clamp(1.9rem,3.4vw,2.9rem); line-height:1.14; font-weight:800;}
+  h3{font-size:1.4rem; line-height:1.28; font-weight:700;}
   p{margin:0 0 1em 0;}
   a{color:inherit; text-decoration:none;}
   ul{margin:0; padding:0; list-style:none;}
@@ -50,14 +50,16 @@
   /* ---------- Buttons ---------- */
   .btn{
     display:inline-flex; align-items:center; gap:8px;
-    padding:14px 26px; border-radius:2px;
-    font-family:'Inter',sans-serif; font-size:0.92rem; font-weight:600;
-    cursor:pointer; border:1px solid transparent; transition:background .2s ease, color .2s ease, border-color .2s ease;
+    padding:14px 28px; border-radius:999px;
+    font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:0.82rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:.05em;
+    cursor:pointer; border:1.5px solid transparent; transition:background .2s ease, color .2s ease, border-color .2s ease, transform .15s ease;
     white-space:nowrap;
   }
+  .btn:active{ transform:scale(.97); }
   .btn-primary{ background:var(--pine); color:var(--white); }
   .btn-primary:hover{ background:var(--pine-light); }
-  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--ink); }
   .btn-ghost:hover{ border-color:var(--pine); color:var(--pine); }
   .btn-on-dark{ background:var(--paper); color:var(--ink); }
   .btn-on-dark:hover{ background:var(--white); }
@@ -78,7 +80,7 @@
   .logo{ cursor:pointer; display:flex; align-items:center; }
   .logo img{ height:26px; width:auto; display:block; }
   nav.links{ display:flex; align-items:center; gap:30px; }
-  nav.links a{ font-size:0.93rem; font-weight:500; color:var(--ink); position:relative; padding:4px 0; cursor:pointer; }
+  nav.links a{ font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--ink); position:relative; padding:4px 0; cursor:pointer; }
   nav.links a.active{ color:var(--pine); }
   nav.links a:hover{ color:var(--pine); }
   .has-drop{ position:relative; }
@@ -89,7 +91,7 @@
     box-shadow:0 12px 30px rgba(20,32,25,.08);
   }
   .has-drop:hover .drop{ opacity:1; visibility:visible; translate:0 0; }
-  .drop a{ display:block; padding:10px 12px; font-size:0.9rem; border-radius:2px; }
+  .drop a{ display:block; padding:10px 12px; font-size:0.9rem; border-radius:8px; text-transform:none; letter-spacing:normal; font-weight:500; }
   .drop a:hover{ background:var(--paper); }
   .nav-cta{ display:flex; align-items:center; gap:18px; }
   .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px; }
@@ -104,7 +106,7 @@
     padding:24px 24px 40px; overflow-y:auto;
   }
   .mobile-panel.open{ display:block; }
-  .mobile-panel a{ display:block; font-family:'Fraunces',serif; font-size:1.5rem; padding:14px 0; border-bottom:1px solid var(--line); }
+  .mobile-panel a{ display:block; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.4rem; padding:14px 0; border-bottom:1px solid var(--line); }
   .mobile-panel .btn{ margin-top:24px; width:100%; justify-content:center; }
 
   /* ---------- Sections generic ---------- */
@@ -121,28 +123,43 @@
   .max-text{ max-width:620px; }
   .divider{ height:1px; background:var(--line); border:none; margin:0; }
 
-  /* ---------- Page hero (subpages) ---------- */
-  .page-hero{ padding:180px 0 80px; }
-  .page-hero .kicker{ font-size:0.9rem; color:var(--pine); font-weight:600; margin-bottom:14px; }
-  .page-hero h1{ max-width:820px; }
-  .page-hero .lede{ margin-top:22px; }
-
-  /* ---------- Home hero ---------- */
-  .home-hero{ padding:168px 0 90px; position:relative; overflow:hidden; }
-  .hero-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center; }
-  @media (max-width:940px){ .hero-grid{ grid-template-columns:1fr; } }
-  .hero-copy h1{ margin-bottom:22px; }
-  .hero-copy .lede{ margin-bottom:6px; }
-  .hero-tag{ margin-top:30px; font-size:0.88rem; color:var(--stone); border-top:1px solid var(--line); padding-top:18px; max-width:420px; }
+  /* ---------- Hero (gradient band, page + home) ---------- */
+  .page-hero, .home-hero{
+    position:relative; overflow:hidden; text-align:center;
+    padding:190px 0 100px;
+    background:linear-gradient(150deg, var(--pine) 0%, #16224a 55%, var(--ink) 100%);
+    color:#fff;
+  }
+  .page-hero::before, .page-hero::after, .home-hero::before, .home-hero::after{
+    content:""; position:absolute; width:170px; height:210px;
+    border:1.5px solid rgba(255,255,255,.22); border-radius:0 70px 70px 70px; pointer-events:none;
+  }
+  .page-hero::before, .home-hero::before{ top:-50px; left:-55px; transform:rotate(-10deg); }
+  .page-hero::after, .home-hero::after{ bottom:-70px; right:-45px; transform:rotate(172deg); }
+  @media (max-width:780px){
+    .page-hero::before, .page-hero::after, .home-hero::before, .home-hero::after{ display:none; }
+  }
+  .page-hero .wrap, .home-hero .wrap{ position:relative; z-index:1; }
+  .page-hero .kicker, .home-hero .kicker{
+    display:inline-block; font-size:0.78rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:.16em; color:#BFD1FF; margin-bottom:18px;
+  }
+  .page-hero h1, .home-hero h1{ color:#fff; max-width:900px; margin:0 auto; }
+  .page-hero .lede, .home-hero .lede{ color:rgba(255,255,255,.82); max-width:640px; margin:22px auto 0; }
+  .page-hero .cta-row, .home-hero .cta-row{ justify-content:center; margin-top:32px; }
+  .page-hero .btn-ghost, .home-hero .btn-ghost{ border-color:rgba(255,255,255,.5); color:#fff; }
+  .page-hero .btn-ghost:hover, .home-hero .btn-ghost:hover{ border-color:#fff; background:rgba(255,255,255,.08); }
+  .hero-tag{ margin:34px auto 0; font-size:0.82rem; text-transform:uppercase; letter-spacing:.1em; color:rgba(255,255,255,.6); border-top:1px solid rgba(255,255,255,.2); padding-top:18px; max-width:420px; }
+  .hero-grid{ display:block; }
 
   /* portal mock */
   .portal-mock{ position:relative; height:440px; }
   .pm-card{
-    position:absolute; background:var(--white); border:1px solid var(--line);
+    position:absolute; background:var(--white); border:1px solid var(--line); border-radius:14px;
     padding:18px 20px; width:230px; box-shadow:0 18px 40px rgba(20,32,25,.08);
     opacity:0; transform:translateY(16px); animation:riseIn .7s ease forwards;
   }
-  .pm-card h4{ font-family:'Fraunces',serif; font-size:1rem; font-weight:500; margin:0 0 6px; }
+  .pm-card h4{ font-family:'Plus Jakarta Sans',sans-serif; font-size:1rem; font-weight:500; margin:0 0 6px; }
   .pm-card p{ font-size:0.8rem; color:var(--stone); margin:0; }
   .pm1{ top:8%; left:4%; animation-delay:.15s; }
   .pm2{ top:0%; right:0%; width:190px; animation-delay:.32s; }
@@ -161,7 +178,7 @@
     border-left:2px solid var(--pine); padding-left:28px; margin:36px 0 0;
   }
   .quote-block p{
-    font-family:'Fraunces',serif; font-style:italic; font-size:clamp(1.4rem,2.6vw,2rem);
+    font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:clamp(1.4rem,2.6vw,2rem);
     line-height:1.3; color:var(--ink); margin:0;
   }
 
@@ -177,15 +194,15 @@
   @media (max-width:640px){ .split-panel{ padding:36px 26px; } }
 
   /* ---------- Services 3-col ---------- */
-  .services{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:50px; border-top:1px solid var(--line); }
-  @media (max-width:880px){ .services{ grid-template-columns:1fr; } }
-  .service{ padding:38px 32px 34px 0; border-bottom:1px solid var(--line); }
-  .services > .service{ border-right:1px solid var(--line); padding-right:32px; }
-  .services > .service:last-child{ border-right:none; }
-  @media (max-width:880px){ .services > .service{ border-right:none; padding-right:0; } }
+  .services{ display:grid; grid-template-columns:repeat(3,1fr); gap:36px; margin-top:50px; border-top:none; text-align:center; }
+  @media (max-width:880px){ .services{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .services{ grid-template-columns:1fr; } }
+  .service{ padding:0; border:0; }
+  .services > .service{ border:0; padding:0; }
+  .service::before{ content:""; display:block; width:56px; height:56px; margin:0 auto 22px; background:var(--pine); border-radius:0 20px 20px 20px; }
   .service h3{ margin-bottom:10px; }
   .service p{ color:var(--stone); margin-bottom:14px; }
-  .service .go{ font-weight:600; font-size:0.9rem; color:var(--pine); }
+  .service .go{ font-weight:700; font-size:0.82rem; text-transform:uppercase; letter-spacing:.05em; color:var(--pine); }
 
   /* feature chips */
   .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
@@ -196,7 +213,7 @@
   .steps{ margin-top:48px; position:relative; }
   .step{ display:grid; grid-template-columns:70px 1fr; gap:24px; padding:30px 0; border-top:1px solid var(--line); }
   .step:last-child{ border-bottom:1px solid var(--line); }
-  .step .num{ font-family:'Fraunces',serif; font-size:1.4rem; color:var(--pine); }
+  .step .num{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.4rem; color:var(--pine); }
   .step h3{ margin-bottom:8px; }
   .step p{ color:var(--stone); max-width:560px; margin:0; }
   @media (max-width:640px){ .step{ grid-template-columns:44px 1fr; } .step .num{font-size:1.1rem;} }
@@ -206,8 +223,8 @@
   @media (max-width:820px){ .cols2{ grid-template-columns:1fr; gap:24px; } }
 
   /* pricing box */
-  .price-box{ border:1px solid var(--line); background:var(--white); padding:34px 36px; margin-top:26px; }
-  .price-box .amount{ font-family:'Fraunces',serif; font-size:1.9rem; color:var(--pine); margin-bottom:8px; }
+  .price-box{ border:1px solid var(--line); border-radius:14px; background:var(--white); padding:34px 36px; margin-top:26px; }
+  .price-box .amount{ font-family:'Plus Jakarta Sans',sans-serif; font-size:1.9rem; color:var(--pine); margin-bottom:8px; }
   .price-box p{ color:var(--stone); margin:0; }
 
   .panel3{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:40px; }
@@ -229,13 +246,13 @@
 
   /* ---------- Team ---------- */
   .team-grid{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:2px;
-    background:var(--line); border:1px solid var(--line); margin-top:44px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
+    margin-top:44px;
   }
   @media (max-width:980px){ .team-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:520px){ .team-grid{ grid-template-columns:1fr; } }
   .team-card{
-    position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--ink);
+    position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--ink); border-radius:14px;
   }
   .team-card img{ width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.02); display:block; }
   .team-card .overlay{
@@ -265,7 +282,7 @@
   .lead-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:36px; margin-top:46px; }
   @media (max-width:820px){ .lead-grid{ grid-template-columns:1fr 1fr; } }
   @media (max-width:560px){ .lead-grid{ grid-template-columns:1fr; max-width:340px; margin-left:auto; margin-right:auto; } }
-  .lead-card figure{ margin:0; aspect-ratio:4/5; overflow:hidden; background:var(--paper-deep); border:1px solid var(--line); }
+  .lead-card figure{ margin:0; aspect-ratio:4/5; overflow:hidden; background:var(--paper-deep); border:1px solid var(--line); border-radius:14px; }
   .lead-card.is-placeholder figure{ display:flex; align-items:center; justify-content:center; color:var(--stone); font-size:0.85rem; text-align:center; padding:20px; border-style:dashed; }
   .lead-card img{ width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.02); display:block; }
   .lead-card .cap{ padding-top:18px; }
@@ -283,7 +300,7 @@
   .testimonial-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:36px; }
   @media (max-width:820px){ .testimonial-grid{ grid-template-columns:1fr; } }
   .testimonial{ border:1px solid var(--line); padding:28px 26px; background:var(--white); }
-  .testimonial .quote{ font-family:'Fraunces',serif; font-style:italic; font-size:1.05rem; color:var(--ink); margin:0 0 16px; }
+  .testimonial .quote{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.05rem; color:var(--ink); margin:0 0 16px; }
   .testimonial .who{ display:flex; flex-direction:column; font-size:0.86rem; color:var(--stone); }
   .testimonial .who strong{ color:var(--ink); font-weight:600; }
 
@@ -292,7 +309,7 @@
   .faq-item{ border-bottom:1px solid var(--line); padding:22px 0; }
   .faq-item summary{ cursor:pointer; font-weight:600; font-size:1.02rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; }
   .faq-item summary::-webkit-details-marker{ display:none; }
-  .faq-item summary::after{ content:"+"; font-family:'Fraunces',serif; font-size:1.3rem; color:var(--pine); flex:none; }
+  .faq-item summary::after{ content:"+"; font-family:'Plus Jakarta Sans',sans-serif; font-size:1.3rem; color:var(--pine); flex:none; }
   .faq-item[open] summary::after{ content:"–"; }
   .faq-item p{ color:var(--stone); margin:14px 0 0; max-width:640px; }
   .faq-item a{ color:var(--pine); cursor:pointer; font-weight:600; }
@@ -305,9 +322,9 @@
   .portal-preview .pm-caption{ margin-top:14px; font-size:0.8rem; color:var(--stone); text-align:center; }
 
   /* ---------- Editorial photos ---------- */
-  .photo-frame{ aspect-ratio:4/3; overflow:hidden; border:1px solid var(--line); margin-top:26px; max-width:460px; }
+  .photo-frame{ aspect-ratio:4/3; overflow:hidden; border:1px solid var(--line); border-radius:14px; margin-top:26px; max-width:460px; }
   .photo-frame img{ width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05); display:block; }
-  .split-panel .thumb{ aspect-ratio:16/9; overflow:hidden; border:1px solid var(--line); margin-bottom:22px; }
+  .split-panel .thumb{ aspect-ratio:16/9; overflow:hidden; border:1px solid var(--line); border-radius:14px; margin-bottom:22px; }
   .split-panel .thumb img{ width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05); display:block; }
 
   /* ---------- Kundenportal (Demo) ---------- */
@@ -338,7 +355,7 @@
   .portal-sidebar{ width:250px; flex:none; background:var(--ink); color:#B7B7BD; padding:22px 18px; display:flex; flex-direction:column; overflow-y:auto; }
   .portal-sidebar .p-logo{ display:flex; align-items:center; gap:10px; margin-bottom:30px; padding:0 6px; }
   .portal-sidebar .p-logo img{ height:20px; filter:brightness(0) invert(1); }
-  .portal-sidebar .p-logo span{ font-family:'Fraunces',serif; font-weight:600; color:#fff; font-size:0.95rem; }
+  .portal-sidebar .p-logo span{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; color:#fff; font-size:0.95rem; }
   .portal-nav-label{ font-size:0.7rem; letter-spacing:.08em; text-transform:uppercase; color:#6E6E75; margin:20px 10px 10px; }
   .portal-nav-item{ display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; font-size:0.9rem; cursor:pointer; color:#C7C7CD; }
   .portal-nav-item:hover{ background:rgba(255,255,255,.06); color:#fff; }
@@ -360,11 +377,11 @@
   @media (max-width:980px){ .pt-grid3{ grid-template-columns:1fr; } }
   .pt-card{ background:var(--white); border:1px solid var(--line); padding:24px; margin-bottom:20px; }
   .pt-card h3{ font-size:1rem; margin-bottom:18px; }
-  .pt-donut{ width:120px; height:120px; border-radius:50%; margin:0 auto 14px; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:1.3rem; font-weight:600; color:var(--ink); background:conic-gradient(var(--pine) calc(var(--pct,70)*1%), var(--paper-deep) 0); position:relative; }
+  .pt-donut{ width:120px; height:120px; border-radius:50%; margin:0 auto 14px; display:flex; align-items:center; justify-content:center; font-family:'Plus Jakarta Sans',sans-serif; font-size:1.3rem; font-weight:600; color:var(--ink); background:conic-gradient(var(--pine) calc(var(--pct,70)*1%), var(--paper-deep) 0); position:relative; }
   .pt-donut::after{ content:""; position:absolute; inset:14px; background:var(--white); border-radius:50%; }
   .pt-donut span{ position:relative; z-index:1; }
   .pt-stat-row{ display:flex; justify-content:space-between; font-size:0.86rem; padding:8px 0; border-top:1px solid var(--line); }
-  .pt-stat-row strong{ font-family:'Fraunces',serif; font-size:1rem; font-weight:600; }
+  .pt-stat-row strong{ font-family:'Plus Jakarta Sans',sans-serif; font-size:1rem; font-weight:600; }
 
   .pt-table{ width:100%; border-collapse:collapse; background:var(--white); border:1px solid var(--line); font-size:0.88rem; }
   .pt-table th{ text-align:left; padding:12px 16px; background:var(--paper-deep); font-size:0.76rem; text-transform:uppercase; letter-spacing:.04em; color:var(--stone); border-bottom:1px solid var(--line); }
@@ -446,16 +463,20 @@
 <main class="page active" data-page="home">
 
   <section class="home-hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <h1>Alles geregelt.<br>Alles an einem Ort.</h1>
-        <p class="lede">Versicherungen. Vorsorge. Finanzen. Steuern. Covert verbindet persönliche Beratung mit digitaler Einfachheit — für Privatpersonen und Unternehmen, die ihre finanziellen Angelegenheiten zentral und transparent regeln möchten.</p>
-        <div class="cta-row">
-          <button class="btn btn-primary" onclick="goTo('home','kontakt')">Beratung vereinbaren</button>
-          <button class="btn btn-ghost" onclick="goTo('home','kontakt')">Kostenlose Ersteinschätzung</button>
-        </div>
-        <div class="hero-tag">Persönlich in Olten. Für Sie in der ganzen Schweiz.</div>
+    <div class="wrap">
+      <div class="kicker">Covert AG</div>
+      <h1>Alles geregelt.<br>Alles an einem Ort.</h1>
+      <p class="lede">Versicherungen. Vorsorge. Finanzen. Steuern. Covert verbindet persönliche Beratung mit digitaler Einfachheit — für Privatpersonen und Unternehmen, die ihre finanziellen Angelegenheiten zentral und transparent regeln möchten.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="goTo('home','kontakt')">Beratung vereinbaren</button>
+        <button class="btn btn-ghost" onclick="goTo('home','kontakt')">Kostenlose Ersteinschätzung</button>
       </div>
+      <div class="hero-tag">Persönlich in Olten · Für Sie in der ganzen Schweiz</div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap" style="max-width:620px;">
       <div class="portal-mock" aria-hidden="true">
         <div class="pm-card pm1"><h4>Policen</h4><p>4 aktive Verträge, zentral hinterlegt</p></div>
         <div class="pm-card pm2"><h4>Dokumente</h4><p>Alle Unterlagen an einem Ort</p></div>
@@ -568,7 +589,7 @@
         <div>
           <p>Versicherungsberatung sollte nachvollziehbar sein. Deshalb vergleichen wir verschiedene Anbieter und Lösungen und zeigen Ihnen transparent auf, wie sich diese bei Preis, Leistung und Umfang unterscheiden.</p>
           <p class="stone">Sie erhalten nicht einfach ein Produkt präsentiert. Sie erhalten verschiedene Möglichkeiten, verstehen deren Unterschiede und entscheiden gemeinsam mit uns, welche Lösung zu Ihnen passt.</p>
-          <p style="font-family:'Fraunces',serif; font-style:italic; font-size:1.3rem; margin-top:24px;">Wir beraten. Sie entscheiden.</p>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.3rem; margin-top:24px;">Wir beraten. Sie entscheiden.</p>
           <div class="cta-row"><button class="btn btn-on-dark" onclick="scrollToId('prozess')">Unsere Arbeitsweise kennenlernen</button></div>
         </div>
       </div>
@@ -845,7 +866,7 @@
       <div><h2>Persönlich beginnen. Digital zusammenarbeiten.</h2></div>
       <div>
         <p>Bei komplexeren Unternehmensmandaten möchten wir Ihr Unternehmen zuerst wirklich verstehen. Deshalb beginnt unsere Zusammenarbeit mit einem persönlichen Gespräch — wir lernen Ihr Geschäftsmodell, Ihre Risiken und Prioritäten kennen.</p>
-        <p class="stone" style="font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem;">Persönlich, wenn es darauf ankommt. Digital, wenn es einfacher geht.</p>
+        <p class="stone" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.2rem;">Persönlich, wenn es darauf ankommt. Digital, wenn es einfacher geht.</p>
       </div>
     </div>
   </section>
@@ -947,12 +968,12 @@
         <div class="service">
           <h3>Vorsorge</h3>
           <p>Wir analysieren Ihre persönliche Vorsorgesituation und zeigen Ihnen auf, wo Handlungsbedarf oder Optimierungspotenzial besteht.</p>
-          <p class="stone" style="font-style:italic; font-family:'Fraunces',serif;">Verstehen, wo Sie stehen. Entscheiden, wohin Sie möchten.</p>
+          <p class="stone" style="font-weight:700; font-family:'Plus Jakarta Sans',sans-serif;">Verstehen, wo Sie stehen. Entscheiden, wohin Sie möchten.</p>
         </div>
         <div class="service">
           <h3>Vermögensaufbau</h3>
           <p>Ein langfristiger Vermögensaufbau braucht eine Strategie, die zu Ihrer finanziellen Situation, Ihrem Zeithorizont und Ihren Zielen passt.</p>
-          <p class="stone" style="font-style:italic; font-family:'Fraunces',serif;">Nicht irgendeine Lösung. Ihre Lösung.</p>
+          <p class="stone" style="font-weight:700; font-family:'Plus Jakarta Sans',sans-serif;">Nicht irgendeine Lösung. Ihre Lösung.</p>
         </div>
         <div class="service">
           <h3>Pensionsplanung</h3>
@@ -995,7 +1016,7 @@
       <div><h2>Steuererklärungen für Privatpersonen</h2></div>
       <div>
         <p>Die jährliche Steuererklärung kostet Zeit und wirft nicht selten Fragen auf. Wir übernehmen die Erstellung Ihrer Steuererklärung und sorgen dafür, dass Ihre Angaben sorgfältig verarbeitet werden.</p>
-        <p class="stone" style="font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem;">Sie liefern die Unterlagen. Wir kümmern uns um den Rest.</p>
+        <p class="stone" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.2rem;">Sie liefern die Unterlagen. Wir kümmern uns um den Rest.</p>
       </div>
     </div>
   </section>
@@ -1015,7 +1036,7 @@
       <div><h2>Steuerberatung für Unternehmen</h2></div>
       <div>
         <p>Unternehmen sind mit unterschiedlichsten steuerlichen Fragestellungen konfrontiert. Covert unterstützt Sie dabei, diese strukturiert zu beurteilen und passende Lösungen zu entwickeln. Für komplexere Fragestellungen stehen diplomierte Steuerexperten innerhalb unseres Teams zur Verfügung.</p>
-        <p class="stone" style="font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem;">Ein Partner. Mehr Fachkompetenz.</p>
+        <p class="stone" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.2rem;">Ein Partner. Mehr Fachkompetenz.</p>
         <div class="cta-row"><button class="btn btn-ghost" onclick="goTo('home','kontakt')">Steuerberatung vereinbaren</button></div>
       </div>
     </div>
@@ -1080,7 +1101,7 @@
       <div><h2>Wir melden uns auch bei Ihnen.</h2></div>
       <div>
         <p>Kommunikation funktioniert in beide Richtungen. Besteht von unserer Seite Handlungsbedarf oder benötigen wir Informationen von Ihnen, informieren wir Sie direkt über das Portal.</p>
-        <p class="stone" style="font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem;">Digital verbunden. Persönlich betreut.</p>
+        <p class="stone" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.2rem;">Digital verbunden. Persönlich betreut.</p>
       </div>
     </div>
   </section>
@@ -1199,19 +1220,20 @@
 
   <section>
     <div class="wrap">
-      <div class="steps" style="margin-top:0;">
-        <div class="step" style="grid-template-columns:150px 1fr;">
-          <div class="num" style="font-size:1.1rem;">Persönlich</div>
-          <div><p>Wir glauben trotz Digitalisierung an persönliche Beratung. Gerade zu Beginn einer Zusammenarbeit möchten wir unsere Kunden kennenlernen und ihre Situation verstehen — gute Beratung braucht mehr als Daten. Sie braucht Kontext.</p></div>
-        </div>
-        <div class="step" style="grid-template-columns:150px 1fr;">
-          <div class="num" style="font-size:1.1rem;">Transparent</div>
-          <div><p>Wir zeigen unterschiedliche Möglichkeiten auf und erklären die relevanten Unterschiede. Dabei kommunizieren wir auch, wie unsere eigene Vergütung funktioniert.</p></div>
-        </div>
-        <div class="step" style="grid-template-columns:150px 1fr;">
-          <div class="num" style="font-size:1.1rem;">Digital</div>
-          <div><p>Administration soll möglichst einfach sein. Mit dem Covert Portal schaffen wir einen zentralen Ort für Policen, Dokumente, Anliegen und Kommunikation.</p></div>
-        </div>
+      <div class="section-head"><h2>Was Covert ausmacht</h2></div>
+      <div class="faq-list" style="max-width:none;">
+        <details class="faq-item" open>
+          <summary>Persönlich</summary>
+          <p>Wir glauben trotz Digitalisierung an persönliche Beratung. Gerade zu Beginn einer Zusammenarbeit möchten wir unsere Kunden kennenlernen und ihre Situation verstehen — gute Beratung braucht mehr als Daten. Sie braucht Kontext.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Transparent</summary>
+          <p>Wir zeigen unterschiedliche Möglichkeiten auf und erklären die relevanten Unterschiede. Dabei kommunizieren wir auch, wie unsere eigene Vergütung funktioniert.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Digital</summary>
+          <p>Administration soll möglichst einfach sein. Mit dem Covert Portal schaffen wir einen zentralen Ort für Policen, Dokumente, Anliegen und Kommunikation.</p>
+        </details>
       </div>
     </div>
   </section>
@@ -1464,10 +1486,10 @@
         <div class="portal-view" id="pv-schaden">
           <h2>Schadenverwaltung</h2>
           <div class="pt-grid3" style="grid-template-columns:repeat(4,1fr);">
-            <div class="pt-card" style="text-align:center; padding:18px;"><div style="font-family:'Fraunces',serif; font-size:1.5rem;">1</div><div class="stone" style="color:var(--stone); font-size:.82rem;">Total</div></div>
-            <div class="pt-card" style="text-align:center; padding:18px;"><div style="font-family:'Fraunces',serif; font-size:1.5rem;">0</div><div class="stone" style="color:var(--stone); font-size:.82rem;">Offen</div></div>
-            <div class="pt-card" style="text-align:center; padding:18px;"><div style="font-family:'Fraunces',serif; font-size:1.5rem;">1</div><div class="stone" style="color:var(--stone); font-size:.82rem;">Erledigt</div></div>
-            <div class="pt-card" style="text-align:center; padding:18px;"><div style="font-family:'Fraunces',serif; font-size:1.5rem;">CHF 2'150</div><div class="stone" style="color:var(--stone); font-size:.82rem;">Bezahlt</div></div>
+            <div class="pt-card" style="text-align:center; padding:18px;"><div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.5rem;">1</div><div class="stone" style="color:var(--stone); font-size:.82rem;">Total</div></div>
+            <div class="pt-card" style="text-align:center; padding:18px;"><div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.5rem;">0</div><div class="stone" style="color:var(--stone); font-size:.82rem;">Offen</div></div>
+            <div class="pt-card" style="text-align:center; padding:18px;"><div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.5rem;">1</div><div class="stone" style="color:var(--stone); font-size:.82rem;">Erledigt</div></div>
+            <div class="pt-card" style="text-align:center; padding:18px;"><div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.5rem;">CHF 2'150</div><div class="stone" style="color:var(--stone); font-size:.82rem;">Bezahlt</div></div>
           </div>
           <table class="pt-table">
             <thead><tr><th>Schaden-Nr.</th><th>Police</th><th>Ereignis</th><th>Datum</th><th>Summe</th><th>Status</th></tr></thead>
