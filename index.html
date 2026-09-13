@@ -150,6 +150,9 @@
   .page-hero .btn-ghost, .home-hero .btn-ghost{ border-color:rgba(255,255,255,.5); color:#fff; }
   .page-hero .btn-ghost:hover, .home-hero .btn-ghost:hover{ border-color:#fff; background:rgba(255,255,255,.08); }
   .hero-tag{ margin:34px auto 0; font-size:0.82rem; text-transform:uppercase; letter-spacing:.1em; color:rgba(255,255,255,.6); border-top:1px solid rgba(255,255,255,.2); padding-top:18px; max-width:420px; }
+  .nudge{ margin:14px 0 0; font-size:0.82rem; color:var(--stone); }
+  .page-hero .nudge, .home-hero .nudge{ color:rgba(255,255,255,.68); }
+  .nudge.center{ text-align:center; }
   .hero-grid{ display:block; }
 
   /* portal mock */
@@ -464,13 +467,14 @@
 
   <section class="home-hero">
     <div class="wrap">
-      <div class="kicker">Covert AG</div>
+      <div class="kicker">Versicherungen · Vorsorge · Finanzen · Steuern</div>
       <h1>Alles geregelt.<br>Alles an einem Ort.</h1>
-      <p class="lede">Versicherungen. Vorsorge. Finanzen. Steuern. Covert verbindet persönliche Beratung mit digitaler Einfachheit — für Privatpersonen und Unternehmen, die ihre finanziellen Angelegenheiten zentral und transparent regeln möchten.</p>
+      <p class="lede">Ein Partner. Persönlich beraten, digital betreut.</p>
       <div class="cta-row">
         <button class="btn btn-primary" onclick="goTo('home','kontakt')">Beratung vereinbaren</button>
         <button class="btn btn-ghost" onclick="goTo('home','kontakt')">Kostenlose Ersteinschätzung</button>
       </div>
+      <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
       <div class="hero-tag">Persönlich in Olten · Für Sie in der ganzen Schweiz</div>
     </div>
   </section>
@@ -685,11 +689,12 @@
   <section id="kontakt" style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:720px;">
       <h2>Lernen wir uns kennen.</h2>
-      <p class="lede" style="margin:22px auto 0; text-align:center;">Sie möchten Ihre Versicherungen optimieren, Ihre finanzielle Situation planen oder wissen, ob bei Ihnen Verbesserungspotenzial besteht? Dann starten wir mit einem persönlichen Gespräch — unverbindlich, persönlich, auf Ihre Situation ausgerichtet.</p>
+      <p class="lede" style="margin:22px auto 0; text-align:center;">Unverbindlich, persönlich, auf Ihre Situation ausgerichtet.</p>
       <div class="cta-row" style="justify-content:center; margin-top:30px;">
-        <button class="btn btn-primary">Beratung vereinbaren</button>
-        <button class="btn btn-ghost">Kontakt aufnehmen</button>
+        <button class="btn btn-primary" onclick="goTo('home','kontakt')">Beratung vereinbaren</button>
+        <button class="btn btn-ghost" onclick="goTo('home','kontakt')">Kontakt aufnehmen</button>
       </div>
+      <p class="nudge center">Je früher wir Ihre Situation kennen, desto mehr Möglichkeiten haben Sie.</p>
     </div>
   </section>
 
@@ -701,9 +706,9 @@
     <div class="wrap">
       <div class="kicker">Privatkunden</div>
       <h1>Versicherungen und Finanzen, die zu Ihrem Leben passen.</h1>
-      <p class="lede">Ein Partner für Versicherungen, Vorsorge, Finanzplanung und Steuern. Persönlich beraten, transparent verglichen und digital an einem Ort.</p>
-      <p class="max-text stone" style="margin-top:18px;">Das Leben verändert sich — und damit auch Ihre finanziellen Bedürfnisse. Eine neue Wohnung, Familie, berufliche Veränderungen, Wohneigentum oder die Planung Ihrer Pensionierung können Auswirkungen auf Versicherungen, Vorsorge und Steuern haben. Covert begleitet Sie langfristig und sorgt dafür, dass Sie den Überblick behalten.</p>
+      <p class="lede">Ein Partner für Versicherungen, Vorsorge, Finanzplanung und Steuern.</p>
       <div class="cta-row"><button class="btn btn-primary" onclick="goTo('home','kontakt')">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="goTo('home','kontakt')">Meine Situation analysieren lassen</button></div>
+      <p class="nudge">Kostenlos &amp; unverbindlich · In 5 Minuten geschildert</p>
       <a class="micro-cta" onclick="goTo('home','kontakt')">5 Minuten, unverbindlich – jetzt Situation schildern →</a>
     </div>
   </section>
@@ -784,6 +789,7 @@
       <h2>Ihre Versicherungen und Finanzen verdienen mehr als einen schnellen Produktvergleich.</h2>
       <p class="lede" style="margin:20px auto 0; text-align:center;">Lernen Sie Covert unverbindlich kennen und erfahren Sie, wie wir Ihre Versicherungs-, Vorsorge-, Finanz- und Steuerthemen zentral zusammenführen.</p>
       <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="goTo('home','kontakt')">Persönliche Beratung vereinbaren</button></div>
+      <p class="nudge center">Je früher wir Ihre Situation kennen, desto mehr Möglichkeiten haben Sie.</p>
     </div>
   </section>
 </main>
@@ -794,9 +800,9 @@
     <div class="wrap">
       <div class="kicker">Unternehmen</div>
       <h1>Versicherungsmanagement, das Ihnen Arbeit abnimmt.</h1>
-      <p class="lede">Covert begleitet Unternehmen bei Versicherungsfragen — von der Analyse und Ausschreibung bis zur laufenden Betreuung. Persönlich beraten, digital verwaltet.</p>
-      <p class="max-text stone" style="margin-top:18px;">Sie führen Ihr Unternehmen. Wir kümmern uns darum, dass Ihre Versicherungslösungen dazu passen — mit einem zentralen Ansprechpartner und einer digitalen Plattform für Policen, Dokumente, Schadenfälle und Mutationen.</p>
+      <p class="lede">Von der Analyse bis zur laufenden Betreuung. Persönlich beraten, digital verwaltet.</p>
       <div class="cta-row"><button class="btn btn-primary" onclick="goTo('home','kontakt')">Unternehmensberatung vereinbaren</button><button class="btn btn-ghost" onclick="scrollToId('u-portal')">Covert für Unternehmen entdecken</button></div>
+      <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
       <a class="micro-cta" onclick="goTo('home','kontakt')">Unverbindliches Erstgespräch für Ihr Unternehmen →</a>
     </div>
   </section>
@@ -876,6 +882,7 @@
       <h2>Lassen Sie uns über Ihr Unternehmen sprechen.</h2>
       <p class="lede" style="margin:20px auto 0; text-align:center;">Ob bestehendes Versicherungsportfolio, bevorstehende Erneuerungen oder der Wunsch nach zentraler Betreuung — wir analysieren gemeinsam, wo Ihr Unternehmen heute steht.</p>
       <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="goTo('home','kontakt')">Unternehmensberatung vereinbaren</button></div>
+      <p class="nudge center">Da wir persönlich beraten, ist unsere Kalenderkapazität begrenzt.</p>
     </div>
   </section>
 </main>
@@ -888,6 +895,7 @@
       <h1>Versicherungen, die zu Ihnen passen.</h1>
       <p class="lede">Nicht die Versicherungsgesellschaft bestimmt die Lösung. Ihre Bedürfnisse tun es. Covert analysiert Ihre bestehenden Versicherungen, ermittelt Ihren tatsächlichen Bedarf und vergleicht verschiedene Möglichkeiten am Markt.</p>
       <div class="cta-row"><button class="btn btn-primary" onclick="goTo('home','kontakt')">Versicherungen prüfen lassen</button><button class="btn btn-ghost" onclick="goTo('home','kontakt')">Beratung vereinbaren</button></div>
+      <p class="nudge">Kostenlos &amp; unverbindlich · Lücken lassen sich oft erst im Gespräch erkennen</p>
     </div>
   </section>
 
@@ -949,6 +957,7 @@
       <h1>Heute entscheiden. Morgen Möglichkeiten haben.</h1>
       <p class="lede">Vorsorge und Finanzplanung beginnen nicht mit einem Produkt. Sie beginnen mit einem Ziel. Covert unterstützt Sie dabei, aus einzelnen finanziellen Entscheidungen einen langfristigen Plan zu entwickeln.</p>
       <div class="cta-row"><button class="btn btn-primary" onclick="goTo('home','kontakt')">Finanzplanung vereinbaren</button><button class="btn btn-ghost" onclick="goTo('home','kontakt')">Vorsorge analysieren lassen</button></div>
+      <p class="nudge">Je früher Sie planen, desto mehr Möglichkeiten bleiben Ihnen</p>
     </div>
   </section>
 
@@ -1008,6 +1017,7 @@
       <h1>Steuern erledigen. Möglichkeiten erkennen.</h1>
       <p class="lede">Von der Steuererklärung bis zur individuellen Steuerberatung. Steuern gehören dazu — unübersichtlich müssen sie deshalb nicht sein.</p>
       <div class="cta-row"><button class="btn btn-primary" onclick="goTo('home','kontakt')">Steuerberatung anfragen</button><button class="btn btn-ghost" onclick="goTo('home','kontakt')">Steuererklärung erstellen lassen</button></div>
+      <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
     </div>
   </section>
 
