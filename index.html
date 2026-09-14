@@ -273,27 +273,52 @@
   .compare-card ul{ text-align:left; display:flex; flex-direction:column; gap:8px; font-size:0.9rem; color:var(--stone); }
   .compare-card ul li::before{ content:"— "; }
 
-  /* ---------- BVG Zinseszins-Rechenbeispiel ---------- */
-  .bvg-lead{ text-align:center; max-width:640px; margin:0 auto; }
-  .bvg-lead .eyebrow{ font-size:0.82rem; color:var(--pine); font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
-  .bvg-lead .big{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:clamp(1.7rem,4vw,2.4rem); margin-top:10px; }
-  .bvg-lead .ask{ color:var(--stone); margin-top:14px; }
-  .bvg-guess-row{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:26px; }
-  .bvg-reveal{ opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease; }
-  .bvg-reveal.shown{ opacity:1; transform:none; }
-  .bvg-calc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:36px; }
-  @media (max-width:640px){ .bvg-calc-grid{ grid-template-columns:1fr; } }
-  .bvg-calc-card{ background:var(--white); padding:32px 30px; }
-  .bvg-calc-card .rate{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:18px; }
-  .bvg-calc-card .row{ display:flex; justify-content:space-between; gap:12px; padding:11px 0; border-top:1px solid var(--line); font-size:0.92rem; color:var(--stone); }
-  .bvg-calc-card .row:first-of-type{ border-top:0; }
-  .bvg-calc-card .row strong{ font-family:'Plus Jakarta Sans',sans-serif; color:var(--ink); }
-  .bvg-calc-card .result{ margin-top:14px; padding-top:18px; border-top:2px solid var(--ink); }
-  .bvg-calc-card .result span{ display:block; font-size:0.8rem; color:var(--stone); margin-bottom:6px; }
-  .bvg-calc-card .result .amount{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.9rem; }
-  .bvg-aha{ text-align:center; margin-top:44px; }
-  .bvg-aha .amount{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:clamp(2.3rem,6vw,3.4rem); color:var(--pine); line-height:1.05; }
-  .bvg-aha p{ color:var(--stone); margin-top:12px; max-width:520px; margin-left:auto; margin-right:auto; }
+  /* ---------- BVG Zinseszins-Rechner ---------- */
+  .bvg-calc-wrap{ display:grid; grid-template-columns:1.6fr 1fr; gap:24px; align-items:start; margin-top:40px; }
+  @media (max-width:980px){ .bvg-calc-wrap{ grid-template-columns:1fr; } }
+  .bvg-calc-card2{ background:var(--white); border:1px solid var(--line); border-radius:16px; padding:30px; }
+  .bvg-compare-card{ background:var(--white); border:1px solid var(--line); border-radius:16px; padding:30px; }
+  .bvg-compare-card .eyebrow{ font-size:0.82rem; color:var(--pine); font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+  .bvg-compare-sub{ color:var(--stone); font-size:0.9rem; margin-top:8px; }
+
+  .bvg-sliders{ display:grid; grid-template-columns:1fr 1fr; gap:24px 28px; }
+  @media (max-width:560px){ .bvg-sliders{ grid-template-columns:1fr; } }
+  .bvg-slider-head{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-size:0.92rem; margin-bottom:10px; }
+  .bvg-slider-head strong{ font-family:'Plus Jakarta Sans',sans-serif; color:var(--pine); white-space:nowrap; }
+  .bvg-range{ -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:999px; background:var(--line); outline:none; cursor:pointer; }
+  .bvg-range::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:20px; height:20px; border-radius:50%; background:var(--ink); border:3px solid var(--white); box-shadow:0 0 0 1px var(--line); cursor:pointer; }
+  .bvg-range::-moz-range-thumb{ width:20px; height:20px; border-radius:50%; background:var(--ink); border:3px solid var(--white); box-shadow:0 0 0 1px var(--line); cursor:pointer; }
+
+  .bvg-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:30px; border-radius:12px; overflow:hidden; }
+  @media (max-width:640px){ .bvg-stats{ grid-template-columns:1fr 1fr; } }
+  .bvg-stat{ background:var(--paper-deep); padding:18px 16px; }
+  .bvg-stat .amount{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.2rem; }
+  .bvg-stat .label{ font-size:0.78rem; color:var(--stone); margin-top:4px; }
+  .bvg-stat.is-total{ background:var(--ink); color:var(--white); }
+  .bvg-stat.is-total .label{ color:rgba(255,255,255,.7); }
+
+  .bvg-chart-wrap{ margin-top:28px; }
+  .bvg-chart{ display:flex; align-items:flex-end; gap:5px; height:200px; position:relative; }
+  .bvg-bar{ flex:1; min-width:4px; height:100%; display:flex; flex-direction:column; justify-content:flex-end; cursor:pointer; position:relative; }
+  .bvg-bar .seg{ width:100%; border-radius:3px 3px 0 0; }
+  .bvg-bar .seg-flat{ background:var(--paper-deep); border:1px solid var(--line); }
+  .bvg-bar .seg-growth{ background:var(--pine); display:none; }
+  .bvg-bar .seg-principal{ background:var(--pine-light); opacity:.35; display:none; }
+  .bvg-bar.is-active .seg-flat{ display:none; }
+  .bvg-bar.is-active .seg-growth, .bvg-bar.is-active .seg-principal{ display:block; }
+  .bvg-bar-tip{ position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%); background:var(--ink); color:var(--white); padding:12px 16px; border-radius:10px; font-size:0.8rem; line-height:1.6; white-space:nowrap; box-shadow:0 12px 28px rgba(0,0,0,.22); z-index:5; }
+  .bvg-bar-tip strong{ font-family:'Plus Jakarta Sans',sans-serif; display:block; margin-bottom:4px; font-size:0.86rem; }
+  .bvg-chart-hint{ font-size:0.78rem; color:var(--stone); margin-top:14px; text-align:center; }
+
+  .bvg-compare-chart{ margin-top:20px; }
+  .bvg-compare-chart svg{ width:100%; height:auto; display:block; }
+  .bvg-compare-legend{ display:flex; gap:18px; margin-top:12px; font-size:0.8rem; color:var(--stone); }
+  .bvg-compare-legend span{ display:flex; align-items:center; gap:7px; }
+  .bvg-compare-legend i{ width:12px; height:12px; border-radius:3px; display:inline-block; }
+
+  .bvg-aha{ text-align:center; margin-top:26px; padding-top:22px; border-top:1px solid var(--line); }
+  .bvg-aha .amount{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:clamp(1.8rem,4vw,2.3rem); color:var(--pine); line-height:1.05; }
+  .bvg-aha p{ color:var(--stone); margin-top:10px; font-size:0.88rem; }
   .bvg-disclaimer{ font-size:0.76rem; color:var(--stone); line-height:1.6; max-width:720px; margin:32px auto 0; text-align:center; }
 
   /* ---------- Vorsorge calculator ---------- */
@@ -1229,44 +1254,53 @@
   </section>
 
   <section>
-    <div class="wrap" style="max-width:640px;">
-      <div class="section-head" style="text-align:center; margin:0 auto 0;"><h2 style="text-align:center;">Kleine Unterschiede. Grosse Wirkung.</h2><p class="lede" style="margin:16px auto 0; text-align:center;">Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben.</p></div>
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto 0; max-width:640px;"><h2 style="text-align:center;">Kleine Unterschiede. Grosse Wirkung.</h2><p class="lede" style="margin:16px auto 0; text-align:center;">Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Passen Sie die Werte an und sehen Sie den Effekt direkt.</p></div>
 
-      <div class="bvg-lead" style="margin-top:40px;">
-        <p class="eyebrow">Vereinfachtes Rechenbeispiel</p>
-        <p class="big">CHF 10&#8217;000 pro Jahr. 30 Jahre.</p>
-        <p class="ask">Was glauben Sie: Was machen 2 % Renditeunterschied über 30 Jahre aus?</p>
-      </div>
-      <div class="bvg-guess-row">
-        <span class="pick-chip" onclick="bvgGuess(this)">CHF 20&#8217;000</span>
-        <span class="pick-chip" onclick="bvgGuess(this)">CHF 50&#8217;000</span>
-        <span class="pick-chip" onclick="bvgGuess(this)">CHF 100&#8217;000</span>
-      </div>
-
-      <div class="bvg-reveal" id="bvgReveal">
-        <div class="bvg-calc-grid">
-          <div class="bvg-calc-card">
-            <p class="rate">Ø 3 % Rendite p.a.</p>
-            <div class="row"><span>Jährliche Einzahlung</span><strong>CHF 10&#8217;000</strong></div>
-            <div class="row"><span>Laufzeit</span><strong>30 Jahre</strong></div>
-            <div class="row"><span>Einbezahltes Kapital</span><strong>CHF 300&#8217;000</strong></div>
-            <div class="result"><span>Vermögen nach 30 Jahren</span><div class="amount">CHF 475&#8217;754</div></div>
+      <div class="bvg-calc-wrap">
+        <div class="bvg-calc-card2">
+          <div class="bvg-sliders">
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Einmalige Einzahlung</span><strong id="bvgOutEinmalig">CHF 10&#8217;000</strong></div>
+              <input type="range" class="bvg-range" id="bvgEinmalig" min="0" max="100000" step="1000" value="10000" oninput="bvgCalc()">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Monatliche Einzahlung</span><strong id="bvgOutMonatlich">CHF 500</strong></div>
+              <input type="range" class="bvg-range" id="bvgMonatlich" min="0" max="3000" step="50" value="500" oninput="bvgCalc()">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Anlagedauer</span><strong id="bvgOutJahre">12 Jahre</strong></div>
+              <input type="range" class="bvg-range" id="bvgJahre" min="1" max="40" step="1" value="12" oninput="bvgCalc()">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Wertentwicklung</span><strong id="bvgOutRendite">4 % p.a.</strong></div>
+              <input type="range" class="bvg-range" id="bvgRendite" min="0" max="8" step="0.5" value="4" oninput="bvgCalc()">
+            </div>
           </div>
-          <div class="bvg-calc-card">
-            <p class="rate">Ø 5 % Rendite p.a.</p>
-            <div class="row"><span>Jährliche Einzahlung</span><strong>CHF 10&#8217;000</strong></div>
-            <div class="row"><span>Laufzeit</span><strong>30 Jahre</strong></div>
-            <div class="row"><span>Einbezahltes Kapital</span><strong>CHF 300&#8217;000</strong></div>
-            <div class="result"><span>Vermögen nach 30 Jahren</span><div class="amount">CHF 664&#8217;388</div></div>
+
+          <div class="bvg-stats" id="bvgStats"></div>
+          <div class="bvg-chart-wrap">
+            <div class="bvg-chart" id="bvgChart"></div>
+          </div>
+          <p class="bvg-chart-hint">Jahr anklicken für die Aufteilung Einzahlung / Wertsteigerung.</p>
+        </div>
+
+        <div class="bvg-compare-card">
+          <p class="eyebrow">Unterschied Ø 3&nbsp;% vs. Ø 5&nbsp;% Rendite</p>
+          <p class="bvg-compare-sub">Bei denselben Einzahlungen wie links — nur die durchschnittliche Rendite unterscheidet sich.</p>
+          <div class="bvg-compare-chart" id="bvgCompareChart"></div>
+          <div class="bvg-compare-legend">
+            <span><i style="background:var(--line);"></i>Ø 3&nbsp;% Rendite</span>
+            <span><i style="background:var(--pine);"></i>Ø 5&nbsp;% Rendite</span>
+          </div>
+          <div class="bvg-aha">
+            <div class="amount" id="bvgDiffAmount">CHF 0</div>
+            <p>Unterschied nach <span id="bvgDiffYears">12</span> Jahren — bei exakt denselben Einzahlungen.</p>
           </div>
         </div>
-        <div class="bvg-aha">
-          <div class="amount">CHF 188&#8217;634 Unterschied</div>
-          <p>Bei exakt denselben Einzahlungen. Der Unterschied entsteht im vereinfachten Beispiel allein durch die angenommene durchschnittliche Rendite und den Zinseszinseffekt.</p>
-        </div>
       </div>
 
-      <p class="bvg-disclaimer">Hinweis: Dieses Beispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts. Es basiert auf konstanten jährlichen Einzahlungen von CHF 10&#8217;000 und angenommenen durchschnittlichen Renditen von 3 % bzw. 5 % über 30 Jahre. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite.</p>
+      <p class="bvg-disclaimer">Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen gewählten Werte. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite.</p>
     </div>
   </section>
 
@@ -1731,12 +1765,106 @@ function pickOne(el){
   el.classList.add('picked');
 }
 
-function bvgGuess(el){
-  el.parentElement.querySelectorAll('.pick-chip').forEach(function(c){ c.classList.remove('picked'); });
-  el.classList.add('picked');
-  var reveal = document.getElementById('bvgReveal');
-  if(reveal){ reveal.classList.add('shown'); }
+/* ---------- BVG Zinseszins-Rechner ---------- */
+var bvgSelectedYear = null;
+
+function bvgChf(n){
+  return 'CHF ' + Math.round(n).toLocaleString('de-CH');
 }
+
+function bvgFV(principal, monthly, years, ratePct){
+  var i = (ratePct / 100) / 12;
+  var n = Math.round(years * 12);
+  if (n <= 0) return principal;
+  if (i === 0) return principal + monthly * n;
+  var growth = (Math.pow(1 + i, n) - 1) / i;
+  return principal * Math.pow(1 + i, n) + monthly * growth;
+}
+
+function bvgCalc(){
+  var P = parseFloat(document.getElementById('bvgEinmalig').value);
+  var M = parseFloat(document.getElementById('bvgMonatlich').value);
+  var years = parseInt(document.getElementById('bvgJahre').value, 10);
+  var rate = parseFloat(document.getElementById('bvgRendite').value);
+
+  document.getElementById('bvgOutEinmalig').textContent = bvgChf(P);
+  document.getElementById('bvgOutMonatlich').textContent = bvgChf(M);
+  document.getElementById('bvgOutJahre').textContent = years + (years === 1 ? ' Jahr' : ' Jahre');
+  document.getElementById('bvgOutRendite').textContent = rate.toLocaleString('de-CH') + ' % p.a.';
+
+  if (bvgSelectedYear === null || bvgSelectedYear > years) bvgSelectedYear = years;
+
+  var series = [];
+  for (var k = 1; k <= years; k++){
+    var fv = bvgFV(P, M, k, rate);
+    var principal = P + M * 12 * k;
+    series.push({ year: k, fv: fv, principal: principal, growth: fv - principal });
+  }
+  var maxFV = series.length ? series[series.length - 1].fv : P;
+
+  var totalMonthly = M * 12 * years;
+  var totalFV = series.length ? series[series.length - 1].fv : bvgFV(P, M, years, rate);
+  var totalGrowth = totalFV - P - totalMonthly;
+
+  document.getElementById('bvgStats').innerHTML =
+    '<div class="bvg-stat"><div class="amount">' + bvgChf(P) + '</div><div class="label">Einmalige Einzahlung</div></div>' +
+    '<div class="bvg-stat"><div class="amount">' + bvgChf(totalMonthly) + '</div><div class="label">monatl. Einzahlungen</div></div>' +
+    '<div class="bvg-stat"><div class="amount">' + bvgChf(totalGrowth) + '</div><div class="label">Wertsteigerung</div></div>' +
+    '<div class="bvg-stat is-total"><div class="amount">' + bvgChf(totalFV) + '</div><div class="label">Vermögen</div></div>';
+
+  var chart = document.getElementById('bvgChart');
+  chart.innerHTML = series.map(function(pt){
+    var h = maxFV > 0 ? (pt.fv / maxFV * 100) : 0;
+    var active = pt.year === bvgSelectedYear;
+    var principalH = pt.fv > 0 ? (pt.principal / pt.fv * 100) : 0;
+    var growthH = 100 - principalH;
+    var tip = active ? (
+      '<div class="bvg-bar-tip"><strong>' + bvgChf(pt.fv) + ' Vermögen im Jahr ' + pt.year + '</strong>' +
+      bvgChf(P) + ' einmalige Einzahlung<br>' +
+      bvgChf(M * 12 * pt.year) + ' monatliche Einzahlungen<br>' +
+      bvgChf(pt.growth) + ' Wertsteigerung</div>'
+    ) : '';
+    return '<div class="bvg-bar' + (active ? ' is-active' : '') + '" style="height:' + h + '%" onclick="bvgSelectYear(' + pt.year + ')">' +
+      tip +
+      '<div class="seg seg-growth" style="height:' + growthH + '%"></div>' +
+      '<div class="seg seg-principal" style="height:' + principalH + '%"></div>' +
+      '<div class="seg seg-flat" style="height:100%"></div>' +
+      '</div>';
+  }).join('');
+
+  var s3 = series.map(function(pt){ return bvgFV(P, M, pt.year, 3); });
+  var s5 = series.map(function(pt){ return bvgFV(P, M, pt.year, 5); });
+  var maxCompare = Math.max.apply(null, s5.concat([1]));
+  var w = 320, h2 = 180, padB = 20;
+  var stepX = series.length > 1 ? (w / (series.length - 1)) : w;
+  function toPoints(arr){
+    return arr.map(function(v, idx){
+      var x = series.length > 1 ? idx * stepX : w;
+      var y = (h2 - padB) - (v / maxCompare) * (h2 - padB);
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    }).join(' ');
+  }
+  var pts3 = toPoints(s3);
+  var pts5 = toPoints(s5);
+  var areaPts = pts5 + ' ' + (w) + ',' + (h2 - padB) + ' ' + 0 + ',' + (h2 - padB);
+  document.getElementById('bvgCompareChart').innerHTML =
+    '<svg viewBox="0 0 ' + w + ' ' + h2 + '" preserveAspectRatio="none">' +
+      '<polygon points="' + areaPts + '" fill="var(--pine)" opacity="0.08"></polygon>' +
+      '<polyline points="' + pts3 + '" fill="none" stroke="var(--line)" stroke-width="3"></polyline>' +
+      '<polyline points="' + pts5 + '" fill="none" stroke="var(--pine)" stroke-width="3"></polyline>' +
+    '</svg>';
+
+  var diff = (s5.length ? s5[s5.length - 1] : 0) - (s3.length ? s3[s3.length - 1] : 0);
+  document.getElementById('bvgDiffAmount').textContent = bvgChf(diff) + ' Unterschied';
+  document.getElementById('bvgDiffYears').textContent = years;
+}
+
+function bvgSelectYear(year){
+  bvgSelectedYear = year;
+  bvgCalc();
+}
+
+if (document.getElementById('bvgEinmalig')) bvgCalc();
 
 function updateVorsorgeCalc(){
   var age = parseInt(document.getElementById('calcAge').value, 10) || 0;
