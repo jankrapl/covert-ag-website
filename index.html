@@ -222,6 +222,7 @@
   .split-panel h3{ margin-bottom:14px; }
   .split-panel .tag{ font-size:0.82rem; color:var(--pine); font-weight:600; margin-bottom:16px; display:block; }
   .split-panel p{ color:var(--stone); }
+  .go{ font-weight:700; font-size:0.82rem; text-transform:uppercase; letter-spacing:.05em; color:var(--pine); cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
   .split-panel .go{ margin-top:20px; font-weight:600; font-size:0.9rem; color:var(--pine); display:inline-flex; align-items:center; gap:6px; }
   @media (max-width:640px){ .split-panel{ padding:36px 26px; } }
 
@@ -479,7 +480,7 @@
     </nav>
     <div class="nav-cta">
       <button class="btn btn-ghost" onclick="openPortal()">Kundenlogin</button>
-      <button class="btn btn-primary" onclick="openBooking()">Beratung buchen</button>
+      <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
       <button class="burger" onclick="toggleMobile()" aria-label="Menü"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -496,7 +497,7 @@
   <a onclick="goTo('blog')">Blog</a>
   <a onclick="goTo('ueber')">Über Covert</a>
   <button class="btn btn-ghost" style="margin-top:14px;" onclick="openPortal()">Kundenlogin</button>
-  <button class="btn btn-primary" onclick="openBooking()">Beratung buchen</button>
+  <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
 </div>
 
 <!-- ================= HOME ================= -->
@@ -509,7 +510,7 @@
       <p class="lede">Ein Partner. Persönlich beraten, digital betreut.</p>
       <div class="cta-row">
         <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
-        <button class="btn btn-ghost" onclick="openBooking()">Kostenlose Ersteinschätzung</button>
+        <button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button>
       </div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
       <div class="hero-tag">Persönlich in Olten · Für Sie in der ganzen Schweiz</div>
@@ -744,7 +745,7 @@
       <p class="lede" style="margin:22px auto 0; text-align:center;">Unverbindlich, persönlich, auf Ihre Situation ausgerichtet.</p>
       <div class="cta-row" style="justify-content:center; margin-top:30px;">
         <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
-        <button class="btn btn-ghost" onclick="openBooking()">Kontakt aufnehmen</button>
+        <button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button>
       </div>
       <p class="nudge center">Je früher wir Ihre Situation kennen, desto mehr Möglichkeiten haben Sie.</p>
     </div>
@@ -759,22 +760,19 @@
       <div class="kicker">Privatkunden</div>
       <h1>Versicherungen und Finanzen, die zu Ihrem Leben passen.</h1>
       <p class="lede">Ein Partner für Versicherungen, Vorsorge, Finanzplanung und Steuern.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Meine Situation analysieren lassen</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · In 5 Minuten geschildert</p>
-      <a class="micro-cta" onclick="openBooking()">5 Minuten, unverbindlich – jetzt Situation schildern →</a>
     </div>
   </section>
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2>Nicht möglichst viele Versicherungen. Sondern die richtigen.</h2>
+      <div><h2>Ihr Leben verändert sich. Ihre Absicherung sollte mitziehen.</h2>
         <div class="photo-frame"><img src="images/privat-hero.jpg" alt="Junges Paar mit Umzugskartons in der neuen Wohnung"></div>
       </div>
       <div>
-        <p class="lede">Sie kaufen eine Wohnung, gründen eine Familie oder wechseln den Job — und plötzlich stellt sich heraus: Die alte Haftpflichtversicherung passt nicht mehr, die Vorsorge müsste angepasst werden, und niemand hat den Überblick, was eigentlich wo geregelt ist. Genau an diesem Punkt setzt Covert an.</p>
-        <p>Eine gute Beratung beginnt für uns nicht mit einem Produkt, sondern mit Ihrer persönlichen Situation. Wir möchten verstehen, was Ihnen wichtig ist, welche Absicherung Sie bereits haben und welche Ziele Sie verfolgen.</p>
-        <p class="stone">Anschliessend analysieren wir Ihre Situation und zeigen Ihnen verschiedene Möglichkeiten auf — dabei vergleichen wir unterschiedliche Anbieter und berücksichtigen sowohl Preis als auch Leistung.</p>
-        <div class="quote-block"><p>Sie bestimmen die Prioritäten. Wir schaffen die Entscheidungsgrundlage.</p></div>
+        <p class="lede">Neue Wohnung, Familie, Jobwechsel — wir sorgen dafür, dass nichts durch die Maschen fällt.</p>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
       </div>
     </div>
   </section>
@@ -783,10 +781,10 @@
     <div class="wrap">
       <div class="section-head"><h2>Alles, was Ihre finanzielle Situation betrifft.</h2></div>
       <div class="services">
-        <div class="service"><h3>Versicherungen</h3><p>Wir prüfen Ihre bestehenden Versicherungen, erkennen mögliche Lücken oder Überschneidungen und vergleichen passende Lösungen verschiedener Gesellschaften.</p><a class="go" onclick="goTo('versicherungen')">Versicherungen prüfen</a></div>
-        <div class="service"><h3>Vorsorge</h3><p>Wie bin ich bei Erwerbsunfähigkeit abgesichert? Wir analysieren Ihre Vorsorgesituation und entwickeln gemeinsam eine langfristige Strategie.</p><a class="go" onclick="goTo('vorsorge')">Vorsorge analysieren</a></div>
-        <div class="service"><h3>Finanzplanung</h3><p>Vermögensaufbau, Budget- oder Pensionsplanung: Wir betrachten Ihre finanzielle Gesamtsituation, nicht nur einzelne Produkte.</p><a class="go" onclick="goTo('vorsorge')">Finanzplanung kennenlernen</a></div>
-        <div class="service"><h3>Steuern</h3><p>Wir übernehmen Ihre Steuererklärung und unterstützen Sie bei Fragen rund um Ihre steuerliche Situation und Optimierung.</p><a class="go" onclick="goTo('steuern')">Steuerberatung anfragen</a></div>
+        <div class="service"><h3>Versicherungen</h3><p>Lücken erkennen, richtig absichern.</p><a class="go" onclick="goTo('versicherungen')">Versicherungen prüfen</a></div>
+        <div class="service"><h3>Vorsorge</h3><p>Ihre Zukunft strategisch planen.</p><a class="go" onclick="goTo('vorsorge')">Vorsorge analysieren</a></div>
+        <div class="service"><h3>Finanzplanung</h3><p>Vermögen aufbauen, mit Plan.</p><a class="go" onclick="goTo('vorsorge')">Finanzplanung kennenlernen</a></div>
+        <div class="service"><h3>Steuern</h3><p>Erklärung und Optimierung aus einer Hand.</p><a class="go" onclick="goTo('steuern')">Steuerberatung anfragen</a></div>
       </div>
     </div>
   </section>
@@ -794,14 +792,13 @@
   <section class="deep">
     <div class="wrap cols2">
       <div>
-        <h2>Ihr Covert Portal</h2>
-        <p class="stone" style="margin-top:16px;">Eine Übersicht statt unzähliger Ordner, Logins und E-Mails. Ihre Versicherungen müssen nicht alle von derselben Gesellschaft stammen, damit Sie den Überblick behalten.</p>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="goTo('portal')">Portal entdecken</button></div>
+        <h2>Alles an einem Ort statt in zehn Ordnern.</h2>
+        <div class="cta-row" style="margin-top:16px;"><button class="btn btn-ghost" onclick="goTo('portal')">Portal entdecken</button></div>
       </div>
       <div>
         <div class="chips">
-          <span class="chip">Policen einsehen</span><span class="chip">Dokumente abrufen</span><span class="chip">Vorsorgelösungen überblicken</span>
-          <span class="chip">Anliegen übermitteln</span><span class="chip">Direkt kommunizieren</span><span class="chip">Benachrichtigungen</span>
+          <span class="chip">Policen</span><span class="chip">Dokumente</span><span class="chip">Vorsorge</span>
+          <span class="chip">Anliegen</span><span class="chip">Kommunikation</span>
         </div>
         <p class="stone" style="margin-top:22px;">Ein Login. Ein Partner. Mehr Überblick.</p>
       </div>
@@ -810,38 +807,28 @@
 
   <section>
     <div class="wrap cols2">
-      <div><h2>Transparent beraten</h2><p class="stone" style="margin-top:16px;">Unsere Empfehlung soll zu Ihnen passen. Nicht zu einer Provision.</p></div>
+      <div><h2>Transparent beraten</h2></div>
       <div>
-        <p>Covert arbeitet als unabhängiger Versicherungsbroker mit verschiedenen Gesellschaften zusammen. Unsere Aufgabe ist es, Ihnen unterschiedliche Möglichkeiten aufzuzeigen und Vor- und Nachteile verständlich gegenüberzustellen.</p>
-        <p class="stone">Je nach Dienstleistung können Beratungsgebühren sowie Courtagen oder Abschlussprovisionen anfallen. Bei langfristigen Vorsorge- und Lebensversicherungslösungen können Sie zusätzlich eine jährliche Betreuung wählen.</p>
+        <p class="stone">Unsere Empfehlung richtet sich nach Ihnen, nicht nach der Provision.</p>
         <div class="price-box">
           <div class="amount">CHF 400.– / Jahr</div>
-          <p><strong>Jährlicher Vorsorge-Check</strong> — wir überprüfen Ihre bestehende Lösung regelmässig und beurteilen, ob Strategie und Ausrichtung weiterhin zu Ihrer Situation und Ihren Zielen passen.</p>
+          <p>Optionaler Vorsorge-Check</p>
         </div>
-        <div class="cta-row" style="margin-top:22px;"><button class="btn btn-ghost" onclick="goTo('transparenz')">Mehr über unsere Vergütung</button></div>
+        <div class="cta-row" style="margin-top:22px;"><button class="btn btn-ghost" onclick="goTo('transparenz')">Mehr zur Vergütung</button></div>
       </div>
     </div>
   </section>
 
-  <section class="deep">
+  <section style="text-align:center; padding:60px 0;">
     <div class="wrap">
-      <div class="section-head"><h2>So starten Sie mit Covert</h2></div>
-      <div class="steps">
-        <div class="step"><div class="num">01</div><div><h3>Kennenlernen</h3><p>Wir besprechen Ihre aktuelle Situation, Wünsche und Ziele persönlich.</p></div></div>
-        <div class="step"><div class="num">02</div><div><h3>Analysieren</h3><p>Wir prüfen bestehende Lösungen und identifizieren Handlungsbedarf.</p></div></div>
-        <div class="step"><div class="num">03</div><div><h3>Vergleichen</h3><p>Wir zeigen Ihnen unterschiedliche Möglichkeiten transparent gegenübergestellt.</p></div></div>
-        <div class="step"><div class="num">04</div><div><h3>Entscheiden</h3><p>Sie wählen gemeinsam mit uns die Lösung, die zu Ihren Prioritäten passt.</p></div></div>
-        <div class="step"><div class="num">05</div><div><h3>Betreuen</h3><p>Ihre Unterlagen kommen ins Covert Portal. Wir bleiben Ihr Ansprechpartner — auch nach dem Abschluss.</p></div></div>
-      </div>
+      <a class="go" onclick="goTo('home','prozess')">So arbeiten wir mit Ihnen zusammen →</a>
     </div>
   </section>
 
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
-      <h2>Ihre Versicherungen und Finanzen verdienen mehr als einen schnellen Produktvergleich.</h2>
-      <p class="lede" style="margin:20px auto 0; text-align:center;">Lernen Sie Covert unverbindlich kennen und erfahren Sie, wie wir Ihre Versicherungs-, Vorsorge-, Finanz- und Steuerthemen zentral zusammenführen.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()">Persönliche Beratung vereinbaren</button></div>
-      <p class="nudge center">Je früher wir Ihre Situation kennen, desto mehr Möglichkeiten haben Sie.</p>
+      <h2>Lernen Sie Covert unverbindlich kennen.</h2>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -853,20 +840,18 @@
       <div class="kicker">Unternehmen</div>
       <h1>Versicherungsmanagement, das Ihnen Arbeit abnimmt.</h1>
       <p class="lede">Von der Analyse bis zur laufenden Betreuung. Persönlich beraten, digital verwaltet.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Unternehmensberatung vereinbaren</button><button class="btn btn-ghost" onclick="scrollToId('u-portal')">Covert für Unternehmen entdecken</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="scrollToId('u-portal')">Covert für Unternehmen entdecken</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
-      <a class="micro-cta" onclick="openBooking()">Unverbindliches Erstgespräch für Ihr Unternehmen →</a>
     </div>
   </section>
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2>Weniger Administration. Mehr Übersicht.</h2>
+      <div><h2>Ihr Unternehmen wächst. Die Versicherungsadministration auch.</h2>
         <div class="photo-frame"><img src="images/unternehmen-hero.jpg" alt="Team im Sitzungszimmer bei der Besprechung"></div>
       </div>
       <div>
-        <p>Mit wachsenden Unternehmen wächst häufig auch die Versicherungsadministration: Neue Mitarbeitende müssen gemeldet werden, Policen verändern sich, Schadenfälle entstehen, Dokumente müssen gefunden werden.</p>
-        <p class="stone">Covert bündelt diese Prozesse — damit Sie sich auf Ihr Kerngeschäft konzentrieren können, während wir uns um Ihre Versicherungsanliegen kümmern.</p>
+        <p>Wir übernehmen sie — damit Sie sich aufs Kerngeschäft konzentrieren können.</p>
         <div class="quote-block"><p>Ein Partner. Ein Portal. Ein klarer Prozess.</p></div>
       </div>
     </div>
@@ -877,10 +862,10 @@
       <div class="section-head"><h2>Unsere Leistungen für Unternehmen</h2><p class="lede">Ob Handwerksbetrieb, Treuhandbüro, Bauunternehmen oder Startup — die Risiken unterscheiden sich, die Systematik unserer Beratung bleibt gleich.</p></div>
       <!-- TODO (optional): 1-2 kurze anonymisierte Fallbeispiele ergänzen, z. B. "Ein Handwerksbetrieb mit 12 Mitarbeitenden ..." sobald reale Kundendaten mit Einverständnis vorliegen -->
       <div class="services">
-        <div class="service"><h3>Risiko- &amp; Versicherungsanalyse</h3><p>Wir analysieren Ihre bestehende Versicherungssituation und prüfen Deckungen, Risiken, Überschneidungen und Optimierungspotenzial.</p></div>
-        <div class="service"><h3>Ausschreibung &amp; Vergleich</h3><p>Wir prüfen Lösungen verschiedener Gesellschaften und stellen relevante Varianten gegenüber — nicht nur nach Prämie, sondern nach Leistung.</p></div>
-        <div class="service"><h3>Laufende Betreuung</h3><p>Unsere Zusammenarbeit endet nicht mit dem Abschluss. Wir unterstützen Sie bei Mutationen, Schadenfällen und weiteren Anliegen.</p></div>
-        <div class="service"><h3>Steuern &amp; Beratung</h3><p>Covert unterstützt Unternehmen auch bei steuerlichen Fragestellungen — Zugang zu Fachkompetenz über einen zentralen Ansprechpartner.</p><a class="go" onclick="goTo('steuern')">Mehr zu Steuern</a></div>
+        <div class="service"><h3>Risiko- &amp; Versicherungsanalyse</h3><p>Deckungen prüfen, Lücken schliessen.</p></div>
+        <div class="service"><h3>Ausschreibung &amp; Vergleich</h3><p>Beste Lösung, nicht nur beste Prämie.</p></div>
+        <div class="service"><h3>Laufende Betreuung</h3><p>Auch nach Vertragsabschluss für Sie da.</p></div>
+        <div class="service"><h3>Steuern &amp; Beratung</h3><p>Fachwissen über einen Ansprechpartner.</p><a class="go" onclick="goTo('steuern')">Mehr zu Steuern</a></div>
       </div>
     </div>
   </section>
@@ -889,11 +874,9 @@
     <div class="wrap cols2">
       <div>
         <span style="display:inline-block; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--pine-light);">Unser Schwerpunkt</span>
-        <h2 style="margin-top:14px;">Berufliche Vorsorge (BVG) — oft der grösste ungeprüfte Kostenblock.</h2>
+        <h2 style="margin-top:14px;">Die 2. Säule: oft der grösste ungeprüfte Kostenblock.</h2>
       </div>
       <div>
-        <p>Sach- und Haftpflichtversicherungen werden meist regelmässig verglichen. Die 2. Säule bleibt dabei oft über Jahre unangetastet — obwohl sie zu den grössten Kostenpositionen zählt und direkt beeinflusst, wie Ihre Mitarbeitenden abgesichert sind.</p>
-        <p style="color:rgba(255,255,255,.7);">Wir vergleichen Ihre bestehende BVG-Lösung mit dem Markt und zeigen transparent auf, wo Optimierungspotenzial besteht.</p>
         <div class="cta-row"><button class="btn btn-on-dark" onclick="goTo('bvg')">BVG für Unternehmen entdecken</button></div>
       </div>
     </div>
@@ -903,8 +886,6 @@
     <div class="wrap cols2">
       <div>
         <h2>Das Covert Firmenportal</h2>
-        <p class="stone" style="margin-top:16px;">Eine zentrale Übersicht über Ihre betriebliche Versicherungssituation. Weniger E-Mails. Weniger Suchen. Weniger Administration.</p>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="goTo('portal')">Firmenportal entdecken</button></div>
       </div>
       <div>
         <div class="chips">
@@ -922,32 +903,21 @@
       <div class="panel3" style="grid-template-columns:1fr 1fr;">
         <div>
           <h3>KMU</h3>
-          <p>Unsere Vergütung erfolgt unter anderem über Courtagen bzw. Abschlussprovisionen der Versicherungsgesellschaften. Zusätzliche Dienstleistungen können separat und transparent verrechnet werden.</p>
+          <p>Vergütung über Courtagen, Zusatzleistungen transparent verrechnet.</p>
         </div>
         <div>
           <h3>Grössere Unternehmen</h3>
-          <p>Wir arbeiten mit einem individuell definierten Mandatsmodell. Gemeinsam legen wir fest, welche Leistungen enthalten sind — darüber hinaus wird transparent nach Aufwand verrechnet.</p>
+          <p>Individuelles Mandatsmodell nach Aufwand.</p>
         </div>
       </div>
       <div class="cta-row" style="margin-top:30px;"><button class="btn btn-ghost" onclick="goTo('transparenz')">Betreuungsmodelle kennenlernen</button></div>
     </div>
   </section>
 
-  <section class="deep">
-    <div class="wrap cols2">
-      <div><h2>Persönlich beginnen. Digital zusammenarbeiten.</h2></div>
-      <div>
-        <p>Bei komplexeren Unternehmensmandaten möchten wir Ihr Unternehmen zuerst wirklich verstehen. Deshalb beginnt unsere Zusammenarbeit mit einem persönlichen Gespräch — wir lernen Ihr Geschäftsmodell, Ihre Risiken und Prioritäten kennen.</p>
-        <p class="stone" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.2rem;">Persönlich, wenn es darauf ankommt. Digital, wenn es einfacher geht.</p>
-      </div>
-    </div>
-  </section>
-
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2>Lassen Sie uns über Ihr Unternehmen sprechen.</h2>
-      <p class="lede" style="margin:20px auto 0; text-align:center;">Ob bestehendes Versicherungsportfolio, bevorstehende Erneuerungen oder der Wunsch nach zentraler Betreuung — wir analysieren gemeinsam, wo Ihr Unternehmen heute steht.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()">Unternehmensberatung vereinbaren</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -958,8 +928,8 @@
     <div class="wrap">
       <div class="kicker">Leistungen · Versicherungen</div>
       <h1>Versicherungen, die zu Ihnen passen.</h1>
-      <p class="lede">Nicht die Versicherungsgesellschaft bestimmt die Lösung. Ihre Bedürfnisse tun es. Covert analysiert Ihre bestehenden Versicherungen, ermittelt Ihren tatsächlichen Bedarf und vergleicht verschiedene Möglichkeiten am Markt.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Versicherungen prüfen lassen</button><button class="btn btn-ghost" onclick="openBooking()">Beratung vereinbaren</button></div>
+      <p class="lede">Nicht die Gesellschaft entscheidet. Ihre Bedürfnisse tun es.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Lücken lassen sich oft erst im Gespräch erkennen</p>
     </div>
   </section>
@@ -968,7 +938,7 @@
     <div class="wrap cols2">
       <div><h2>Nicht einfach versichern. Richtig absichern.</h2></div>
       <div>
-        <p>Bevor wir über Produkte oder Versicherungsgesellschaften sprechen, möchten wir verstehen, was Sie tatsächlich benötigen. Welche Risiken möchten Sie absichern? Wo gibt es Lücken oder Doppelversicherungen?</p>
+        <p>Wir prüfen, was Sie wirklich brauchen — bevor wir über Produkte sprechen.</p>
         <div class="chips">
           <span class="chip">Krankenkasse</span><span class="chip">Haftpflicht</span><span class="chip">Hausrat</span>
           <span class="chip">Fahrzeug</span><span class="chip">Rechtsschutz</span><span class="chip">Betriebshaftpflicht</span>
@@ -982,8 +952,7 @@
     <div class="wrap cols2">
       <div><h2>Wir zeigen Möglichkeiten. Sie entscheiden.</h2></div>
       <div>
-        <p>Versicherungen unterscheiden sich nicht nur beim Preis. Deckungen, Leistungen, Selbstbehalte und Ausschlüsse können entscheidend sein. Deshalb stellen wir verschiedene Varianten gegenüber und zeigen Ihnen die relevanten Unterschiede verständlich auf.</p>
-        <p class="stone">Preisbewusst oder leistungsorientiert? Entscheidend ist, was zu Ihnen passt.</p>
+        <p>Preis ist nicht alles. Deckung, Selbstbehalt und Ausschlüsse zählen auch — wir vergleichen ehrlich.</p>
       </div>
     </div>
   </section>
@@ -995,14 +964,14 @@
           <div class="thumb"><img src="images/thumb-privat.jpg" alt=""></div>
           <span class="tag">Privatpersonen</span>
           <h3>Ihre Absicherung als Ganzes betrachtet</h3>
-          <p>Bestehende Policen können ebenfalls in Ihrem Covert Portal hinterlegt werden — auch wenn diese ursprünglich nicht über Covert abgeschlossen wurden.</p>
+          <p>Bestehende Policen laufen bei uns mit — auch ohne Wechsel.</p>
           <span class="go">Zu Privatkunden</span>
         </div>
         <div class="split-panel" onclick="goTo('unternehmen')">
           <div class="thumb"><img src="images/thumb-unternehmen.jpg" alt=""></div>
           <span class="tag">Unternehmen</span>
           <h3>Begleitung bei wachsenden Risiken</h3>
-          <p>Neue Mitarbeitende, Wachstum oder neue Standorte verändern die Versicherungssituation. Wir begleiten Sie bei der laufenden Analyse und Betreuung.</p>
+          <p>Wachstum verändert Risiken. Wir passen Ihre Absicherung laufend an.</p>
           <span class="go">Zu Unternehmen</span>
         </div>
       </div>
@@ -1011,8 +980,7 @@
 
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
-      <h2>Nach dem Abschluss geht es weiter.</h2>
-      <p class="lede" style="margin:20px auto 0; text-align:center;">Wir hinterlegen Ihre relevanten Policen und Dokumente in Ihrem persönlichen Covert Portal. Ein Partner — auch nach dem Abschluss.</p>
+      <h2>Auch nach dem Abschluss: Ihre Policen bleiben im Blick.</h2>
       <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button></div>
     </div>
   </section>
@@ -1024,8 +992,8 @@
     <div class="wrap">
       <div class="kicker">Leistungen · Vorsorge &amp; Finanzplanung</div>
       <h1>Heute entscheiden. Morgen Möglichkeiten haben.</h1>
-      <p class="lede">Vorsorge und Finanzplanung beginnen nicht mit einem Produkt. Sie beginnen mit einem Ziel. Covert unterstützt Sie dabei, aus einzelnen finanziellen Entscheidungen einen langfristigen Plan zu entwickeln.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Finanzplanung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Vorsorge analysieren lassen</button></div>
+      <p class="lede">Vorsorge beginnt nicht mit einem Produkt, sondern mit einem Ziel.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
       <p class="nudge">Je früher Sie planen, desto mehr Möglichkeiten bleiben Ihnen</p>
     </div>
   </section>
@@ -1034,8 +1002,7 @@
     <div class="wrap cols2">
       <div><h2>Ihre Zukunft lässt sich nicht vorhersagen. Aber planen.</h2></div>
       <div>
-        <p>Vorsorge wird häufig erst dann zum Thema, wenn wichtige Lebensentscheidungen anstehen. Dabei lohnt es sich, frühzeitig zu wissen, wo man finanziell steht.</p>
-        <p class="stone">Wir betrachten Ihre aktuelle Situation, bestehende Vorsorgelösungen und Ihre langfristigen Ziele — und entwickeln darauf aufbauend gemeinsam mit Ihnen eine passende Strategie.</p>
+        <p>Wir prüfen Ihre Situation und entwickeln daraus eine passende Strategie.</p>
       </div>
     </div>
   </section>
@@ -1045,18 +1012,16 @@
       <div class="services" style="border-top:1px solid var(--line); margin-top:0;">
         <div class="service">
           <h3>Vorsorge</h3>
-          <p>Wir analysieren Ihre persönliche Vorsorgesituation und zeigen Ihnen auf, wo Handlungsbedarf oder Optimierungspotenzial besteht.</p>
-          <p class="stone" style="font-weight:700; font-family:'Plus Jakarta Sans',sans-serif;">Verstehen, wo Sie stehen. Entscheiden, wohin Sie möchten.</p>
+          <p>Handlungsbedarf erkennen, bevor es zu spät ist.</p>
         </div>
         <div class="service">
           <h3>Vermögensaufbau</h3>
-          <p>Ein langfristiger Vermögensaufbau braucht eine Strategie, die zu Ihrer finanziellen Situation, Ihrem Zeithorizont und Ihren Zielen passt.</p>
-          <p class="stone" style="font-weight:700; font-family:'Plus Jakarta Sans',sans-serif;">Nicht irgendeine Lösung. Ihre Lösung.</p>
+          <p>Strategie statt Zufall.</p>
         </div>
         <div class="service">
           <h3>Pensionsplanung</h3>
-          <p>Wann möchte ich in Pension gehen? Welches Einkommen steht mir später zur Verfügung? Wir machen verschiedene Szenarien nachvollziehbar.</p>
-          <a class="go" onclick="openBooking()">Pensionsplanung anfragen</a>
+          <p>Szenarien statt Vermutungen.</p>
+          <a class="go" onclick="openBooking()">Situation schildern</a>
         </div>
       </div>
     </div>
@@ -1066,13 +1031,12 @@
     <div class="wrap cols2">
       <div><h2>Vorsorge braucht Betreuung.</h2></div>
       <div>
-        <p>Eine langfristige Vorsorgelösung kann über Jahrzehnte laufen. Doch in dieser Zeit verändert sich vieles: Ihre Lebenssituation, Ihr Einkommen, Ihre Ziele und möglicherweise auch Ihre Anlagestrategie.</p>
+        <p>Vorsorge läuft über Jahrzehnte — Ihre Lösung sollte mitwachsen.</p>
         <div class="price-box">
           <div class="amount">CHF 400.– / Jahr</div>
-          <p><strong>Jährliche Überprüfung</strong> — einmal jährlich prüfen wir gemeinsam mit Ihnen, ob Ihre bestehende Lösung weiterhin zu Ihrer Situation und Ihren langfristigen Zielen passt.</p>
+          <p>Jährliche Überprüfung</p>
         </div>
-        <p class="stone" style="margin-top:18px;">Nicht abschliessen und vergessen. Sondern langfristig begleiten.</p>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Vorsorgeberatung vereinbaren</button></div>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
       </div>
     </div>
   </section>
@@ -1092,8 +1056,7 @@
     <div class="wrap">
       <div class="kicker">Schwerpunkt · Berufliche Vorsorge (BVG)</div>
       <h1>Die 2. Säule verdient mehr als eine Unterschrift.</h1>
-      <p class="lede">BVG ist bei Covert kein Nebenprodukt, sondern unser Schwerpunkt für Unternehmen.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">BVG-Analyse anfragen</button><button class="btn btn-ghost" onclick="openBooking()">Unverbindliches Erstgespräch</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Für Geschäftsführung, HR und Verwaltungsrat</p>
     </div>
   </section>
@@ -1104,8 +1067,7 @@
         <div class="photo-frame"><img src="images/unternehmen-hero.jpg" alt="Team im Sitzungszimmer bei der Besprechung"></div>
       </div>
       <div>
-        <p>Viele Unternehmen vergleichen ihre Sach- und Haftpflichtversicherungen regelmässig. Die berufliche Vorsorge bleibt dagegen oft über Jahre unangetastet — dabei handelt es sich um einen der grössten Kostenblöcke und eine zentrale Leistung gegenüber Mitarbeitenden.</p>
-        <p class="stone">Unterschiede zwischen Sammelstiftungen bei Kosten, Anlagestrategie, Verzinsung und Leistungen im Invaliditäts- und Todesfall können erheblich sein — und wirken sich direkt auf Unternehmen und Mitarbeitende aus.</p>
+        <p>Sach- und Haftpflichtversicherungen werden regelmässig verglichen. Die BVG oft jahrelang nicht — obwohl sie einer der grössten Kostenblöcke ist.</p>
         <div class="quote-block"><p>Die 2. Säule beeinflusst, wie sicher sich Ihre Mitarbeitenden fühlen.</p></div>
       </div>
     </div>
@@ -1117,19 +1079,19 @@
       <div class="services">
         <div class="service">
           <h3>BVG-Vergleich &amp; Ausschreibung</h3>
-          <p>Wir vergleichen Ihre bestehende Lösung mit Angeboten verschiedener Sammelstiftungen — nach Kosten, Leistungen und Anlagestrategie.</p>
+          <p>Verschiedene Sammelstiftungen im Vergleich.</p>
         </div>
         <div class="service">
           <h3>Kosten- &amp; Leistungsanalyse</h3>
-          <p>Verwaltungskosten, Risikoprämien und Sparbeiträge im Detail geprüft — nachvollziehbar aufbereitet, nicht nur als Zahl im Vorsorgeausweis.</p>
+          <p>Verständlich statt nur eine Zahl im Ausweis.</p>
         </div>
         <div class="service">
           <h3>Laufende Betreuung</h3>
-          <p>Deckungsgrad, Verzinsung und Anlagestrategie verändern sich. Wir behalten Ihre Lösung im Blick und melden uns, wenn Handlungsbedarf besteht.</p>
+          <p>Wir melden uns, wenn sich etwas ändert.</p>
         </div>
         <div class="service">
           <h3>Kommunikation für Mitarbeitende</h3>
-          <p>Wir erklären Vorsorgeausweise und Leistungen verständlich — für mehr Vertrauen im Team.</p>
+          <p>Vorsorgeausweise verständlich erklärt.</p>
         </div>
       </div>
     </div>
@@ -1139,8 +1101,7 @@
     <div class="wrap cols2">
       <div><h2>Ein Schwerpunkt, kein Nebenprodukt.</h2></div>
       <div>
-        <p>Für viele Beratungen ist die berufliche Vorsorge nur ein Produkt neben vielen. Bei Covert ist es ein eigener Schwerpunkt — mit gezieltem Fachwissenaufbau in unserem Team.</p>
-        <p class="stone">Jan Krapl befindet sich aktuell in Ausbildung zum dipl. Berater berufliche Vorsorge IAF — mit Fokus auf genau dieses Thema.</p>
+        <p>BVG ist bei uns kein Nebenprodukt — mit gezieltem Fachwissenaufbau im Team.</p>
         <a class="go" onclick="goTo('ueber')">Unser Team kennenlernen</a>
       </div>
     </div>
@@ -1163,7 +1124,7 @@
     <div class="wrap" style="max-width:680px;">
       <h2>Lassen Sie uns Ihre berufliche Vorsorge analysieren.</h2>
       <p class="lede" style="margin:20px auto 0; text-align:center;">Unverbindlich, transparent, auf Ihr Unternehmen ausgerichtet.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()">BVG-Analyse anfragen</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button></div>
       <p class="nudge center">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
     </div>
   </section>
@@ -1176,16 +1137,15 @@
       <div class="kicker">Leistungen · Steuern</div>
       <h1>Steuern erledigen. Möglichkeiten erkennen.</h1>
       <p class="lede">Von der Steuererklärung bis zur individuellen Steuerberatung. Steuern gehören dazu — unübersichtlich müssen sie deshalb nicht sein.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Steuerberatung anfragen</button><button class="btn btn-ghost" onclick="openBooking()">Steuererklärung erstellen lassen</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
     </div>
   </section>
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2>Steuererklärungen für Privatpersonen</h2></div>
+      <div><h2>Steuererklärung</h2></div>
       <div>
-        <p>Die jährliche Steuererklärung kostet Zeit und wirft nicht selten Fragen auf. Wir übernehmen die Erstellung Ihrer Steuererklärung und sorgen dafür, dass Ihre Angaben sorgfältig verarbeitet werden.</p>
         <p class="stone" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.2rem;">Sie liefern die Unterlagen. Wir kümmern uns um den Rest.</p>
       </div>
     </div>
@@ -1195,8 +1155,7 @@
     <div class="wrap cols2">
       <div><h2>Steueroptimierung</h2></div>
       <div>
-        <p>Wer seine steuerliche Situation optimieren möchte, sollte nicht erst beim Ausfüllen der Steuererklärung darüber nachdenken. Wir analysieren Ihre persönliche Situation und zeigen Ihnen im Rahmen der gesetzlichen Möglichkeiten entsprechende Optimierungspotenziale auf — auch mit Blick auf Vorsorge und Finanzplanung.</p>
-        <div class="quote-block"><p>Steuern nicht nur deklarieren. Vorausschauend planen.</p></div>
+        <p>Nicht erst beim Ausfüllen denken — wir zeigen Potenzial frühzeitig auf.</p>
       </div>
     </div>
   </section>
@@ -1205,9 +1164,8 @@
     <div class="wrap cols2">
       <div><h2>Steuerberatung für Unternehmen</h2></div>
       <div>
-        <p>Unternehmen sind mit unterschiedlichsten steuerlichen Fragestellungen konfrontiert. Covert unterstützt Sie dabei, diese strukturiert zu beurteilen und passende Lösungen zu entwickeln. Für komplexere Fragestellungen stehen diplomierte Steuerexperten innerhalb unseres Teams zur Verfügung.</p>
-        <p class="stone" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.2rem;">Ein Partner. Mehr Fachkompetenz.</p>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Steuerberatung vereinbaren</button></div>
+        <p>Komplexe Fragen? Unsere diplomierten Steuerexperten sind für Sie da.</p>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
       </div>
     </div>
   </section>
@@ -1220,7 +1178,7 @@
       <div class="kicker">Kundenportal</div>
       <h1>Alles im Blick. An einem Ort.</h1>
       <p class="lede">Ihre Versicherungen und Dokumente. Ihre Anliegen. Ihr direkter Draht zu Covert. Wir möchten Beratung nicht nur persönlicher und transparenter machen — sondern auch die Administration dahinter einfacher.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Portal entdecken</button><button class="btn btn-ghost" onclick="openPortal()">Zum Kundenlogin (Demo)</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openPortal()">Zum Kundenlogin (Demo)</button></div>
       <div class="portal-preview">
         <div class="portal-mock" aria-hidden="true">
           <div class="pm-card pm1"><h4>Policen</h4><p>4 aktive Verträge, zentral hinterlegt</p></div>
@@ -1239,8 +1197,7 @@
     <div class="wrap cols2">
       <div><h2>Schluss mit Suchen.</h2></div>
       <div>
-        <p>Versicherungspolicen im Ordner. Rechnungen per E-Mail. Ein anderes Dokument irgendwo auf dem Computer. Und für jede Frage ein anderer Ansprechpartner. Wir finden: Das geht einfacher.</p>
-        <p class="stone">Im Covert Portal führen wir Ihre relevanten Informationen zentral zusammen — damit Sie wissen, wo Sie suchen müssen: an einem Ort.</p>
+        <p>Policen im Ordner, Rechnungen im Mailfach, Dokumente irgendwo. Wir bringen das an einen Ort.</p>
       </div>
     </div>
   </section>
@@ -1270,17 +1227,15 @@
     <div class="wrap cols2">
       <div><h2>Wir melden uns auch bei Ihnen.</h2></div>
       <div>
-        <p>Kommunikation funktioniert in beide Richtungen. Besteht von unserer Seite Handlungsbedarf oder benötigen wir Informationen von Ihnen, informieren wir Sie direkt über das Portal.</p>
-        <p class="stone" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.2rem;">Digital verbunden. Persönlich betreut.</p>
+        <p>Kommunikation läuft in beide Richtungen — direkt übers Portal.</p>
       </div>
     </div>
   </section>
 
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
-      <h2>Technologie ersetzt bei uns keine Beratung. Sie soll sie einfacher machen.</h2>
-      <p class="lede" style="margin:20px auto 0; text-align:center;">Wir möchten unsere Kunden persönlich kennenlernen und ihre Situation verstehen. Das Portal übernimmt danach dort, wo digitale Prozesse schneller und unkomplizierter sind.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()">Covert kennenlernen</button></div>
+      <h2>Technologie ersetzt keine Beratung. Sie macht sie einfacher.</h2>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -1291,7 +1246,7 @@
     <div class="wrap">
       <div class="kicker">Transparenz &amp; Vergütung</div>
       <h1>Wissen, woran Sie sind.</h1>
-      <p class="lede">Warum wird ein bestimmtes Produkt empfohlen? Wie verdient der Berater daran? Und welche Leistungen sind nach einem Abschluss enthalten? Wir möchten diese Fragen offen beantworten.</p>
+      <p class="lede">Warum dieses Produkt? Wie verdienen wir daran? Wir beantworten das offen.</p>
     </div>
   </section>
 
@@ -1299,7 +1254,7 @@
     <div class="wrap cols2">
       <div><h2>Ihre Bedürfnisse bestimmen unsere Empfehlung. Nicht die höchste Provision.</h2></div>
       <div>
-        <p>Wir möchten keine Lösung empfehlen, nur weil sie für uns finanziell attraktiver ist. Deshalb analysieren wir zunächst Ihre Situation und zeigen Ihnen anschliessend unterschiedliche Möglichkeiten auf.</p>
+        <p>Erst Ihre Situation, dann die Optionen — nie umgekehrt.</p>
         <div class="quote-block"><p>Wir schaffen Transparenz. Sie treffen die Entscheidung.</p></div>
       </div>
     </div>
@@ -1382,8 +1337,7 @@
         <div class="photo-frame"><img src="images/ueber-advisor.jpg" alt="Beraterin im Gespräch mit einer Kundin"></div>
       </div>
       <div>
-        <p>Wir haben gesehen, dass Versicherungsberatung häufig stark vom Produkt geprägt ist: Welche Versicherung, bei welcher Gesellschaft, welche Lösung wird angeboten. Wir möchten früher ansetzen — bei Ihnen.</p>
-        <p class="stone">Wir möchten zunächst verstehen, welche Bedürfnisse, Ziele und Prioritäten Sie haben. Erst danach geht es um konkrete Lösungen.</p>
+        <p>Versicherungsberatung ist oft produktgetrieben. Wir setzen früher an — bei Ihnen.</p>
       </div>
     </div>
   </section>
@@ -1394,15 +1348,15 @@
       <div class="faq-list" style="max-width:none;">
         <details class="faq-item" open>
           <summary>Persönlich</summary>
-          <p>Wir glauben trotz Digitalisierung an persönliche Beratung. Gerade zu Beginn einer Zusammenarbeit möchten wir unsere Kunden kennenlernen und ihre Situation verstehen — gute Beratung braucht mehr als Daten. Sie braucht Kontext.</p>
+          <p>Wir lernen Sie kennen, bevor wir beraten.</p>
         </details>
         <details class="faq-item">
           <summary>Transparent</summary>
-          <p>Wir zeigen unterschiedliche Möglichkeiten auf und erklären die relevanten Unterschiede. Dabei kommunizieren wir auch, wie unsere eigene Vergütung funktioniert.</p>
+          <p>Wir zeigen Optionen und legen unsere Vergütung offen.</p>
         </details>
         <details class="faq-item">
           <summary>Digital</summary>
-          <p>Administration soll möglichst einfach sein. Mit dem Covert Portal schaffen wir einen zentralen Ort für Policen, Dokumente, Anliegen und Kommunikation.</p>
+          <p>Administration soll einfach sein, nicht aufwendig.</p>
         </details>
       </div>
     </div>
@@ -1412,9 +1366,8 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Die Menschen hinter Covert.</h2>
-        <p class="lede">Kompetenz ist wichtig. Vertrauen entsteht persönlich. Covert steht als Unternehmen und Marke im Mittelpunkt — gleichzeitig möchten wir Ihnen zeigen, wer sich um Ihre Anliegen kümmert.</p>
+        <p class="lede">Kompetenz ist wichtig, Vertrauen entsteht persönlich — lernen Sie unser Team kennen.</p>
       </div>
-      <p class="max-text stone">Unser Team vereint Fachwissen aus den Bereichen Versicherungen, Vorsorge, Finanzplanung und Steuern. Gemeinsam verfolgen wir ein Ziel: Beratung einfacher, transparenter und persönlicher zu gestalten.</p>
     </div>
   </section>
 
@@ -1428,7 +1381,7 @@
           <div class="overlay">
             <h4>Jan Krapl</h4>
             <div class="role">Geschäftsführer / CEO, Mitinhaber</div>
-            <div class="bio">Verantwortlich für die Geschäftsführung von Covert sowie für die Beratung im Bereich Versicherungen und Vorsorge. Sein Fokus liegt auf verständlichen Lösungen und einer langfristigen, persönlichen Zusammenarbeit. Zurzeit befindet er sich zudem in Ausbildung zum dipl. Berater berufliche Vorsorge IAF.</div>
+            <div class="bio">Verantwortlich für die Geschäftsführung von Covert sowie für die Beratung im Bereich Versicherungen und Vorsorge. Sein Fokus liegt auf verständlichen Lösungen und einer langfristigen, persönlichen Zusammenarbeit.</div>
             <div class="tags"><span class="tag-pill">Geschäftsführung</span><span class="tag-pill">Versicherungen</span><span class="tag-pill">In Ausbildung: dipl. Berater berufliche Vorsorge IAF</span></div>
             <div class="links"><a href="https://www.linkedin.com/in/jan-krapl-6b7207275/" target="_blank" rel="noopener">LinkedIn</a><a href="#">Kontakt</a></div>
           </div>
@@ -1438,7 +1391,7 @@
           <div class="overlay">
             <h4>Luca Ferrari</h4>
             <div class="role">Mitinhaber, Dipl. Steuerexperte (i. A.)</div>
-            <div class="bio">Mitinhaber von Covert und verantwortlich für die steuerliche Beratung unserer Kunden. Er verbindet fachliche Tiefe mit einer klaren, verständlichen Kommunikation. Luca ist M.A. HSG in Accounting &amp; Finance und aktuell in Ausbildung zum dipl. Steuerexperten.</div>
+            <div class="bio">Mitinhaber von Covert und verantwortlich für die steuerliche Beratung unserer Kunden. Er verbindet fachliche Tiefe mit einer klaren, verständlichen Kommunikation.</div>
             <div class="tags"><span class="tag-pill">Steuern</span><span class="tag-pill">Mitinhaber</span><span class="tag-pill">M.A. HSG Accounting &amp; Finance</span><span class="tag-pill">Dipl. Steuerexperte (i. A.)</span></div>
             <div class="links"><a href="https://www.linkedin.com/in/luca-ferrari-160453121/" target="_blank" rel="noopener">LinkedIn</a><a href="#">Kontakt</a></div>
           </div>
@@ -1448,7 +1401,7 @@
           <div class="overlay">
             <h4>Nicolas Schneider</h4>
             <div class="role">Mitinhaber</div>
-            <div class="bio">Mitinhaber von Covert und Teil der Geschäftsleitung. Er begleitet den Aufbau von Covert als zentralem Ansprechpartner für Versicherungen, Vorsorge und Finanzen. Nicolas ist M.A. HSG in Unternehmensführung.</div>
+            <div class="bio">Mitinhaber von Covert und Teil der Geschäftsleitung. Er begleitet den Aufbau von Covert als zentralem Ansprechpartner für Versicherungen, Vorsorge und Finanzen.</div>
             <div class="tags"><span class="tag-pill">Mitinhaber</span><span class="tag-pill">M.A. HSG Unternehmensführung</span></div>
             <div class="links"><a href="https://www.linkedin.com/in/nicolassschneider/" target="_blank" rel="noopener">LinkedIn</a><a href="#">Kontakt</a></div>
           </div>
@@ -1469,8 +1422,7 @@
 
   <section>
     <div class="wrap">
-      <div class="section-head"><h2>Covert gemeinsam weiterdenken.</h2><p class="lede">Unsere Geschäftsleitung verbindet Versicherungs- und Finanzkompetenz mit dem Anspruch, bestehende Beratungsmodelle neu zu denken.</p></div>
-      <p class="max-text stone">Unser Ziel ist nicht, Beratung vollständig zu digitalisieren. Unser Ziel ist, Technologie dort einzusetzen, wo sie unseren Kunden das Leben einfacher macht — und gleichzeitig persönlich da zu sein, wenn Fachwissen und Vertrauen gefragt sind.</p>
+      <div class="section-head"><h2>Covert gemeinsam weiterdenken.</h2><p class="lede">Unser Ziel: Technologie dort einsetzen, wo sie hilft — persönlich da sein, wo Vertrauen zählt.</p></div>
       <div class="lead-grid">
         <div class="lead-card">
           <figure><img src="team/jan.jpg" alt="Jan Krapl"></figure>
@@ -1532,7 +1484,7 @@
         <a onclick="goTo('blog')">Blog</a>
         <a onclick="goTo('transparenz')">Transparenz &amp; Vergütung</a>
         <a onclick="goTo('home','faq')">Häufige Fragen</a>
-        <a onclick="openBooking()">Beratung buchen</a>
+        <a onclick="openBooking()">Beratung vereinbaren</a>
       </div>
     </div>
     <div class="foot-legal">
