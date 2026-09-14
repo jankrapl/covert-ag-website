@@ -910,20 +910,6 @@
     </div>
   </section>
 
-  <section>
-    <div class="wrap cols2">
-      <div><h2>Transparent beraten</h2></div>
-      <div>
-        <p class="stone">Unsere Empfehlung richtet sich nach Ihnen, nicht nach der Provision.</p>
-        <div class="price-box">
-          <div class="amount">CHF 400.– / Jahr</div>
-          <p>Optionaler Vorsorge-Check</p>
-        </div>
-        <div class="cta-row" style="margin-top:22px;"><button class="btn btn-ghost" onclick="goTo('transparenz')">Mehr zur Vergütung</button></div>
-      </div>
-    </div>
-  </section>
-
   <section style="text-align:center; padding:60px 0;">
     <div class="wrap">
       <a class="go" onclick="goTo('home','prozess')">So arbeiten wir mit Ihnen zusammen →</a>
@@ -1376,7 +1362,11 @@
       <div class="kicker">Kundenportal</div>
       <h1>Alles im Blick. Von überall.</h1>
       <p class="lede">Policen, Dokumente, Anliegen und Kommunikation – zentral in Ihrem Covert Portal.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openPortal()">Portal entdecken</button><button class="btn btn-ghost" onclick="openBooking()">Beratung vereinbaren</button></div>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="openPortal('privat')">Login Privatperson</button>
+        <button class="btn btn-ghost" onclick="openPortal('unternehmen')">Login Unternehmen</button>
+      </div>
+      <p class="nudge">Oder <a onclick="openBooking()" style="text-decoration:underline; cursor:pointer;">Beratung vereinbaren</a>, wenn Sie noch keinen Zugang haben</p>
       <div class="portal-preview">
         <div class="portal-mock" aria-hidden="true">
           <div class="pm-card pm1"><h4>Policen</h4><p>4 aktive Verträge, zentral hinterlegt</p></div>
