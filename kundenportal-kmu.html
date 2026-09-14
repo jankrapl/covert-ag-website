@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kundenportal – coverd ag</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body{ margin:0; background:#F3F3F1; font-family:'Instrument Sans','Helvetica Neue',Helvetica,sans-serif; color:#0A0A0B; -webkit-font-smoothing:antialiased; }
+  *{ box-sizing:border-box; }
+  a{ color:#1F4FFF; text-decoration:none; }
+  a:hover{ color:#0A0A0B; }
+  button{ font-family:inherit; }
+  input, textarea{ font-family:inherit; }
+
+  .app-flex{ display:flex; min-height:100vh; background:#F3F3F1; }
+
+  .sidebar{ width:248px; flex:none; background:#0A58FD; color:#FFFFFF; display:flex; flex-direction:column; padding:24px 0; position:sticky; top:0; height:100vh; overflow-y:auto; }
+  .sidebar-logo{ padding:0 22px 28px; }
+  .sidebar-logo-box{ width:132px; height:34px; overflow:hidden; position:relative; background:#FFFFFF; border-radius:8px; }
+  .sidebar-logo-box img{ position:absolute; left:-78px; top:-66px; width:288px; height:162px; mix-blend-mode:multiply; }
+  .sidebar-label{ padding:0 22px 10px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#DCE8FF; }
+  .sidebar-label.spaced{ padding-top:26px; }
+  .sidebar-nav{ display:flex; flex-direction:column; gap:2px; padding:0 12px; }
+  .nav-item{ text-align:left; border:0; background:transparent; font:inherit; font-size:15px; font-weight:500; padding:12px 14px; border-radius:10px; cursor:pointer; display:flex; align-items:center; gap:12px; width:100%; }
+  .nav-item:hover{ background:#0A4AD6; }
+  .nav-item .dot{ width:8px; height:8px; border-radius:2px; flex:none; }
+  .sidebar-advisor{ margin-top:auto; padding:22px 22px 0; border-top:1px solid #3B7BFF; display:flex; align-items:center; gap:12px; }
+  .sidebar-advisor img{ width:40px; height:40px; border-radius:999px; object-fit:cover; object-position:50% 22%; flex:none; }
+
+  .main-col{ flex:1 1 auto; min-width:0; display:flex; flex-direction:column; }
+  .topheader{ background:#FFFFFF; border-bottom:1px solid #E4E4E1; padding:18px 36px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; position:sticky; top:0; z-index:20; }
+  .topheader .title{ font-size:20px; font-weight:600; }
+  .topheader .crumb{ font-size:14px; color:#6E6E6B; margin-top:2px; }
+  .btn-dark{ border:0; background:#0A0A0B; color:#FFFFFF; font:inherit; font-size:15px; font-weight:600; padding:11px 20px; border-radius:999px; cursor:pointer; }
+  .btn-dark:hover{ background:#1F4FFF; }
+  .header-user{ display:flex; align-items:center; gap:10px; padding-left:14px; border-left:1px solid #E4E4E1; }
+  .avatar{ width:36px; height:36px; border-radius:999px; background:#E8ECFF; color:#1F4FFF; display:grid; place-items:center; font-size:13px; font-weight:700; flex:none; }
+
+  main.main-content{ padding:36px; max-width:1280px; width:100%; }
+
+  .card{ border:1px solid #E4E4E1; background:#FFFFFF; border-radius:22px; padding:26px; }
+  .card-hover{ cursor:pointer; }
+  .card-hover:hover{ border-color:#0A0A0B; }
+  .list-card{ border:1px solid #E4E4E1; background:#FFFFFF; border-radius:20px; padding:24px; cursor:pointer; font:inherit; text-align:left; width:100%; }
+  .list-card:hover{ border-color:#0A0A0B; }
+  .doc-card{ border:1px solid #E4E4E1; background:#FFFFFF; border-radius:18px; padding:22px; display:flex; flex-direction:column; gap:12px; }
+  .doc-card:hover{ border-color:#0A0A0B; }
+  .pill-outline{ border:1px solid #E4E4E1; background:#FFFFFF; font:inherit; font-size:14px; font-weight:600; padding:10px 16px; border-radius:999px; cursor:pointer; }
+  .pill-outline:hover{ border-color:#0A0A0B; }
+  .tab-pill{ border:1px solid #E4E4E1; background:#FFFFFF; color:#0A0A0B; font:inherit; font-size:15px; font-weight:600; padding:11px 18px; border-radius:999px; cursor:pointer; }
+  .tab-pill:hover{ border-color:#0A0A0B; }
+  .tab-pill.active{ background:#0A0A0B; color:#FFFFFF; border-color:#0A0A0B; }
+  .filter-pill{ border:1px solid #E4E4E1; background:#FFFFFF; font:inherit; font-size:15px; font-weight:500; padding:11px 18px; border-radius:999px; cursor:pointer; }
+  .filter-pill:hover{ border-color:#0A0A0B; }
+  .filter-pill.active{ background:#0A0A0B; color:#FFFFFF; border:0; }
+  .badge{ font-size:13px; font-weight:600; border-radius:999px; padding:6px 12px; display:inline-block; }
+  .badge-ok{ color:#16603A; background:#DDF3E6; }
+  .micro{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#6E6E6B; }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  .input{ width:100%; border:1px solid #E4E4E1; border-radius:12px; padding:13px 16px; font:inherit; font-size:15px; outline:none; }
+  .input:focus{ border-color:#1F4FFF; }
+  .btn-blue{ border:0; background:#1F4FFF; color:#FFFFFF; font:inherit; font-weight:600; padding:14px 22px; border-radius:12px; cursor:pointer; }
+  .btn-blue:hover{ background:#0A0A0B; }
+  .btn-blue-sm{ border:0; background:#1F4FFF; color:#FFFFFF; font:inherit; font-size:15px; font-weight:600; padding:12px 18px; border-radius:12px; cursor:pointer; }
+  .btn-blue-sm:hover{ background:#0A0A0B; }
+  .dropzone{ border:1px dashed #C9C9C5; border-radius:12px; padding:20px 16px; font-size:15px; color:#6E6E6B; text-align:center; }
+  .toggle{ flex:none; width:52px; height:30px; border-radius:999px; border:0; cursor:pointer; padding:3px; display:flex; }
+  .toggle span{ width:24px; height:24px; border-radius:999px; background:#FFFFFF; display:block; }
+  .profil-tab{ width:100%; text-align:left; border:0; background:transparent; font:inherit; font-size:15px; font-weight:500; padding:13px 16px; border-radius:12px; cursor:pointer; }
+  .profil-tab:hover{ background:#F3F3F1; }
+  .profil-tab.active{ background:#F3F3F1; color:#1F4FFF; }
+  .help-dark{ border:1px solid #0A0A0B; background:#0A0A0B; color:#FFFFFF; border-radius:20px; padding:26px; display:flex; flex-direction:column; gap:12px; }
+  .help-dark .btn-white{ align-self:flex-start; margin-top:6px; border:0; background:#FFFFFF; color:#0A0A0B; font:inherit; font-size:14px; font-weight:600; padding:10px 18px; border-radius:999px; cursor:pointer; }
+  .help-dark .btn-white:hover{ background:#1F4FFF; color:#FFFFFF; }
+
+  .grid-2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+  .grid-cards{ display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; }
+  .grid-docs{ display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+  .grid-news{ display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:20px; }
+  .grid-fields{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
+  .stat-strip{ border-top:1px solid #E4E4E1; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); }
+  .stat-cell{ padding:20px 30px; border-right:1px solid #F0F0EE; }
+
+  .chatbot{ position:fixed; right:24px; bottom:24px; z-index:40; display:flex; flex-direction:column; align-items:flex-end; gap:14px; }
+  .chat-panel{ width:380px; max-width:calc(100vw - 48px); max-height:calc(100vh - 130px); background:#FFFFFF; border:1px solid #E4E4E1; border-radius:22px; box-shadow:0 24px 60px rgba(10,10,11,0.16); overflow:hidden; display:flex; flex-direction:column; }
+  .chat-head{ padding:18px 22px; border-bottom:1px solid #E4E4E1; display:flex; align-items:center; gap:12px; flex:none; }
+  .chat-messages{ padding:20px 22px; display:flex; flex-direction:column; gap:14px; flex:1 1 auto; min-height:180px; max-height:340px; overflow-y:auto; }
+  .chat-bubble{ font-size:15px; line-height:1.5; border-radius:14px; padding:12px 15px; max-width:88%; white-space:pre-line; }
+  .chat-foot{ padding:14px 22px 20px; border-top:1px solid #E4E4E1; display:flex; flex-direction:column; gap:12px; flex:none; }
+  .chip-suggest{ border:1px solid #E4E4E1; background:#FFFFFF; font:inherit; font-size:13px; font-weight:500; padding:8px 13px; border-radius:999px; cursor:pointer; }
+  .chip-suggest:hover{ border-color:#0A0A0B; }
+  .fab{ border:0; background:#0A0A0B; color:#FFFFFF; font:inherit; font-size:15px; font-weight:600; padding:16px 24px; border-radius:999px; cursor:pointer; box-shadow:0 12px 32px rgba(10,10,11,0.22); }
+  .fab:hover{ background:#1F4FFF; }
+
+  @media (max-width:900px){
+    .sidebar{ position:static; height:auto; width:100%; flex-direction:row; align-items:center; padding:14px 16px; overflow-x:auto; }
+    .sidebar-logo{ padding:0 14px 0 0; }
+    .sidebar-label{ display:none; }
+    .sidebar-nav{ flex-direction:row; padding:0; }
+    .nav-item{ white-space:nowrap; }
+    .sidebar-advisor{ display:none; }
+    main.main-content{ padding:20px; }
+    .topheader{ padding:14px 20px; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const POLICIES = [
+  { key: 'bvg', produkt: 'Berufliche Vorsorge', gesellschaft: 'Swiss Life', nr: '49144.10', beginn: '01.01.2027', ablauf: '31.12.2029', praemie: "CHF 134'314.00", betrag: 134314, selbst: 'CHF 0.00',
+    deckung: 'Obligatorische und überobligatorische berufliche Vorsorge für 18 Mitarbeitende, inklusive Risikoleistungen bei Invalidität und Tod.',
+    mutTitel: 'Mitarbeiter anmelden',
+    felder: [['Name und Vorname', 'z. B. Meier Anna'], ['AHV-Nummer', '756.____.____.__'], ['Eintrittsdatum', 'TT.MM.JJJJ'], ['Jahreslohn (CHF)', 'z. B. 78 000'], ['Beschäftigungsgrad', '100%'], ['Geburtsdatum', 'TT.MM.JJJJ']],
+    dokumente: [['Police · PDF', 'Vertragsverlängerung 2027–2029', '27.07.2026 · 1.2 MB'], ['Abrechnung · PDF', 'Definitive Prämienabrechnung 2025', '30.01.2026 · 275 KB'], ['Liste · XLSX', 'Versichertenbestand per 01.01.2026', '15.01.2026 · 62 KB']],
+    tags: ['bvg', 'vorsorge', 'pension', 'mitarbeiter', 'personal'] },
+  { key: 'ktg', produkt: 'Kollektiv-Krankentaggeld', gesellschaft: 'Helvetia', nr: 'P-1322-5183', beginn: '01.01.2025', ablauf: '31.12.2029', praemie: "CHF 13'944.25", betrag: 13944.25, selbst: 'Wartefrist 30 Tage',
+    deckung: '80% des Lohnes während 730 Tagen, Wartefrist 30 Tage, für alle Mitarbeitenden.',
+    mutTitel: 'Lohnsumme melden',
+    felder: [['Jahreslohnsumme (CHF)', 'z. B. 1 240 000'], ['Anzahl versicherte Personen', 'z. B. 18'], ['Stichtag', 'TT.MM.JJJJ'], ['Bemerkung', 'optional']],
+    dokumente: [['Police · PDF', 'KTG-Police 2026', '06.04.2026 · 160 KB'], ['Rechnung · PDF', 'Prämienrechnung 2026', '01.07.2026 · 210 KB']],
+    tags: ['krank', 'taggeld', 'lohnausfall'] },
+  { key: 'sach', produkt: 'Sachversicherung kombiniert', gesellschaft: 'Emmental Versicherung', nr: '50094972', beginn: '01.01.2024', ablauf: '31.12.2026', praemie: "CHF 6'287.50", betrag: 6287.5, selbst: "CHF 1'000.00",
+    deckung: 'Feuer, Elementar, Wasser und Diebstahl für Gebäude und Inventar an beiden Standorten.',
+    mutTitel: 'Versicherungswerte anpassen',
+    felder: [['Standort', 'z. B. Werkhof Lotzwil'], ['Inventarwert (CHF)', 'z. B. 860 000'], ['Gebäudewert (CHF)', 'z. B. 2 400 000'], ['Gültig ab', 'TT.MM.JJJJ']],
+    dokumente: [['Police · PDF', 'Sachversicherung — Policenkopie', '11.04.2026 · 890 KB'], ['Gutachten · PDF', 'Wasserschaden Lagerhalle Ost', '28.08.2026 · 3.4 MB']],
+    tags: ['sach', 'gebäude', 'inventar', 'feuer', 'wasser'] },
+  { key: 'mfz', produkt: 'MFz-Versicherung Flotte', gesellschaft: 'Mobiliar', nr: 'P-1561-1438', beginn: '01.01.2024', ablauf: '31.12.2026', praemie: "CHF 6'279.50", betrag: 6279.5, selbst: "CHF 1'000.00",
+    deckung: 'Haftpflicht und Vollkasko für sechs Fahrzeuge, inklusive Insassenschutz.',
+    mutTitel: 'Fahrzeug an- oder abmelden',
+    felder: [['An- oder Abmeldung', 'Anmeldung'], ['Kontrollschild', 'z. B. BE 412 883'], ['Marke und Typ', 'z. B. VW Crafter'], ['Stammnummer', 'z. B. 123.456.789'], ['Datum', 'TT.MM.JJJJ'], ['Kaskodeckung', 'Vollkasko']],
+    dokumente: [['Rechnung · PDF', 'Prämienrechnung MFz-Flotte 2026', '13.08.2026 · 210 KB'], ['Police · PDF', 'Flottenliste 2026', '02.01.2026 · 320 KB']],
+    tags: ['auto', 'fahrzeug', 'mfz', 'flotte', 'lieferwagen'] },
+  { key: 'hp', produkt: 'Betriebs-Haftpflicht', gesellschaft: 'Mobiliar', nr: 'P-1558-5698', beginn: '01.01.2024', ablauf: '31.12.2026', praemie: "CHF 3'385.50", betrag: 3385.5, selbst: 'CHF 500.00',
+    deckung: 'Personen- und Sachschäden gegenüber Dritten bis CHF 10 Mio., inklusive Produktehaftpflicht.',
+    mutTitel: 'Betriebsangaben ändern',
+    felder: [['Betriebstätigkeit', 'z. B. Metallbau, Montage'], ['Jahresumsatz (CHF)', 'z. B. 4 200 000'], ['Jahreslohnsumme (CHF)', 'z. B. 1 240 000'], ['Gültig ab', 'TT.MM.JJJJ']],
+    dokumente: [['Police · PDF', 'Betriebs-Haftpflicht Policenkopie', '02.01.2026 · 410 KB']],
+    tags: ['haftpflicht', 'betrieb'] },
+  { key: 'cyber', produkt: 'Cyber-Risk-Versicherung', gesellschaft: 'Zürich', nr: '16494441', beginn: '01.01.2026', ablauf: '31.12.2026', praemie: "CHF 1'235.85", betrag: 1235.85, selbst: "CHF 2'500.00",
+    deckung: 'Eigen- und Drittschäden nach Cyber-Vorfällen, Krisenhotline und Datenwiederherstellung. Betriebsunterbruch ist nicht gedeckt.',
+    mutTitel: 'Deckung anpassen',
+    felder: [['Gewünschte Deckungssumme (CHF)', 'z. B. 2 000 000'], ['Anzahl Arbeitsplätze', 'z. B. 24'], ['IT-Dienstleister', 'z. B. Beispiel Informatik AG'], ['Gültig ab', 'TT.MM.JJJJ']],
+    dokumente: [['Offerte · PDF', 'Cyber-Risk Erneuerungsvorschlag 2027', '02.09.2026 · 640 KB'], ['Police · PDF', 'Cyber-Risk Police 2026', '02.01.2026 · 380 KB']],
+    tags: ['cyber', 'hacker', 'it', 'daten'] },
+  { key: 'uvg', produkt: 'UVG-Zusatzversicherung', gesellschaft: 'Mobiliar', nr: 'P-1683-3223', beginn: '01.01.2025', ablauf: '31.12.2029', praemie: 'CHF 453.50', betrag: 453.5, selbst: 'CHF 0.00',
+    deckung: 'Ergänzung zur obligatorischen Unfallversicherung: Spitalzusatz und Lohnanteile über dem UVG-Maximum.',
+    mutTitel: 'Personalbestand melden',
+    felder: [['Anzahl versicherte Personen', 'z. B. 18'], ['Jahreslohnsumme (CHF)', 'z. B. 1 240 000'], ['Gültig ab', 'TT.MM.JJJJ'], ['Bemerkung', 'optional']],
+    dokumente: [['Police · PDF', 'UVG-Zusatz Policenkopie', '02.01.2026 · 290 KB']],
+    tags: ['unfall', 'uvg'] }
+];
+
+const CLAIMS = [
+  { key: 'wasser', titel: 'Wasserschaden Lagerhalle Ost', sub: 'Sachversicherung · Emmental · gemeldet 12.08.2026', status: 'In Bearbeitung', fg: '#1F4FFF', bg: '#E8ECFF', dot: '#1F4FFF',
+    datum: '12.08.2026', summe: "CHF 24'800.00", selbst: "CHF 1'000.00",
+    beschrieb: 'Nach einem Rohrbruch in der Sprinkleranlage stand die Lagerhalle Ost rund 8 cm unter Wasser. Betroffen sind Lagergut und Bodenbelag.',
+    schritte: [['Meldung eingegangen', '12.08.2026'], ['Besichtigung durch Experten', '19.08.2026'], ['Gutachten liegt vor', '28.08.2026'], ['Auszahlung wird geprüft', 'offen']] },
+  { key: 'kollision', titel: 'Kollision Lieferwagen BE 412 883', sub: 'MFz-Flotte · Mobiliar · gemeldet 04.03.2026', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+    datum: '04.03.2026', summe: "CHF 5'820.00", selbst: "CHF 1'000.00",
+    beschrieb: 'Auffahrkollision beim Einbiegen in den Werkhof, Fremdverschulden. Reparatur direkt mit der Garage abgerechnet.',
+    schritte: [['Meldung eingegangen', '04.03.2026'], ['Kostenvoranschlag geprüft', '11.03.2026'], ["Auszahlung CHF 4'820.00", '26.03.2026']] },
+  { key: 'unfall', titel: 'Arbeitsunfall Werkstatt', sub: 'UVG-Zusatz · Mobiliar · gemeldet 19.11.2025', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+    datum: '19.11.2025', summe: "CHF 11'660.00", selbst: 'CHF 0.00',
+    beschrieb: 'Schnittverletzung an der Kantbank, sechs Wochen Arbeitsausfall. Taggeldleistungen wurden vollständig abgerechnet.',
+    schritte: [['Meldung eingegangen', '19.11.2025'], ['Taggeld ab 8. Tag', '27.11.2025'], ['Fall abgeschlossen', '20.01.2026']] }
+];
+
+const VERLAUF = [
+  { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '02.09.2026 · 15:34', text: 'Guten Tag Herr Ferrari, der Erneuerungsvorschlag für die Cyber-Risk-Versicherung liegt unter Dokumente. Die Prämie bleibt unverändert, die Deckungssumme steigt auf CHF 2 Mio.' },
+  { initialen: 'LF', bg: '#F3F3F1', fg: '#6E6E6B', name: 'Luca Ferrari', zeit: '28.08.2026 · 09:12', text: 'Zwei neue Mitarbeitende starten im Oktober. Ich melde sie über das Portal an.' },
+  { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '27.07.2026 · 11:05', text: 'BVG-Vertrag verlängert: 01.01.2027 bis 31.12.2029, Bedingungen unverändert.' }
+];
+const TERMINE = [
+  { datum: '20.09.2026', titel: 'MFz-Flotte — Prämienrechnung fällig', sub: "Police P-1561-1438 · Mobiliar · CHF 6'279.50", status: 'Offen', fg: '#8A5A00', bg: '#FFF3D6' },
+  { datum: '01.10.2026', titel: 'Cyber-Risk — Erneuerung zur Prüfung', sub: 'Jan Krapl hat Ihnen einen Vorschlag hinterlegt.', status: 'Aktion', fg: '#1F4FFF', bg: '#E8ECFF' },
+  { datum: '31.12.2026', titel: 'Betriebs-Haftpflicht — Vertragsablauf', sub: 'Wir melden uns 90 Tage vorher bei Ihnen.', status: 'Notiert', fg: '#6E6E6B', bg: '#F3F3F1' }
+];
+const DOKUMENTE = [
+  { typ: 'Police · PDF', farbe: '#1F4FFF', name: 'Berufliche Vorsorge — Vertragsverlängerung 2027–2029', meta: '27.07.2026 · 1.2 MB' },
+  { typ: 'Offerte · PDF', farbe: '#1F4FFF', name: 'Cyber-Risk — Erneuerungsvorschlag 2027', meta: '02.09.2026 · 640 KB' },
+  { typ: 'Schaden · PDF', farbe: '#6E6E6B', name: 'Gutachten Wasserschaden Lagerhalle Ost', meta: '28.08.2026 · 3.4 MB' },
+  { typ: 'Rechnung · PDF', farbe: '#6E6E6B', name: 'Prämienrechnung MFz-Flotte 2026', meta: '13.08.2026 · 210 KB' },
+  { typ: 'Police · PDF', farbe: '#6E6E6B', name: 'Sachversicherung kombiniert — Policenkopie', meta: '11.04.2026 · 890 KB' },
+  { typ: 'Übersicht · XLSX', farbe: '#6E6E6B', name: 'Versicherungsspiegel Bachmann Metallbau AG', meta: '15.01.2026 · 48 KB' }
+];
+const NEWS = [
+  { kategorie: 'Hinweis', neu: true, titel: 'Cyber-Deckungen 2027: was sich ändert', text: 'Die Gesellschaften verlangen ab 2027 durchgehend Zwei-Faktor-Anmeldung und getrennte Backups. Wir prüfen bei allen Mandaten, ob die Anforderungen erfüllt sind.', meta: '02.09.2026 · Jan Krapl' },
+  { kategorie: 'Branche', neu: true, titel: 'Prämien in der Sachversicherung ziehen an', text: 'Nach zwei schadenreichen Jahren erhöhen mehrere Gesellschaften die Prämien für Gewerbebetriebe. Wo es sinnvoll ist, holen wir Vergleichsofferten ein.', meta: '18.08.2026 · coverd ag' },
+  { kategorie: 'Recht', neu: false, titel: 'BVG-Reform: Auswirkungen auf KMU', text: 'Der Umwandlungssatz und die Eintrittsschwelle ändern sich gestaffelt. Für Betriebe mit Teilzeitpersonal lohnt sich eine frühe Überprüfung des Vorsorgeplans.', meta: '30.06.2026 · coverd ag' },
+  { kategorie: 'Intern', neu: false, titel: 'Neues Kundenportal ab Oktober', text: 'Mutationen, Schadenmeldungen und Dokumente laufen künftig über das Portal. Ihre bisherigen Unterlagen sind bereits übernommen.', meta: '12.06.2026 · coverd ag' }
+];
+const FAQ = [
+  'Wie melde ich einen neuen Mitarbeiter zur BVG an?',
+  'Wo finde ich meine aktuelle Police als PDF?',
+  'Wie lange dauert die Bearbeitung eines Schadenfalls?',
+  'Wie ändere ich meine E-Mailadresse?',
+  'Wer sieht meine Daten im Portal?',
+  'Wie kündige ich eine Police?'
+];
+
+const chf = (n) => 'CHF ' + n.toLocaleString('de-CH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+const state = {
+  screen: 'dash', policy: null, claim: null, detailTab: 'ueber', profilTab: 'allg', docFilter: 'Alle',
+  notify: { schaden: true, dokumente: true, policen: true, news: false },
+  botOpen: false,
+  messages: [{ role: 'bot', text: 'Guten Tag. Ich beantworte Fragen zu Ihren sieben Policen — Prämien, Laufzeiten, Deckungen. Für alles Weitere ist Jan Krapl da.' }]
+};
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function go(screen){ state.screen = screen; state.policy = null; state.claim = null; render(); window.scrollTo(0,0); }
+function openPolicy(key){ state.screen = 'policen'; state.policy = key; state.detailTab = 'ueber'; render(); window.scrollTo(0,0); }
+function openClaim(key){ state.screen = 'schaden'; state.claim = key; render(); window.scrollTo(0,0); }
+function setDetailTab(t){ state.detailTab = t; render(); }
+function setProfilTab(t){ state.profilTab = t; render(); }
+function toggleNotify(key){ state.notify[key] = !state.notify[key]; render(); }
+function setDocFilter(f){ state.docFilter = f; render(); }
+function toggleBot(){ state.botOpen = !state.botOpen; render(); }
+function closeBot(){ state.botOpen = false; render(); }
+
+function answer(q){
+  const s = q.toLowerCase();
+  const total = POLICIES.reduce((a, p) => a + p.betrag, 0);
+  if (/(prämie|praemie|kosten|preis|zahle|total)/.test(s)) {
+    const hit = POLICIES.find((p) => p.tags.some((t) => s.includes(t)));
+    if (hit) return 'Die Jahresprämie für ' + hit.produkt + ' beträgt ' + hit.praemie + ' (' + hit.gesellschaft + ', Police ' + hit.nr + ').';
+    return 'Ihre sieben aktiven Policen kosten zusammen ' + chf(total) + ' pro Jahr. Grösster Posten: Berufliche Vorsorge.';
+  }
+  if (/(läuft|lauft|ablauf|abläuft|kündig|erneuer|frist|verlänger)/.test(s)) {
+    return 'Als Erstes laufen vier Policen am 31.12.2026 ab: Sachversicherung, MFz-Flotte, Betriebs-Haftpflicht und Cyber-Risk. Für Cyber liegt bereits ein Erneuerungsvorschlag unter Dokumente.';
+  }
+  if (/(mitarbeiter|eintritt|anmeld|austritt)/.test(s)) {
+    return 'Neue Mitarbeitende melden Sie bei der Police Berufliche Vorsorge an — Reiter "Mutation" auf der Policendetailseite.';
+  }
+  if (/(schaden|anliegen|unfall|bearbeitung)/.test(s)) {
+    return 'Ein Fall ist in Bearbeitung: Wasserschaden Lagerhalle Ost (Sachversicherung, Emmental) — Gutachten liegt vor, die Auszahlung wird geprüft.';
+  }
+  if (/(rechnung|fällig|faellig|zahlung)/.test(s)) {
+    return "Offen sind zwei Prämienrechnungen: MFz-Flotte CHF 6'279.50 (fällig 20.09.2026) und UVG-Zusatz CHF 234.80 (fällig 28.09.2026).";
+  }
+  const hit = POLICIES.find((p) => p.tags.some((t) => s.includes(t)) || s.includes(p.nr.toLowerCase()));
+  if (hit) return hit.produkt + ' bei ' + hit.gesellschaft + ' (Police ' + hit.nr + '), ' + hit.praemie + ' pro Jahr, läuft bis ' + hit.ablauf + '.\n\n' + hit.deckung;
+  if (/(versichert|deckung|gedeckt|abgedeckt)/.test(s)) {
+    return 'Gedeckt sind Sach, Betriebs-Haftpflicht, MFz-Flotte, Cyber-Risk sowie Personal (BVG, UVG-Zusatz, Krankentaggeld). Nicht gedeckt: Betriebsunterbruch nach einem Cyber-Vorfall.';
+  }
+  return 'Dazu finde ich in Ihren Policen keine Angabe. Jan Krapl hilft weiter: 078 248 91 21 oder jkrapl@coverd.ch.';
+}
+
+function send(text){
+  const q = (text || '').trim();
+  if (!q) return;
+  state.messages.push({ role: 'user', text: q });
+  state.messages.push({ role: 'bot', text: answer(q) });
+  render();
+}
+function sendFromInput(){
+  const el = document.getElementById('botInput');
+  send(el.value);
+  el.value = '';
+  el.focus();
+}
+function onBotKey(e){ if (e.key === 'Enter') sendFromInput(); }
+
+function navItem(key, label, active, go_){
+  return `<button class="nav-item" style="background:${active ? '#0A4AD6' : 'transparent'}; color:${active ? '#FFFFFF' : '#EAF1FF'}" onclick="${go_}"><span class="dot" style="background:${active ? '#FFFFFF' : '#5B8DFF'}"></span>${label}</button>`;
+}
+
+function sidebar(){
+  const sc = state.screen;
+  return `
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="sidebar-logo-box"><img src="images/coverd-logo.png" alt="coverd ag" style="position:absolute; left:0; top:0; width:132px; height:34px; object-fit:contain; mix-blend-mode:multiply; padding:2px;"></div></div>
+    <div class="sidebar-label">Hauptbereiche</div>
+    <nav class="sidebar-nav">
+      ${navItem('dash','Dashboard', sc==='dash', "go('dash')")}
+      ${navItem('policen','Policen', sc==='policen', "go('policen')")}
+      ${navItem('schaden','Schadenfälle', sc==='schaden', "go('schaden')")}
+      ${navItem('dokumente','Dokumente', sc==='dokumente', "go('dokumente')")}
+      ${navItem('news','News', sc==='news', "go('news')")}
+    </nav>
+    <div class="sidebar-label spaced">Konto</div>
+    <nav class="sidebar-nav">
+      ${navItem('profil','Mein Profil', sc==='profil', "go('profil')")}
+      ${navItem('hilfe','Hilfezentrum', sc==='hilfe', "go('hilfe')")}
+    </nav>
+    <div class="sidebar-advisor">
+      <img src="team/jan.jpg" alt="Jan Krapl">
+      <div><div style="font-size:14px; font-weight:600;">Jan Krapl</div><div style="font-size:12px; color:#DCE8FF;">Ihr Mandatsleiter</div></div>
+    </div>
+  </aside>`;
+}
+
+function topheader(){
+  const policy = POLICIES.find(p => p.key === state.policy);
+  const claim = CLAIMS.find(c => c.key === state.claim);
+  const titles = { dash:['Dashboard','Übersicht'], policen:['Policen','Übersicht'], schaden:['Schadenfälle','Übersicht'], dokumente:['Dokumente','Übersicht'], news:['Informationen','Übersicht'], hilfe:['Hilfezentrum','Übersicht'], profil:['Mein Profil','Benutzer'] };
+  const base = titles[state.screen] || titles.dash;
+  const pageTitle = policy ? 'Policen' : claim ? 'Schadenfälle' : base[0];
+  const pageCrumb = policy ? 'Übersicht · ' + policy.nr : claim ? 'Übersicht · ' + claim.titel : base[1];
+  return `
+  <header class="topheader">
+    <div><div class="title">${esc(pageTitle)}</div><div class="crumb">${esc(pageCrumb)}</div></div>
+    <div style="display:flex; align-items:center; gap:14px; margin-left:auto;">
+      <button class="btn-dark" onclick="go('schaden')">Schaden melden</button>
+      <div class="header-user">
+        <div class="avatar">LF</div>
+        <div style="line-height:1.25;"><div style="font-size:14px; font-weight:600;">Luca Ferrari</div><div style="font-size:12px; color:#6E6E6B;">Bachmann Metallbau AG</div></div>
+      </div>
+    </div>
+  </header>`;
+}
+
+function ring(pct, color, center, size){
+  size = size || 132;
+  const inner = Math.round(size * 0.727);
+  return `<div style="width:${size}px; height:${size}px; border-radius:999px; background:conic-gradient(${color} 0 ${pct}%, #DDE3F5 ${pct}% 100%); display:grid; place-items:center; flex:none;">
+    <div style="width:${inner}px; height:${inner}px; border-radius:999px; background:#FFFFFF; display:grid; place-items:center; font-size:30px; font-weight:600;">${center}</div>
+  </div>`;
+}
+
+function dashboardView(){
+  return `
+  <div style="display:flex; flex-direction:column; gap:28px;">
+    <div>
+      <h1 style="margin:0; font-size:38px; font-weight:600; letter-spacing:-0.02em; line-height:1.1;">Guten Tag, Luca Ferrari</h1>
+      <p style="margin:14px 0 0; font-size:17px; color:#6E6E6B; max-width:560px;">Zwei Dinge brauchen diese Woche Ihre Aufmerksamkeit. Alles andere läuft.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div style="font-size:17px; font-weight:600;">Policen</div>
+        <div style="display:flex; align-items:center; gap:26px; margin-top:22px;">
+          ${ring(86, '#1F4FFF', 7)}
+          <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
+            <div><div style="font-size:14px; color:#6E6E6B;">Aktive Verträge</div><div style="font-size:19px; font-weight:600; margin-top:2px;">7 von 8</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">Jahresprämie</div><div style="font-size:19px; font-weight:600; margin-top:2px;">CHF 165'900</div></div>
+          </div>
+        </div>
+        <div style="display:flex; gap:18px; margin-top:22px; font-size:13px; color:#6E6E6B; flex-wrap:wrap;">
+          <span style="display:flex; align-items:center; gap:7px;"><span style="width:10px; height:3px; background:#1F4FFF; display:inline-block;"></span>Aktiv</span>
+          <span style="display:flex; align-items:center; gap:7px;"><span style="width:10px; height:3px; background:#DDE3F5; display:inline-block;"></span>Gekündigt</span>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:17px; font-weight:600;">Schadenfälle</div>
+        <div style="display:flex; align-items:center; gap:26px; margin-top:22px;">
+          ${ring(25, '#0A0A0B', 4)}
+          <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
+            <div><div style="font-size:14px; color:#6E6E6B;">In Bearbeitung</div><div style="font-size:19px; font-weight:600; margin-top:2px; color:#1F4FFF;">1</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">Ausbezahlt gesamt</div><div style="font-size:19px; font-weight:600; margin-top:2px;">CHF 16'480</div></div>
+          </div>
+        </div>
+        <div style="display:flex; gap:18px; margin-top:22px; font-size:13px; color:#6E6E6B; flex-wrap:wrap;">
+          <span style="display:flex; align-items:center; gap:7px;"><span style="width:10px; height:3px; background:#0A0A0B; display:inline-block;"></span>Offen</span>
+          <span style="display:flex; align-items:center; gap:7px;"><span style="width:10px; height:3px; background:#DDE3F5; display:inline-block;"></span>Abgeschlossen</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1; display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
+        <h2 style="margin:0; font-size:19px; font-weight:600;">Verlauf</h2>
+        <span style="font-size:13px; font-weight:600; color:#1F4FFF; background:#E8ECFF; border-radius:999px; padding:6px 12px;">2 neu</span>
+      </div>
+      ${VERLAUF.map(v => `
+      <div style="display:flex; gap:18px; padding:22px 26px; border-bottom:1px solid #F0F0EE;">
+        <div style="width:38px; height:38px; border-radius:999px; background:${v.bg}; color:${v.fg}; display:grid; place-items:center; font-size:13px; font-weight:700; flex:none;">${v.initialen}</div>
+        <div style="min-width:0; flex:1 1 auto;">
+          <div style="display:flex; gap:10px; align-items:baseline; flex-wrap:wrap;"><span style="font-size:15px; font-weight:600;">${v.name}</span><span class="mono" style="font-size:12px; color:#6E6E6B;">${v.zeit}</span></div>
+          <div style="font-size:15px; line-height:1.5; margin-top:6px;">${v.text}</div>
+        </div>
+      </div>`).join('')}
+      <div style="padding:20px 26px; display:flex; gap:12px; align-items:center; background:#FAFAF8;">
+        <input id="verlaufInput" placeholder="Nachricht an Jan Krapl schreiben" class="input" style="flex:1 1 auto; min-width:0;">
+        <button class="btn-dark" style="border-radius:12px;" onclick="alert('In der Demo-Version nicht verfügbar.')">Senden</button>
+      </div>
+    </div>
+
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1;"><h2 style="margin:0; font-size:19px; font-weight:600;">Was als Nächstes ansteht</h2></div>
+      ${TERMINE.map(t => `
+      <div style="display:flex; align-items:flex-start; gap:18px; padding:22px 26px; border-bottom:1px solid #F0F0EE;">
+        <div class="mono" style="font-size:13px; color:#6E6E6B; width:92px; flex:none; padding-top:2px;">${t.datum}</div>
+        <div style="min-width:0; flex:1 1 auto;"><div style="font-size:16px; font-weight:600;">${t.titel}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${t.sub}</div></div>
+        <span style="flex:none; font-size:13px; font-weight:600; color:${t.fg}; background:${t.bg}; border-radius:999px; padding:6px 12px;">${t.status}</span>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function policenListView(){
+  return `
+  <div style="display:flex; flex-direction:column; gap:22px;">
+    <p style="margin:0; font-size:16px; color:#6E6E6B;">7 aktive Verträge · Jahresprämie CHF 165'900.10</p>
+    <div class="grid-cards">
+      ${POLICIES.map(p => `
+      <button class="list-card" onclick="openPolicy('${p.key}')" style="display:flex; flex-direction:column; gap:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px;">
+          <div style="min-width:0;"><div style="font-size:17px; font-weight:600;">${p.produkt}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${p.gesellschaft}</div></div>
+          <span class="badge badge-ok">Aktiv</span>
+        </div>
+        <div style="display:flex; gap:26px; flex-wrap:wrap; border-top:1px solid #F0F0EE; padding-top:14px;">
+          <div><div class="micro">Prämie</div><div style="font-size:16px; font-weight:600; margin-top:3px;">${p.praemie}</div></div>
+          <div><div class="micro">Läuft ab</div><div style="font-size:16px; font-weight:600; margin-top:3px;">${p.ablauf}</div></div>
+        </div>
+      </button>`).join('')}
+    </div>
+  </div>`;
+}
+
+function policeDetailView(){
+  const p = POLICIES.find(x => x.key === state.policy);
+  if (!p) return '';
+  const dt = state.detailTab;
+  const tabs = [['ueber','Übersicht'], ['dok','Dokumente'], ['mut', p.mutTitel]];
+  return `
+  <div style="display:flex; flex-direction:column; gap:22px;">
+    <button class="pill-outline" style="align-self:flex-start;" onclick="go('policen')">Zurück zu Policen</button>
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div style="padding:26px 30px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+        <div style="width:56px; height:56px; border-radius:14px; background:#E8ECFF; color:#1F4FFF; display:grid; place-items:center; font-size:22px; font-weight:700; flex:none;">P</div>
+        <div style="min-width:0;">
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><h1 style="margin:0; font-size:26px; font-weight:600; letter-spacing:-0.01em;">${p.produkt}</h1><span class="badge badge-ok">Aktiv</span></div>
+          <div style="font-size:15px; color:#6E6E6B; margin-top:6px;">${p.gesellschaft} · Police ${p.nr}</div>
+        </div>
+        <button class="btn-dark" style="margin-left:auto;" onclick="go('schaden')">Schaden melden</button>
+      </div>
+      <div class="stat-strip">
+        <div class="stat-cell"><div class="micro">Beginn</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.beginn}</div></div>
+        <div class="stat-cell"><div class="micro">Ablauf</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.ablauf}</div></div>
+        <div class="stat-cell"><div class="micro">Bruttoprämie</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.praemie}</div></div>
+        <div style="padding:20px 30px; display:flex; align-items:center; gap:12px;">
+          <img src="team/jan.jpg" alt="Jan Krapl" style="width:36px; height:36px; border-radius:999px; object-fit:cover; object-position:50% 22%; flex:none;">
+          <div><div class="micro">Ansprechpartner</div><div style="font-size:15px; font-weight:600; margin-top:3px;">Jan Krapl</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      ${tabs.map(([k,l]) => `<button class="tab-pill ${dt===k?'active':''}" onclick="setDetailTab('${k}')">${l}</button>`).join('')}
+    </div>
+
+    ${dt === 'ueber' ? `
+    <div class="grid-2">
+      <div class="card">
+        <h2 style="margin:0 0 18px; font-size:17px; font-weight:600;">Police im Überblick</h2>
+        <div class="grid-fields">
+          <div><div style="font-size:13px; color:#6E6E6B;">Policen-Nr</div><div class="mono" style="font-size:15px; margin-top:4px;">${p.nr}</div></div>
+          <div><div style="font-size:13px; color:#6E6E6B;">Gesellschaft</div><div style="font-size:15px; margin-top:4px;">${p.gesellschaft}</div></div>
+          <div><div style="font-size:13px; color:#6E6E6B;">Selbstbehalt</div><div style="font-size:15px; margin-top:4px;">${p.selbst}</div></div>
+          <div><div style="font-size:13px; color:#6E6E6B;">Zahlweise</div><div style="font-size:15px; margin-top:4px;">Jährlich</div></div>
+        </div>
+      </div>
+      <div class="card"><h2 style="margin:0 0 14px; font-size:17px; font-weight:600;">Was gedeckt ist</h2><p style="margin:0; font-size:15px; line-height:1.6;">${p.deckung}</p></div>
+    </div>` : ''}
+
+    ${dt === 'dok' ? `
+    <div class="grid-docs">
+      ${p.dokumente.map(([typ,name,meta]) => `<div class="doc-card"><div class="micro">${typ}</div><div style="font-size:16px; font-weight:600; line-height:1.35;">${name}</div><div style="font-size:14px; color:#6E6E6B; margin-top:auto;">${meta}</div></div>`).join('')}
+    </div>` : ''}
+
+    ${dt === 'mut' ? `
+    <div class="card">
+      <h2 style="margin:0; font-size:19px; font-weight:600;">${p.mutTitel}</h2>
+      <p style="margin:8px 0 0; font-size:15px; color:#6E6E6B;">Police ${p.nr} · ${p.gesellschaft}</p>
+      <div class="grid-fields" style="margin-top:24px;">
+        ${p.felder.map(([label,ph]) => `<div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${label}</div><input class="input" placeholder="${ph}"></div>`).join('')}
+      </div>
+      <div style="display:flex; gap:14px; align-items:center; margin-top:24px; flex-wrap:wrap;">
+        <button class="btn-blue" onclick="alert('Mutation eingereicht (Demo). Jan Krapl prüft die Angaben und leitet sie an die Gesellschaft weiter.')">Mutation senden</button>
+        <span style="font-size:14px; color:#6E6E6B;">Jan Krapl prüft die Mutation und leitet sie an die Gesellschaft weiter.</span>
+      </div>
+    </div>` : ''}
+  </div>`;
+}
+
+function schadenListView(){
+  return `
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:26px; align-items:start;">
+    <div style="min-width:0; display:flex; flex-direction:column; gap:16px;">
+      <p style="margin:0; font-size:16px; color:#6E6E6B;">1 in Bearbeitung · 3 abgeschlossen</p>
+      ${CLAIMS.map(c => `
+      <button class="list-card" onclick="openClaim('${c.key}')" style="display:flex; gap:18px; align-items:flex-start;">
+        <div style="width:10px; height:10px; border-radius:999px; background:${c.dot}; margin-top:8px; flex:none;"></div>
+        <div style="min-width:0; flex:1 1 auto;"><div style="font-size:17px; font-weight:600;">${c.titel}</div><div style="font-size:15px; color:#6E6E6B; margin-top:5px;">${c.sub}</div></div>
+        <span style="flex:none; font-size:13px; font-weight:600; color:${c.fg}; background:${c.bg}; border-radius:999px; padding:6px 12px;">${c.status}</span>
+      </button>`).join('')}
+    </div>
+    <aside class="card">
+      <h2 style="margin:0; font-size:19px; font-weight:600;">Schaden melden</h2>
+      <p style="margin:10px 0 22px; font-size:15px; color:#6E6E6B; line-height:1.5;">Vier Angaben genügen. Den Rest klären wir mit der Gesellschaft.</p>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Betroffene Police</div>
+          <select class="input" style="color:#0A0A0B;"><option>Bitte auswählen</option>${POLICIES.map(p=>`<option>${p.produkt}</option>`).join('')}</select>
+        </div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Wann ist es passiert?</div><input type="text" class="input" placeholder="TT.MM.JJJJ"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Was ist passiert?</div><textarea class="input" style="min-height:84px; resize:vertical;" placeholder="In eigenen Worten, ein paar Sätze reichen."></textarea></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Fotos oder Belege</div><div class="dropzone">Dateien hierher ziehen</div></div>
+        <button class="btn-blue" style="font-size:16px; padding:15px 18px;" onclick="alert('Meldung gesendet (Demo). Jan Krapl meldet sich innerhalb eines Arbeitstags.')">Meldung senden</button>
+      </div>
+    </aside>
+  </div>`;
+}
+
+function schadenDetailView(){
+  const c = CLAIMS.find(x => x.key === state.claim);
+  if (!c) return '';
+  return `
+  <div style="display:flex; flex-direction:column; gap:22px;">
+    <button class="pill-outline" style="align-self:flex-start;" onclick="go('schaden')">Zurück zu Schadenfällen</button>
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div style="padding:26px 30px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+        <div style="width:56px; height:56px; border-radius:14px; background:#FFF3D6; color:#8A5A00; display:grid; place-items:center; font-size:22px; font-weight:700; flex:none;">S</div>
+        <div style="min-width:0;">
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><h1 style="margin:0; font-size:26px; font-weight:600; letter-spacing:-0.01em;">${c.titel}</h1><span style="font-size:13px; font-weight:600; color:${c.fg}; background:${c.bg}; border-radius:999px; padding:6px 12px;">${c.status}</span></div>
+          <div style="font-size:15px; color:#6E6E6B; margin-top:6px;">${c.sub}</div>
+        </div>
+      </div>
+      <div class="stat-strip">
+        <div class="stat-cell"><div class="micro">Schadendatum</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${c.datum}</div></div>
+        <div class="stat-cell"><div class="micro">Schadensumme</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${c.summe}</div></div>
+        <div class="stat-cell"><div class="micro">Selbstbehalt</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${c.selbst}</div></div>
+        <div style="padding:20px 30px; display:flex; align-items:center; gap:12px;">
+          <img src="team/jan.jpg" alt="Jan Krapl" style="width:36px; height:36px; border-radius:999px; object-fit:cover; object-position:50% 22%; flex:none;">
+          <div><div class="micro">Ansprechpartner</div><div style="font-size:15px; font-weight:600; margin-top:3px;">Jan Krapl</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card"><h2 style="margin:0 0 14px; font-size:17px; font-weight:600;">Was passiert ist</h2><p style="margin:0; font-size:15px; line-height:1.6;">${c.beschrieb}</p></div>
+      <div class="card">
+        <h2 style="margin:0 0 18px; font-size:17px; font-weight:600;">Stand der Bearbeitung</h2>
+        ${c.schritte.map(([titel,datum]) => `
+        <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:16px;">
+          <div style="width:10px; height:10px; border-radius:999px; background:${datum==='offen'?'#C9CFE8':'#1F4FFF'}; margin-top:6px; flex:none;"></div>
+          <div><div style="font-size:15px; font-weight:600;">${titel}</div><div style="font-size:14px; color:#6E6E6B; margin-top:3px;">${datum}</div></div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+function dokumenteView(){
+  const filters = ['Alle','Policen','Rechnungen','Schaden'];
+  const filtered = state.docFilter === 'Alle' ? DOKUMENTE : DOKUMENTE.filter(d => d.typ.startsWith(state.docFilter === 'Policen' ? 'Police' : state.docFilter === 'Rechnungen' ? 'Rechnung' : 'Schaden'));
+  return `
+  <div style="display:flex; flex-direction:column; gap:22px;">
+    <p style="margin:0; font-size:16px; color:#6E6E6B;">81 Dateien · alles zu Ihren Verträgen an einem Ort</p>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      ${filters.map(f => `<button class="filter-pill ${state.docFilter===f?'active':''}" onclick="setDocFilter('${f}')">${f}</button>`).join('')}
+    </div>
+    <div class="grid-docs">
+      ${filtered.map(d => `<div class="doc-card"><div class="micro" style="color:${d.farbe};">${d.typ}</div><div style="font-size:16px; font-weight:600; line-height:1.35;">${d.name}</div><div style="font-size:14px; color:#6E6E6B; margin-top:auto;">${d.meta}</div></div>`).join('')}
+      ${filtered.length === 0 ? '<p style="color:#6E6E6B;">Keine Dokumente in dieser Kategorie.</p>' : ''}
+    </div>
+  </div>`;
+}
+
+function newsView(){
+  return `
+  <div style="display:flex; flex-direction:column; gap:22px;">
+    <p style="margin:0; font-size:16px; color:#6E6E6B;">Fachbeiträge und Hinweise von coverd ag</p>
+    <div class="grid-news">
+      ${NEWS.map(n => `
+      <article class="card" style="display:flex; flex-direction:column; gap:12px;">
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><span class="micro">${n.kategorie}</span>${n.neu ? '<span style="font-size:12px; font-weight:600; color:#1F4FFF; background:#E8ECFF; border-radius:999px; padding:4px 10px;">neu</span>' : ''}</div>
+        <h2 style="margin:0; font-size:19px; font-weight:600; line-height:1.3;">${n.titel}</h2>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#4A4A48;">${n.text}</p>
+        <div style="font-size:14px; color:#6E6E6B; margin-top:auto; padding-top:8px;">${n.meta}</div>
+      </article>`).join('')}
+    </div>
+  </div>`;
+}
+
+function hilfeView(){
+  return `
+  <div style="display:flex; flex-direction:column; gap:26px;">
+    <div class="card" style="padding:36px;">
+      <h1 style="margin:0; font-size:28px; font-weight:600; letter-spacing:-0.01em;">Wie können wir helfen?</h1>
+      <div style="display:flex; align-items:center; gap:12px; background:#F3F3F1; border:1px solid #E4E4E1; border-radius:999px; padding:14px 20px; margin-top:20px; max-width:560px;">
+        <div style="width:8px; height:8px; border-radius:999px; background:#1F4FFF; flex:none;"></div>
+        <input class="input" style="border:0; background:transparent; padding:0;" placeholder="Hilfeseite durchsuchen">
+      </div>
+    </div>
+    <div class="card" style="padding:30px;">
+      <h2 style="margin:0 0 20px; font-size:19px; font-weight:600;">Häufige Fragen</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px 32px;">
+        ${FAQ.map(f => `<a href="#" onclick="return false;" style="font-size:16px; font-weight:600; line-height:1.4; display:flex; gap:10px; align-items:baseline;"><span style="color:#1F4FFF;">→</span>${f}</a>`).join('')}
+      </div>
+    </div>
+    <div class="grid-2" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+      <div class="card" style="display:flex; flex-direction:column; gap:12px;"><div style="font-size:17px; font-weight:600;">Allgemein</div><p style="margin:0; font-size:15px; color:#6E6E6B; line-height:1.5;">Hilfe und Tipps zur Nutzung des Portals.</p><button class="pill-outline" style="align-self:flex-start; margin-top:6px;">Anzeigen</button></div>
+      <div class="card" style="display:flex; flex-direction:column; gap:12px;"><div style="font-size:17px; font-weight:600;">Sicherheit</div><p style="margin:0; font-size:15px; color:#6E6E6B; line-height:1.5;">Einstellungen, mit denen Sie Ihr Konto schützen.</p><button class="pill-outline" style="align-self:flex-start; margin-top:6px;">Anzeigen</button></div>
+      <div class="help-dark"><div style="font-size:17px; font-weight:600;">Lieber persönlich?</div><p style="margin:0; font-size:15px; color:#B9B9B4; line-height:1.5;">Jan Krapl, 078 248 91 21, jkrapl@coverd.ch</p><button class="btn-white" onclick="alert('Rückruf angefordert (Demo).')">Rückruf anfordern</button></div>
+    </div>
+  </div>`;
+}
+
+function profilView(){
+  const pt = state.profilTab;
+  const tabs = [['allg','Allgemeine Informationen'],['sicher','Sicherheit'],['benach','Benachrichtigungen']];
+  const titleMap = { allg: 'Persönliche Informationen', sicher: 'Sicherheit', benach: 'Benachrichtigungen' };
+  const subMap = { allg: 'Verwalten Sie Ihre persönlichen Angaben', sicher: 'Einstellungen, mit denen Sie Ihr Konto schützen', benach: 'Bestimmen Sie, worüber wir Sie informieren' };
+  const notifyDefs = [['schaden','Schadenfälle','Statusänderungen und Auszahlungen'], ['dokumente','Dokumente','Neue Policen, Rechnungen und Belege'], ['policen','Policen','Mutationen und Vertragsverlängerungen'], ['news','News','Fachbeiträge und Hinweise']];
+  return `
+  <div style="display:flex; flex-wrap:wrap; gap:26px; align-items:flex-start;">
+    <aside class="card" style="flex:1 1 280px; max-width:320px; padding:0; overflow:hidden;">
+      <div style="padding:26px; display:flex; flex-direction:column; gap:14px; border-bottom:1px solid #E4E4E1;">
+        <div style="width:64px; height:64px; border-radius:999px; background:#E8ECFF; color:#1F4FFF; display:grid; place-items:center; font-size:22px; font-weight:700;">LF</div>
+        <div><div style="font-size:18px; font-weight:600;">Luca Ferrari</div><div style="font-size:14px; color:#6E6E6B; margin-top:3px;">Bachmann Metallbau AG</div></div>
+        <span class="badge badge-ok" style="align-self:flex-start;">Aktiv</span>
+      </div>
+      <div style="padding:12px;">
+        ${tabs.map(([k,l]) => `<button class="profil-tab ${pt===k?'active':''}" onclick="setProfilTab('${k}')">${l}</button>`).join('')}
+      </div>
+    </aside>
+    <div class="card" style="flex:3 1 420px; min-width:0; padding:30px;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+        <div><h2 style="margin:0; font-size:19px; font-weight:600;">${titleMap[pt]}</h2><p style="margin:8px 0 0; font-size:15px; color:#6E6E6B;">${subMap[pt]}</p></div>
+        <button class="btn-blue-sm" onclick="alert('Gespeichert (Demo).')">Speichern</button>
+      </div>
+      ${pt === 'allg' ? `
+      <div class="grid-fields" style="margin-top:26px;">
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Vorname</div><input class="input" value="Luca"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Nachname</div><input class="input" value="Ferrari"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Funktion</div><input class="input" value="Geschäftsführer"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Telefon</div><input class="input" value="062 212 44 10"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">E-Mail</div><input class="input" value="l.ferrari@bachmann-metallbau.ch"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Sprache</div><input class="input" value="Deutsch"></div>
+      </div>` : ''}
+      ${pt === 'sicher' ? `
+      <div style="display:flex; flex-direction:column; gap:22px; margin-top:26px;">
+        <div class="grid-fields">
+          <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">E-Mail für die Anmeldung</div><input class="input" value="l.ferrari@bachmann-metallbau.ch"></div>
+          <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Handynummer für die Zwei-Faktor-Anmeldung</div><input class="input" value="079 408 08 67"></div>
+        </div>
+        <div style="border-top:1px solid #F0F0EE; padding-top:22px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;">
+          <div><div style="font-size:16px; font-weight:600;">Kennwort</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">Zuletzt geändert am 02.02.2026</div></div>
+          <button class="pill-outline">Jetzt ändern</button>
+        </div>
+      </div>` : ''}
+      ${pt === 'benach' ? `
+      <div style="display:flex; flex-direction:column; margin-top:26px;">
+        ${notifyDefs.map(([key,titel,sub]) => { const on = state.notify[key]; return `
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:18px 0; border-bottom:1px solid #F0F0EE;">
+          <div><div style="font-size:16px; font-weight:600;">${titel}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${sub}</div></div>
+          <button class="toggle" style="background:${on?'#1F4FFF':'#DDDDD9'}; justify-content:${on?'flex-end':'flex-start'};" onclick="toggleNotify('${key}')"><span></span></button>
+        </div>`; }).join('')}
+      </div>` : ''}
+    </div>
+  </div>`;
+}
+
+function mainBody(){
+  const policy = state.policy && POLICIES.find(p => p.key === state.policy);
+  const claim = state.claim && CLAIMS.find(c => c.key === state.claim);
+  if (state.screen === 'dash') return dashboardView();
+  if (state.screen === 'policen') return policy ? policeDetailView() : policenListView();
+  if (state.screen === 'schaden') return claim ? schadenDetailView() : schadenListView();
+  if (state.screen === 'dokumente') return dokumenteView();
+  if (state.screen === 'news') return newsView();
+  if (state.screen === 'hilfe') return hilfeView();
+  if (state.screen === 'profil') return profilView();
+  return dashboardView();
+}
+
+function chatWidget(){
+  return `
+  <div class="chatbot">
+    ${state.botOpen ? `
+    <div class="chat-panel">
+      <div class="chat-head">
+        <div style="width:10px; height:10px; border-radius:999px; background:#1F4FFF; flex:none;"></div>
+        <div style="min-width:0; flex:1 1 auto;"><div style="font-size:15px; font-weight:600;">coverd Assistent</div><div style="font-size:13px; color:#6E6E6B;">Antwortet aus Ihren Policen</div></div>
+        <button onclick="closeBot()" style="border:0; background:transparent; font-size:20px; color:#6E6E6B; cursor:pointer; line-height:1; padding:4px 6px;">×</button>
+      </div>
+      <div class="chat-messages" id="botScroll">
+        ${state.messages.map(m => `<div style="display:flex; justify-content:${m.role==='user'?'flex-end':'flex-start'};"><div class="chat-bubble" style="background:${m.role==='user'?'#0A0A0B':'#F3F3F1'}; color:${m.role==='user'?'#FFFFFF':'#0A0A0B'};">${esc(m.text)}</div></div>`).join('')}
+      </div>
+      <div class="chat-foot">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="chip-suggest" onclick="send('Wie hoch ist meine Jahresprämie?')">Wie hoch ist meine Jahresprämie?</button>
+          <button class="chip-suggest" onclick="send('Welche Police läuft zuerst ab?')">Welche Police läuft zuerst ab?</button>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <input id="botInput" class="input" placeholder="Frage zu Ihren Policen stellen" onkeydown="onBotKey(event)">
+          <button class="btn-blue-sm" onclick="sendFromInput()">Senden</button>
+        </div>
+      </div>
+    </div>` : ''}
+    <button class="fab" onclick="toggleBot()">Fragen? Assistent öffnen</button>
+  </div>`;
+}
+
+function render(){
+  document.getElementById('app').innerHTML = `<div class="app-flex">${sidebar()}<div class="main-col">${topheader()}<main class="main-content">${mainBody()}</main></div></div>${chatWidget()}`;
+  const sc = document.getElementById('botScroll');
+  if (sc) sc.scrollTop = sc.scrollHeight;
+}
+
+render();
+</script>
+</body>
+</html>
