@@ -207,6 +207,10 @@
   @media (max-width:940px){ .portal-mock{ height:320px; } .pm-card{ width:150px; padding:12px 14px; } .pm-card h4{font-size:.85rem;} .pm-card p{font-size:.72rem;} }
   @media (max-width:640px){ .portal-mock{ display:none; } }
 
+  /* portal screenshot (real product) */
+  .portal-shot-wrap{ display:flex; justify-content:center; }
+  .portal-shot{ width:100%; max-width:300px; border-radius:22px; box-shadow:0 30px 70px rgba(20,32,25,.16); border:1px solid var(--line); display:block; }
+
   /* ---------- Pull quote ---------- */
   .quote-block{
     border-left:2px solid var(--pine); padding-left:28px; margin:36px 0 0;
@@ -535,12 +539,8 @@
 
   <section class="tight">
     <div class="wrap" style="max-width:620px;">
-      <div class="portal-mock" aria-hidden="true">
-        <div class="pm-card pm1"><h4>Policen</h4><p>4 aktive Verträge, zentral hinterlegt</p></div>
-        <div class="pm-card pm2"><h4>Dokumente</h4><p>Alle Unterlagen an einem Ort</p></div>
-        <div class="pm-card pm3"><h4>Vorsorge</h4><p>Nächste Überprüfung im März</p></div>
-        <div class="pm-card pm4"><h4>Anliegen</h4><p>Direkt an Coverd übermittelt</p></div>
-        <div class="pm-card pm5"><h4>Benachrichtigung</h4><p>1 neue Rückmeldung</p></div>
+      <div class="portal-shot-wrap">
+        <img src="images/portal-mobile-preview.png" alt="Coverd Kundenportal auf dem Smartphone" class="portal-shot">
       </div>
     </div>
   </section>
@@ -1460,15 +1460,10 @@
       </div>
       <p class="nudge">Oder <a onclick="openBooking()" style="text-decoration:underline; cursor:pointer;">Beratung vereinbaren</a>, wenn Sie noch keinen Zugang haben</p>
       <div class="portal-preview">
-        <div class="portal-mock" aria-hidden="true">
-          <div class="pm-card pm1"><h4>Policen</h4><p>4 aktive Verträge, zentral hinterlegt</p></div>
-          <div class="pm-card pm2"><h4>Dokumente</h4><p>Alle Unterlagen an einem Ort</p></div>
-          <div class="pm-card pm3"><h4>Anliegen</h4><p>Direkt an Coverd übermittelt</p></div>
-          <div class="pm-card pm4"><h4>Vorsorge</h4><p>Nächste Überprüfung im März</p></div>
-          <div class="pm-card pm5"><h4>Benachrichtigung</h4><p>1 neue Rückmeldung</p></div>
+        <div class="portal-shot-wrap">
+          <img src="images/portal-mobile-preview.png" alt="Coverd Kundenportal auf dem Smartphone" class="portal-shot">
         </div>
-        <!-- TODO: Sobald das echte Portal steht, durch reale Screenshots oder eine kurze animierte Produkttour ersetzen -->
-        <p class="pm-caption">Illustrative Darstellung des Coverd Portals</p>
+        <p class="pm-caption">So sieht Ihr Coverd Portal aus</p>
       </div>
     </div>
   </section>
