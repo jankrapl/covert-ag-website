@@ -227,8 +227,7 @@
   @media (max-width:640px){ .split-panel{ padding:36px 26px; } }
 
   /* ---------- Services 3-col ---------- */
-  .services{ display:grid; grid-template-columns:repeat(3,1fr); gap:36px; margin-top:50px; border-top:none; text-align:center; }
-  @media (max-width:880px){ .services{ grid-template-columns:1fr 1fr; } }
+  .services{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:36px; margin-top:50px; border-top:none; text-align:center; }
   @media (max-width:600px){ .services{ grid-template-columns:1fr; } }
   .service{ padding:0; border:0; }
   .services > .service{ border:0; padding:0; }
@@ -240,6 +239,56 @@
   /* feature chips */
   .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
   .chip{ border:1px solid var(--line); padding:8px 16px; font-size:0.86rem; border-radius:20px; background:var(--white); }
+
+  /* ---------- Psychological self-check callout ---------- */
+  .self-check{
+    background:var(--white); color:var(--ink); border-radius:14px; padding:28px 32px;
+    max-width:580px; margin:38px auto 0; text-align:left; box-shadow:0 24px 60px rgba(0,0,0,.28);
+  }
+  .self-check .q{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.15rem; margin-bottom:8px; }
+  .self-check .a{ color:var(--stone); font-size:0.95rem; margin:0; }
+
+  /* ---------- Pick chips (interactive, no backend) ---------- */
+  .pick-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+  .pick-chip{
+    border:1.5px solid var(--line); border-radius:999px; padding:11px 20px; font-size:0.92rem; font-weight:600;
+    background:var(--white); cursor:pointer; transition:border-color .15s ease, background .15s ease, color .15s ease;
+    -webkit-tap-highlight-color:transparent; user-select:none;
+  }
+  .pick-chip:hover{ border-color:var(--pine); }
+  .pick-chip.picked{ background:var(--ink); border-color:var(--ink); color:#fff; }
+  .pick-chip.picked::before{ content:"✓ "; }
+  .booking-picker{ margin-top:48px; padding-top:40px; border-top:1px solid var(--line); }
+  .booking-picker .q{ font-weight:700; font-family:'Plus Jakarta Sans',sans-serif; margin-bottom:4px; }
+
+  /* ---------- Compare cards (illustrative pricing) ---------- */
+  .compare-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:36px; }
+  @media (max-width:780px){ .compare-grid{ grid-template-columns:1fr; } }
+  .compare-card{ background:var(--white); padding:30px 26px; text-align:center; }
+  .compare-card.is-mid{ background:var(--paper-deep); }
+  .compare-card .amount{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.7rem; margin-bottom:4px; }
+  .compare-card .per{ font-size:0.78rem; color:var(--stone); text-transform:uppercase; letter-spacing:.06em; margin-bottom:20px; display:block; }
+  .compare-card ul{ text-align:left; display:flex; flex-direction:column; gap:8px; font-size:0.9rem; color:var(--stone); }
+  .compare-card ul li::before{ content:"— "; }
+
+  /* ---------- Vorsorge calculator ---------- */
+  .calc-box{ background:var(--paper-deep); border-radius:14px; padding:28px 30px; display:flex; flex-wrap:wrap; gap:24px; align-items:center; justify-content:center; margin-top:24px; }
+  .calc-box label{ display:flex; flex-direction:column; font-size:0.78rem; color:var(--stone); font-weight:600; gap:6px; text-align:left; }
+  .calc-box input{ width:90px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:1.1rem; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; background:var(--white); color:var(--ink); }
+  .calc-result{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.1rem; color:var(--pine); }
+  .calc-result span{ font-size:2.1rem; }
+
+  /* ---------- Scenario box (Portal "Samstagabend" style) ---------- */
+  .scenario-box{ background:var(--paper-deep); border-radius:14px; padding:28px 30px; margin-top:20px; }
+  .scenario-box .when{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:10px; }
+  .scenario-box .flow{ font-weight:700; color:var(--pine); margin-top:10px; }
+
+  /* ---------- Mini dashboard preview ---------- */
+  .mini-dash{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:30px; }
+  @media (max-width:780px){ .mini-dash{ grid-template-columns:1fr 1fr; } }
+  .mini-dash-tile{ background:var(--white); border:1px solid var(--line); border-radius:14px; padding:22px 20px; }
+  .mini-dash-tile .label{ font-size:0.78rem; color:var(--stone); margin-bottom:8px; }
+  .mini-dash-tile .value{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.25rem; color:var(--ink); }
   .dark .chip{ border-color:rgba(255,255,255,.28); background:transparent; color:var(--paper); }
 
   /* ---------- Process steps ---------- */
@@ -567,11 +616,11 @@
   <section>
     <div class="wrap">
       <div class="stats-row">
-        <div class="stat-item"><p>Persönlich in Olten – schweizweit erreichbar.</p></div>
-        <div class="stat-item"><p>Ein Partner für Versicherungen, Vorsorge, Finanzen und Steuern.</p></div>
-        <div class="stat-item"><p>Transparente Vergütung – offen ausgewiesen statt versteckt.</p></div>
+        <div class="stat-item"><p>FINMA-registrierter Versicherungsvermittler.</p></div>
+        <div class="stat-item"><p>Diplomierte Steuerexperten im Team.</p></div>
+        <div class="stat-item"><p>Persönlich in Olten – schweizweit tätig.</p></div>
       </div>
-      <!-- TODO: Sobald verfügbar, echte Kennzahlen ergänzen, z. B. "[X] Jahre Erfahrung in der Versicherungsberatung" und "[X] betreute Kunden in der Schweiz". Keine Zahlen erfinden. -->
+      <!-- TODO: Sobald verfügbar, echte Kennzahlen ergänzen, z. B. "[X] Jahre Erfahrung in der Versicherungsberatung", "[X] betreute Kunden/Unternehmen", "[X] Versicherungspartner" oder Google-Bewertungen. Keine Zahlen erfinden. -->
     </div>
   </section>
 
@@ -740,14 +789,33 @@
   </section>
 
   <section id="kontakt" style="text-align:center; padding:120px 0;">
-    <div class="wrap" style="max-width:720px;">
-      <h2>Lernen wir uns kennen.</h2>
-      <p class="lede" style="margin:22px auto 0; text-align:center;">Unverbindlich, persönlich, auf Ihre Situation ausgerichtet.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:30px;">
-        <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
-        <button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button>
+    <div class="wrap" style="max-width:640px;">
+      <h2>Sie müssen heute nichts entscheiden.</h2>
+      <p class="lede" style="margin:20px auto 0; text-align:center;">Lernen Sie uns in einem unverbindlichen Erstgespräch kennen. Wir schauen gemeinsam, wo Sie stehen und ob Covert Sie unterstützen kann.</p>
+      <div class="cta-row" style="justify-content:center; margin-top:28px;">
+        <button class="btn btn-primary" onclick="openBooking()">Kostenloses Erstgespräch buchen</button>
       </div>
-      <p class="nudge center">Je früher wir Ihre Situation kennen, desto mehr Möglichkeiten haben Sie.</p>
+      <p class="nudge center">Kostenlos · Unverbindlich · Persönlich</p>
+
+      <div class="booking-picker">
+        <p class="q">Ich bin:</p>
+        <div class="pick-row" style="justify-content:center;">
+          <span class="pick-chip" data-group="persona" onclick="pickOne(this)">Privatperson</span>
+          <span class="pick-chip" data-group="persona" onclick="pickOne(this)">Unternehmen</span>
+        </div>
+        <p class="q" style="margin-top:26px;">Es geht um:</p>
+        <div class="pick-row" style="justify-content:center;">
+          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">Versicherungen</span>
+          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">Vorsorge</span>
+          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">Steuern</span>
+          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">BVG</span>
+          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">Finanzplanung</span>
+          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">Ich weiss es noch nicht</span>
+        </div>
+        <div class="cta-row" style="justify-content:center; margin-top:30px;">
+          <button class="btn btn-ghost" onclick="openBooking()">Termin auswählen</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -758,21 +826,34 @@
   <section class="page-hero">
     <div class="wrap">
       <div class="kicker">Privatkunden</div>
-      <h1>Versicherungen und Finanzen, die zu Ihrem Leben passen.</h1>
-      <p class="lede">Ein Partner für Versicherungen, Vorsorge, Finanzplanung und Steuern.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
-      <p class="nudge">Kostenlos &amp; unverbindlich · In 5 Minuten geschildert</p>
+      <h1>Alles geregelt. Für heute und morgen.</h1>
+      <p class="lede">Versicherungen, Vorsorge, Finanzen und Steuern – mit einem Ansprechpartner und einer zentralen Übersicht.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Kostenloses Erstgespräch</button></div>
+      <div class="self-check">
+        <p class="q">Wann haben Sie Ihre Versicherungen zuletzt wirklich überprüft?</p>
+        <p class="a">Nicht nur die Prämie. Sondern ob die Leistungen noch zu Ihrem heutigen Leben passen.</p>
+      </div>
     </div>
   </section>
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2>Ihr Leben verändert sich. Ihre Absicherung sollte mitziehen.</h2>
+      <div><h2>Das Leben verändert sich. Ihre Absicherung auch.</h2>
         <div class="photo-frame"><img src="images/privat-hero.jpg" alt="Junges Paar mit Umzugskartons in der neuen Wohnung"></div>
       </div>
       <div>
-        <p class="lede">Neue Wohnung, Familie, Jobwechsel — wir sorgen dafür, dass nichts durch die Maschen fällt.</p>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
+        <p class="stone" style="font-weight:600;">Was hat sich bei Ihnen verändert?</p>
+        <div class="pick-row">
+          <span class="pick-chip" onclick="toggleChip(this)">Umzug</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Familienzuwachs</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Heirat</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Neuer Job</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Eigenheim</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Mehr Einkommen</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Pensionierung</span>
+        </div>
+        <p style="margin-top:22px;">Eine Veränderung kann Auswirkungen auf Versicherungen, Vorsorge und Steuern haben.</p>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Meine Situation prüfen</button></div>
       </div>
     </div>
   </section>
@@ -781,26 +862,42 @@
     <div class="wrap">
       <div class="section-head"><h2>Alles, was Ihre finanzielle Situation betrifft.</h2></div>
       <div class="services">
-        <div class="service"><h3>Versicherungen</h3><p>Lücken erkennen, richtig absichern.</p><a class="go" onclick="goTo('versicherungen')">Versicherungen prüfen</a></div>
-        <div class="service"><h3>Vorsorge</h3><p>Ihre Zukunft strategisch planen.</p><a class="go" onclick="goTo('vorsorge')">Vorsorge analysieren</a></div>
-        <div class="service"><h3>Finanzplanung</h3><p>Vermögen aufbauen, mit Plan.</p><a class="go" onclick="goTo('vorsorge')">Finanzplanung kennenlernen</a></div>
-        <div class="service"><h3>Steuern</h3><p>Erklärung und Optimierung aus einer Hand.</p><a class="go" onclick="goTo('steuern')">Steuerberatung anfragen</a></div>
+        <div class="service"><h3>Versicherungen</h3><p>Richtig abgesichert – ohne unnötige Lösungen.</p><a class="go" onclick="goTo('versicherungen')">Versicherungen prüfen</a></div>
+        <div class="service"><h3>Vorsorge</h3><p>Heute wissen, ob morgen genug da ist.</p><a class="go" onclick="goTo('vorsorge')">Vorsorge analysieren</a></div>
+        <div class="service"><h3>Finanzen</h3><p>Aus einzelnen Entscheidungen wird ein Plan.</p><a class="go" onclick="goTo('vorsorge')">Finanzplanung kennenlernen</a></div>
+        <div class="service"><h3>Steuern</h3><p>Erledigen, optimieren, vorausplanen.</p><a class="go" onclick="goTo('steuern')">Steuerberatung anfragen</a></div>
       </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="wrap" style="max-width:680px; text-align:center;">
+      <h2>Mehr Versicherungen bedeuten nicht automatisch mehr Sicherheit.</h2>
+      <p style="margin-top:18px; color:rgba(255,255,255,.82);">Zu viel versichert? Doppelt versichert? Eine wichtige Lücke übersehen?</p>
+      <p style="color:rgba(255,255,255,.82);">Wir prüfen Ihre bestehende Situation, bevor wir über neue Produkte sprechen.</p>
+      <div class="cta-row" style="justify-content:center; margin-top:22px;"><button class="btn btn-on-dark" onclick="openBooking()">Bestehende Versicherungen prüfen</button></div>
     </div>
   </section>
 
   <section class="deep">
     <div class="wrap cols2">
       <div>
-        <h2>Alles an einem Ort statt in zehn Ordnern.</h2>
+        <h2>Ihre Versicherungen. Ein Login.</h2>
         <div class="cta-row" style="margin-top:16px;"><button class="btn btn-ghost" onclick="goTo('portal')">Portal entdecken</button></div>
       </div>
       <div>
-        <div class="chips">
-          <span class="chip">Policen</span><span class="chip">Dokumente</span><span class="chip">Vorsorge</span>
-          <span class="chip">Anliegen</span><span class="chip">Kommunikation</span>
+        <div class="scenario-box">
+          <p>Police gesucht? <strong>Gefunden.</strong></p>
+          <p>Frage? <strong>Direkt an Covert.</strong></p>
+          <p>Dokument benötigt? <strong>Im Portal.</strong></p>
+          <p>Änderung? <strong>Digital melden.</strong></p>
         </div>
-        <p class="stone" style="margin-top:22px;">Ein Login. Ein Partner. Mehr Überblick.</p>
+        <div class="portal-mock" aria-hidden="true" style="margin-top:24px; height:380px;">
+          <div class="pm-card pm1"><h4>Policen</h4><p>6 aktive Verträge</p></div>
+          <div class="pm-card pm2"><h4>Dokumente</h4><p>24 Dokumente</p></div>
+          <div class="pm-card pm3"><h4>Anliegen</h4><p>1 in Bearbeitung</p></div>
+          <div class="pm-card pm4"><h4>Nachrichten</h4><p>2 neu</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -838,21 +935,27 @@
   <section class="page-hero">
     <div class="wrap">
       <div class="kicker">Unternehmen</div>
-      <h1>Versicherungsmanagement, das Ihnen Arbeit abnimmt.</h1>
-      <p class="lede">Von der Analyse bis zur laufenden Betreuung. Persönlich beraten, digital verwaltet.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="scrollToId('u-portal')">Covert für Unternehmen entdecken</button></div>
+      <h1>Ihre Versicherungen laufen. Ihr Unternehmen auch.</h1>
+      <p class="lede">Wir analysieren, vergleichen und betreuen Ihre Unternehmensversicherungen – damit Sie sich auf Ihr Geschäft konzentrieren können.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Unternehmen analysieren lassen</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
     </div>
   </section>
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2>Ihr Unternehmen wächst. Die Versicherungsadministration auch.</h2>
+      <div><h2>Wie viel Zeit kostet Sie Ihre Versicherungsadministration?</h2>
         <div class="photo-frame"><img src="images/unternehmen-hero.jpg" alt="Team im Sitzungszimmer bei der Besprechung"></div>
       </div>
       <div>
-        <p>Wir übernehmen sie — damit Sie sich aufs Kerngeschäft konzentrieren können.</p>
-        <div class="quote-block"><p>Ein Partner. Ein Portal. Ein klarer Prozess.</p></div>
+        <div class="scenario-box">
+          <p>Neuer Mitarbeiter → <strong>melden.</strong></p>
+          <p>Schadenfall → <strong>Ansprechpartner suchen.</strong></p>
+          <p>Police → <strong>Dokument suchen.</strong></p>
+          <p>Mutation → <strong>E-Mail schreiben.</strong></p>
+          <p>BVG → <strong>Offerte vergleichen.</strong></p>
+        </div>
+        <div class="quote-block" style="margin-top:22px;"><p>Das geht einfacher. Covert bündelt Ihre Versicherungsadministration an einem Ort.</p></div>
       </div>
     </div>
   </section>
@@ -866,6 +969,24 @@
         <div class="service"><h3>Ausschreibung &amp; Vergleich</h3><p>Beste Lösung, nicht nur beste Prämie.</p></div>
         <div class="service"><h3>Laufende Betreuung</h3><p>Auch nach Vertragsabschluss für Sie da.</p></div>
         <div class="service"><h3>Steuern &amp; Beratung</h3><p>Fachwissen über einen Ansprechpartner.</p><a class="go" onclick="goTo('steuern')">Mehr zu Steuern</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols2">
+      <div><h2>Ist Ihre Versicherung mit Ihrem Unternehmen gewachsen?</h2></div>
+      <div>
+        <div class="pick-row" style="margin-top:0;">
+          <span class="pick-chip" onclick="toggleChip(this)">Neue Mitarbeitende</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Mehr Umsatz</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Neuer Standort</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Neue Fahrzeuge</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Neue Tätigkeiten</span>
+          <span class="pick-chip" onclick="toggleChip(this)">Neue Risiken</span>
+        </div>
+        <p style="margin-top:22px;">Unternehmen verändern sich. Versicherungen sollten mitziehen.</p>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Risiken überprüfen</button></div>
       </div>
     </div>
   </section>
@@ -885,12 +1006,16 @@
   <section class="deep" id="u-portal">
     <div class="wrap cols2">
       <div>
-        <h2>Das Covert Firmenportal</h2>
+        <h2>Eine Plattform für Ihre Versicherungsadministration.</h2>
+        <p class="stone" style="margin-top:14px;">Alles zentral. Direkt mit Covert verbunden.</p>
+        <div class="cta-row" style="margin-top:16px;"><button class="btn btn-ghost" onclick="goTo('portal')">Firmenportal ansehen</button></div>
       </div>
       <div>
-        <div class="chips">
-          <span class="chip">Policen einsehen</span><span class="chip">Rechnungen abrufen</span><span class="chip">Dokumente verwalten</span>
-          <span class="chip">Schadenfälle melden</span><span class="chip">Mitarbeitende melden</span><span class="chip">Mutationen übermitteln</span><span class="chip">Direkt kommunizieren</span>
+        <div class="portal-mock" aria-hidden="true" style="height:380px;">
+          <div class="pm-card pm1"><h4>Policen</h4><p>Zentral hinterlegt</p></div>
+          <div class="pm-card pm2"><h4>Rechnungen</h4><p>Immer abrufbar</p></div>
+          <div class="pm-card pm3"><h4>Schäden</h4><p>Direkt melden</p></div>
+          <div class="pm-card pm4"><h4>Mitarbeitende</h4><p>Einfach mutieren</p></div>
         </div>
       </div>
     </div>
@@ -927,9 +1052,9 @@
   <section class="page-hero">
     <div class="wrap">
       <div class="kicker">Leistungen · Versicherungen</div>
-      <h1>Versicherungen, die zu Ihnen passen.</h1>
-      <p class="lede">Nicht die Gesellschaft entscheidet. Ihre Bedürfnisse tun es.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
+      <h1>Nicht irgendeine Versicherung. Die passende.</h1>
+      <p class="lede">Wir vergleichen Anbieter, Leistungen und Preise – Sie entscheiden, welche Lösung zu Ihnen passt.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Versicherungen vergleichen</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Lücken lassen sich oft erst im Gespräch erkennen</p>
     </div>
   </section>
@@ -949,11 +1074,40 @@
   </section>
 
   <section>
-    <div class="wrap cols2">
-      <div><h2>Wir zeigen Möglichkeiten. Sie entscheiden.</h2></div>
-      <div>
-        <p>Preis ist nicht alles. Deckung, Selbstbehalt und Ausschlüsse zählen auch — wir vergleichen ehrlich.</p>
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto;"><h2>Günstiger oder besser versichert?</h2></div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <span class="per">Variante A</span>
+          <div class="amount">CHF 620</div>
+          <span class="per">pro Jahr</span>
+          <ul><li>Günstigere Prämie</li><li>Solide Deckung</li></ul>
+        </div>
+        <div class="compare-card is-mid">
+          <span class="per">Variante B</span>
+          <div class="amount">CHF 790</div>
+          <span class="per">pro Jahr</span>
+          <ul><li>Höhere Deckung</li><li>Zusätzliche Leistungen</li></ul>
+        </div>
+        <div class="compare-card">
+          <span class="per">Variante C</span>
+          <div class="amount">CHF 940</div>
+          <span class="per">pro Jahr</span>
+          <ul><li>Umfassende Absicherung</li><li>Tiefere Selbstbehalte</li></ul>
+        </div>
       </div>
+      <div style="text-align:center; margin-top:28px;">
+        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.15rem;">Wir zeigen die Unterschiede. Sie entscheiden.</p>
+        <p class="stone" style="font-size:0.82rem;">Konditionen illustrativ.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="deep" style="text-align:center;">
+    <div class="wrap" style="max-width:640px;">
+      <h2>Unsere Empfehlung beginnt nicht bei der Provision.</h2>
+      <p style="margin-top:16px; font-weight:700; font-family:'Plus Jakarta Sans',sans-serif; color:var(--pine);">Ihre Situation → Ihr Bedarf → Vergleich → Ihre Entscheidung.</p>
+      <div class="cta-row" style="justify-content:center; margin-top:20px;"><button class="btn btn-ghost" onclick="goTo('home','prozess')">So beraten wir</button></div>
     </div>
   </section>
 
@@ -991,19 +1145,23 @@
   <section class="page-hero">
     <div class="wrap">
       <div class="kicker">Leistungen · Vorsorge &amp; Finanzplanung</div>
-      <h1>Heute entscheiden. Morgen Möglichkeiten haben.</h1>
-      <p class="lede">Vorsorge beginnt nicht mit einem Produkt, sondern mit einem Ziel.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
+      <h1>Wissen Sie, was später für Sie übrig bleibt?</h1>
+      <p class="lede">Vorsorge, Vermögensaufbau und Pensionierung – heute planen, statt später überrascht zu werden.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Vorsorge prüfen</button></div>
       <p class="nudge">Je früher Sie planen, desto mehr Möglichkeiten bleiben Ihnen</p>
     </div>
   </section>
 
   <section class="deep">
-    <div class="wrap cols2">
-      <div><h2>Ihre Zukunft lässt sich nicht vorhersagen. Aber planen.</h2></div>
-      <div>
-        <p>Wir prüfen Ihre Situation und entwickeln daraus eine passende Strategie.</p>
+    <div class="wrap" style="max-width:640px; text-align:center;">
+      <h2>Was bedeutet Ihre Vorsorge langfristig?</h2>
+      <div class="calc-box">
+        <label>Ihr Alter<input type="number" id="calcAge" value="35" min="18" max="99" oninput="updateVorsorgeCalc()"></label>
+        <label>Pensionierung<input type="number" id="calcRetire" value="65" min="18" max="99" oninput="updateVorsorgeCalc()"></label>
+        <div class="calc-result"><span id="calcYears">30</span> Jahre</div>
       </div>
+      <p style="margin-top:22px;">Eine Entscheidung, die heute klein erscheint, begleitet Sie möglicherweise die nächsten <strong id="calcYearsInline">30</strong> Jahre.</p>
+      <p class="stone">Deshalb prüfen wir nicht nur den Abschluss – sondern die langfristige Entwicklung.</p>
     </div>
   </section>
 
@@ -1029,14 +1187,14 @@
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2>Vorsorge braucht Betreuung.</h2></div>
+      <div><h2>Abgeschlossen bedeutet nicht erledigt.</h2></div>
       <div>
-        <p>Vorsorge läuft über Jahrzehnte — Ihre Lösung sollte mitwachsen.</p>
+        <p>Ihre Lebenssituation verändert sich. Ihre Ziele verändern sich. Ihre Vorsorgelösung sollte deshalb regelmässig überprüft werden.</p>
         <div class="price-box">
-          <div class="amount">CHF 400.– / Jahr</div>
-          <p>Jährliche Überprüfung</p>
+          <div class="amount">Jährlicher Vorsorge-Check</div>
+          <p>Jährliche Überprüfung Ihrer bestehenden Lösung und Strategie.</p>
         </div>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="goTo('transparenz')">Mehr erfahren</button></div>
       </div>
     </div>
   </section>
@@ -1055,8 +1213,9 @@
   <section class="page-hero">
     <div class="wrap">
       <div class="kicker">Schwerpunkt · Berufliche Vorsorge (BVG)</div>
-      <h1>Die 2. Säule verdient mehr als eine Unterschrift.</h1>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
+      <h1>Wann haben Sie Ihre BVG-Lösung zuletzt verglichen?</h1>
+      <p class="lede">Kosten, Leistungen und Vorsorgeplan können sich erheblich unterscheiden. Wir zeigen Ihnen, wo Ihr Unternehmen heute steht.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">BVG prüfen lassen</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Für Geschäftsführung, HR und Verwaltungsrat</p>
     </div>
   </section>
@@ -1070,6 +1229,25 @@
         <p>Sach- und Haftpflichtversicherungen werden regelmässig verglichen. Die BVG oft jahrelang nicht — obwohl sie einer der grössten Kostenblöcke ist.</p>
         <div class="quote-block"><p>Die 2. Säule beeinflusst, wie sicher sich Ihre Mitarbeitenden fühlen.</p></div>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:520px;">
+      <div class="section-head" style="text-align:center; margin:0 auto 24px;"><h2>Beispiel: KMU mit 25 Mitarbeitenden</h2></div>
+      <div class="scenario-box">
+        <p class="when">Heute</p>
+        <p>BVG-Kosten: <strong>CHF 100'000</strong></p>
+        <p>Vorsorgeplan: <strong>bestehend</strong></p>
+        <p>Letzte Prüfung: <strong>vor 5 Jahren</strong></p>
+        <p class="flow">↓ Covert-Analyse</p>
+        <p>3 Varianten verglichen</p>
+        <p>Kosten geprüft</p>
+        <p>Leistungen verglichen</p>
+        <p>Vorsorgeplan analysiert</p>
+        <p class="flow">→ Entscheidungsgrundlage für die Geschäftsleitung</p>
+      </div>
+      <p class="stone" style="text-align:center; font-size:0.8rem; margin-top:14px;">Illustratives Beispiel — keine reale Kundensituation, keine Einsparversprechen.</p>
     </div>
   </section>
 
@@ -1135,37 +1313,49 @@
   <section class="page-hero">
     <div class="wrap">
       <div class="kicker">Leistungen · Steuern</div>
-      <h1>Steuern erledigen. Möglichkeiten erkennen.</h1>
-      <p class="lede">Von der Steuererklärung bis zur individuellen Steuerberatung. Steuern gehören dazu — unübersichtlich müssen sie deshalb nicht sein.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
+      <h1>Steuern erledigt.</h1>
+      <p class="lede">Steuererklärung, Steuerberatung und Steueroptimierung für Privatpersonen und Unternehmen.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Steueranfrage starten</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
     </div>
   </section>
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2>Steuererklärung</h2></div>
+      <div><h2>Sie liefern die Unterlagen. Wir kümmern uns darum.</h2></div>
       <div>
-        <p class="stone" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.2rem;">Sie liefern die Unterlagen. Wir kümmern uns um den Rest.</p>
+        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700;">Unterlagen übermitteln → Prüfung durch Covert → Steuererklärung fertig.</p>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Steuererklärung erstellen lassen</button></div>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap cols2">
-      <div><h2>Steueroptimierung</h2></div>
+      <div><h2>Steueroptimierung beginnt vor der Steuererklärung.</h2></div>
       <div>
-        <p>Nicht erst beim Ausfüllen denken — wir zeigen Potenzial frühzeitig auf.</p>
+        <p>Wer erst beim Ausfüllen über seine Steuern nachdenkt, kann viele Entscheidungen nicht mehr rückwirkend ändern. Deshalb beraten wir vorausschauend.</p>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Steuersituation besprechen</button></div>
       </div>
     </div>
   </section>
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2>Steuerberatung für Unternehmen</h2></div>
+      <div><h2>Komplexe Frage? Fachperson.</h2></div>
       <div>
-        <p>Komplexe Fragen? Unsere diplomierten Steuerexperten sind für Sie da.</p>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button></div>
+        <p>Für anspruchsvollere steuerliche Fragestellungen stehen bei Covert entsprechend qualifizierte Fachpersonen und diplomierte Steuerexperten zur Verfügung.</p>
+        <div class="pick-row" style="margin-top:20px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <img src="team/luca.jpg" alt="Luca Ferrari" style="width:44px; height:44px; border-radius:50%; object-fit:cover; filter:grayscale(1);">
+            <span style="font-size:0.88rem;"><strong>Luca Ferrari</strong><br><span class="stone">Dipl. Steuerexperte (i. A.)</span></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <img src="team/dominique.jpg" alt="Dominique" style="width:44px; height:44px; border-radius:50%; object-fit:cover; filter:grayscale(1);">
+            <span style="font-size:0.88rem;"><strong>Dominique</strong><br><span class="stone">Dipl. Steuerexperte</span></span>
+          </div>
+        </div>
+        <div class="cta-row" style="margin-top:22px;"><button class="btn btn-ghost" onclick="openBooking()">Steuerberatung</button></div>
       </div>
     </div>
   </section>
@@ -1176,9 +1366,9 @@
   <section class="page-hero">
     <div class="wrap">
       <div class="kicker">Kundenportal</div>
-      <h1>Alles im Blick. An einem Ort.</h1>
-      <p class="lede">Ihre Versicherungen und Dokumente. Ihre Anliegen. Ihr direkter Draht zu Covert. Wir möchten Beratung nicht nur persönlicher und transparenter machen — sondern auch die Administration dahinter einfacher.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button><button class="btn btn-ghost" onclick="openPortal()">Zum Kundenlogin (Demo)</button></div>
+      <h1>Alles im Blick. Von überall.</h1>
+      <p class="lede">Policen, Dokumente, Anliegen und Kommunikation – zentral in Ihrem Covert Portal.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openPortal()">Portal entdecken</button><button class="btn btn-ghost" onclick="openBooking()">Beratung vereinbaren</button></div>
       <div class="portal-preview">
         <div class="portal-mock" aria-hidden="true">
           <div class="pm-card pm1"><h4>Policen</h4><p>4 aktive Verträge, zentral hinterlegt</p></div>
@@ -1198,6 +1388,18 @@
       <div><h2>Schluss mit Suchen.</h2></div>
       <div>
         <p>Policen im Ordner, Rechnungen im Mailfach, Dokumente irgendwo. Wir bringen das an einen Ort.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto;"><h2>Ein Login statt suchen.</h2></div>
+      <div class="mini-dash">
+        <div class="mini-dash-tile"><div class="label">Meine Policen</div><div class="value">6 aktive Policen</div></div>
+        <div class="mini-dash-tile"><div class="label">Meine Dokumente</div><div class="value">24 Dokumente</div></div>
+        <div class="mini-dash-tile"><div class="label">Meine Anliegen</div><div class="value">1 in Bearbeitung</div></div>
+        <div class="mini-dash-tile"><div class="label">Nachrichten</div><div class="value">2 neu</div></div>
       </div>
     </div>
   </section>
@@ -1225,9 +1427,19 @@
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2>Wir melden uns auch bei Ihnen.</h2></div>
       <div>
-        <p>Kommunikation läuft in beide Richtungen — direkt übers Portal.</p>
+        <div class="scenario-box">
+          <p class="when">Samstagabend. Wasserschaden.</p>
+          <p>Sie müssen nicht überlegen, wer Ihr Ansprechpartner ist oder wo Ihre Police liegt.</p>
+          <p class="flow">Covert öffnen → Schaden melden → erledigt.</p>
+        </div>
+      </div>
+      <div>
+        <div class="scenario-box">
+          <p class="when">Montagmorgen. Neuer Mitarbeiter.</p>
+          <p>Portal öffnen → Mitarbeiter melden → Covert übernimmt.</p>
+          <p class="flow">Plötzlich versteht jeder den Nutzen des Portals.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1245,8 +1457,9 @@
   <section class="page-hero">
     <div class="wrap">
       <div class="kicker">Transparenz &amp; Vergütung</div>
-      <h1>Wissen, woran Sie sind.</h1>
-      <p class="lede">Warum dieses Produkt? Wie verdienen wir daran? Wir beantworten das offen.</p>
+      <h1>Was verdient Covert eigentlich an mir?</h1>
+      <p class="lede">Eine berechtigte Frage. Und eine, die wir Ihnen offen beantworten.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="scrollToId('verguetungsmodell')">Unser Vergütungsmodell</button></div>
     </div>
   </section>
 
@@ -1261,6 +1474,19 @@
   </section>
 
   <section>
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto 8px;"><h2>So können wir vergütet werden.</h2></div>
+      <div class="services" style="border-top:none; margin-top:30px;">
+        <div class="service"><h3>Beratungshonorar</h3><p>Sie bezahlen für unsere Beratung.</p></div>
+        <div class="service"><h3>Courtage / Provision</h3><p>Wir erhalten eine Vergütung vom Anbieter.</p></div>
+        <div class="service"><h3>Mandatsgebühr</h3><p>Unternehmen bezahlen einen vereinbarten Betrag für definierte Leistungen.</p></div>
+        <div class="service"><h3>Zusatzleistungen</h3><p>Bestimmte Leistungen werden separat verrechnet.</p></div>
+      </div>
+      <p style="text-align:center; margin-top:30px; font-weight:700; font-family:'Plus Jakarta Sans',sans-serif;">Welches Modell bei Ihnen gilt, erfahren Sie transparent.</p>
+    </div>
+  </section>
+
+  <section id="verguetungsmodell">
     <div class="wrap">
       <div class="section-head"><h2>Wie Covert vergütet wird</h2><p class="lede">Je nach Dienstleistung und Art der Zusammenarbeit unterscheidet sich unser Vergütungsmodell — mit Beratungshonoraren, Courtagen, Abschlussprovisionen, Mandatsgebühren oder separat verrechneten Dienstleistungen.</p></div>
       <!-- TODO: Für KMU und Grössere Unternehmen zusätzlich eine grobe Preisspanne oder Richtwerte nennen, sobald verfügbar — keine Zahlen erfinden -->
@@ -1283,6 +1509,14 @@
         </div>
       </div>
       <div class="cta-row" style="margin-top:36px;"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button></div>
+    </div>
+  </section>
+
+  <section class="dark" style="text-align:center;">
+    <div class="wrap" style="max-width:600px;">
+      <h2>Fragen Sie uns.</h2>
+      <p class="quote" style="margin-top:20px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:clamp(1.2rem,2.4vw,1.6rem); font-style:italic; color:#fff;">„Warum empfehlen Sie mir diese Lösung – und was verdient Covert daran?“</p>
+      <p style="margin-top:18px; color:rgba(255,255,255,.8);">Wir finden, darauf sollten Sie eine klare Antwort erhalten.</p>
     </div>
   </section>
 </main>
@@ -1325,39 +1559,21 @@
   <section class="page-hero">
     <div class="wrap">
       <div class="kicker">Über Covert</div>
-      <h1>Beratung kann einfacher sein.</h1>
-      <p class="lede">Persönlicher. Transparenter. Digitaler. Covert AG verfolgt einen einfachen Gedanken: Versicherungen, Vorsorge, Finanzen und Steuern sollten nicht vier verschiedene Welten mit unterschiedlichen Ansprechpartnern sein.</p>
-      <div class="quote-block" style="margin-top:26px;"><p>Ein Partner. Alles im Blick.</p></div>
+      <h1>Beratung, wie sie sein sollte.</h1>
+      <p class="lede">Persönlich. Transparent. Digital.</p>
+      <div class="quote-block" style="margin-top:26px;"><p>Ein Ansprechpartner. Alles im Blick.</p></div>
     </div>
   </section>
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2>Warum Covert?</h2>
+      <div><h2>Warum wir Covert aufgebaut haben.</h2>
         <div class="photo-frame"><img src="images/ueber-advisor.jpg" alt="Beraterin im Gespräch mit einer Kundin"></div>
       </div>
       <div>
-        <p>Versicherungsberatung ist oft produktgetrieben. Wir setzen früher an — bei Ihnen.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="section-head"><h2>Was Covert ausmacht</h2></div>
-      <div class="faq-list" style="max-width:none;">
-        <details class="faq-item" open>
-          <summary>Persönlich</summary>
-          <p>Wir lernen Sie kennen, bevor wir beraten.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Transparent</summary>
-          <p>Wir zeigen Optionen und legen unsere Vergütung offen.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Digital</summary>
-          <p>Administration soll einfach sein, nicht aufwendig.</p>
-        </details>
+        <p>Weil Beratung nicht davon abhängen sollte, welches Produkt dem Berater die höchste Vergütung bringt.</p>
+        <p>Weil Kunden verstehen sollten, warum ihnen eine Lösung empfohlen wird.</p>
+        <p>Und weil Versicherungsadministration heute einfacher funktionieren kann.</p>
       </div>
     </div>
   </section>
@@ -1366,23 +1582,17 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Die Menschen hinter Covert.</h2>
-        <p class="lede">Kompetenz ist wichtig, Vertrauen entsteht persönlich — lernen Sie unser Team kennen.</p>
+        <p class="lede">Fachwissen ist wichtig. Vertrauen ist persönlich.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="deep">
-    <div class="wrap">
-      <div class="section-head"><h2>Unser Team</h2><p class="lede">Hinter digitalen Prozessen und unserem Covert Portal stehen Menschen, die zuhören, analysieren und Lösungen entwickeln. Lernen Sie das Team kennen, das Covert jeden Tag weiterentwickelt.</p></div>
       <!-- TODO: LinkedIn-Profil für Dominique ergänzen, sobald vorhanden (Jan, Luca, Nicolas sind bereits verlinkt) -->
       <div class="team-grid">
         <div class="team-card" tabindex="0">
           <img src="team/jan.jpg" alt="Jan Krapl">
           <div class="overlay">
             <h4>Jan Krapl</h4>
-            <div class="role">Geschäftsführer / CEO, Mitinhaber</div>
-            <div class="bio">Verantwortlich für die Geschäftsführung von Covert sowie für die Beratung im Bereich Versicherungen und Vorsorge. Sein Fokus liegt auf verständlichen Lösungen und einer langfristigen, persönlichen Zusammenarbeit.</div>
-            <div class="tags"><span class="tag-pill">Geschäftsführung</span><span class="tag-pill">Versicherungen</span><span class="tag-pill">In Ausbildung: dipl. Berater berufliche Vorsorge IAF</span></div>
+            <div class="role">Geschäftsführer, Mitinhaber</div>
+            <div class="bio">Versicherungen &amp; Unternehmen.</div>
+            <div class="tags"><span class="tag-pill">Versicherungen</span><span class="tag-pill">In Ausbildung: dipl. Berater berufliche Vorsorge IAF</span></div>
             <div class="links"><a href="https://www.linkedin.com/in/jan-krapl-6b7207275/" target="_blank" rel="noopener">LinkedIn</a><a href="#">Kontakt</a></div>
           </div>
         </div>
@@ -1391,8 +1601,8 @@
           <div class="overlay">
             <h4>Luca Ferrari</h4>
             <div class="role">Mitinhaber, Dipl. Steuerexperte (i. A.)</div>
-            <div class="bio">Mitinhaber von Covert und verantwortlich für die steuerliche Beratung unserer Kunden. Er verbindet fachliche Tiefe mit einer klaren, verständlichen Kommunikation.</div>
-            <div class="tags"><span class="tag-pill">Steuern</span><span class="tag-pill">Mitinhaber</span><span class="tag-pill">M.A. HSG Accounting &amp; Finance</span><span class="tag-pill">Dipl. Steuerexperte (i. A.)</span></div>
+            <div class="bio">Steuern &amp; Unternehmensberatung.</div>
+            <div class="tags"><span class="tag-pill">Steuern</span><span class="tag-pill">M.A. HSG Accounting &amp; Finance</span></div>
             <div class="links"><a href="https://www.linkedin.com/in/luca-ferrari-160453121/" target="_blank" rel="noopener">LinkedIn</a><a href="#">Kontakt</a></div>
           </div>
         </div>
@@ -1401,8 +1611,8 @@
           <div class="overlay">
             <h4>Nicolas Schneider</h4>
             <div class="role">Mitinhaber</div>
-            <div class="bio">Mitinhaber von Covert und Teil der Geschäftsleitung. Er begleitet den Aufbau von Covert als zentralem Ansprechpartner für Versicherungen, Vorsorge und Finanzen.</div>
-            <div class="tags"><span class="tag-pill">Mitinhaber</span><span class="tag-pill">M.A. HSG Unternehmensführung</span></div>
+            <div class="bio">Vorsorge &amp; Finanzplanung.</div>
+            <div class="tags"><span class="tag-pill">M.A. HSG Unternehmensführung</span></div>
             <div class="links"><a href="https://www.linkedin.com/in/nicolassschneider/" target="_blank" rel="noopener">LinkedIn</a><a href="#">Kontakt</a></div>
           </div>
         </div>
@@ -1411,40 +1621,15 @@
           <div class="overlay">
             <h4>Dominique</h4>
             <div class="role">Dipl. Steuerexperte</div>
-            <div class="bio">Dipl. Steuerexperte bei Covert und Ansprechpartner für komplexere steuerliche Fragestellungen unserer Privat- und Unternehmenskunden.</div>
-            <div class="tags"><span class="tag-pill">Steuern</span><span class="tag-pill">Fachexpertise</span></div>
+            <div class="bio">Komplexere steuerliche Fragestellungen.</div>
+            <div class="tags"><span class="tag-pill">Steuern</span></div>
             <div class="links"><a href="#">LinkedIn</a><a href="#">Kontakt</a></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="section-head"><h2>Covert gemeinsam weiterdenken.</h2><p class="lede">Unser Ziel: Technologie dort einsetzen, wo sie hilft — persönlich da sein, wo Vertrauen zählt.</p></div>
-      <div class="lead-grid">
-        <div class="lead-card">
-          <figure><img src="team/jan.jpg" alt="Jan Krapl"></figure>
-          <div class="cap"><h4>Jan Krapl</h4><div class="role">Geschäftsführer / CEO, Mitinhaber</div></div>
-        </div>
-        <div class="lead-card">
-          <figure><img src="team/luca.jpg" alt="Luca"></figure>
-          <div class="cap"><h4>Luca Ferrari</h4><div class="role">Mitinhaber, Dipl. Steuerexperte (i. A.)</div></div>
-        </div>
-        <div class="lead-card">
-          <figure><img src="team/nicolas.jpg" alt="Nicolas"></figure>
-          <div class="cap"><h4>Nicolas Schneider</h4><div class="role">Mitinhaber</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="deep">
-    <div class="wrap cols2">
-      <div><h2>Mehr als Versicherungen.</h2></div>
-      <div>
-        <p>Covert verbindet verschiedene Kompetenzbereiche unter einem Dach: Versicherungen, Vorsorge, Finanzplanung, Steuern. Damit möchten wir langfristig der zentrale Ansprechpartner für die finanziellen und versicherungstechnischen Anliegen unserer Privat- und Unternehmenskunden sein.</p>
+      <div style="text-align:center; max-width:520px; margin:40px auto 0;">
+        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.15rem;">Sie wissen, wer für Sie da ist.</p>
+        <p class="stone">Keine anonyme Hotline. Kein wechselnder Ansprechpartner. Ein Team, das Ihre Situation kennt.</p>
       </div>
     </div>
   </section>
@@ -1720,6 +1905,24 @@ function scrollToId(id){
 }
 function toggleMobile(){
   document.getElementById('mobilePanel').classList.toggle('open');
+}
+
+function toggleChip(el){
+  el.classList.toggle('picked');
+}
+
+function pickOne(el){
+  var group = el.dataset.group;
+  document.querySelectorAll('.pick-chip[data-group="'+group+'"]').forEach(function(c){ c.classList.remove('picked'); });
+  el.classList.add('picked');
+}
+
+function updateVorsorgeCalc(){
+  var age = parseInt(document.getElementById('calcAge').value, 10) || 0;
+  var retire = parseInt(document.getElementById('calcRetire').value, 10) || 0;
+  var years = Math.max(0, retire - age);
+  document.getElementById('calcYears').textContent = years;
+  document.getElementById('calcYearsInline').textContent = years;
 }
 
 function openPortal(mode){
