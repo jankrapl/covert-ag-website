@@ -461,6 +461,14 @@
   .portal-view{ display:none; }
   .portal-view.active{ display:block; }
 
+  .pt-advisor{ margin-bottom:22px; }
+  .pt-advisor-row{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .pt-advisor-row img{ width:56px; height:56px; border-radius:50%; object-fit:cover; filter:grayscale(1) contrast(1.05); }
+  .pt-advisor-name{ font-weight:700; }
+  .pt-advisor-role{ color:var(--stone); font-size:0.85rem; }
+  .pt-advisor-msg{ display:flex; gap:8px; }
+  .pt-advisor-msg input{ flex:1; padding:10px 14px; border:1px solid var(--line); border-radius:8px; font-size:0.88rem; font-family:inherit; background:var(--paper-deep); }
+  .pt-advisor-msg .btn{ padding:10px 18px; border-radius:8px; text-transform:none; letter-spacing:normal; font-size:1rem; }
   .pt-grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:26px; }
   @media (max-width:980px){ .pt-grid3{ grid-template-columns:1fr; } }
   .pt-card{ background:var(--white); border:1px solid var(--line); padding:24px; margin-bottom:20px; }
@@ -1725,9 +1733,23 @@
 
       <div class="portal-nav-label">Hauptbereiche</div>
       <div class="portal-nav-item active" data-view="dashboard" onclick="portalShow('dashboard')"><span class="ic">◆</span> Dashboard</div>
-      <div class="portal-nav-item" data-view="policen" onclick="portalShow('policen')"><span class="ic">▤</span> Policenverwaltung</div>
-      <div class="portal-nav-item" data-view="schaden" onclick="portalShow('schaden')"><span class="ic">◈</span> Schadenverwaltung</div>
-      <div class="portal-nav-item" data-view="dokumente" onclick="portalShow('dokumente')"><span class="ic">▥</span> Dokumente</div>
+
+      <div data-mode="privat">
+        <div class="portal-nav-item" data-view="policen" onclick="portalShow('policen')"><span class="ic">▤</span> Policen</div>
+        <div class="portal-nav-item" data-view="praemien" onclick="portalShow('praemien')"><span class="ic">▤</span> Prämienrechnungen</div>
+        <div class="portal-nav-item" data-view="schaden" onclick="portalShow('schaden')"><span class="ic">◈</span> Schadenfälle</div>
+        <div class="portal-nav-item" data-view="anfragen" onclick="portalShow('anfragen')"><span class="ic">✉</span> Anfragen</div>
+        <div class="portal-nav-item" data-view="dokumente" onclick="portalShow('dokumente')"><span class="ic">▥</span> Dokumente</div>
+      </div>
+
+      <div data-mode="unternehmen">
+        <div class="portal-nav-item" data-view="policen" onclick="portalShow('policen')"><span class="ic">▤</span> Policenverwaltung</div>
+        <div class="portal-nav-item" data-view="schaden" onclick="portalShow('schaden')"><span class="ic">◈</span> Schadenverwaltung</div>
+        <div class="portal-nav-item" data-view="ausschreibungen" onclick="portalShow('ausschreibungen')"><span class="ic">▨</span> Ausschreibungen</div>
+        <div class="portal-nav-item" data-view="dokumente" onclick="portalShow('dokumente')"><span class="ic">▥</span> Dokumente</div>
+        <div class="portal-nav-item" data-view="news" onclick="portalShow('news')"><span class="ic">🔔</span> Informationen</div>
+      </div>
+
       <div class="portal-nav-item" data-view="profil" onclick="portalShow('profil')"><span class="ic">●</span> Mein Profil</div>
 
       <div class="portal-nav-label">Hilfe</div>
@@ -1750,6 +1772,20 @@
 
         <div class="portal-view active" id="pv-dashboard">
           <h2>Dashboard</h2>
+          <div class="pt-card pt-advisor">
+            <h3>Ihr Ansprechpartner</h3>
+            <div class="pt-advisor-row">
+              <img src="team/jan.jpg" alt="Jan Krapl">
+              <div>
+                <div class="pt-advisor-name">Jan Krapl</div>
+                <div class="pt-advisor-role">Geschäftsführer, Mitinhaber</div>
+              </div>
+            </div>
+            <div class="pt-advisor-msg">
+              <input type="text" placeholder="Nachricht schreiben …">
+              <button class="btn btn-primary" onclick="alert('In der Demo-Version nicht verfügbar.')">→</button>
+            </div>
+          </div>
           <div class="pt-grid3">
             <div class="pt-card" data-mode="unternehmen">
               <h3>Muster Handwerk AG</h3>
@@ -1822,6 +1858,28 @@
           </table>
         </div>
 
+        <div class="portal-view" id="pv-praemien" data-mode="privat">
+          <h2>Prämienrechnungen</h2>
+          <table class="pt-table">
+            <thead><tr><th>Police-Nr.</th><th>Produkt</th><th>Gesellschaft</th><th>Fälligkeit</th><th>Betrag</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>CH-200114</td><td>Hausratversicherung</td><td>Die Mobiliar</td><td>01.01.2026</td><td>CHF 320</td><td><span class="pt-pill ok">Bezahlt</span></td></tr>
+              <tr><td>CH-200115</td><td>Privathaftpflicht</td><td>Die Mobiliar</td><td>01.01.2026</td><td>CHF 180</td><td><span class="pt-pill ok">Bezahlt</span></td></tr>
+              <tr><td>CH-200116</td><td>Fahrzeugversicherung</td><td>AXA</td><td>01.06.2026</td><td>CHF 940</td><td><span class="pt-pill info">Gesendet</span></td></tr>
+              <tr><td>CH-200117</td><td>Säule 3a – Vorsorge</td><td>SWICA</td><td>01.01.2026</td><td>CHF 1'200</td><td><span class="pt-pill ok">Bezahlt</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="portal-view" id="pv-anfragen" data-mode="privat">
+          <h2>Anfragen</h2>
+          <div class="pt-doc-list">
+            <div class="pt-doc-row"><span class="name">✉ Frage zur Anpassung Vorsorgeausweis</span><span class="pt-pill info">In Bearbeitung</span></div>
+            <div class="pt-doc-row"><span class="name">✉ Adressänderung gemeldet</span><span class="pt-pill ok">Erledigt</span></div>
+          </div>
+          <div class="cta-row" style="margin-top:22px;"><button class="btn btn-ghost" onclick="openBooking()">Neue Anfrage stellen</button></div>
+        </div>
+
         <div class="portal-view" id="pv-dokumente">
           <h2>Dokumente</h2>
           <div class="pt-doc-list">
@@ -1829,6 +1887,26 @@
             <div class="pt-doc-row"><span class="name">📄 Prämienrechnung Q1 2026.pdf</span><span style="color:var(--stone); font-size:.82rem;">10.01.2026</span></div>
             <div class="pt-doc-row"><span class="name">📄 Schadenmeldung COV-SC-0142.pdf</span><span style="color:var(--stone); font-size:.82rem;">14.02.2026</span></div>
             <div class="pt-doc-row"><span class="name">📄 Vorsorge-Check 2025 – Zusammenfassung.pdf</span><span style="color:var(--stone); font-size:.82rem;">03.11.2025</span></div>
+          </div>
+        </div>
+
+        <div class="portal-view" id="pv-ausschreibungen" data-mode="unternehmen">
+          <h2>Ausschreibungen</h2>
+          <table class="pt-table">
+            <thead><tr><th>Bezeichnung</th><th>Bereich</th><th>Status</th><th>Frist</th></tr></thead>
+            <tbody>
+              <tr><td>BVG-Vergleich 2026</td><td>Berufliche Vorsorge</td><td><span class="pt-pill info">In Bearbeitung</span></td><td>31.03.2026</td></tr>
+              <tr><td>Sachversicherung Erneuerung</td><td>Sachversicherung</td><td><span class="pt-pill ok">Abgeschlossen</span></td><td>01.01.2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="portal-view" id="pv-news" data-mode="unternehmen">
+          <h2>Informationen</h2>
+          <div class="pt-doc-list">
+            <div class="pt-doc-row"><span class="name">📰 Jährlicher Vorsorge-Check – jetzt Termin sichern</span><span style="color:var(--stone); font-size:.82rem;">vor 3 Tagen</span></div>
+            <div class="pt-doc-row"><span class="name">📰 Neue Ansprechpartnerin im Bereich Steuern</span><span style="color:var(--stone); font-size:.82rem;">vor 2 Wochen</span></div>
+            <div class="pt-doc-row"><span class="name">📰 Prämienübersicht 2026 verfügbar</span><span style="color:var(--stone); font-size:.82rem;">vor 1 Monat</span></div>
           </div>
         </div>
 
