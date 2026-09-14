@@ -96,6 +96,8 @@
   .drop-label{ font-size:0.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--stone); font-weight:700; padding:6px 12px 6px; }
   .drop a{ display:block; padding:10px 12px; font-size:0.9rem; border-radius:8px; text-transform:none; letter-spacing:normal; font-weight:500; }
   .drop a:hover{ background:var(--paper); }
+  .login-drop .drop{ left:auto; right:0; transform:none; }
+  .login-drop.open .drop{ opacity:1; visibility:visible; translate:0 0; }
   .nav-cta{ display:flex; align-items:center; gap:18px; }
   .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px; }
   .burger span{ width:22px; height:2px; background:var(--ink); display:block; }
@@ -556,6 +558,13 @@
       <a data-p="ueber" onclick="goTo('ueber')">Über Coverd</a>
     </nav>
     <div class="nav-cta">
+      <div class="has-drop login-drop" id="loginDrop">
+        <button class="btn btn-ghost" onclick="toggleLoginDrop(event)">Kundenlogin</button>
+        <div class="drop">
+          <a onclick="openPortal('privat')">Login Privatperson</a>
+          <a onclick="openPortal('unternehmen')">Login Unternehmen</a>
+        </div>
+      </div>
       <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
       <button class="burger" onclick="toggleMobile()" aria-label="Menü"><span></span><span></span><span></span></button>
     </div>
@@ -572,7 +581,9 @@
   <a onclick="goTo('portal')">Kundenportal</a>
   <a onclick="goTo('blog')">Blog</a>
   <a onclick="goTo('ueber')">Über Coverd</a>
-  <button class="btn btn-primary" style="margin-top:14px;" onclick="openBooking()">Beratung vereinbaren</button>
+  <button class="btn btn-ghost" style="margin-top:14px;" onclick="openPortal('privat')">Login Privatperson</button>
+  <button class="btn btn-ghost" style="margin-top:10px;" onclick="openPortal('unternehmen')">Login Unternehmen</button>
+  <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
 </div>
 
 <!-- ================= HOME ================= -->
@@ -1648,8 +1659,11 @@
       <div class="kicker">Kundenportal</div>
       <h1>Alles im Blick. Von überall.</h1>
       <p class="lede">Policen, Dokumente, Anliegen und Kommunikation – zentral in Ihrem Coverd Portal.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button></div>
-      <p class="nudge">Kostenlos &amp; unverbindlich · Zugang erhalten Sie von Ihrem Coverd-Berater</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="openPortal('privat')">Login Privatperson</button>
+        <button class="btn btn-ghost" onclick="openPortal('unternehmen')">Login Unternehmen</button>
+      </div>
+      <p class="nudge">Oder <a onclick="openBooking()" style="text-decoration:underline; cursor:pointer;">Beratung vereinbaren</a>, wenn Sie noch keinen Zugang haben</p>
     </div>
   </section>
 
@@ -1696,7 +1710,7 @@
         <div class="portal-shot-wrap">
           <img src="images/portal-preview-desktop.png" alt="Coverd Kundenportal Dashboard" class="portal-shot">
         </div>
-        <p class="pm-caption">Illustrative Darstellung des Coverd Portals</p>
+        <p class="pm-caption">So sieht Ihr Coverd Portal aus</p>
       </div>
     </div>
   </section>
@@ -1994,6 +2008,15 @@ function toggleChip(el){
   el.classList.toggle('picked');
 }
 
+function toggleLoginDrop(e){
+  e.stopPropagation();
+  document.getElementById('loginDrop').classList.toggle('open');
+}
+document.addEventListener('click', function(e){
+  var el = document.getElementById('loginDrop');
+  if(el && !el.contains(e.target)){ el.classList.remove('open'); }
+});
+
 function pickOne(el){
   var group = el.dataset.group;
   document.querySelectorAll('.pick-chip[data-group="'+group+'"]').forEach(function(c){ c.classList.remove('picked'); });
@@ -2138,6 +2161,10 @@ function updateVorsorgeCalc(){
   document.getElementById('calcYearsInline').textContent = years;
 }
 
+function openPortal(mode){
+  document.getElementById('mobilePanel').classList.remove('open');
+  window.location.href = (mode === 'unternehmen') ? 'kundenportal-kmu.html' : 'kundenportal-privat.html';
+}
 </script>
 
 </body>
