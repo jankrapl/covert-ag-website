@@ -109,101 +109,68 @@
 <div id="app"></div>
 <script>
 const POLICIES = [
-  { key: 'kk', produkt: 'Krankenkasse Grundversicherung', gesellschaft: 'CSS', nr: '80-1194-72', beginn: '01.01.2026', ablauf: 'Laufend', praemie: 'CHF 412.30 / Monat', selbst: 'Franchise CHF 300 + 10% Selbstbehalt',
-    deckung: 'Obligatorische Grundversicherung nach KVG, freie Arztwahl im Hausarztmodell.',
-    mutTitel: 'Franchise anpassen',
-    felder: [['Gewünschte Franchise', 'CHF 300 / 500 / 1000 / 1500 / 2000 / 2500'], ['Gültig ab', '01.01. des Folgejahres']],
-    dokumente: [['Police · PDF', 'Versicherungsausweis 2026', '03.12.2025 · 180 KB'], ['Abrechnung · PDF', 'Prämienübersicht 2026', '03.12.2025 · 95 KB']],
-    tags: ['krankenkasse', 'kk', 'kvg', 'franchise', 'grundversicherung'] },
-  { key: 'auto', produkt: 'Autoversicherung', gesellschaft: 'Zürich', nr: 'AU-33481-CH', beginn: '01.06.2025', ablauf: '31.05.2027', praemie: 'CHF 968.00 / Jahr', selbst: 'CHF 500.00',
-    deckung: 'Haftpflicht und Teilkasko für VW Golf, Kontrollschild SO 118 442.',
-    mutTitel: 'Fahrzeugdaten ändern',
-    felder: [['Kontrollschild', 'z. B. SO 118 442'], ['Km-Stand pro Jahr', 'z. B. 12 000'], ['Garagenparkplatz', 'Ja / Nein'], ['Gültig ab', 'TT.MM.JJJJ']],
-    dokumente: [['Police · PDF', 'Autoversicherung Policenkopie', '28.05.2025 · 240 KB'], ['Grüne Karte · PDF', 'Internationale Versicherungskarte', '28.05.2025 · 88 KB']],
-    tags: ['auto', 'fahrzeug', 'golf', 'kasko'] },
-  { key: 'hausrat', produkt: 'Hausratversicherung', gesellschaft: 'Mobiliar', nr: 'HR-77219', beginn: '01.03.2022', ablauf: '28.02.2027', praemie: 'CHF 214.00 / Jahr', selbst: 'CHF 200.00',
-    deckung: 'Feuer, Wasser, Diebstahl und Elementarschäden für die Wohnung an der Kirchgasse 14.',
-    mutTitel: 'Versicherungssumme anpassen',
-    felder: [['Versicherungssumme (CHF)', 'z. B. 80 000'], ['Wertsachen (CHF)', 'z. B. 5 000'], ['Gültig ab', 'TT.MM.JJJJ']],
-    dokumente: [['Police · PDF', 'Hausratversicherung Policenkopie', '14.02.2022 · 210 KB']],
-    tags: ['hausrat', 'wohnung', 'diebstahl'] },
-  { key: 'phv', produkt: 'Privathaftpflicht', gesellschaft: 'Mobiliar', nr: 'PH-40982', beginn: '01.03.2022', ablauf: '28.02.2027', praemie: 'CHF 128.00 / Jahr', selbst: 'CHF 0.00',
-    deckung: 'Personen- und Sachschäden gegenüber Dritten bis CHF 5 Mio., inklusive Schlüsselverlust.',
-    mutTitel: 'Deckung anpassen',
-    felder: [['Deckungssumme', 'CHF 5 Mio. / 10 Mio.'], ['Haushaltgrösse', 'z. B. 2 Personen'], ['Gültig ab', 'TT.MM.JJJJ']],
-    dokumente: [['Police · PDF', 'Privathaftpflicht Policenkopie', '14.02.2022 · 175 KB']],
-    tags: ['haftpflicht', 'phv'] },
-  { key: 'leben', produkt: 'Risikolebensversicherung', gesellschaft: 'Swiss Life', nr: 'RL-509214', beginn: '01.09.2023', ablauf: '31.08.2043', praemie: 'CHF 42.50 / Monat', selbst: 'CHF 0.00',
-    deckung: 'Todesfallsumme CHF 200 000, Auszahlung an die begünstigte Person im Todesfall.',
-    mutTitel: 'Begünstigung ändern',
-    felder: [['Begünstigte Person', 'Name und Vorname'], ['Verwandtschaftsgrad', 'z. B. Ehepartner'], ['Gültig ab', 'TT.MM.JJJJ']],
-    dokumente: [['Police · PDF', 'Risikolebensversicherung Policenkopie', '20.08.2023 · 260 KB']],
-    tags: ['leben', 'todesfall', 'risiko'] },
-  { key: 'rs', produkt: 'Rechtsschutzversicherung', gesellschaft: 'CAP', nr: 'RS-118837', beginn: '01.01.2025', ablauf: '31.12.2026', praemie: 'CHF 19.90 / Monat', selbst: 'CHF 0.00',
-    deckung: 'Rechtsschutz für Verkehr, Wohnen, Arbeit und Alltag, inklusive telefonischer Rechtsberatung.',
-    mutTitel: 'Deckungsbaustein hinzufügen',
-    felder: [['Gewünschter Baustein', 'z. B. Familien-Rechtsschutz'], ['Gültig ab', 'TT.MM.JJJJ']],
-    dokumente: [['Police · PDF', 'Rechtsschutzversicherung Policenkopie', '03.12.2024 · 190 KB']],
-    tags: ['recht', 'rechtsschutz'] }
+  { key: 'kk', produkt: 'Krankenkasse', gesellschaft: 'Sanitas · Grundversicherung + Zusatz', nr: '4471-9920', praemie: 'CHF 289.00 / Monat', selbst: "Franchise CHF 2'500", ablauf: '31.12.2026',
+    deckung: 'Grundversicherung nach Modell Hausarzt mit Franchise CHF 2 500. Zusatzversicherung für Zahnbehandlung und Alternativmedizin.',
+    mutTitel: 'Franchise oder Modell ändern',
+    felder: [['Gewünschte Franchise', 'z. B. CHF 1 500'], ['Versicherungsmodell', 'z. B. Hausarzt'], ['Zusatzversicherung', 'Zahn, Alternativmedizin'], ['Gültig ab', '01.01.2027']],
+    dokumente: [['Police · PDF', 'Versicherungsausweis 2026', '10.01.2026 · 240 KB']],
+    tags: ['kranken', 'krankenkasse', 'arzt', 'franchise', 'zahn', 'sanitas'] },
+  { key: 'auto', produkt: 'Autoversicherung', gesellschaft: 'Mobiliar · Vollkasko', nr: '7712-0043', praemie: 'CHF 94.00 / Monat', selbst: 'CHF 500', ablauf: '31.12.2026',
+    deckung: 'Vollkasko mit Selbstbehalt CHF 500, Bonusstufe 0, Insassenschutz inbegriffen.',
+    mutTitel: 'Fahrzeug oder Kasko ändern',
+    felder: [['Kontrollschild', 'z. B. SO 214 556'], ['Marke und Typ', 'z. B. Skoda Octavia'], ['Stammnummer', 'z. B. 123.456.789'], ['Kaskodeckung', 'Vollkasko'], ['Jährliche Fahrleistung', 'z. B. 12 000 km'], ['Gültig ab', 'TT.MM.JJJJ']],
+    dokumente: [['Police · PDF', 'Police nach Fahrzeugwechsel', '14.06.2026 · 410 KB'], ['Rechnung · PDF', 'Prämienrechnung 2026/27', '28.08.2026 · 120 KB']],
+    tags: ['auto', 'fahrzeug', 'kasko', 'kollision', 'garage'] },
+  { key: 'hausrat', produkt: 'Hausrat', gesellschaft: 'Mobiliar', nr: '8814-2290', praemie: 'CHF 42.00 / Monat', selbst: 'CHF 200', ablauf: '31.12.2026',
+    deckung: "Versicherungssumme CHF 120'000. Feuer, Wasser, Diebstahl zu Hause und auswärts.",
+    mutTitel: 'Summe oder Adresse ändern',
+    felder: [['Wohnadresse', 'Strasse und Nummer'], ['PLZ und Ort', 'z. B. 4600 Olten'], ['Versicherungssumme (CHF)', 'z. B. 120 000'], ['Anzahl Zimmer', 'z. B. 3.5'], ['Wertsachen über CHF 10 000', 'z. B. Klavier'], ['Gültig ab', 'TT.MM.JJJJ']],
+    dokumente: [['Police · PDF', "Hausrat — neue Versicherungssumme CHF 120'000", '01.09.2026 · 380 KB'], ['Schaden · PDF', 'Abrechnung Velodiebstahl', '27.05.2026 · 96 KB']],
+    tags: ['hausrat', 'wohnung', 'möbel', 'velo', 'fahrrad', 'diebstahl', 'einbruch', 'umzug', 'adresse'] },
+  { key: 'phv', produkt: 'Privathaftpflicht', gesellschaft: 'Mobiliar', nr: '8814-2291', praemie: 'CHF 18.00 / Monat', selbst: 'kein Selbstbehalt', ablauf: '31.12.2026',
+    deckung: 'Deckungssumme CHF 5 Mio. für Schäden an Personen und Sachen Dritter, inklusive Schäden an gemieteten Wohnungen.',
+    mutTitel: 'Haushaltsangaben ändern',
+    felder: [['Anzahl Personen im Haushalt', 'z. B. 2'], ['Haustiere', 'z. B. ein Hund'], ['Deckungssumme (CHF)', 'z. B. 5 000 000'], ['Gültig ab', 'TT.MM.JJJJ']],
+    dokumente: [['Police · PDF', 'Privathaftpflicht Policenkopie', '02.01.2026 · 210 KB']],
+    tags: ['haftpflicht', 'privathaftpflicht', 'hund', 'mietwohnung'] },
+  { key: 'leben', produkt: 'Lebensversicherung', gesellschaft: 'Swiss Life · Säule 3a', nr: '2290-5518', praemie: 'CHF 25.00 / Monat', selbst: '—', ablauf: '01.06.2049',
+    deckung: "Todesfallkapital CHF 200'000 mit Sparanteil in der Säule 3a, steuerlich abzugsfähig.",
+    mutTitel: 'Beitrag oder Begünstigte ändern',
+    felder: [['Jahresbeitrag (CHF)', 'z. B. 7 056'], ['Begünstigte Person', 'Name und Vorname'], ['Todesfallkapital (CHF)', 'z. B. 200 000'], ['Gültig ab', '01.01.2027']],
+    dokumente: [['Ausweis · PDF', 'Steuerbescheinigung Säule 3a 2025', '15.01.2026 · 84 KB']],
+    tags: ['leben', 'lebensversicherung', '3a', 'säule', 'vorsorge', 'todesfall', 'steuer'] },
+  { key: 'rs', produkt: 'Rechtsschutz', gesellschaft: 'CAP · Privat und Verkehr', nr: '5560-1174', praemie: 'CHF 18.00 / Monat', selbst: 'kein Selbstbehalt', ablauf: '31.12.2026',
+    deckung: "Anwalts- und Gerichtskosten bis CHF 600'000 im Privat- und Verkehrsrechtsschutz.",
+    mutTitel: 'Deckungsbereich ändern',
+    felder: [['Deckungsbereich', 'Privat und Verkehr'], ['Anzahl Personen', 'z. B. 2'], ['Deckungssumme (CHF)', 'z. B. 600 000'], ['Gültig ab', 'TT.MM.JJJJ']],
+    dokumente: [['Police · PDF', 'Rechtsschutz Policenkopie', '02.01.2026 · 190 KB']],
+    tags: ['recht', 'rechtsschutz', 'anwalt', 'gericht', 'streit'] }
 ];
 
 const CLAIMS = [
-  { key: 'wasch', titel: 'Wasserschaden Waschmaschine', sub: 'Hausratversicherung · Mobiliar · gemeldet 14.02.2026', status: 'In Bearbeitung', fg: '#1F4FFF', bg: '#E8ECFF', dot: '#1F4FFF',
-    datum: '14.02.2026', summe: 'CHF 2\'150.00', selbst: 'CHF 200.00',
-    beschrieb: 'Ein defekter Schlauch der Waschmaschine hat den Boden im Badezimmer und den angrenzenden Flur beschädigt.',
-    schritte: [['Meldung eingegangen', '14.02.2026'], ['Handwerker-Offerte eingereicht', '20.02.2026'], ['Auszahlung wird geprüft', 'offen']] },
-  { key: 'velo', titel: 'Velodiebstahl vor dem Bahnhof', sub: 'Hausratversicherung · Mobiliar · gemeldet 03.11.2025', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
-    datum: '03.11.2025', summe: "CHF 1'200.00", selbst: 'CHF 200.00',
-    beschrieb: 'Das Velo wurde trotz Schloss vor dem Bahnhof Olten entwendet. Polizeirapport wurde eingereicht.',
-    schritte: [['Meldung eingegangen', '03.11.2025'], ['Polizeirapport geprüft', '10.11.2025'], ["Auszahlung CHF 1'000.00", '21.11.2025']] },
-  { key: 'park', titel: 'Parkschaden am Golf', sub: 'Autoversicherung · Zürich · gemeldet 22.07.2025', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
-    datum: '22.07.2025', summe: "CHF 890.00", selbst: 'CHF 500.00',
-    beschrieb: 'Unbekannter Verursacher hat beim Parkieren die hintere Stossstange beschädigt. Reparatur bei der Garage Müller AG.',
-    schritte: [['Meldung eingegangen', '22.07.2025'], ['Kostenvoranschlag geprüft', '29.07.2025'], ['Auszahlung CHF 390.00', '12.08.2025']] },
-  { key: 'nachbar', titel: 'Sachschaden bei Nachbarn', sub: 'Privathaftpflicht · Mobiliar · gemeldet 05.05.2025', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
-    datum: '05.05.2025', summe: 'CHF 640.00', selbst: 'CHF 0.00',
-    beschrieb: 'Beim Rasenmähen wurde versehentlich ein Fenster beim Nachbarhaus beschädigt.',
-    schritte: [['Meldung eingegangen', '05.05.2025'], ['Schaden begutachtet', '12.05.2025'], ['Auszahlung CHF 640.00', '26.05.2025']] }
-];
-
-const VERLAUF = [
-  { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '20.02.2026 · 10:12', text: 'Guten Tag Frau Brunner, für den Wasserschaden habe ich die Handwerker-Offerte an die Mobiliar weitergeleitet. Sobald die Zusage da ist, melde ich mich.' },
-  { initialen: 'NB', bg: '#F3F3F1', fg: '#6E6E6B', name: 'Nina Brunner', zeit: '14.02.2026 · 18:47', text: 'Danke für die schnelle Rückmeldung. Ich habe die Fotos vom Schaden bereits hochgeladen.' },
-  { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '03.12.2025 · 09:30', text: 'Ihre Krankenkassen-Prämien 2026 liegen unter Dokumente. Bei Fragen zur Franchise melden Sie sich gern.' }
-];
-const TERMINE = [
-  { datum: '30.09.2026', titel: 'Autoversicherung — Vertragsende naht', sub: 'Police AU-33481-CH läuft am 31.05.2027 aus, wir prüfen Alternativen rechtzeitig.', status: 'Notiert', fg: '#6E6E6B', bg: '#F3F3F1' },
-  { datum: '15.11.2026', titel: 'Krankenkasse — Franchise überprüfen', sub: 'Wechsel bis 30. November möglich, wirksam ab 1. Januar.', status: 'Aktion', fg: '#1F4FFF', bg: '#E8ECFF' },
-  { datum: '28.02.2027', titel: 'Hausrat & Privathaftpflicht — Vertragsablauf', sub: 'Wir melden uns 90 Tage vorher bei Ihnen.', status: 'Notiert', fg: '#6E6E6B', bg: '#F3F3F1' }
-];
-const DOKUMENTE = [
-  { typ: 'Police · PDF', farbe: '#1F4FFF', name: 'Krankenkasse — Versicherungsausweis 2026', meta: '03.12.2025 · 180 KB' },
-  { typ: 'Schaden · PDF', farbe: '#1F4FFF', name: 'Fotos und Offerte Wasserschaden Waschmaschine', meta: '20.02.2026 · 1.1 MB' },
-  { typ: 'Police · PDF', farbe: '#6E6E6B', name: 'Autoversicherung Policenkopie', meta: '28.05.2025 · 240 KB' },
-  { typ: 'Rechnung · PDF', farbe: '#6E6E6B', name: 'Prämienübersicht 2026', meta: '03.12.2025 · 95 KB' },
-  { typ: 'Police · PDF', farbe: '#6E6E6B', name: 'Hausratversicherung Policenkopie', meta: '14.02.2022 · 210 KB' },
-  { typ: 'Übersicht · PDF', farbe: '#6E6E6B', name: 'Versicherungsspiegel Nina Brunner', meta: '05.01.2026 · 62 KB' }
-];
-const NEWS = [
-  { kategorie: 'Hinweis', neu: true, titel: 'Franchise wechseln: Frist 30. November', text: 'Wer die Franchise für 2027 ändern möchte, muss dies bis Ende November mitteilen. Wir prüfen gern, ob ein Wechsel für Sie sinnvoll ist.', meta: '02.09.2026 · Jan Krapl' },
-  { kategorie: 'Branche', neu: true, titel: 'Krankenkassenprämien 2027', text: 'Erste Schätzungen zeigen einen weiteren Anstieg der Prämien. Ein Kassenvergleich lohnt sich meist mehr als ein Franchisewechsel.', meta: '20.08.2026 · coverd ag' },
-  { kategorie: 'Recht', neu: false, titel: 'Was die Privathaftpflicht wirklich deckt', text: 'Viele denken, Schäden bei Freunden seien nicht gedeckt. Das stimmt so nicht — wir zeigen, worauf es ankommt.', meta: '15.07.2026 · coverd ag' },
-  { kategorie: 'Intern', neu: false, titel: 'Neues Kundenportal ab Oktober', text: 'Schadenmeldungen und Dokumente laufen künftig über das Portal. Ihre bisherigen Unterlagen sind bereits übernommen.', meta: '12.06.2026 · coverd ag' }
-];
-const FAQ = [
-  'Wie ändere ich meine Franchise bei der Krankenkasse?',
-  'Wo finde ich meine aktuelle Police als PDF?',
-  'Wie lange dauert die Bearbeitung eines Schadenfalls?',
-  'Wie ändere ich meine E-Mailadresse?',
-  'Wer sieht meine Daten im Portal?',
-  'Wie kündige ich eine Police?'
+  { key: 'wasch', titel: 'Wasserschaden Waschmaschine', sub: 'Hausrat · Mobiliar · gemeldet 05.09.2026', status: 'In Bearbeitung', fg: '#1F4FFF', bg: '#E8ECFF', dot: '#1F4FFF',
+    datum: '05.09.2026', summe: "CHF 2'400.00", selbst: 'CHF 200.00',
+    beschrieb: 'Der Zulaufschlauch der Waschmaschine ist gerissen, Wasser lief in den Korridor. Parkett und Sockelleisten sind beschädigt.',
+    schritte: [['Meldung eingegangen', '05.09.2026'], ['Fotos eingereicht', '06.09.2026'], ['Kostenschätzung in Prüfung', 'offen']] },
+  { key: 'velo', titel: 'Velo gestohlen, Bahnhof Olten', sub: 'Hausrat · Mobiliar · gemeldet 03.05.2026', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+    datum: '03.05.2026', summe: "CHF 1'440.00", selbst: 'CHF 200.00',
+    beschrieb: 'Das abgeschlossene Velo wurde am Bahnhof entwendet. Polizeirapport lag der Meldung bei.',
+    schritte: [['Meldung eingegangen', '03.05.2026'], ['Polizeirapport geprüft', '12.05.2026'], ["Auszahlung CHF 1'240.00", '27.05.2026']] },
+  { key: 'park', titel: 'Parkschaden Kotflügel', sub: 'Auto · Mobiliar · gemeldet 21.11.2025', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+    datum: '21.11.2025', summe: "CHF 1'850.00", selbst: 'CHF 500.00',
+    beschrieb: 'Unbekannter Dritter beschädigte beim Parkieren den vorderen rechten Kotflügel.',
+    schritte: [['Meldung eingegangen', '21.11.2025'], ['Garage beauftragt', '25.11.2025'], ['Direkt abgerechnet', '09.12.2025']] },
+  { key: 'nachbar', titel: 'Wasserschaden Küche Nachbarwohnung', sub: 'Privathaftpflicht · Mobiliar · gemeldet 08.02.2025', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+    datum: '08.02.2025', summe: "CHF 3'860.00", selbst: 'kein Selbstbehalt',
+    beschrieb: 'Ein übergelaufenes Spülbecken beschädigte die Decke der darunterliegenden Wohnung.',
+    schritte: [['Meldung eingegangen', '08.02.2025'], ['Schaden anerkannt', '20.02.2025'], ["Vollständig übernommen CHF 3'860.00", '14.03.2025']] }
 ];
 
 const state = {
   screen: 'dash', policy: null, claim: null, detailTab: 'ueber', profilTab: 'allg', docFilter: 'Alle',
   notify: { schaden: true, dokumente: true, policen: true, news: false },
   botOpen: false,
-  messages: [{ role: 'bot', text: 'Guten Tag. Ich beantworte Fragen zu Ihren sechs Policen — Prämien, Laufzeiten, Deckungen. Für alles Weitere ist Jan Krapl da.' }]
+  messages: [{ role: 'bot', text: 'Guten Tag. Ich beantworte Fragen zu Ihren sechs Versicherungen — Prämien, Deckungen, Selbstbehalte. Für alles Weitere ist Jan Krapl da.' }]
 };
 
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -220,27 +187,35 @@ function closeBot(){ state.botOpen = false; render(); }
 
 function answer(q){
   const s = q.toLowerCase();
-  if (/(prämie|praemie|kosten|preis|zahle|total)/.test(s)) {
-    const hit = POLICIES.find((p) => p.tags.some((t) => s.includes(t)));
-    if (hit) return 'Die Prämie für ' + hit.produkt + ' beträgt ' + hit.praemie + ' (' + hit.gesellschaft + ', Police ' + hit.nr + ').';
-    return 'Ihre sechs Policen kosten zusammen rund CHF 6\'350.00 pro Jahr. Grösster Posten: die Krankenkasse.';
+  const hit = POLICIES.find((p) => p.tags.some((t) => s.includes(t)));
+  if (/(prämie|praemie|zahle|kosten|monat|preis|total)/.test(s)) {
+    if (hit) return hit.produkt + ': ' + hit.praemie + ' (' + hit.gesellschaft + ', Police ' + hit.nr + ').';
+    return 'Ihre sechs Versicherungen kosten zusammen CHF 486.00 pro Monat. Grösster Posten: Krankenkasse mit CHF 289.00.';
   }
-  if (/(läuft|lauft|ablauf|abläuft|kündig|erneuer|frist|verlänger)/.test(s)) {
-    return 'Als Erstes läuft die Hausrat- und Privathaftpflichtversicherung am 28.02.2027 aus. Bei der Krankenkasse endet die Wechselfrist für die Franchise am 30. November.';
+  if (/(selbstbehalt|franchise)/.test(s)) {
+    return 'Ihre Selbstbehalte:\n\nKrankenkasse — Franchise CHF 2 500\nAuto (Vollkasko) — CHF 500\nHausrat — CHF 200\nPrivathaftpflicht — kein Selbstbehalt';
   }
-  if (/(schaden|anliegen|unfall|bearbeitung)/.test(s)) {
-    return 'Ein Fall ist in Bearbeitung: Wasserschaden Waschmaschine (Hausratversicherung, Mobiliar) — die Auszahlung wird geprüft.';
+  if (/(velo|fahrrad|gestohlen|diebstahl|einbruch)/.test(s)) {
+    return 'Ja. Ihr Hausrat (Police 8814-2290, Mobiliar) deckt Diebstahl auch auswärts, Selbstbehalt CHF 200. Ein Velodiebstahl wurde im Mai 2026 mit CHF 1\'240.00 abgerechnet.';
   }
-  if (/(franchise|kasse|kk)/.test(s)) {
-    return 'Ihre Franchise bei der CSS beträgt aktuell CHF 300. Ein Wechsel ist bis 30. November für das Folgejahr möglich.';
+  if (/(umzug|adresse|neue wohnung)/.test(s)) {
+    return 'Eine neue Adresse melden Sie bei Hausrat über den Reiter "Summe oder Adresse ändern". Wir passen Hausrat, Privathaftpflicht und die Autoversicherung gemeinsam an.';
+  }
+  if (/(schaden|anliegen|melden|unfall|bearbeitung)/.test(s)) {
+    return 'Ein Anliegen ist in Bearbeitung: Wasserschaden Waschmaschine (Hausrat, Mobiliar, gemeldet 05.09.2026) — die Fotos sind eingereicht, die Mobiliar prüft die Kostenschätzung.';
+  }
+  if (/(nachricht|ungelesen)/.test(s)) {
+    return 'Sie haben 2 neue Nachrichten im Verlauf auf dem Dashboard. Die jüngste ist von Jan Krapl vom 01.09.2026 zur neuen Hausratpolice.';
   }
   if (/(rechnung|fällig|faellig|zahlung)/.test(s)) {
-    return 'Aktuell ist keine Rechnung offen. Die nächste Krankenkassenprämie wird am 1. des Monats abgebucht.';
+    return 'Offen ist eine Rechnung: Autoversicherung CHF 1\'128.00, fällig am 30.09.2026.';
   }
-  const hit = POLICIES.find((p) => p.tags.some((t) => s.includes(t)) || s.includes(p.nr.toLowerCase()));
-  if (hit) return hit.produkt + ' bei ' + hit.gesellschaft + ' (Police ' + hit.nr + '), ' + hit.praemie + ', läuft bis ' + hit.ablauf + '.\n\n' + hit.deckung;
+  if (/(kündig|wechsel|frist)/.test(s)) {
+    return 'Die Zusatzversicherung der Krankenkasse kann bis 30.11.2026 gekündigt werden. Hausrat und Privathaftpflicht laufen bis 31.12.2026 und verlängern sich automatisch.';
+  }
+  if (hit) return hit.produkt + ' bei ' + hit.gesellschaft + ' (Police ' + hit.nr + '), ' + hit.praemie + '.\n\n' + hit.deckung;
   if (/(versichert|deckung|gedeckt|abgedeckt)/.test(s)) {
-    return 'Gedeckt sind Krankenkasse, Auto, Hausrat, Privathaftpflicht, Risikoleben und Rechtsschutz. Bei Fragen zu einer bestimmten Police fragen Sie am besten direkt danach.';
+    return 'Gedeckt sind Krankheit, Auto, Hausrat, Privathaftpflicht, Rechtsschutz und Vorsorge (Säule 3a). Keine Reiseversicherung — das wäre eine Lücke, wenn Sie oft verreisen.';
   }
   return 'Dazu finde ich in Ihren Policen keine Angabe. Jan Krapl hilft weiter: 078 248 91 21 oder jkrapl@coverd.ch.';
 }
@@ -292,7 +267,7 @@ function sidebar(){
 function topheader(){
   const policy = POLICIES.find(p => p.key === state.policy);
   const claim = CLAIMS.find(c => c.key === state.claim);
-  const titles = { dash:['Dashboard','Übersicht'], policen:['Meine Versicherungen','Übersicht'], schaden:['Meine Anliegen','Übersicht'], dokumente:['Dokumente','Übersicht'], news:['Informationen','Übersicht'], hilfe:['Hilfezentrum','Übersicht'], profil:['Mein Profil','Benutzer'] };
+  const titles = { dash:['Dashboard','Übersicht'], policen:['Meine Versicherungen','Übersicht'], schaden:['Meine Anliegen','Übersicht'], dokumente:['Meine Dokumente','Übersicht'], news:['Informationen','Übersicht'], hilfe:['Hilfezentrum','Übersicht'], profil:['Mein Profil','Benutzer'] };
   const base = titles[state.screen] || titles.dash;
   const pageTitle = policy ? 'Meine Versicherungen' : claim ? 'Meine Anliegen' : base[0];
   const pageCrumb = policy ? 'Übersicht · ' + policy.nr : claim ? 'Übersicht · ' + claim.titel : base[1];
@@ -300,7 +275,7 @@ function topheader(){
   <header class="topheader">
     <div><div class="title">${esc(pageTitle)}</div><div class="crumb">${esc(pageCrumb)}</div></div>
     <div style="display:flex; align-items:center; gap:14px; margin-left:auto;">
-      <button class="btn-dark" onclick="go('schaden')">Anliegen melden</button>
+      <button class="btn-dark" onclick="go('schaden')">Schaden melden</button>
       <div class="header-user">
         <div class="avatar">NB</div>
         <div style="line-height:1.25;"><div style="font-size:14px; font-weight:600;">Nina Brunner</div><div style="font-size:12px; color:#6E6E6B;">Privatkundin seit 2019</div></div>
@@ -321,36 +296,28 @@ function dashboardView(){
   return `
   <div style="display:flex; flex-direction:column; gap:28px;">
     <div>
-      <h1 style="margin:0; font-size:38px; font-weight:600; letter-spacing:-0.02em; line-height:1.1;">Guten Tag, Nina Brunner</h1>
-      <p style="margin:14px 0 0; font-size:17px; color:#6E6E6B; max-width:560px;">Eine Sache braucht diese Woche Ihre Aufmerksamkeit. Alles andere läuft.</p>
+      <h1 style="margin:0; font-size:38px; font-weight:600; letter-spacing:-0.02em; line-height:1.1;">Guten Tag, Nina</h1>
+      <p style="margin:14px 0 0; font-size:17px; color:#6E6E6B; max-width:520px;">Alles in Ordnung. Eine Rechnung ist im September fällig, sonst gibt es nichts zu tun.</p>
     </div>
     <div class="grid-2">
       <div class="card">
-        <div style="font-size:17px; font-weight:600;">Meine Versicherungen</div>
+        <div style="font-size:17px; font-weight:600;">Versicherungen</div>
         <div style="display:flex; align-items:center; gap:26px; margin-top:22px;">
-          ${ring(83, '#1F4FFF', 6)}
+          ${ring(100, '#1F4FFF', 6)}
           <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
-            <div><div style="font-size:14px; color:#6E6E6B;">Aktive Verträge</div><div style="font-size:19px; font-weight:600; margin-top:2px;">6 von 7</div></div>
-            <div><div style="font-size:14px; color:#6E6E6B;">Jahresprämie gesamt</div><div style="font-size:19px; font-weight:600; margin-top:2px;">CHF 6'350.00</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">Alle aktiv</div><div style="font-size:19px; font-weight:600; margin-top:2px;">6 Policen</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">Prämien pro Monat</div><div style="font-size:19px; font-weight:600; margin-top:2px;">CHF 486.00</div></div>
           </div>
-        </div>
-        <div style="display:flex; gap:18px; margin-top:22px; font-size:13px; color:#6E6E6B; flex-wrap:wrap;">
-          <span style="display:flex; align-items:center; gap:7px;"><span style="width:10px; height:3px; background:#1F4FFF; display:inline-block;"></span>Aktiv</span>
-          <span style="display:flex; align-items:center; gap:7px;"><span style="width:10px; height:3px; background:#DDE3F5; display:inline-block;"></span>Gekündigt</span>
         </div>
       </div>
       <div class="card">
-        <div style="font-size:17px; font-weight:600;">Meine Anliegen</div>
+        <div style="font-size:17px; font-weight:600;">Anliegen</div>
         <div style="display:flex; align-items:center; gap:26px; margin-top:22px;">
           ${ring(25, '#0A0A0B', 4)}
           <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
             <div><div style="font-size:14px; color:#6E6E6B;">In Bearbeitung</div><div style="font-size:19px; font-weight:600; margin-top:2px; color:#1F4FFF;">1</div></div>
-            <div><div style="font-size:14px; color:#6E6E6B;">Ausbezahlt gesamt</div><div style="font-size:19px; font-weight:600; margin-top:2px;">CHF 2'030.00</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">Neue Nachrichten</div><div style="font-size:19px; font-weight:600; margin-top:2px;">2</div></div>
           </div>
-        </div>
-        <div style="display:flex; gap:18px; margin-top:22px; font-size:13px; color:#6E6E6B; flex-wrap:wrap;">
-          <span style="display:flex; align-items:center; gap:7px;"><span style="width:10px; height:3px; background:#0A0A0B; display:inline-block;"></span>Offen</span>
-          <span style="display:flex; align-items:center; gap:7px;"><span style="width:10px; height:3px; background:#DDE3F5; display:inline-block;"></span>Abgeschlossen</span>
         </div>
       </div>
     </div>
@@ -358,9 +325,13 @@ function dashboardView(){
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1; display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
         <h2 style="margin:0; font-size:19px; font-weight:600;">Verlauf</h2>
-        <span style="font-size:13px; font-weight:600; color:#1F4FFF; background:#E8ECFF; border-radius:999px; padding:6px 12px;">1 neu</span>
+        <span style="font-size:13px; font-weight:600; color:#1F4FFF; background:#E8ECFF; border-radius:999px; padding:6px 12px;">2 neu</span>
       </div>
-      ${VERLAUF.map(v => `
+      ${[
+        { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '01.09.2026 · 14:20', text: "Guten Tag Frau Brunner, die neue Hausratpolice mit der erhöhten Versicherungssumme von CHF 120'000 ist ausgestellt und liegt unter Dokumente." },
+        { initialen: 'NB', bg: '#F3F3F1', fg: '#6E6E6B', name: 'Nina Brunner', zeit: '26.08.2026 · 18:47', text: 'Wir haben ein Klavier gekauft. Reicht die Hausratsumme noch?' },
+        { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '14.06.2026 · 09:30', text: 'Autoversicherung nach dem Fahrzeugwechsel angepasst, Bonusstufe bleibt erhalten.' }
+      ].map(v => `
       <div style="display:flex; gap:18px; padding:22px 26px; border-bottom:1px solid #F0F0EE;">
         <div style="width:38px; height:38px; border-radius:999px; background:${v.bg}; color:${v.fg}; display:grid; place-items:center; font-size:13px; font-weight:700; flex:none;">${v.initialen}</div>
         <div style="min-width:0; flex:1 1 auto;">
@@ -376,7 +347,11 @@ function dashboardView(){
 
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1;"><h2 style="margin:0; font-size:19px; font-weight:600;">Was als Nächstes ansteht</h2></div>
-      ${TERMINE.map(t => `
+      ${[
+        { datum: '30.09.2026', titel: 'Autoversicherung — Rechnung fällig', sub: "Police 7712-0043 · Mobiliar · CHF 1'128.00", status: 'Offen', fg: '#8A5A00', bg: '#FFF3D6' },
+        { datum: '30.11.2026', titel: 'Krankenkasse — Kündigungsfrist Zusatz', sub: 'Wir prüfen bis Ende Oktober, ob ein Wechsel sich lohnt.', status: 'Wir melden uns', fg: '#1F4FFF', bg: '#E8ECFF' },
+        { datum: '31.12.2026', titel: 'Hausrat und Privathaftpflicht — Verlängerung', sub: 'Verlängert sich automatisch um ein Jahr.', status: 'Notiert', fg: '#6E6E6B', bg: '#F3F3F1' }
+      ].map(t => `
       <div style="display:flex; align-items:flex-start; gap:18px; padding:22px 26px; border-bottom:1px solid #F0F0EE;">
         <div class="mono" style="font-size:13px; color:#6E6E6B; width:92px; flex:none; padding-top:2px;">${t.datum}</div>
         <div style="min-width:0; flex:1 1 auto;"><div style="font-size:16px; font-weight:600;">${t.titel}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${t.sub}</div></div>
@@ -389,7 +364,7 @@ function dashboardView(){
 function policenListView(){
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <p style="margin:0; font-size:16px; color:#6E6E6B;">6 aktive Verträge · Jahresprämie CHF 6'350.00</p>
+    <p style="margin:0; font-size:16px; color:#6E6E6B;">6 Versicherungen · CHF 486.00 pro Monat</p>
     <div class="grid-cards">
       ${POLICIES.map(p => `
       <button class="list-card" onclick="openPolicy('${p.key}')" style="display:flex; flex-direction:column; gap:14px;">
@@ -399,7 +374,7 @@ function policenListView(){
         </div>
         <div style="display:flex; gap:26px; flex-wrap:wrap; border-top:1px solid #F0F0EE; padding-top:14px;">
           <div><div class="micro">Prämie</div><div style="font-size:16px; font-weight:600; margin-top:3px;">${p.praemie}</div></div>
-          <div><div class="micro">Läuft ab</div><div style="font-size:16px; font-weight:600; margin-top:3px;">${p.ablauf}</div></div>
+          <div><div class="micro">Police</div><div class="mono" style="font-size:14px; margin-top:5px; color:#4A4A48;">${p.nr}</div></div>
         </div>
       </button>`).join('')}
     </div>
@@ -413,7 +388,7 @@ function policeDetailView(){
   const tabs = [['ueber','Übersicht'], ['dok','Dokumente'], ['mut', p.mutTitel]];
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <button class="pill-outline" style="align-self:flex-start;" onclick="go('policen')">Zurück zu Meine Versicherungen</button>
+    <button class="pill-outline" style="align-self:flex-start;" onclick="go('policen')">Zurück zu meinen Versicherungen</button>
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:26px 30px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
         <div style="width:56px; height:56px; border-radius:14px; background:#E8ECFF; color:#1F4FFF; display:grid; place-items:center; font-size:22px; font-weight:700; flex:none;">P</div>
@@ -421,15 +396,15 @@ function policeDetailView(){
           <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><h1 style="margin:0; font-size:26px; font-weight:600; letter-spacing:-0.01em;">${p.produkt}</h1><span class="badge badge-ok">Aktiv</span></div>
           <div style="font-size:15px; color:#6E6E6B; margin-top:6px;">${p.gesellschaft} · Police ${p.nr}</div>
         </div>
-        <button class="btn-dark" style="margin-left:auto;" onclick="go('schaden')">Anliegen melden</button>
+        <button class="btn-dark" style="margin-left:auto;" onclick="go('schaden')">Schaden melden</button>
       </div>
       <div class="stat-strip">
-        <div class="stat-cell"><div class="micro">Beginn</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.beginn}</div></div>
-        <div class="stat-cell"><div class="micro">Ablauf</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.ablauf}</div></div>
         <div class="stat-cell"><div class="micro">Prämie</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.praemie}</div></div>
+        <div class="stat-cell"><div class="micro">Selbstbehalt</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.selbst}</div></div>
+        <div class="stat-cell"><div class="micro">Läuft bis</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.ablauf}</div></div>
         <div style="padding:20px 30px; display:flex; align-items:center; gap:12px;">
           <img src="team/jan.jpg" alt="Jan Krapl" style="width:36px; height:36px; border-radius:999px; object-fit:cover; object-position:50% 22%; flex:none;">
-          <div><div class="micro">Ansprechpartner</div><div style="font-size:15px; font-weight:600; margin-top:3px;">Jan Krapl</div></div>
+          <div><div class="micro">Ihr Berater</div><div style="font-size:15px; font-weight:600; margin-top:3px;">Jan Krapl</div></div>
         </div>
       </div>
     </div>
@@ -439,17 +414,9 @@ function policeDetailView(){
     </div>
 
     ${dt === 'ueber' ? `
-    <div class="grid-2">
-      <div class="card">
-        <h2 style="margin:0 0 18px; font-size:17px; font-weight:600;">Police im Überblick</h2>
-        <div class="grid-fields">
-          <div><div style="font-size:13px; color:#6E6E6B;">Policen-Nr</div><div class="mono" style="font-size:15px; margin-top:4px;">${p.nr}</div></div>
-          <div><div style="font-size:13px; color:#6E6E6B;">Gesellschaft</div><div style="font-size:15px; margin-top:4px;">${p.gesellschaft}</div></div>
-          <div><div style="font-size:13px; color:#6E6E6B;">Selbstbehalt</div><div style="font-size:15px; margin-top:4px;">${p.selbst}</div></div>
-          <div><div style="font-size:13px; color:#6E6E6B;">Zahlweise</div><div style="font-size:15px; margin-top:4px;">Monatlich / Jährlich</div></div>
-        </div>
-      </div>
-      <div class="card"><h2 style="margin:0 0 14px; font-size:17px; font-weight:600;">Was gedeckt ist</h2><p style="margin:0; font-size:15px; line-height:1.6;">${p.deckung}</p></div>
+    <div class="card" style="max-width:720px;">
+      <h2 style="margin:0 0 14px; font-size:17px; font-weight:600;">Was gedeckt ist</h2>
+      <p style="margin:0; font-size:16px; line-height:1.6;">${p.deckung}</p>
     </div>` : ''}
 
     ${dt === 'dok' ? `
@@ -465,8 +432,8 @@ function policeDetailView(){
         ${p.felder.map(([label,ph]) => `<div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${label}</div><input class="input" placeholder="${ph}"></div>`).join('')}
       </div>
       <div style="display:flex; gap:14px; align-items:center; margin-top:24px; flex-wrap:wrap;">
-        <button class="btn-blue" onclick="alert('Mutation eingereicht (Demo). Jan Krapl prüft die Angaben und leitet sie an die Gesellschaft weiter.')">Mutation senden</button>
-        <span style="font-size:14px; color:#6E6E6B;">Jan Krapl prüft die Mutation und leitet sie an die Gesellschaft weiter.</span>
+        <button class="btn-blue" onclick="alert('Änderung eingereicht (Demo). Jan Krapl meldet sich innerhalb eines Arbeitstags.')">Änderung senden</button>
+        <span style="font-size:14px; color:#6E6E6B;">Jan Krapl meldet sich innerhalb eines Arbeitstags.</span>
       </div>
     </div>` : ''}
   </div>`;
@@ -476,7 +443,7 @@ function schadenListView(){
   return `
   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:26px; align-items:start;">
     <div style="min-width:0; display:flex; flex-direction:column; gap:16px;">
-      <p style="margin:0; font-size:16px; color:#6E6E6B;">1 in Bearbeitung · 3 abgeschlossen</p>
+      <p style="margin:0; font-size:16px; color:#6E6E6B;">1 Anliegen in Bearbeitung · 3 erledigte Fälle</p>
       ${CLAIMS.map(c => `
       <button class="list-card" onclick="openClaim('${c.key}')" style="display:flex; gap:18px; align-items:flex-start;">
         <div style="width:10px; height:10px; border-radius:999px; background:${c.dot}; margin-top:8px; flex:none;"></div>
@@ -485,10 +452,10 @@ function schadenListView(){
       </button>`).join('')}
     </div>
     <aside class="card">
-      <h2 style="margin:0; font-size:19px; font-weight:600;">Anliegen melden</h2>
-      <p style="margin:10px 0 22px; font-size:15px; color:#6E6E6B; line-height:1.5;">Vier Angaben genügen. Den Rest klären wir mit der Gesellschaft.</p>
+      <h2 style="margin:0; font-size:19px; font-weight:600;">Schaden melden</h2>
+      <p style="margin:10px 0 22px; font-size:15px; color:#6E6E6B; line-height:1.5;">Vier Angaben genügen. Den Rest klären wir mit der Versicherung.</p>
       <div style="display:flex; flex-direction:column; gap:16px;">
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Betroffene Police</div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Betroffene Versicherung</div>
           <select class="input" style="color:#0A0A0B;"><option>Bitte auswählen</option>${POLICIES.map(p=>`<option>${p.produkt}</option>`).join('')}</select>
         </div>
         <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Wann ist es passiert?</div><input type="text" class="input" placeholder="TT.MM.JJJJ"></div>
@@ -505,7 +472,7 @@ function schadenDetailView(){
   if (!c) return '';
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <button class="pill-outline" style="align-self:flex-start;" onclick="go('schaden')">Zurück zu Meine Anliegen</button>
+    <button class="pill-outline" style="align-self:flex-start;" onclick="go('schaden')">Zurück zu meinen Anliegen</button>
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:26px 30px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
         <div style="width:56px; height:56px; border-radius:14px; background:#FFF3D6; color:#8A5A00; display:grid; place-items:center; font-size:22px; font-weight:700; flex:none;">S</div>
@@ -520,7 +487,7 @@ function schadenDetailView(){
         <div class="stat-cell"><div class="micro">Selbstbehalt</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${c.selbst}</div></div>
         <div style="padding:20px 30px; display:flex; align-items:center; gap:12px;">
           <img src="team/jan.jpg" alt="Jan Krapl" style="width:36px; height:36px; border-radius:999px; object-fit:cover; object-position:50% 22%; flex:none;">
-          <div><div class="micro">Ansprechpartner</div><div style="font-size:15px; font-weight:600; margin-top:3px;">Jan Krapl</div></div>
+          <div><div class="micro">Ihr Berater</div><div style="font-size:15px; font-weight:600; margin-top:3px;">Jan Krapl</div></div>
         </div>
       </div>
     </div>
@@ -539,11 +506,19 @@ function schadenDetailView(){
 }
 
 function dokumenteView(){
+  const DOKUMENTE = [
+    { typ: 'Police · PDF', farbe: '#1F4FFF', name: "Hausrat — neue Versicherungssumme CHF 120'000", meta: '01.09.2026 · 380 KB' },
+    { typ: 'Rechnung · PDF', farbe: '#6E6E6B', name: 'Autoversicherung — Prämienrechnung 2026/27', meta: '28.08.2026 · 120 KB' },
+    { typ: 'Police · PDF', farbe: '#6E6E6B', name: 'Auto — Police nach Fahrzeugwechsel', meta: '14.06.2026 · 410 KB' },
+    { typ: 'Schaden · PDF', farbe: '#6E6E6B', name: 'Abrechnung Velodiebstahl', meta: '27.05.2026 · 96 KB' },
+    { typ: 'Police · PDF', farbe: '#6E6E6B', name: 'Krankenkasse — Versicherungsausweis 2026', meta: '10.01.2026 · 240 KB' },
+    { typ: 'Übersicht · PDF', farbe: '#6E6E6B', name: 'Versicherungsübersicht Nina Brunner', meta: '10.01.2026 · 88 KB' }
+  ];
   const filters = ['Alle','Policen','Rechnungen','Schaden'];
   const filtered = state.docFilter === 'Alle' ? DOKUMENTE : DOKUMENTE.filter(d => d.typ.startsWith(state.docFilter === 'Policen' ? 'Police' : state.docFilter === 'Rechnungen' ? 'Rechnung' : 'Schaden'));
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <p style="margin:0; font-size:16px; color:#6E6E6B;">Alles zu Ihren Verträgen an einem Ort</p>
+    <p style="margin:0; font-size:16px; color:#6E6E6B;">24 Dateien · Policen, Rechnungen und Schadenbelege</p>
     <div style="display:flex; gap:10px; flex-wrap:wrap;">
       ${filters.map(f => `<button class="filter-pill ${state.docFilter===f?'active':''}" onclick="setDocFilter('${f}')">${f}</button>`).join('')}
     </div>
@@ -555,9 +530,15 @@ function dokumenteView(){
 }
 
 function newsView(){
+  const NEWS = [
+    { kategorie: 'Tipp', neu: true, titel: 'Hausrat nach grösseren Anschaffungen prüfen', text: 'Neue Möbel, ein Instrument oder ein E-Bike heben den Wert des Haushalts schnell an. Liegt die Summe zu tief, kürzt die Versicherung im Schadenfall anteilig.', meta: '01.09.2026 · Jan Krapl' },
+    { kategorie: 'Hinweis', neu: true, titel: 'Krankenkasse: Prämien 2027 sind da', text: 'Die neuen Prämien liegen vor. Wer wechseln will, muss die Kündigung bis 30. November einreichen. Wir rechnen Ihnen die Varianten gerne durch.', meta: '20.08.2026 · coverd ag' },
+    { kategorie: 'Recht', neu: false, titel: 'Velo und E-Bike richtig versichern', text: 'Seit dem Wegfall der Velovignette läuft die Haftpflicht über die Privathaftpflicht. Diebstahl auswärts ist nur mit entsprechender Hausratdeckung eingeschlossen.', meta: '12.05.2026 · coverd ag' },
+    { kategorie: 'Intern', neu: false, titel: 'Neues Kundenportal ab Oktober', text: 'Änderungen, Schadenmeldungen und Dokumente laufen künftig über das Portal. Ihre bisherigen Unterlagen sind bereits übernommen.', meta: '12.06.2026 · coverd ag' }
+  ];
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <p style="margin:0; font-size:16px; color:#6E6E6B;">Fachbeiträge und Hinweise von coverd ag</p>
+    <p style="margin:0; font-size:16px; color:#6E6E6B;">Hinweise und Tipps von coverd ag</p>
     <div class="grid-news">
       ${NEWS.map(n => `
       <article class="card" style="display:flex; flex-direction:column; gap:12px;">
@@ -571,6 +552,14 @@ function newsView(){
 }
 
 function hilfeView(){
+  const FAQ = [
+    'Wie melde ich einen Schaden?',
+    'Wo finde ich meine Police als PDF?',
+    'Was mache ich bei einem Umzug?',
+    'Wie ändere ich meine Franchise?',
+    'Wie lange dauert eine Auszahlung?',
+    'Wie ändere ich meine E-Mailadresse?'
+  ];
   return `
   <div style="display:flex; flex-direction:column; gap:26px;">
     <div class="card" style="padding:36px;">
@@ -599,7 +588,7 @@ function profilView(){
   const tabs = [['allg','Allgemeine Informationen'],['sicher','Sicherheit'],['benach','Benachrichtigungen']];
   const titleMap = { allg: 'Persönliche Informationen', sicher: 'Sicherheit', benach: 'Benachrichtigungen' };
   const subMap = { allg: 'Verwalten Sie Ihre persönlichen Angaben', sicher: 'Einstellungen, mit denen Sie Ihr Konto schützen', benach: 'Bestimmen Sie, worüber wir Sie informieren' };
-  const notifyDefs = [['schaden','Meine Anliegen','Statusänderungen und Auszahlungen'], ['dokumente','Dokumente','Neue Policen, Rechnungen und Belege'], ['policen','Versicherungen','Mutationen und Vertragsverlängerungen'], ['news','News','Fachbeiträge und Hinweise']];
+  const notifyDefs = [['schaden','Anliegen und Schäden','Statusänderungen und Auszahlungen'], ['dokumente','Dokumente','Neue Policen, Rechnungen und Belege'], ['policen','Versicherungen','Änderungen und Verlängerungen'], ['news','News','Tipps und Hinweise']];
   return `
   <div style="display:flex; flex-wrap:wrap; gap:26px; align-items:flex-start;">
     <aside class="card" style="flex:1 1 280px; max-width:320px; padding:0; overflow:hidden;">
@@ -621,10 +610,10 @@ function profilView(){
       <div class="grid-fields" style="margin-top:26px;">
         <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Vorname</div><input class="input" value="Nina"></div>
         <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Nachname</div><input class="input" value="Brunner"></div>
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Adresse</div><input class="input" value="Kirchgasse 14, 4600 Olten"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Adresse</div><input class="input" value="Kirchgasse 14"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">PLZ und Ort</div><input class="input" value="4600 Olten"></div>
         <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Telefon</div><input class="input" value="079 512 33 08"></div>
         <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">E-Mail</div><input class="input" value="nina.brunner@example.ch"></div>
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Sprache</div><input class="input" value="Deutsch"></div>
       </div>` : ''}
       ${pt === 'sicher' ? `
       <div style="display:flex; flex-direction:column; gap:22px; margin-top:26px;">
@@ -633,7 +622,7 @@ function profilView(){
           <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Handynummer für die Zwei-Faktor-Anmeldung</div><input class="input" value="079 512 33 08"></div>
         </div>
         <div style="border-top:1px solid #F0F0EE; padding-top:22px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;">
-          <div><div style="font-size:16px; font-weight:600;">Kennwort</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">Zuletzt geändert am 18.01.2026</div></div>
+          <div><div style="font-size:16px; font-weight:600;">Kennwort</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">Zuletzt geändert am 11.03.2026</div></div>
           <button class="pill-outline">Jetzt ändern</button>
         </div>
       </div>` : ''}
@@ -677,11 +666,11 @@ function chatWidget(){
       </div>
       <div class="chat-foot">
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="chip-suggest" onclick="send('Wie hoch ist meine Prämie?')">Wie hoch ist meine Prämie?</button>
-          <button class="chip-suggest" onclick="send('Welche Police läuft zuerst ab?')">Welche Police läuft zuerst ab?</button>
+          <button class="chip-suggest" onclick="send('Ist mein Velo versichert?')">Ist mein Velo versichert?</button>
+          <button class="chip-suggest" onclick="send('Wie hoch ist mein Selbstbehalt?')">Wie hoch ist mein Selbstbehalt?</button>
         </div>
         <div style="display:flex; gap:10px;">
-          <input id="botInput" class="input" placeholder="Frage zu Ihren Policen stellen" onkeydown="onBotKey(event)">
+          <input id="botInput" class="input" placeholder="Frage zu Ihren Versicherungen stellen" onkeydown="onBotKey(event)">
           <button class="btn-blue-sm" onclick="sendFromInput()">Senden</button>
         </div>
       </div>
