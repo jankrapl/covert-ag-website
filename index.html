@@ -66,6 +66,7 @@
   .btn-ghost-on-dark{ background:transparent; color:var(--paper); border-color:rgba(241,238,227,.35); }
   .btn-ghost-on-dark:hover{ border-color:var(--paper); }
   .cta-row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:8px; }
+  @media (max-width:480px){ .btn{ white-space:normal; text-align:center; max-width:100%; } }
 
   /* ---------- Header ---------- */
   header.site{
@@ -239,6 +240,39 @@
   .services > .service{ border:0; padding:0; }
   .service-icon{ width:56px; height:56px; margin:0 auto 22px; background:var(--pine); border-radius:0 20px 20px 20px; display:flex; align-items:center; justify-content:center; }
   .service-icon svg{ width:26px; height:26px; }
+
+  /* ---------- Comparison table (Coverd vs. Vergleichsportal vs. Direkt) ---------- */
+  .compare-table-wrap{ margin-top:10px; overflow-x:auto; }
+  .compare-table{ width:100%; border-collapse:collapse; min-width:640px; }
+  .compare-table th, .compare-table td{ padding:15px 18px; text-align:left; border-bottom:1px solid var(--line); font-size:0.92rem; }
+  .compare-table thead th{ font-family:'Plus Jakarta Sans',sans-serif; font-size:0.76rem; text-transform:uppercase; letter-spacing:.04em; color:var(--stone); border-bottom:2px solid var(--ink); }
+  .compare-table tbody td:first-child{ color:var(--ink); font-weight:600; }
+  .compare-table tbody td:nth-child(2){ font-weight:700; color:var(--ink); background:rgba(0,87,255,.05); }
+  .compare-table td.yes{ color:#1C7A43; }
+  .compare-table td.no{ color:var(--stone); }
+  .compare-table td.mid{ color:#B4600C; }
+  .compare-cards{ display:none; }
+  @media (max-width:640px){
+    .compare-table-wrap{ display:none; }
+    .compare-cards{ display:flex; flex-direction:column; gap:16px; margin-top:20px; }
+    .compare-card2{ border:1px solid var(--line); border-radius:14px; padding:20px 22px; }
+    .compare-card2 h4{ font-size:1rem; margin-bottom:12px; }
+    .compare-card2 .crow{ display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-top:1px solid var(--line); font-size:0.86rem; }
+    .compare-card2 .crow:first-of-type{ border-top:0; }
+    .compare-card2 .crow span:first-child{ color:var(--stone); }
+    .compare-card2 .crow.self span:last-child{ font-weight:700; color:var(--ink); }
+    .compare-card2 .yes{ color:#1C7A43; font-weight:600; }
+    .compare-card2 .no{ color:var(--stone); }
+    .compare-card2 .mid{ color:#B4600C; }
+  }
+
+  /* ---------- Lead-magnet box ---------- */
+  .leadmagnet-box{ border:1px solid var(--pine); background:rgba(0,87,255,.05); border-radius:14px; padding:34px 36px; margin-top:26px; }
+  .leadmagnet-box h3{ margin-bottom:10px; }
+  .leadmagnet-box p{ color:var(--stone); }
+
+  /* ---------- Team quote ---------- */
+  .team-card .overlay .quote{ font-size:0.8rem; font-style:italic; line-height:1.5; opacity:.95; margin:0 0 12px; padding-left:10px; border-left:2px solid rgba(255,255,255,.4); }
   .service h3{ margin-bottom:10px; }
   .service p{ color:var(--stone); margin-bottom:14px; }
   .service .go{ font-weight:700; font-size:0.82rem; text-transform:uppercase; letter-spacing:.05em; color:var(--pine); }
@@ -528,11 +562,12 @@
     <div class="wrap">
       <div class="kicker">Versicherungen · Vorsorge · Finanzen · Steuern</div>
       <h1>Alles geregelt.<br>Alles an einem Ort.</h1>
-      <p class="lede">Ein Partner. Persönlich beraten, digital betreut.</p>
+      <p class="lede">Ein Partner für Versicherungen, Vorsorge und Steuern – persönlich beraten, digital betreut.</p>
       <div class="cta-row">
         <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
         <button class="btn btn-ghost" onclick="openBooking()">Situation schildern</button>
       </div>
+      <p class="nudge">FINMA-registrierter Versicherungsvermittler · Beratung in Olten und schweizweit</p>
       <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
       <div class="hero-tag">Persönlich in Olten · Für Sie in der ganzen Schweiz</div>
     </div>
@@ -554,6 +589,7 @@
       <div>
         <p class="max-text">Versicherungen bei verschiedenen Gesellschaften. Vorsorgelösungen an unterschiedlichen Orten. Steuerunterlagen, Policen, Rechnungen und Ansprechpartner verteilt über mehrere Systeme. Wir finden: Das geht einfacher.</p>
         <p class="max-text stone">Coverd bringt Ihre Versicherungen, Vorsorge, Finanzen und Steuerthemen zusammen — mit persönlicher Beratung und einer zentralen digitalen Übersicht.</p>
+        <p class="max-text" style="font-weight:700; color:var(--pine); font-family:'Plus Jakarta Sans',sans-serif;">Mit Coverd haben Sie ab dem ersten Gespräch einen Ansprechpartner statt fünf – und alle Unterlagen an einem Ort, statt in drei verschiedenen Postfächern.</p>
         <div class="quote-block"><p>Ein Partner. Eine Übersicht. Eine Lösung.</p></div>
       </div>
     </div>
@@ -584,6 +620,35 @@
           <p>Kosten, Leistungen und Vorsorgeplan verständlich analysiert — für Unternehmen, die ihre berufliche Vorsorge nicht einfach laufen lassen wollen.</p>
           <span class="go">Zur BVG-Beratung</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="deep">
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto 8px; max-width:640px;">
+        <h2 style="text-align:center;">Neue Marke, erfahrenes Team.</h2>
+        <p class="lede" style="margin:16px auto 0; text-align:center;">Coverd AG wurde 2026 gegründet – mit dem Ziel, Versicherungsberatung transparenter zu machen. Was neu ist: die Marke. Was nicht neu ist: die Erfahrung unseres Teams.</p>
+      </div>
+      <div class="services" style="margin-top:44px;">
+        <div class="service">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="8.5" r="2.4"/><path d="M15.8 14.3c2.4.5 4.2 2.5 4.2 5.7"/></svg></div>
+          <h3>Erfahrenes Team</h3>
+          <p>Langjährige Erfahrung im Versicherungs-, Vorsorge- und Steuerwesen, inkl. dipl. Steuerexperte im Team.</p>
+        </div>
+        <div class="service">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
+          <h3>FINMA-registriert</h3>
+          <p>Registrierter Versicherungsvermittler mit Berufshaftpflichtversicherung nach VAG.</p>
+        </div>
+        <div class="service">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 10.8 15.3 16 9.5"/></svg></div>
+          <h3>Kein Risiko beim Einstieg</h3>
+          <p>Das Erstgespräch ist kostenlos und unverbindlich. Sie entscheiden danach in Ruhe.</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:40px;">
+        <a class="go" onclick="scrollToId('prozess')">So läuft eine Zusammenarbeit ab →</a>
       </div>
     </div>
   </section>
@@ -655,8 +720,8 @@
         <h2 style="margin-top:14px;">Berufliche Vorsorge (BVG).</h2>
       </div>
       <div>
-        <p>Für viele Unternehmen ist die 2. Säule der grösste Kostenblock, der am seltensten überprüft wird. Bei Coverd ist die berufliche Vorsorge ein eigener Schwerpunkt, kein Nebenprodukt.</p>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="goTo('bvg')">BVG für Unternehmen entdecken</button></div>
+        <p>Für viele Unternehmen ist die 2. Säule der grösste Kostenblock, der am seltensten überprüft wird. Anschlussverträge lassen sich meist nur mit 6 Monaten Frist kündigen – wer per Anfang Jahr wechseln möchte, sollte bereits im Sommer aktiv werden. Bei Coverd ist die berufliche Vorsorge ein eigener Schwerpunkt, kein Nebenprodukt.</p>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="goTo('bvg')">Jetzt BVG-Situation kostenlos prüfen lassen</button></div>
       </div>
     </div>
   </section>
@@ -735,6 +800,53 @@
     </div>
   </section>
 
+  <section>
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto 0; max-width:680px;"><h2 style="text-align:center;">Warum Coverd statt Direktversicherung oder Vergleichsportal?</h2></div>
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th>Kriterium</th><th>Coverd</th><th>Vergleichsportal</th><th>Direkt bei Versicherer</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Persönliche Beratung</td><td class="yes">Ja</td><td class="no">Nein</td><td class="mid">Teilweise</td></tr>
+            <tr><td>Anbieterübergreifender Vergleich</td><td class="yes">Ja, mehrere Gesellschaften</td><td class="yes">Ja, aber ohne Beratung</td><td class="no">Nein, nur ein Anbieter</td></tr>
+            <tr><td>Laufende Betreuung nach Abschluss</td><td class="yes">Ja</td><td class="no">Nein</td><td class="mid">Teilweise</td></tr>
+            <tr><td>Zentrales Portal für alle Policen</td><td class="yes">Ja</td><td class="no">Nein</td><td class="no">Nein</td></tr>
+            <tr><td>Fokus auf BVG-Beratung für KMU</td><td class="yes">Ja, eigener Schwerpunkt</td><td class="no">Nein</td><td class="mid">Selten</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="compare-cards">
+        <div class="compare-card2"><h4>Persönliche Beratung</h4>
+          <div class="crow self"><span>Coverd</span><span class="yes">Ja</span></div>
+          <div class="crow"><span>Vergleichsportal</span><span class="no">Nein</span></div>
+          <div class="crow"><span>Direkt bei Versicherer</span><span class="mid">Teilweise</span></div>
+        </div>
+        <div class="compare-card2"><h4>Anbieterübergreifender Vergleich</h4>
+          <div class="crow self"><span>Coverd</span><span class="yes">Ja, mehrere Gesellschaften</span></div>
+          <div class="crow"><span>Vergleichsportal</span><span class="yes">Ja, aber ohne Beratung</span></div>
+          <div class="crow"><span>Direkt bei Versicherer</span><span class="no">Nein, nur ein Anbieter</span></div>
+        </div>
+        <div class="compare-card2"><h4>Laufende Betreuung nach Abschluss</h4>
+          <div class="crow self"><span>Coverd</span><span class="yes">Ja</span></div>
+          <div class="crow"><span>Vergleichsportal</span><span class="no">Nein</span></div>
+          <div class="crow"><span>Direkt bei Versicherer</span><span class="mid">Teilweise</span></div>
+        </div>
+        <div class="compare-card2"><h4>Zentrales Portal für alle Policen</h4>
+          <div class="crow self"><span>Coverd</span><span class="yes">Ja</span></div>
+          <div class="crow"><span>Vergleichsportal</span><span class="no">Nein</span></div>
+          <div class="crow"><span>Direkt bei Versicherer</span><span class="no">Nein</span></div>
+        </div>
+        <div class="compare-card2"><h4>Fokus auf BVG-Beratung für KMU</h4>
+          <div class="crow self"><span>Coverd</span><span class="yes">Ja, eigener Schwerpunkt</span></div>
+          <div class="crow"><span>Vergleichsportal</span><span class="no">Nein</span></div>
+          <div class="crow"><span>Direkt bei Versicherer</span><span class="mid">Selten</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="deep" id="faq">
     <div class="wrap">
       <div class="section-head"><h2>Häufige Fragen</h2></div>
@@ -758,6 +870,22 @@
         <details class="faq-item">
           <summary>Ist das Coverd Portal verpflichtend?</summary>
           <p>Nein. Es ist ein zusätzliches Angebot für mehr Überblick. Persönliche Beratung bleibt jederzeit möglich, auch ohne Portalnutzung.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Wie sicher sind meine Daten im Coverd Portal?</summary>
+          <p><!-- TODO: konkrete Angabe zu Hosting/Datenschutz ergänzen, sobald bekannt --></p>
+        </details>
+        <details class="faq-item">
+          <summary>Wie viel Zeit kostet mich das Erstgespräch?</summary>
+          <p><!-- TODO: z. B. "Rechnen Sie mit rund 30–45 Minuten." --></p>
+        </details>
+        <details class="faq-item">
+          <summary>Wie unabhängig ist Coverd wirklich, wenn ihr Courtagen erhaltet?</summary>
+          <p>Wir legen offen, wie wir vergütet werden, und empfehlen keine Lösung, weil sie für uns finanziell attraktiver ist. Unsere Empfehlung basiert auf Ihrer Situation und einem Vergleich mehrerer Anbieter — nicht auf der Höhe der Courtage.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Coverd ist doch neu am Markt – warum sollte ich euch vertrauen?</summary>
+          <p>Coverd AG ist als Unternehmen neu, unser Team bringt aber langjährige Erfahrung aus der Versicherungs-, Vorsorge- und Steuerberatung mit. Zudem sind wir FINMA-registriert und durch eine Berufshaftpflichtversicherung abgesichert.</p>
         </details>
       </div>
     </div>
@@ -883,6 +1011,17 @@
     </div>
   </section>
 
+  <section>
+    <div class="wrap" style="max-width:640px;">
+      <div class="leadmagnet-box">
+        <h3>Kostenlose Checkliste: „Diese 5 Versicherungen sollten Sie jährlich prüfen“</h3>
+        <p>Laden Sie sich unsere kurze Checkliste herunter und prüfen Sie in 5 Minuten, ob sich eine genauere Analyse lohnt.</p>
+        <!-- TODO: PDF und Formular folgen separat — Button aktuell Platzhalter -->
+        <div class="cta-row"><a class="btn btn-ghost" href="#">PDF kostenlos herunterladen</a></div>
+      </div>
+    </div>
+  </section>
+
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2>Lernen Sie Coverd unverbindlich kennen.</h2>
@@ -997,6 +1136,17 @@
         </div>
       </div>
       <div class="cta-row" style="margin-top:30px;"><button class="btn btn-ghost" onclick="goTo('transparenz')">Betreuungsmodelle kennenlernen</button></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:640px;">
+      <div class="leadmagnet-box">
+        <h3>Kostenlose Checkliste: „5 Anzeichen, dass Ihre BVG-Lösung zu teuer ist“</h3>
+        <p>Laden Sie sich unsere kurze Checkliste herunter und prüfen Sie in 5 Minuten, ob sich eine genauere Analyse lohnt.</p>
+        <!-- TODO: PDF und Formular folgen separat — Button aktuell Platzhalter -->
+        <div class="cta-row"><a class="btn btn-ghost" href="#">PDF kostenlos herunterladen</a></div>
+      </div>
     </div>
   </section>
 
@@ -1228,9 +1378,24 @@
     <div class="wrap">
       <div class="kicker">Schwerpunkt · Berufliche Vorsorge (BVG)</div>
       <h1>Wann haben Sie Ihre BVG-Lösung zuletzt verglichen?</h1>
-      <p class="lede">Kosten, Leistungen und Vorsorgeplan können sich erheblich unterscheiden. Wir zeigen Ihnen, wo Ihr Unternehmen heute steht.</p>
+      <p class="lede">Sie erfahren innert weniger Wochen schwarz auf weiss, ob Ihre Mitarbeitenden zu fairen Konditionen versichert sind – und wie viel Sparpotenzial in Ihrer aktuellen BVG-Lösung steckt.</p>
       <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">BVG prüfen lassen</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Für Geschäftsführung, HR und Verwaltungsrat</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:720px;">
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>„Wir haben doch schon eine Pensionskasse.“</summary>
+          <p>Genau das ist unser Ausgangspunkt: Wir vergleichen Ihre bestehende Lösung, ohne dass Sie vorher kündigen oder etwas ändern müssen.</p>
+        </details>
+        <details class="faq-item">
+          <summary>„Ein Wechsel ist doch kompliziert.“</summary>
+          <p>Die Kündigungsfrist beträgt meist 6 Monate; wir übernehmen die Koordination mit der Belegschaft und der neuen Sammelstiftung für Sie.</p>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -1388,6 +1553,17 @@
           <p style="color:rgba(255,255,255,.72); margin-top:12px;">Nicht mit dem Versprechen einer bestimmten Rendite. Sondern mit dem Ziel, regelmässig zu prüfen, ob Ihre Vorsorgelösung weiterhin zu Ihrem Unternehmen und Ihren Mitarbeitenden passt.</p>
           <div class="cta-row"><button class="btn btn-on-dark" onclick="openBooking()">BVG überprüfen lassen</button></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:640px;">
+      <div class="leadmagnet-box">
+        <h3>Kostenlose Checkliste: „5 Anzeichen, dass Ihre BVG-Lösung zu teuer ist“</h3>
+        <p>Laden Sie sich unsere kurze Checkliste herunter und prüfen Sie in 5 Minuten, ob sich eine genauere Analyse lohnt.</p>
+        <!-- TODO: PDF und Formular folgen separat — Button aktuell Platzhalter -->
+        <div class="cta-row"><a class="btn btn-ghost" href="#">PDF kostenlos herunterladen</a></div>
       </div>
     </div>
   </section>
@@ -1660,6 +1836,8 @@
         <div class="photo-frame"><img src="images/ueber-advisor.jpg" alt="Beraterin im Gespräch mit einer Kundin"></div>
       </div>
       <div>
+        <p>Coverd entstand aus einer einfachen Beobachtung: Jan, Luca und Nicolas haben in ihrem eigenen Umfeld immer wieder gesehen, wie unübersichtlich Versicherungs- und Vorsorgeentscheidungen für Privatpersonen und KMU sind – verteilt auf verschiedene Berater, Gesellschaften und Aktenordner, ohne echten Überblick. Daraus entstand die Idee zu Coverd: ein Partner, der Versicherungen, Vorsorge, Finanzen und Steuern persönlich und digital zusammenbringt.</p>
+        <!-- TODO: Hier fehlen noch 2-3 echte Sätze zur tatsächlichen Gründungsgeschichte — werden separat geliefert. -->
         <p>Weil Beratung nicht davon abhängen sollte, welches Produkt dem Berater die höchste Vergütung bringt.</p>
         <p>Weil Kunden verstehen sollten, warum ihnen eine Lösung empfohlen wird.</p>
         <p>Und weil Versicherungsadministration heute einfacher funktionieren kann.</p>
@@ -1681,6 +1859,7 @@
             <h4>Jan Krapl</h4>
             <div class="role">Geschäftsführer, Mitinhaber</div>
             <div class="bio">Versicherungen &amp; Unternehmen.</div>
+            <div class="quote">„Was mich antreibt: Kunden sollen nach einem Gespräch mit mir genau wissen, wo sie stehen – ohne Fachchinesisch.“</div>
             <div class="tags"><span class="tag-pill">Versicherungen</span><span class="tag-pill">In Ausbildung: dipl. Berater berufliche Vorsorge IAF</span></div>
             <div class="links"><a href="https://www.linkedin.com/in/jan-krapl-6b7207275/" target="_blank" rel="noopener">LinkedIn</a><a onclick="openBooking()" style="cursor:pointer;">Kontakt</a></div>
           </div>
@@ -1691,6 +1870,7 @@
             <h4>Luca Ferrari</h4>
             <div class="role">Mitinhaber, Dipl. Steuerexperte (i. A.)</div>
             <div class="bio">Steuern &amp; Unternehmensberatung.</div>
+            <div class="quote"><!-- TODO: echtes Zitat von Luca ergänzen --></div>
             <div class="tags"><span class="tag-pill">Steuern</span><span class="tag-pill">M.A. HSG Accounting &amp; Finance</span></div>
             <div class="links"><a href="https://www.linkedin.com/in/luca-ferrari-160453121/" target="_blank" rel="noopener">LinkedIn</a><a onclick="openBooking()" style="cursor:pointer;">Kontakt</a></div>
           </div>
@@ -1701,6 +1881,7 @@
             <h4>Nicolas Schneider</h4>
             <div class="role">Mitinhaber</div>
             <div class="bio">Vorsorge &amp; Finanzplanung.</div>
+            <div class="quote"><!-- TODO: echtes Zitat von Nicolas ergänzen --></div>
             <div class="tags"><span class="tag-pill">M.A. HSG Unternehmensführung</span></div>
             <div class="links"><a href="https://www.linkedin.com/in/nicolassschneider/" target="_blank" rel="noopener">LinkedIn</a><a onclick="openBooking()" style="cursor:pointer;">Kontakt</a></div>
           </div>
@@ -1711,6 +1892,7 @@
             <h4>Dominique</h4>
             <div class="role">Dipl. Steuerexperte</div>
             <div class="bio">Komplexere steuerliche Fragestellungen.</div>
+            <div class="quote"><!-- TODO: echtes Zitat von Dominique ergänzen --></div>
             <div class="tags"><span class="tag-pill">Steuern</span></div>
             <div class="links"><a href="#">LinkedIn</a><a onclick="openBooking()" style="cursor:pointer;">Kontakt</a></div>
           </div>
