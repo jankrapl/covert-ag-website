@@ -285,6 +285,9 @@
   @media (max-width:560px){ .bvg-sliders{ grid-template-columns:1fr; } }
   .bvg-slider-head{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-size:0.92rem; margin-bottom:10px; }
   .bvg-slider-head strong{ font-family:'Plus Jakarta Sans',sans-serif; color:var(--pine); white-space:nowrap; }
+  .bvg-num-wrap{ display:inline-flex; align-items:center; gap:6px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; color:var(--pine); white-space:nowrap; }
+  .bvg-num{ width:88px; border:1px solid var(--line); border-radius:8px; padding:5px 8px; font:inherit; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:0.92rem; color:var(--pine); background:var(--white); text-align:right; }
+  .bvg-num:focus{ outline:none; border-color:var(--pine); }
   .bvg-range{ -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:999px; background:var(--line); outline:none; cursor:pointer; }
   .bvg-range::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:20px; height:20px; border-radius:50%; background:var(--ink); border:3px solid var(--white); box-shadow:0 0 0 1px var(--line); cursor:pointer; }
   .bvg-range::-moz-range-thumb{ width:20px; height:20px; border-radius:50%; background:var(--ink); border:3px solid var(--white); box-shadow:0 0 0 1px var(--line); cursor:pointer; }
@@ -1154,6 +1157,57 @@
     </div>
   </section>
 
+  <section>
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto 0; max-width:640px;"><h2 style="text-align:center;">Kleine Unterschiede. Grosse Wirkung.</h2><p class="lede" style="margin:16px auto 0; text-align:center;">Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Tragen Sie Ihre eigenen Werte ein und sehen Sie den Effekt direkt.</p></div>
+
+      <div class="bvg-calc-wrap">
+        <div class="bvg-calc-card2">
+          <div class="bvg-sliders">
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Einmalige Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvgEinmaligNum" value="10000" min="0" step="500" oninput="bvgSyncRange('bvgEinmalig')"></span></div>
+              <input type="range" class="bvg-range" id="bvgEinmalig" min="0" max="100000" step="1000" value="10000" oninput="bvgSyncNum('bvgEinmalig')">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Monatliche Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvgMonatlichNum" value="500" min="0" step="50" oninput="bvgSyncRange('bvgMonatlich')"></span></div>
+              <input type="range" class="bvg-range" id="bvgMonatlich" min="0" max="3000" step="50" value="500" oninput="bvgSyncNum('bvgMonatlich')">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Anlagedauer</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvgJahreNum" value="12" min="1" step="1" oninput="bvgSyncRange('bvgJahre')"> Jahre</span></div>
+              <input type="range" class="bvg-range" id="bvgJahre" min="1" max="40" step="1" value="12" oninput="bvgSyncNum('bvgJahre')">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Wertentwicklung</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvgRenditeNum" value="4" min="0" step="0.1" oninput="bvgSyncRange('bvgRendite')"> % p.a.</span></div>
+              <input type="range" class="bvg-range" id="bvgRendite" min="0" max="8" step="0.5" value="4" oninput="bvgSyncNum('bvgRendite')">
+            </div>
+          </div>
+
+          <div class="bvg-stats" id="bvgStats"></div>
+          <div class="bvg-chart-wrap">
+            <div class="bvg-chart" id="bvgChart"></div>
+          </div>
+          <p class="bvg-chart-hint">Jahr anklicken für die Aufteilung Einzahlung / Wertsteigerung.</p>
+        </div>
+
+        <div class="bvg-compare-card">
+          <p class="eyebrow">Unterschied Ø 3&nbsp;% vs. Ø 5&nbsp;% Rendite</p>
+          <p class="bvg-compare-sub">Bei denselben Einzahlungen wie links — nur die durchschnittliche Rendite unterscheidet sich.</p>
+          <div class="bvg-compare-chart" id="bvgCompareChart"></div>
+          <div class="bvg-compare-legend">
+            <span><i style="background:var(--line);"></i>Ø 3&nbsp;% Rendite</span>
+            <span><i style="background:var(--pine);"></i>Ø 5&nbsp;% Rendite</span>
+          </div>
+          <div class="bvg-aha">
+            <div class="amount" id="bvgDiffAmount">CHF 0</div>
+            <p>Unterschied nach <span id="bvgDiffYears">12</span> Jahren — bei exakt denselben Einzahlungen.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="bvg-disclaimer">Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen eingetragenen Werte. Gebühren, Steuern, Risikoleistungen und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite.</p>
+    </div>
+  </section>
+
   <section style="text-align:center; padding:80px 0;">
     <div class="wrap" style="max-width:640px;">
       <h3 style="margin-bottom:14px;">Sie führen ein Unternehmen?</h3>
@@ -1250,57 +1304,6 @@
         <div class="step"><div class="num">04</div><div><h3>Entscheiden</h3><p>Gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt.</p></div></div>
         <div class="step"><div class="num">05</div><div><h3>Betreuen</h3><p>Wir überprüfen Ihre BVG-Lösung laufend und sind Ansprechpartner bei Fragen.</p></div></div>
       </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="section-head" style="text-align:center; margin:0 auto 0; max-width:640px;"><h2 style="text-align:center;">Kleine Unterschiede. Grosse Wirkung.</h2><p class="lede" style="margin:16px auto 0; text-align:center;">Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Passen Sie die Werte an und sehen Sie den Effekt direkt.</p></div>
-
-      <div class="bvg-calc-wrap">
-        <div class="bvg-calc-card2">
-          <div class="bvg-sliders">
-            <div class="bvg-slider">
-              <div class="bvg-slider-head"><span>Einmalige Einzahlung</span><strong id="bvgOutEinmalig">CHF 10&#8217;000</strong></div>
-              <input type="range" class="bvg-range" id="bvgEinmalig" min="0" max="100000" step="1000" value="10000" oninput="bvgCalc()">
-            </div>
-            <div class="bvg-slider">
-              <div class="bvg-slider-head"><span>Monatliche Einzahlung</span><strong id="bvgOutMonatlich">CHF 500</strong></div>
-              <input type="range" class="bvg-range" id="bvgMonatlich" min="0" max="3000" step="50" value="500" oninput="bvgCalc()">
-            </div>
-            <div class="bvg-slider">
-              <div class="bvg-slider-head"><span>Anlagedauer</span><strong id="bvgOutJahre">12 Jahre</strong></div>
-              <input type="range" class="bvg-range" id="bvgJahre" min="1" max="40" step="1" value="12" oninput="bvgCalc()">
-            </div>
-            <div class="bvg-slider">
-              <div class="bvg-slider-head"><span>Wertentwicklung</span><strong id="bvgOutRendite">4 % p.a.</strong></div>
-              <input type="range" class="bvg-range" id="bvgRendite" min="0" max="8" step="0.5" value="4" oninput="bvgCalc()">
-            </div>
-          </div>
-
-          <div class="bvg-stats" id="bvgStats"></div>
-          <div class="bvg-chart-wrap">
-            <div class="bvg-chart" id="bvgChart"></div>
-          </div>
-          <p class="bvg-chart-hint">Jahr anklicken für die Aufteilung Einzahlung / Wertsteigerung.</p>
-        </div>
-
-        <div class="bvg-compare-card">
-          <p class="eyebrow">Unterschied Ø 3&nbsp;% vs. Ø 5&nbsp;% Rendite</p>
-          <p class="bvg-compare-sub">Bei denselben Einzahlungen wie links — nur die durchschnittliche Rendite unterscheidet sich.</p>
-          <div class="bvg-compare-chart" id="bvgCompareChart"></div>
-          <div class="bvg-compare-legend">
-            <span><i style="background:var(--line);"></i>Ø 3&nbsp;% Rendite</span>
-            <span><i style="background:var(--pine);"></i>Ø 5&nbsp;% Rendite</span>
-          </div>
-          <div class="bvg-aha">
-            <div class="amount" id="bvgDiffAmount">CHF 0</div>
-            <p>Unterschied nach <span id="bvgDiffYears">12</span> Jahren — bei exakt denselben Einzahlungen.</p>
-          </div>
-        </div>
-      </div>
-
-      <p class="bvg-disclaimer">Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen gewählten Werte. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite.</p>
     </div>
   </section>
 
@@ -1781,16 +1784,24 @@ function bvgFV(principal, monthly, years, ratePct){
   return principal * Math.pow(1 + i, n) + monthly * growth;
 }
 
-function bvgCalc(){
-  var P = parseFloat(document.getElementById('bvgEinmalig').value);
-  var M = parseFloat(document.getElementById('bvgMonatlich').value);
-  var years = parseInt(document.getElementById('bvgJahre').value, 10);
-  var rate = parseFloat(document.getElementById('bvgRendite').value);
+function bvgSyncRange(baseId){
+  var num = document.getElementById(baseId + 'Num');
+  var range = document.getElementById(baseId);
+  if (num.value !== '') range.value = num.value;
+  bvgCalc();
+}
+function bvgSyncNum(baseId){
+  var num = document.getElementById(baseId + 'Num');
+  var range = document.getElementById(baseId);
+  num.value = range.value;
+  bvgCalc();
+}
 
-  document.getElementById('bvgOutEinmalig').textContent = bvgChf(P);
-  document.getElementById('bvgOutMonatlich').textContent = bvgChf(M);
-  document.getElementById('bvgOutJahre').textContent = years + (years === 1 ? ' Jahr' : ' Jahre');
-  document.getElementById('bvgOutRendite').textContent = rate.toLocaleString('de-CH') + ' % p.a.';
+function bvgCalc(){
+  var P = parseFloat(document.getElementById('bvgEinmaligNum').value) || 0;
+  var M = parseFloat(document.getElementById('bvgMonatlichNum').value) || 0;
+  var years = Math.max(1, parseInt(document.getElementById('bvgJahreNum').value, 10) || 1);
+  var rate = parseFloat(document.getElementById('bvgRenditeNum').value) || 0;
 
   if (bvgSelectedYear === null || bvgSelectedYear > years) bvgSelectedYear = years;
 
