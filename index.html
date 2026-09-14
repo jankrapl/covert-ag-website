@@ -294,15 +294,17 @@
 
   .bvg-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:30px; border-radius:12px; overflow:hidden; }
   @media (max-width:640px){ .bvg-stats{ grid-template-columns:1fr 1fr; } }
-  .bvg-stat{ background:var(--paper-deep); padding:18px 16px; }
-  .bvg-stat .amount{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.2rem; }
+  @media (max-width:380px){ .bvg-stats{ grid-template-columns:1fr; } }
+  .bvg-stat{ background:var(--paper-deep); padding:18px 16px; overflow:hidden; }
+  .bvg-stat .amount{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.2rem; word-break:break-word; }
   .bvg-stat .label{ font-size:0.78rem; color:var(--stone); margin-top:4px; }
   .bvg-stat.is-total{ background:var(--ink); color:var(--white); }
   .bvg-stat.is-total .label{ color:rgba(255,255,255,.7); }
 
-  .bvg-chart-wrap{ margin-top:28px; }
-  .bvg-chart{ display:flex; align-items:flex-end; gap:5px; height:200px; position:relative; }
-  .bvg-bar{ flex:1; min-width:4px; height:100%; display:flex; flex-direction:column; justify-content:flex-end; cursor:pointer; position:relative; }
+  .bvg-chart-wrap{ margin-top:28px; overflow-x:auto; }
+  .bvg-chart{ display:flex; align-items:flex-end; gap:5px; height:200px; position:relative; min-width:min-content; }
+  .bvg-bar{ flex:1; min-width:3px; height:100%; display:flex; flex-direction:column; justify-content:flex-end; cursor:pointer; position:relative; }
+  @media (max-width:480px){ .bvg-chart{ gap:3px; } }
   .bvg-bar .seg{ width:100%; border-radius:3px 3px 0 0; }
   .bvg-bar .seg-flat{ background:var(--paper-deep); border:1px solid var(--line); }
   .bvg-bar .seg-growth{ background:var(--pine); display:none; }
@@ -1165,20 +1167,20 @@
         <div class="bvg-calc-card2">
           <div class="bvg-sliders">
             <div class="bvg-slider">
-              <div class="bvg-slider-head"><span>Einmalige Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvgEinmaligNum" value="10000" min="0" step="500" oninput="bvgSyncRange('bvgEinmalig')"></span></div>
-              <input type="range" class="bvg-range" id="bvgEinmalig" min="0" max="100000" step="1000" value="10000" oninput="bvgSyncNum('bvgEinmalig')">
+              <div class="bvg-slider-head"><span>Einmalige Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvgEinmaligNum" value="10000" min="0" step="500" oninput="bvgSyncRange('bvg','Einmalig')"></span></div>
+              <input type="range" class="bvg-range" id="bvgEinmalig" min="0" max="100000" step="1000" value="10000" oninput="bvgSyncNum('bvg','Einmalig')">
             </div>
             <div class="bvg-slider">
-              <div class="bvg-slider-head"><span>Monatliche Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvgMonatlichNum" value="500" min="0" step="50" oninput="bvgSyncRange('bvgMonatlich')"></span></div>
-              <input type="range" class="bvg-range" id="bvgMonatlich" min="0" max="3000" step="50" value="500" oninput="bvgSyncNum('bvgMonatlich')">
+              <div class="bvg-slider-head"><span>Monatliche Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvgMonatlichNum" value="500" min="0" step="50" oninput="bvgSyncRange('bvg','Monatlich')"></span></div>
+              <input type="range" class="bvg-range" id="bvgMonatlich" min="0" max="3000" step="50" value="500" oninput="bvgSyncNum('bvg','Monatlich')">
             </div>
             <div class="bvg-slider">
-              <div class="bvg-slider-head"><span>Anlagedauer</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvgJahreNum" value="12" min="1" step="1" oninput="bvgSyncRange('bvgJahre')"> Jahre</span></div>
-              <input type="range" class="bvg-range" id="bvgJahre" min="1" max="40" step="1" value="12" oninput="bvgSyncNum('bvgJahre')">
+              <div class="bvg-slider-head"><span>Anlagedauer</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvgJahreNum" value="12" min="1" step="1" oninput="bvgSyncRange('bvg','Jahre')"> Jahre</span></div>
+              <input type="range" class="bvg-range" id="bvgJahre" min="1" max="40" step="1" value="12" oninput="bvgSyncNum('bvg','Jahre')">
             </div>
             <div class="bvg-slider">
-              <div class="bvg-slider-head"><span>Wertentwicklung</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvgRenditeNum" value="4" min="0" step="0.1" oninput="bvgSyncRange('bvgRendite')"> % p.a.</span></div>
-              <input type="range" class="bvg-range" id="bvgRendite" min="0" max="8" step="0.5" value="4" oninput="bvgSyncNum('bvgRendite')">
+              <div class="bvg-slider-head"><span>Wertentwicklung</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvgRenditeNum" value="4" min="0" step="0.1" oninput="bvgSyncRange('bvg','Rendite')"> % p.a.</span></div>
+              <input type="range" class="bvg-range" id="bvgRendite" min="0" max="8" step="0.5" value="4" oninput="bvgSyncNum('bvg','Rendite')">
             </div>
           </div>
 
@@ -1308,27 +1310,53 @@
   </section>
 
   <section>
-    <div class="wrap" style="max-width:480px;">
-      <div class="bvg-compare-card">
-        <p class="eyebrow">Unterschied Ø 3&nbsp;% vs. Ø 5&nbsp;% Rendite</p>
-        <p class="bvg-compare-sub">Bei denselben Einzahlungen — nur die durchschnittliche Rendite unterscheidet sich.</p>
-        <div class="bvg-compare-chart">
-          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
-            <polygon points="0.0,157.6 11.0,155.1 22.1,152.4 33.1,149.6 44.1,146.7 55.2,143.6 66.2,140.4 77.2,137.0 88.3,133.4 99.3,129.7 110.3,125.8 121.4,121.7 132.4,117.3 143.4,112.8 154.5,108.0 165.5,103.0 176.6,97.8 187.6,92.3 198.6,86.5 209.7,80.4 220.7,74.0 231.7,67.3 242.8,60.2 253.8,52.8 264.8,45.1 275.9,36.9 286.9,28.3 297.9,19.4 309.0,9.9 320.0,0.0 320,160 0,160" fill="var(--pine)" opacity="0.08"></polygon>
-            <polyline points="0.0,157.6 11.0,155.1 22.1,152.6 33.1,149.9 44.1,147.2 55.2,144.4 66.2,141.5 77.2,138.6 88.3,135.5 99.3,132.4 110.3,129.2 121.4,125.8 132.4,122.4 143.4,118.9 154.5,115.2 165.5,111.5 176.6,107.6 187.6,103.6 198.6,99.5 209.7,95.3 220.7,90.9 231.7,86.5 242.8,81.8 253.8,77.1 264.8,72.2 275.9,67.2 286.9,62.0 297.9,56.6 309.0,51.1 320.0,45.4" fill="none" stroke="var(--line)" stroke-width="3"></polyline>
-            <polyline points="0.0,157.6 11.0,155.1 22.1,152.4 33.1,149.6 44.1,146.7 55.2,143.6 66.2,140.4 77.2,137.0 88.3,133.4 99.3,129.7 110.3,125.8 121.4,121.7 132.4,117.3 143.4,112.8 154.5,108.0 165.5,103.0 176.6,97.8 187.6,92.3 198.6,86.5 209.7,80.4 220.7,74.0 231.7,67.3 242.8,60.2 253.8,52.8 264.8,45.1 275.9,36.9 286.9,28.3 297.9,19.4 309.0,9.9 320.0,0.0" fill="none" stroke="var(--pine)" stroke-width="3"></polyline>
-          </svg>
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto 0; max-width:640px;"><h2 style="text-align:center;">Kleine Unterschiede. Grosse Wirkung.</h2><p class="lede" style="margin:16px auto 0; text-align:center;">Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Tragen Sie Ihre eigenen Werte ein und sehen Sie den Effekt direkt.</p></div>
+
+      <div class="bvg-calc-wrap">
+        <div class="bvg-calc-card2">
+          <div class="bvg-sliders">
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Einmalige Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvg2EinmaligNum" value="10000" min="0" step="500" oninput="bvgSyncRange('bvg2','Einmalig')"></span></div>
+              <input type="range" class="bvg-range" id="bvg2Einmalig" min="0" max="100000" step="1000" value="10000" oninput="bvgSyncNum('bvg2','Einmalig')">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Monatliche Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvg2MonatlichNum" value="500" min="0" step="50" oninput="bvgSyncRange('bvg2','Monatlich')"></span></div>
+              <input type="range" class="bvg-range" id="bvg2Monatlich" min="0" max="3000" step="50" value="500" oninput="bvgSyncNum('bvg2','Monatlich')">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Anlagedauer</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvg2JahreNum" value="12" min="1" step="1" oninput="bvgSyncRange('bvg2','Jahre')"> Jahre</span></div>
+              <input type="range" class="bvg-range" id="bvg2Jahre" min="1" max="40" step="1" value="12" oninput="bvgSyncNum('bvg2','Jahre')">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span>Wertentwicklung</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvg2RenditeNum" value="4" min="0" step="0.1" oninput="bvgSyncRange('bvg2','Rendite')"> % p.a.</span></div>
+              <input type="range" class="bvg-range" id="bvg2Rendite" min="0" max="8" step="0.5" value="4" oninput="bvgSyncNum('bvg2','Rendite')">
+            </div>
+          </div>
+
+          <div class="bvg-stats" id="bvg2Stats"></div>
+          <div class="bvg-chart-wrap">
+            <div class="bvg-chart" id="bvg2Chart"></div>
+          </div>
+          <p class="bvg-chart-hint">Jahr anklicken für die Aufteilung Einzahlung / Wertsteigerung.</p>
         </div>
-        <div class="bvg-compare-legend">
-          <span><i style="background:var(--line);"></i>Ø 3&nbsp;% Rendite</span>
-          <span><i style="background:var(--pine);"></i>Ø 5&nbsp;% Rendite</span>
-        </div>
-        <div class="bvg-aha">
-          <div class="amount">CHF 188&#8217;634 Unterschied</div>
-          <p>CHF 10&#8217;000 Einzahlung pro Jahr, 30 Jahre, exakt dieselben Einzahlungen — der Unterschied entsteht allein durch die angenommene durchschnittliche Rendite.</p>
+
+        <div class="bvg-compare-card">
+          <p class="eyebrow">Unterschied Ø 3&nbsp;% vs. Ø 5&nbsp;% Rendite</p>
+          <p class="bvg-compare-sub">Bei denselben Einzahlungen wie links — nur die durchschnittliche Rendite unterscheidet sich.</p>
+          <div class="bvg-compare-chart" id="bvg2CompareChart"></div>
+          <div class="bvg-compare-legend">
+            <span><i style="background:var(--line);"></i>Ø 3&nbsp;% Rendite</span>
+            <span><i style="background:var(--pine);"></i>Ø 5&nbsp;% Rendite</span>
+          </div>
+          <div class="bvg-aha">
+            <div class="amount" id="bvg2DiffAmount">CHF 0</div>
+            <p>Unterschied nach <span id="bvg2DiffYears">12</span> Jahren — bei exakt denselben Einzahlungen.</p>
+          </div>
         </div>
       </div>
-      <p class="bvg-disclaimer">Hinweis: Illustratives Rechenbeispiel. Es basiert auf konstanten jährlichen Einzahlungen von CHF 10&#8217;000 über 30 Jahre bei angenommenen durchschnittlichen Renditen von 3&nbsp;% bzw. 5&nbsp;%. Gebühren, Steuern, Risikoleistungen und gesetzliche BVG-Vorgaben sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien.</p>
+
+      <p class="bvg-disclaimer">Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen eingetragenen Werte. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite.</p>
     </div>
   </section>
 
@@ -1794,7 +1822,7 @@ function pickOne(el){
 }
 
 /* ---------- BVG Zinseszins-Rechner ---------- */
-var bvgSelectedYear = null;
+var bvgSelectedYear = {};
 
 function bvgChf(n){
   return 'CHF ' + Math.round(n).toLocaleString('de-CH');
@@ -1809,26 +1837,26 @@ function bvgFV(principal, monthly, years, ratePct){
   return principal * Math.pow(1 + i, n) + monthly * growth;
 }
 
-function bvgSyncRange(baseId){
-  var num = document.getElementById(baseId + 'Num');
-  var range = document.getElementById(baseId);
+function bvgSyncRange(ns, key){
+  var num = document.getElementById(ns + key + 'Num');
+  var range = document.getElementById(ns + key);
   if (num.value !== '') range.value = num.value;
-  bvgCalc();
+  bvgCalc(ns);
 }
-function bvgSyncNum(baseId){
-  var num = document.getElementById(baseId + 'Num');
-  var range = document.getElementById(baseId);
+function bvgSyncNum(ns, key){
+  var num = document.getElementById(ns + key + 'Num');
+  var range = document.getElementById(ns + key);
   num.value = range.value;
-  bvgCalc();
+  bvgCalc(ns);
 }
 
-function bvgCalc(){
-  var P = parseFloat(document.getElementById('bvgEinmaligNum').value) || 0;
-  var M = parseFloat(document.getElementById('bvgMonatlichNum').value) || 0;
-  var years = Math.max(1, parseInt(document.getElementById('bvgJahreNum').value, 10) || 1);
-  var rate = parseFloat(document.getElementById('bvgRenditeNum').value) || 0;
+function bvgCalc(ns){
+  var P = parseFloat(document.getElementById(ns + 'EinmaligNum').value) || 0;
+  var M = parseFloat(document.getElementById(ns + 'MonatlichNum').value) || 0;
+  var years = Math.max(1, parseInt(document.getElementById(ns + 'JahreNum').value, 10) || 1);
+  var rate = parseFloat(document.getElementById(ns + 'RenditeNum').value) || 0;
 
-  if (bvgSelectedYear === null || bvgSelectedYear > years) bvgSelectedYear = years;
+  if (bvgSelectedYear[ns] === undefined || bvgSelectedYear[ns] === null || bvgSelectedYear[ns] > years) bvgSelectedYear[ns] = years;
 
   var series = [];
   for (var k = 1; k <= years; k++){
@@ -1842,16 +1870,16 @@ function bvgCalc(){
   var totalFV = series.length ? series[series.length - 1].fv : bvgFV(P, M, years, rate);
   var totalGrowth = totalFV - P - totalMonthly;
 
-  document.getElementById('bvgStats').innerHTML =
+  document.getElementById(ns + 'Stats').innerHTML =
     '<div class="bvg-stat"><div class="amount">' + bvgChf(P) + '</div><div class="label">Einmalige Einzahlung</div></div>' +
     '<div class="bvg-stat"><div class="amount">' + bvgChf(totalMonthly) + '</div><div class="label">monatl. Einzahlungen</div></div>' +
     '<div class="bvg-stat"><div class="amount">' + bvgChf(totalGrowth) + '</div><div class="label">Wertsteigerung</div></div>' +
     '<div class="bvg-stat is-total"><div class="amount">' + bvgChf(totalFV) + '</div><div class="label">Vermögen</div></div>';
 
-  var chart = document.getElementById('bvgChart');
+  var chart = document.getElementById(ns + 'Chart');
   chart.innerHTML = series.map(function(pt){
     var h = maxFV > 0 ? (pt.fv / maxFV * 100) : 0;
-    var active = pt.year === bvgSelectedYear;
+    var active = pt.year === bvgSelectedYear[ns];
     var principalH = pt.fv > 0 ? (pt.principal / pt.fv * 100) : 0;
     var growthH = 100 - principalH;
     var tip = active ? (
@@ -1860,7 +1888,7 @@ function bvgCalc(){
       bvgChf(M * 12 * pt.year) + ' monatliche Einzahlungen<br>' +
       bvgChf(pt.growth) + ' Wertsteigerung</div>'
     ) : '';
-    return '<div class="bvg-bar' + (active ? ' is-active' : '') + '" style="height:' + h + '%" onclick="bvgSelectYear(' + pt.year + ')">' +
+    return '<div class="bvg-bar' + (active ? ' is-active' : '') + '" style="height:' + h + '%" onclick="bvgSelectYear(\'' + ns + '\',' + pt.year + ')">' +
       tip +
       '<div class="seg seg-growth" style="height:' + growthH + '%"></div>' +
       '<div class="seg seg-principal" style="height:' + principalH + '%"></div>' +
@@ -1883,7 +1911,7 @@ function bvgCalc(){
   var pts3 = toPoints(s3);
   var pts5 = toPoints(s5);
   var areaPts = pts5 + ' ' + (w) + ',' + (h2 - padB) + ' ' + 0 + ',' + (h2 - padB);
-  document.getElementById('bvgCompareChart').innerHTML =
+  document.getElementById(ns + 'CompareChart').innerHTML =
     '<svg viewBox="0 0 ' + w + ' ' + h2 + '" preserveAspectRatio="none">' +
       '<polygon points="' + areaPts + '" fill="var(--pine)" opacity="0.08"></polygon>' +
       '<polyline points="' + pts3 + '" fill="none" stroke="var(--line)" stroke-width="3"></polyline>' +
@@ -1891,16 +1919,17 @@ function bvgCalc(){
     '</svg>';
 
   var diff = (s5.length ? s5[s5.length - 1] : 0) - (s3.length ? s3[s3.length - 1] : 0);
-  document.getElementById('bvgDiffAmount').textContent = bvgChf(diff) + ' Unterschied';
-  document.getElementById('bvgDiffYears').textContent = years;
+  document.getElementById(ns + 'DiffAmount').textContent = bvgChf(diff) + ' Unterschied';
+  document.getElementById(ns + 'DiffYears').textContent = years;
 }
 
-function bvgSelectYear(year){
-  bvgSelectedYear = year;
-  bvgCalc();
+function bvgSelectYear(ns, year){
+  bvgSelectedYear[ns] = year;
+  bvgCalc(ns);
 }
 
-if (document.getElementById('bvgEinmalig')) bvgCalc();
+if (document.getElementById('bvgEinmalig')) bvgCalc('bvg');
+if (document.getElementById('bvg2Einmalig')) bvgCalc('bvg2');
 
 function updateVorsorgeCalc(){
   var age = parseInt(document.getElementById('calcAge').value, 10) || 0;
