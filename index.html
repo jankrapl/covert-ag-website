@@ -92,10 +92,10 @@
     box-shadow:0 12px 30px rgba(20,32,25,.08);
   }
   .has-drop:hover .drop{ opacity:1; visibility:visible; translate:0 0; }
+  .drop-wide{ display:grid; grid-template-columns:1fr 1fr; gap:2px 20px; min-width:460px; padding:14px; }
+  .drop-label{ font-size:0.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--stone); font-weight:700; padding:6px 12px 6px; }
   .drop a{ display:block; padding:10px 12px; font-size:0.9rem; border-radius:8px; text-transform:none; letter-spacing:normal; font-weight:500; }
   .drop a:hover{ background:var(--paper); }
-  .login-drop .drop{ left:auto; right:0; transform:none; }
-  .login-drop.open .drop{ opacity:1; visibility:visible; translate:0 0; }
   .nav-cta{ display:flex; align-items:center; gap:18px; }
   .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px; }
   .burger span{ width:22px; height:2px; background:var(--ink); display:block; }
@@ -241,6 +241,21 @@
   .service-icon{ width:56px; height:56px; margin:0 auto 22px; background:var(--pine); border-radius:0 20px 20px 20px; display:flex; align-items:center; justify-content:center; }
   .service-icon svg{ width:26px; height:26px; }
 
+  /* ---------- Versicherungen: Privat/KMU toggle ---------- */
+  .vtoggle-wrap{ display:flex; justify-content:center; margin-top:36px; }
+  .vtoggle{ display:inline-flex; gap:4px; border:1px solid var(--line); border-radius:999px; padding:5px; background:var(--white); }
+  .vtoggle-btn{ border:0; background:transparent; padding:11px 24px; border-radius:999px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:0.85rem; cursor:pointer; color:var(--stone); transition:background .2s ease, color .2s ease; }
+  .vtoggle-btn.active{ background:var(--ink); color:#fff; }
+  .vgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px; margin-top:36px; }
+  .vcard{ border:1px solid var(--line); border-radius:16px; padding:26px; cursor:pointer; transition:border-color .15s ease; text-align:left; background:var(--white); }
+  .vcard:hover{ border-color:var(--pine); }
+  .vcard h3{ margin:0 0 6px; font-size:1.05rem; }
+  .vcard > p{ color:var(--stone); font-size:0.9rem; margin:0; }
+  .vcard .service-icon{ margin:0 0 18px; }
+  .vcard-detail{ display:none; margin-top:16px; padding-top:16px; border-top:1px solid var(--line); }
+  .vcard.open .vcard-detail{ display:block; }
+  .vcard-detail p{ font-size:0.88rem; color:var(--ink); margin:0 0 12px; }
+
   /* ---------- Comparison table (Coverd vs. Vergleichsportal vs. Direkt) ---------- */
   .compare-table-wrap{ margin-top:10px; overflow-x:auto; }
   .compare-table{ width:100%; border-collapse:collapse; min-width:640px; }
@@ -265,11 +280,6 @@
     .compare-card2 .no{ color:var(--stone); }
     .compare-card2 .mid{ color:#B4600C; }
   }
-
-  /* ---------- Lead-magnet box ---------- */
-  .leadmagnet-box{ border:1px solid var(--pine); background:rgba(0,87,255,.05); border-radius:14px; padding:34px 36px; margin-top:26px; }
-  .leadmagnet-box h3{ margin-bottom:10px; }
-  .leadmagnet-box p{ color:var(--stone); }
 
   /* ---------- Team quote ---------- */
   .team-card .overlay .quote{ font-size:0.8rem; font-style:italic; line-height:1.5; opacity:.95; margin:0 0 12px; padding-left:10px; border-left:2px solid rgba(255,255,255,.4); }
@@ -386,13 +396,24 @@
   .dark .chip{ border-color:rgba(255,255,255,.28); background:transparent; color:var(--paper); }
 
   /* ---------- Process steps ---------- */
-  .steps{ margin-top:48px; position:relative; }
-  .step{ display:grid; grid-template-columns:70px 1fr; gap:24px; padding:30px 0; border-top:1px solid var(--line); }
-  .step:last-child{ border-bottom:1px solid var(--line); }
-  .step .num{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.4rem; color:var(--pine); }
+  .steps{ margin-top:56px; display:grid; grid-template-columns:repeat(5,1fr); position:relative; }
+  .steps::before{ content:""; position:absolute; top:34px; left:10%; right:10%; height:2px; background:var(--line); z-index:0; }
+  .step{ position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 12px; }
+  .step-icon{ width:68px; height:68px; border-radius:50%; background:var(--white); border:2px solid var(--pine); color:var(--pine); display:flex; align-items:center; justify-content:center; flex:none; margin-bottom:20px; }
+  .step-icon svg{ width:28px; height:28px; stroke:currentColor; }
+  .step-body{ display:flex; flex-direction:column; align-items:center; }
+  .step .num{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:2.1rem; color:var(--pine); line-height:1; margin-bottom:8px; }
   .step h3{ margin-bottom:8px; }
-  .step p{ color:var(--stone); max-width:560px; margin:0; }
-  @media (max-width:640px){ .step{ grid-template-columns:44px 1fr; } .step .num{font-size:1.1rem;} }
+  .step p{ color:var(--stone); font-size:0.88rem; margin:0; }
+  @media (max-width:860px){
+    .steps{ display:flex; flex-direction:column; }
+    .steps::before{ top:0; bottom:0; left:34px; right:auto; width:2px; height:auto; }
+    .step{ flex-direction:row; align-items:flex-start; text-align:left; padding:0 0 40px; }
+    .step:last-child{ padding-bottom:0; }
+    .step-icon{ margin:0 20px 0 0; }
+    .step-body{ align-items:flex-start; }
+  }
+  @media (max-width:480px){ .steps::before{ left:26px; } .step-icon{ width:52px; height:52px; } .step-icon svg{ width:22px; height:22px; } .step .num{ font-size:1.6rem; } }
 
   /* ---------- two-col text ---------- */
   .cols2{ display:grid; grid-template-columns:0.8fr 1.2fr; gap:60px; }
@@ -515,11 +536,19 @@
       <a data-p="unternehmen" onclick="goTo('unternehmen')">Unternehmen</a>
       <div class="has-drop">
         <a>Leistungen</a>
-        <div class="drop">
-          <a onclick="goTo('versicherungen')">Versicherungen</a>
-          <a onclick="goTo('vorsorge')">Vorsorge &amp; Finanzplanung</a>
-          <a onclick="goTo('bvg')">Berufliche Vorsorge (BVG)</a>
-          <a onclick="goTo('steuern')">Steuern</a>
+        <div class="drop drop-wide">
+          <div>
+            <div class="drop-label">Für Privatkunden</div>
+            <a onclick="goToVersicherungen('privat')">Versicherungen</a>
+            <a onclick="goTo('vorsorge')">Vorsorge &amp; Finanzplanung</a>
+            <a onclick="goTo('steuern')">Steuern</a>
+          </div>
+          <div>
+            <div class="drop-label">Für Unternehmen</div>
+            <a onclick="goToVersicherungen('unternehmen')">Versicherungen (KMU)</a>
+            <a onclick="goTo('bvg')">Berufliche Vorsorge (BVG)</a>
+            <a onclick="goTo('steuern')">Steuern &amp; Beratung</a>
+          </div>
         </div>
       </div>
       <a data-p="portal" onclick="goTo('portal')">Kundenportal</a>
@@ -527,13 +556,6 @@
       <a data-p="ueber" onclick="goTo('ueber')">Über Coverd</a>
     </nav>
     <div class="nav-cta">
-      <div class="has-drop login-drop" id="loginDrop">
-        <button class="btn btn-ghost" onclick="toggleLoginDrop(event)">Kundenlogin</button>
-        <div class="drop">
-          <a onclick="openPortal('privat')">Login Privatperson</a>
-          <a onclick="openPortal('unternehmen')">Login Unternehmen</a>
-        </div>
-      </div>
       <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
       <button class="burger" onclick="toggleMobile()" aria-label="Menü"><span></span><span></span><span></span></button>
     </div>
@@ -550,9 +572,7 @@
   <a onclick="goTo('portal')">Kundenportal</a>
   <a onclick="goTo('blog')">Blog</a>
   <a onclick="goTo('ueber')">Über Coverd</a>
-  <button class="btn btn-ghost" style="margin-top:14px;" onclick="openPortal('privat')">Login Privatperson</button>
-  <button class="btn btn-ghost" style="margin-top:10px;" onclick="openPortal('unternehmen')">Login Unternehmen</button>
-  <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
+  <button class="btn btn-primary" style="margin-top:14px;" onclick="openBooking()">Beratung vereinbaren</button>
 </div>
 
 <!-- ================= HOME ================= -->
@@ -754,11 +774,11 @@
     <div class="wrap">
       <div class="section-head"><h2>Persönlich starten. Digital weiterdenken.</h2></div>
       <div class="steps">
-        <div class="step"><div class="num">01</div><div><h3>Kennenlernen</h3><p>In einem persönlichen Erstgespräch lernen wir Sie und Ihre Situation kennen und definieren gemeinsam, wo Handlungsbedarf besteht.</p></div></div>
-        <div class="step"><div class="num">02</div><div><h3>Analysieren</h3><p>Wir analysieren bestehende Lösungen, Ihre Bedürfnisse und Ziele und prüfen verschiedene Möglichkeiten am Markt.</p></div></div>
-        <div class="step"><div class="num">03</div><div><h3>Vergleichen</h3><p>Wir stellen geeignete Lösungen gegenüber und zeigen Unterschiede bei Leistungen, Kosten und weiteren Faktoren transparent auf.</p></div></div>
-        <div class="step"><div class="num">04</div><div><h3>Entscheiden</h3><p>Gemeinsam besprechen wir die Varianten. Sie entscheiden, welche Lösung am besten zu Ihren Prioritäten passt.</p></div></div>
-        <div class="step"><div class="num">05</div><div><h3>Betreuen</h3><p>Ihre Unterlagen werden im Coverd-Portal hinterlegt — wir begleiten Sie auch bei zukünftigen Anliegen.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/></svg></div><div class="step-body"><div class="num">01</div><h3>Kennenlernen</h3><p>In einem persönlichen Erstgespräch lernen wir Sie und Ihre Situation kennen und definieren gemeinsam, wo Handlungsbedarf besteht.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.3" y2="15.3"/></svg></div><div class="step-body"><div class="num">02</div><h3>Analysieren</h3><p>Wir analysieren bestehende Lösungen, Ihre Bedürfnisse und Ziele und prüfen verschiedene Möglichkeiten am Markt.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></div><div class="step-body"><div class="num">03</div><h3>Vergleichen</h3><p>Wir stellen geeignete Lösungen gegenüber und zeigen Unterschiede bei Leistungen, Kosten und weiteren Faktoren transparent auf.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 10.8 15.3 16 9.5"/></svg></div><div class="step-body"><div class="num">04</div><h3>Entscheiden</h3><p>Gemeinsam besprechen wir die Varianten. Sie entscheiden, welche Lösung am besten zu Ihren Prioritäten passt.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div><div class="step-body"><div class="num">05</div><h3>Betreuen</h3><p>Ihre Unterlagen werden im Coverd-Portal hinterlegt — wir begleiten Sie auch bei zukünftigen Anliegen.</p></div></div>
       </div>
     </div>
   </section>
@@ -929,17 +949,6 @@
     </div>
   </section>
 
-  <section>
-    <div class="wrap" style="max-width:640px;">
-      <div class="leadmagnet-box">
-        <h3>Kostenlose Checkliste: „Diese 5 Versicherungen sollten Sie jährlich prüfen“</h3>
-        <p>Laden Sie sich unsere kurze Checkliste herunter und prüfen Sie in 5 Minuten, ob sich eine genauere Analyse lohnt.</p>
-        <!-- TODO: PDF und Formular folgen separat — Button aktuell Platzhalter -->
-        <div class="cta-row"><a class="btn btn-ghost" href="#">PDF kostenlos herunterladen</a></div>
-      </div>
-    </div>
-  </section>
-
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2>Lernen Sie Coverd unverbindlich kennen.</h2>
@@ -1057,17 +1066,6 @@
     </div>
   </section>
 
-  <section>
-    <div class="wrap" style="max-width:640px;">
-      <div class="leadmagnet-box">
-        <h3>Kostenlose Checkliste: „5 Anzeichen, dass Ihre BVG-Lösung zu teuer ist“</h3>
-        <p>Laden Sie sich unsere kurze Checkliste herunter und prüfen Sie in 5 Minuten, ob sich eine genauere Analyse lohnt.</p>
-        <!-- TODO: PDF und Formular folgen separat — Button aktuell Platzhalter -->
-        <div class="cta-row"><a class="btn btn-ghost" href="#">PDF kostenlos herunterladen</a></div>
-      </div>
-    </div>
-  </section>
-
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2>Lassen Sie uns über Ihr Unternehmen sprechen.</h2>
@@ -1085,6 +1083,111 @@
       <p class="lede">Wir vergleichen Anbieter, Leistungen und Preise – Sie entscheiden, welche Lösung zu Ihnen passt.</p>
       <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Versicherungen vergleichen</button></div>
       <p class="nudge">Kostenlos &amp; unverbindlich · Lücken lassen sich oft erst im Gespräch erkennen</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto 8px; max-width:640px;">
+        <h2 style="text-align:center;">Alle Versicherungen im Überblick.</h2>
+        <p class="lede" style="margin:16px auto 0; text-align:center;">Wählen Sie, was für Sie relevant ist.</p>
+      </div>
+      <div class="vtoggle-wrap">
+        <div class="vtoggle">
+          <button class="vtoggle-btn active" id="vtogglePrivatBtn" onclick="setVersicherungenMode('privat')">Privatpersonen</button>
+          <button class="vtoggle-btn" id="vtoggleUnternehmenBtn" onclick="setVersicherungenMode('unternehmen')">Unternehmen (KMU)</button>
+        </div>
+      </div>
+
+      <div class="vgrid" id="vgridPrivat">
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+          <h3>Krankenkasse</h3>
+          <p>Grundversicherung &amp; Zusatzversicherung.</p>
+          <div class="vcard-detail"><p>Wir vergleichen Kassen und Zusatzmodelle, damit Prämie und Leistungen zu Ihrer Situation passen.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg></div>
+          <h3>Hausratversicherung</h3>
+          <p>Ihr Hab und Gut gegen Feuer, Wasser und Diebstahl.</p>
+          <div class="vcard-detail"><p>Deckt Inventar und Wertsachen zu Hause und oft auch unterwegs.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
+          <h3>Privathaftpflichtversicherung</h3>
+          <p>Schäden, die Sie unabsichtlich anderen zufügen.</p>
+          <div class="vcard-detail"><p>Von der zerbrochenen Vase bis zum Wasserschaden in der Mietwohnung.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16V12l2-5h12l2 5v4"/><circle cx="7.5" cy="16.5" r="1.7"/><circle cx="16.5" cy="16.5" r="1.7"/><line x1="4" y1="13" x2="20" y2="13"/></svg></div>
+          <h3>Fahrzeugversicherung</h3>
+          <p>Haftpflicht und Kasko für Auto oder Motorrad.</p>
+          <div class="vcard-detail"><p>Wir vergleichen Deckung, Selbstbehalt und Bonusschutz zwischen Anbietern.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></div>
+          <h3>Rechtsschutzversicherung</h3>
+          <p>Anwalts- und Gerichtskosten im Streitfall.</p>
+          <div class="vcard-detail"><p>Ob im Verkehr, am Arbeitsplatz oder im Alltag — Sie stehen nicht allein da.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9.5-9A5 5 0 0 1 12 6a5 5 0 0 1 9.5 5c-2.5 4.6-9.5 9-9.5 9z"/></svg></div>
+          <h3>Lebens- &amp; Todesfallversicherung</h3>
+          <p>Finanzielle Absicherung für Ihre Angehörigen.</p>
+          <div class="vcard-detail"><p>Kapital im Todesfall oder Sparlösung mit Vorsorgecharakter — je nach Bedarf.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 3 10l7 3 3 7 8-17z"/><path d="M13 14l4-4"/></svg></div>
+          <h3>Reiseversicherung</h3>
+          <p>Annullierung, Assistance und medizinische Notfälle.</p>
+          <div class="vcard-detail"><p>Sinnvoll ergänzend zur Krankenkasse, besonders bei Reisen ausserhalb Europas.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+      </div>
+
+      <div class="vgrid" id="vgridUnternehmen" style="display:none;">
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
+          <h3>Betriebshaftpflichtversicherung</h3>
+          <p>Schäden gegenüber Kunden, Lieferanten und Dritten.</p>
+          <div class="vcard-detail"><p>Deckt Personen- und Sachschäden, die im Rahmen Ihrer Geschäftstätigkeit entstehen.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18"/><line x1="6" y1="8" x2="18" y2="8"/><line x1="6" y1="13" x2="18" y2="13"/><line x1="10" y1="21" x2="10" y2="18"/><line x1="14" y1="21" x2="14" y2="18"/></svg></div>
+          <h3>Sachversicherung</h3>
+          <p>Gebäude und Inventar abgesichert.</p>
+          <div class="vcard-detail"><p>Feuer, Elementar, Wasser und Diebstahl für Gebäude und Betriebseinrichtung.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+          <h3>Cyber-Versicherung</h3>
+          <p>Schutz bei Hackerangriffen und Datenverlust.</p>
+          <div class="vcard-detail"><p>Deckt Wiederherstellungskosten, Krisenhotline und teils Haftungsansprüche Dritter.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16V7h11v9"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17.5" cy="17" r="1.6"/></svg></div>
+          <h3>Fahrzeugflotten-Versicherung</h3>
+          <p>Alle Geschäftsfahrzeuge in einer Police.</p>
+          <div class="vcard-detail"><p>Ein Vertrag statt viele Einzelpolicen — mit zentraler Übersicht im Portal.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+          <h3>Krankentaggeldversicherung</h3>
+          <p>Lohnfortzahlung bei krankheitsbedingtem Ausfall.</p>
+          <div class="vcard-detail"><p>Sichert Ihre Lohnkosten ab, wenn Mitarbeitende länger ausfallen.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="toggleVCard(this)">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></div>
+          <h3>Rechtsschutzversicherung (Betrieb)</h3>
+          <p>Rechtsstreitigkeiten für Ihr Unternehmen.</p>
+          <div class="vcard-detail"><p>Von arbeitsrechtlichen Fragen bis zu Vertragsstreitigkeiten mit Kunden.</p><a class="go" onclick="event.stopPropagation(); openBooking();">Beratung dazu anfragen →</a></div>
+        </div>
+        <div class="vcard" onclick="goTo('bvg')">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg></div>
+          <h3>Berufliche Vorsorge (BVG)</h3>
+          <p>Die 2. Säule für Ihre Mitarbeitenden — unser Schwerpunkt.</p>
+          <div class="vcard-detail"><p>Eigener Beratungsschwerpunkt bei Coverd — mit eigener Seite und Rechner.</p><a class="go" onclick="event.stopPropagation(); goTo('bvg');">Zur BVG-Seite →</a></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1390,11 +1493,11 @@
     <div class="wrap">
       <div class="section-head"><h2>So gehen wir vor</h2></div>
       <div class="steps">
-        <div class="step"><div class="num">01</div><div><h3>Kennenlernen</h3><p>Wir verstehen Ihr Unternehmen, Ihre Belegschaft und Ihre bestehende Vorsorgelösung.</p></div></div>
-        <div class="step"><div class="num">02</div><div><h3>Analysieren</h3><p>Wir prüfen Vorsorgereglement, Kosten, Leistungen und Anlagestrategie im Detail.</p></div></div>
-        <div class="step"><div class="num">03</div><div><h3>Vergleichen</h3><p>Wir stellen Angebote verschiedener Sammelstiftungen transparent gegenüber.</p></div></div>
-        <div class="step"><div class="num">04</div><div><h3>Entscheiden</h3><p>Gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt.</p></div></div>
-        <div class="step"><div class="num">05</div><div><h3>Betreuen</h3><p>Wir überprüfen Ihre BVG-Lösung laufend und sind Ansprechpartner bei Fragen.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/></svg></div><div class="step-body"><div class="num">01</div><h3>Kennenlernen</h3><p>Wir verstehen Ihr Unternehmen, Ihre Belegschaft und Ihre bestehende Vorsorgelösung.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.3" y2="15.3"/></svg></div><div class="step-body"><div class="num">02</div><h3>Analysieren</h3><p>Wir prüfen Vorsorgereglement, Kosten, Leistungen und Anlagestrategie im Detail.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></div><div class="step-body"><div class="num">03</div><h3>Vergleichen</h3><p>Wir stellen Angebote verschiedener Sammelstiftungen transparent gegenüber.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 10.8 15.3 16 9.5"/></svg></div><div class="step-body"><div class="num">04</div><h3>Entscheiden</h3><p>Gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div><div class="step-body"><div class="num">05</div><h3>Betreuen</h3><p>Wir überprüfen Ihre BVG-Lösung laufend und sind Ansprechpartner bei Fragen.</p></div></div>
       </div>
     </div>
   </section>
@@ -1475,17 +1578,6 @@
     </div>
   </section>
 
-  <section>
-    <div class="wrap" style="max-width:640px;">
-      <div class="leadmagnet-box">
-        <h3>Kostenlose Checkliste: „5 Anzeichen, dass Ihre BVG-Lösung zu teuer ist“</h3>
-        <p>Laden Sie sich unsere kurze Checkliste herunter und prüfen Sie in 5 Minuten, ob sich eine genauere Analyse lohnt.</p>
-        <!-- TODO: PDF und Formular folgen separat — Button aktuell Platzhalter -->
-        <div class="cta-row"><a class="btn btn-ghost" href="#">PDF kostenlos herunterladen</a></div>
-      </div>
-    </div>
-  </section>
-
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2>Lassen Sie uns Ihre berufliche Vorsorge analysieren.</h2>
@@ -1556,17 +1648,8 @@
       <div class="kicker">Kundenportal</div>
       <h1>Alles im Blick. Von überall.</h1>
       <p class="lede">Policen, Dokumente, Anliegen und Kommunikation – zentral in Ihrem Coverd Portal.</p>
-      <div class="cta-row">
-        <button class="btn btn-primary" onclick="openPortal('privat')">Login Privatperson</button>
-        <button class="btn btn-ghost" onclick="openPortal('unternehmen')">Login Unternehmen</button>
-      </div>
-      <p class="nudge">Oder <a onclick="openBooking()" style="text-decoration:underline; cursor:pointer;">Beratung vereinbaren</a>, wenn Sie noch keinen Zugang haben</p>
-      <div class="portal-preview">
-        <div class="portal-shot-wrap">
-          <img src="images/portal-preview-desktop.png" alt="Coverd Kundenportal Dashboard" class="portal-shot">
-        </div>
-        <p class="pm-caption">So sieht Ihr Coverd Portal aus</p>
-      </div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button></div>
+      <p class="nudge">Kostenlos &amp; unverbindlich · Zugang erhalten Sie von Ihrem Coverd-Berater</p>
     </div>
   </section>
 
@@ -1575,18 +1658,6 @@
       <div><h2>Schluss mit Suchen.</h2></div>
       <div>
         <p>Policen im Ordner, Rechnungen im Mailfach, Dokumente irgendwo. Wir bringen das an einen Ort.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="section-head" style="text-align:center; margin:0 auto;"><h2>Ein Login statt suchen.</h2></div>
-      <div class="mini-dash">
-        <div class="mini-dash-tile"><div class="label">Meine Policen</div><div class="value">6 aktive Policen</div></div>
-        <div class="mini-dash-tile"><div class="label">Meine Dokumente</div><div class="value">24 Dokumente</div></div>
-        <div class="mini-dash-tile"><div class="label">Meine Anliegen</div><div class="value">1 in Bearbeitung</div></div>
-        <div class="mini-dash-tile"><div class="label">Nachrichten</div><div class="value">2 neu</div></div>
       </div>
     </div>
   </section>
@@ -1608,6 +1679,24 @@
           <span class="chip">Policen einsehen</span><span class="chip">Rechnungen abrufen</span><span class="chip">Dokumente verwalten</span>
           <span class="chip">Schadenfälle melden</span><span class="chip">Mitarbeitende melden</span><span class="chip">Mutationen übermitteln</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto;"><h2>Ein Login statt suchen.</h2></div>
+      <div class="mini-dash">
+        <div class="mini-dash-tile"><div class="label">Meine Policen</div><div class="value">6 aktive Policen</div></div>
+        <div class="mini-dash-tile"><div class="label">Meine Dokumente</div><div class="value">24 Dokumente</div></div>
+        <div class="mini-dash-tile"><div class="label">Meine Anliegen</div><div class="value">1 in Bearbeitung</div></div>
+        <div class="mini-dash-tile"><div class="label">Nachrichten</div><div class="value">2 neu</div></div>
+      </div>
+      <div class="portal-preview" style="margin-top:56px;">
+        <div class="portal-shot-wrap">
+          <img src="images/portal-preview-desktop.png" alt="Coverd Kundenportal Dashboard" class="portal-shot">
+        </div>
+        <p class="pm-caption">Illustrative Darstellung des Coverd Portals</p>
       </div>
     </div>
   </section>
@@ -1905,19 +1994,30 @@ function toggleChip(el){
   el.classList.toggle('picked');
 }
 
-function toggleLoginDrop(e){
-  e.stopPropagation();
-  document.getElementById('loginDrop').classList.toggle('open');
-}
-document.addEventListener('click', function(e){
-  var el = document.getElementById('loginDrop');
-  if(el && !el.contains(e.target)){ el.classList.remove('open'); }
-});
-
 function pickOne(el){
   var group = el.dataset.group;
   document.querySelectorAll('.pick-chip[data-group="'+group+'"]').forEach(function(c){ c.classList.remove('picked'); });
   el.classList.add('picked');
+}
+
+var versicherungenMode = 'privat';
+function setVersicherungenMode(mode){
+  versicherungenMode = mode;
+  var vp = document.getElementById('vgridPrivat');
+  var vu = document.getElementById('vgridUnternehmen');
+  if (vp) vp.style.display = mode === 'privat' ? 'grid' : 'none';
+  if (vu) vu.style.display = mode === 'unternehmen' ? 'grid' : 'none';
+  var bp = document.getElementById('vtogglePrivatBtn');
+  var bu = document.getElementById('vtoggleUnternehmenBtn');
+  if (bp) bp.classList.toggle('active', mode === 'privat');
+  if (bu) bu.classList.toggle('active', mode === 'unternehmen');
+}
+function goToVersicherungen(mode){
+  setVersicherungenMode(mode);
+  goTo('versicherungen');
+}
+function toggleVCard(el){
+  el.classList.toggle('open');
 }
 
 /* ---------- BVG Zinseszins-Rechner ---------- */
@@ -2038,10 +2138,6 @@ function updateVorsorgeCalc(){
   document.getElementById('calcYearsInline').textContent = years;
 }
 
-function openPortal(mode){
-  document.getElementById('mobilePanel').classList.remove('open');
-  window.location.href = (mode === 'unternehmen') ? 'kundenportal-kmu.html' : 'kundenportal-privat.html';
-}
 </script>
 
 </body>
