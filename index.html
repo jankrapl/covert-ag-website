@@ -217,7 +217,7 @@
   }
 
   /* ---------- Split audience panels ---------- */
-  .split{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px; }
+  .split{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px; }
   @media (max-width:820px){ .split{ grid-template-columns:1fr; } }
   .split-panel{ background:var(--paper); padding:48px 44px; cursor:pointer; transition:background .2s ease; }
   .split-panel:hover{ background:var(--white); }
@@ -272,6 +272,29 @@
   .compare-card .per{ font-size:0.78rem; color:var(--stone); text-transform:uppercase; letter-spacing:.06em; margin-bottom:20px; display:block; }
   .compare-card ul{ text-align:left; display:flex; flex-direction:column; gap:8px; font-size:0.9rem; color:var(--stone); }
   .compare-card ul li::before{ content:"— "; }
+
+  /* ---------- BVG Zinseszins-Rechenbeispiel ---------- */
+  .bvg-lead{ text-align:center; max-width:640px; margin:0 auto; }
+  .bvg-lead .eyebrow{ font-size:0.82rem; color:var(--pine); font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+  .bvg-lead .big{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:clamp(1.7rem,4vw,2.4rem); margin-top:10px; }
+  .bvg-lead .ask{ color:var(--stone); margin-top:14px; }
+  .bvg-guess-row{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:26px; }
+  .bvg-reveal{ opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease; }
+  .bvg-reveal.shown{ opacity:1; transform:none; }
+  .bvg-calc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:36px; }
+  @media (max-width:640px){ .bvg-calc-grid{ grid-template-columns:1fr; } }
+  .bvg-calc-card{ background:var(--white); padding:32px 30px; }
+  .bvg-calc-card .rate{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:18px; }
+  .bvg-calc-card .row{ display:flex; justify-content:space-between; gap:12px; padding:11px 0; border-top:1px solid var(--line); font-size:0.92rem; color:var(--stone); }
+  .bvg-calc-card .row:first-of-type{ border-top:0; }
+  .bvg-calc-card .row strong{ font-family:'Plus Jakarta Sans',sans-serif; color:var(--ink); }
+  .bvg-calc-card .result{ margin-top:14px; padding-top:18px; border-top:2px solid var(--ink); }
+  .bvg-calc-card .result span{ display:block; font-size:0.8rem; color:var(--stone); margin-bottom:6px; }
+  .bvg-calc-card .result .amount{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.9rem; }
+  .bvg-aha{ text-align:center; margin-top:44px; }
+  .bvg-aha .amount{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:clamp(2.3rem,6vw,3.4rem); color:var(--pine); line-height:1.05; }
+  .bvg-aha p{ color:var(--stone); margin-top:12px; max-width:520px; margin-left:auto; margin-right:auto; }
+  .bvg-disclaimer{ font-size:0.76rem; color:var(--stone); line-height:1.6; max-width:720px; margin:32px auto 0; text-align:center; }
 
   /* ---------- Vorsorge calculator ---------- */
   .calc-box{ background:var(--paper-deep); border-radius:14px; padding:28px 30px; display:flex; flex-wrap:wrap; gap:24px; align-items:center; justify-content:center; margin-top:24px; }
@@ -522,6 +545,13 @@
           <h3>Damit Sie sich um Ihr Unternehmen kümmern können.</h3>
           <p>Coverd unterstützt KMU und Unternehmen bei der Analyse, Optimierung und laufenden Betreuung ihrer Versicherungslösungen — persönlich beraten, digital verwaltet.</p>
           <span class="go">Für Unternehmen</span>
+        </div>
+        <div class="split-panel" onclick="goTo('bvg')">
+          <div class="thumb"><img src="images/unternehmen-hero.jpg" alt=""></div>
+          <span class="tag">Berufliche Vorsorge</span>
+          <h3>Wann haben Sie Ihre BVG-Lösung zuletzt verglichen?</h3>
+          <p>Kosten, Leistungen und Vorsorgeplan verständlich analysiert — für Unternehmen, die ihre berufliche Vorsorge nicht einfach laufen lassen wollen.</p>
+          <span class="go">Zur BVG-Beratung</span>
         </div>
       </div>
     </div>
@@ -1198,6 +1228,74 @@
     </div>
   </section>
 
+  <section>
+    <div class="wrap" style="max-width:640px;">
+      <div class="section-head" style="text-align:center; margin:0 auto 0;"><h2 style="text-align:center;">Kleine Unterschiede. Grosse Wirkung.</h2><p class="lede" style="margin:16px auto 0; text-align:center;">Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben.</p></div>
+
+      <div class="bvg-lead" style="margin-top:40px;">
+        <p class="eyebrow">Vereinfachtes Rechenbeispiel</p>
+        <p class="big">CHF 10&#8217;000 pro Jahr. 30 Jahre.</p>
+        <p class="ask">Was glauben Sie: Was machen 2 % Renditeunterschied über 30 Jahre aus?</p>
+      </div>
+      <div class="bvg-guess-row">
+        <span class="pick-chip" onclick="bvgGuess(this)">CHF 20&#8217;000</span>
+        <span class="pick-chip" onclick="bvgGuess(this)">CHF 50&#8217;000</span>
+        <span class="pick-chip" onclick="bvgGuess(this)">CHF 100&#8217;000</span>
+      </div>
+
+      <div class="bvg-reveal" id="bvgReveal">
+        <div class="bvg-calc-grid">
+          <div class="bvg-calc-card">
+            <p class="rate">Ø 3 % Rendite p.a.</p>
+            <div class="row"><span>Jährliche Einzahlung</span><strong>CHF 10&#8217;000</strong></div>
+            <div class="row"><span>Laufzeit</span><strong>30 Jahre</strong></div>
+            <div class="row"><span>Einbezahltes Kapital</span><strong>CHF 300&#8217;000</strong></div>
+            <div class="result"><span>Vermögen nach 30 Jahren</span><div class="amount">CHF 475&#8217;754</div></div>
+          </div>
+          <div class="bvg-calc-card">
+            <p class="rate">Ø 5 % Rendite p.a.</p>
+            <div class="row"><span>Jährliche Einzahlung</span><strong>CHF 10&#8217;000</strong></div>
+            <div class="row"><span>Laufzeit</span><strong>30 Jahre</strong></div>
+            <div class="row"><span>Einbezahltes Kapital</span><strong>CHF 300&#8217;000</strong></div>
+            <div class="result"><span>Vermögen nach 30 Jahren</span><div class="amount">CHF 664&#8217;388</div></div>
+          </div>
+        </div>
+        <div class="bvg-aha">
+          <div class="amount">CHF 188&#8217;634 Unterschied</div>
+          <p>Bei exakt denselben Einzahlungen. Der Unterschied entsteht im vereinfachten Beispiel allein durch die angenommene durchschnittliche Rendite und den Zinseszinseffekt.</p>
+        </div>
+      </div>
+
+      <p class="bvg-disclaimer">Hinweis: Dieses Beispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts. Es basiert auf konstanten jährlichen Einzahlungen von CHF 10&#8217;000 und angenommenen durchschnittlichen Renditen von 3 % bzw. 5 % über 30 Jahre. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite.</p>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="wrap">
+      <div class="cols2">
+        <div>
+          <h2>Und wann wurde Ihre Vorsorgelösung zuletzt überprüft?</h2>
+          <p style="color:rgba(255,255,255,.72); margin-top:16px;">Eine Vorsorgelösung begleitet Mitarbeitende und Unternehmen oft über viele Jahre. In dieser Zeit können sich unter anderem verändern:</p>
+          <ul style="margin-top:16px; color:rgba(255,255,255,.82); display:flex; flex-direction:column; gap:6px; padding-left:0; list-style:none;">
+            <li>— Anlagestrategie</li>
+            <li>— Kosten</li>
+            <li>— Verzinsung</li>
+            <li>— Vorsorgeplan</li>
+            <li>— Anbieter</li>
+            <li>— Unternehmensstruktur</li>
+          </ul>
+          <p style="margin-top:16px; color:rgba(255,255,255,.72);">Deshalb sollte eine langfristige Vorsorgelösung nicht einfach abgeschlossen und vergessen werden.</p>
+        </div>
+        <div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1.3rem;">Coverd prüft. Sie entscheiden.</p>
+          <p style="color:rgba(255,255,255,.72); margin-top:16px;">Wir analysieren Ihre bestehende BVG-Lösung und zeigen transparent auf, wie sie bei Kosten, Leistungen und Struktur im Vergleich dasteht.</p>
+          <p style="color:rgba(255,255,255,.72); margin-top:12px;">Nicht mit dem Versprechen einer bestimmten Rendite. Sondern mit dem Ziel, regelmässig zu prüfen, ob Ihre Vorsorgelösung weiterhin zu Ihrem Unternehmen und Ihren Mitarbeitenden passt.</p>
+          <div class="cta-row"><button class="btn btn-on-dark" onclick="openBooking()">BVG überprüfen lassen</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2>Lassen Sie uns Ihre berufliche Vorsorge analysieren.</h2>
@@ -1631,6 +1729,13 @@ function pickOne(el){
   var group = el.dataset.group;
   document.querySelectorAll('.pick-chip[data-group="'+group+'"]').forEach(function(c){ c.classList.remove('picked'); });
   el.classList.add('picked');
+}
+
+function bvgGuess(el){
+  el.parentElement.querySelectorAll('.pick-chip').forEach(function(c){ c.classList.remove('picked'); });
+  el.classList.add('picked');
+  var reveal = document.getElementById('bvgReveal');
+  if(reveal){ reveal.classList.add('shown'); }
 }
 
 function updateVorsorgeCalc(){
