@@ -301,11 +301,8 @@
 
   /* ---------- Blog articles ---------- */
   .article{ max-width:720px; margin:0 auto; }
-  .article + .article{ margin-top:100px; padding-top:100px; border-top:1px solid var(--line); }
   .article-tag{ display:inline-block; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--pine); margin-bottom:14px; }
   .article h2{ margin-bottom:24px; }
-  .article-image{ aspect-ratio:3/2; overflow:hidden; border-radius:14px; margin:28px 0 36px; }
-  .article-image img{ width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05); display:block; }
   .article p{ margin:0 0 20px; line-height:1.7; }
   .article h3{ margin:40px 0 14px; font-size:1.2rem; }
   .article ul{ margin:20px 0; }
@@ -319,6 +316,26 @@
   .article-table tbody td:first-child{ font-weight:600; color:var(--ink); }
   .article-table tbody td:nth-child(2){ color:var(--pine); font-weight:600; white-space:nowrap; }
   .article-table tbody td:last-child{ color:var(--stone); }
+
+  /* ---------- Blog card grid ---------- */
+  .blog-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:28px; align-items:start; }
+  .blog-card{ border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--white); cursor:pointer; transition:border-color .15s ease; }
+  .blog-card:hover{ border-color:var(--pine); }
+  .blog-card.open{ grid-column:1/-1; border-color:var(--pine); }
+  .blog-card-image{ aspect-ratio:3/2; overflow:hidden; }
+  .blog-card-image img{ width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05); display:block; }
+  .blog-card-preview{ padding:24px 26px 22px; display:flex; flex-direction:column; }
+  .blog-card-preview h2{ font-size:1.25rem; margin:0 0 12px; }
+  .blog-card-excerpt{ color:var(--stone); font-size:0.92rem; line-height:1.6; margin:0; }
+  .blog-card-toggle{ width:32px; height:32px; border-radius:50%; border:1px solid var(--line); position:relative; margin-top:20px; flex-shrink:0; transition:transform .2s ease, border-color .2s ease; }
+  .blog-card-toggle::before, .blog-card-toggle::after{ content:""; position:absolute; background:var(--pine); top:50%; left:50%; }
+  .blog-card-toggle::before{ width:12px; height:2px; transform:translate(-50%,-50%); }
+  .blog-card-toggle::after{ width:2px; height:12px; transform:translate(-50%,-50%); }
+  .blog-card.open .blog-card-toggle{ transform:rotate(45deg); border-color:var(--pine); }
+  .blog-card-full{ display:none; padding:0 26px 34px; }
+  .blog-card.open .blog-card-full{ display:block; border-top:1px solid var(--line); margin-top:2px; padding-top:30px; }
+  .blog-card .article{ max-width:none; }
+  @media (max-width:640px){ .blog-grid{ grid-template-columns:1fr; } }
 
   /* ---------- BVG Zinseszins-Rechner ---------- */
   .bvg-calc-wrap{ display:grid; grid-template-columns:1.6fr 1fr; gap:24px; align-items:start; margin-top:40px; }
@@ -1785,151 +1802,241 @@
   <section>
     <div class="wrap">
 
-      <article class="article">
-        <div class="article-tag">Versicherungen &amp; Vorsorge</div>
-        <h2>BVG-Wechsel für KMU: Was Sie beachten müssen</h2>
-        <div class="article-image"><img src="images/blog-bvg-wechsel.jpg" alt="Modernes Firmengebäude"></div>
-        <p>Sach- und Haftpflichtversicherungen vergleichen viele Unternehmen regelmässig. Die berufliche Vorsorge (BVG) bleibt dabei oft über Jahre unangetastet – dabei handelt es sich meist um einen der grössten Kostenblöcke im Unternehmen. Wer sie nie überprüft, lässt oft ohne es zu merken Optimierungspotenzial liegen. Hier die wichtigsten Punkte für einen Wechsel.</p>
+      <div class="blog-grid">
 
-        <h3>Warum sich ein Blick auf die BVG-Lösung lohnt</h3>
-        <p>Sammelstiftungen unterscheiden sich zum Teil erheblich bei:</p>
-        <ul>
-          <li>Verwaltungskosten – diese schmälern direkt die Rendite Ihrer Mitarbeitenden,</li>
-          <li>Anlagestrategie und Verzinsung des angesparten Kapitals,</li>
-          <li>Leistungen bei Invalidität und Todesfall,</li>
-          <li>Deckungsgrad und finanzieller Stabilität der Sammelstiftung.</li>
-        </ul>
-        <p>Diese Unterschiede wirken sich direkt darauf aus, wie gut Ihre Mitarbeitenden abgesichert sind – und wie viel das Unternehmen dafür bezahlt.</p>
+        <div class="blog-card" onclick="toggleVCard(this)">
+          <div class="blog-card-image"><img src="images/blog-bvg-wechsel.jpg" alt="Modernes Firmengebäude"></div>
+          <div class="blog-card-preview">
+            <div class="article-tag">Versicherungen &amp; Vorsorge</div>
+            <h2>BVG-Wechsel für KMU: Was Sie beachten müssen</h2>
+            <p class="blog-card-excerpt">Sach- und Haftpflichtversicherungen vergleichen viele Unternehmen regelmässig. Die berufliche Vorsorge (BVG) bleibt dabei oft über Jahre unangetastet – dabei handelt es sich meist um einen der grössten Kostenblöcke im Unternehmen.</p>
+            <div class="blog-card-toggle"></div>
+          </div>
+          <div class="article blog-card-full">
+            <p>Sach- und Haftpflichtversicherungen vergleichen viele Unternehmen regelmässig. Die berufliche Vorsorge (BVG) bleibt dabei oft über Jahre unangetastet – dabei handelt es sich meist um einen der grössten Kostenblöcke im Unternehmen. Wer sie nie überprüft, lässt oft ohne es zu merken Optimierungspotenzial liegen. Hier die wichtigsten Punkte für einen Wechsel.</p>
 
-        <h3>Die Kündigungsfrist ist der Knackpunkt</h3>
-        <p>Anders als bei vielen Sachversicherungen ist ein BVG-Wechsel nicht kurzfristig möglich. Anschlussverträge bei Sammelstiftungen laufen meist mit einer Kündigungsfrist von sechs Monaten auf Ende Jahr – wer per 1. Januar wechseln möchte, muss also in der Regel bis 30. Juni kündigen. Die genaue Frist steht im Anschlussvertrag und kann leicht abweichen.</p>
-        <p><strong>Unsere Empfehlung:</strong> Beginnen Sie den Vergleichsprozess bereits im Frühling, wenn ein Wechsel per Jahresende infrage kommt. So bleibt genug Zeit für Offerten, Vergleich und die interne Abstimmung.</p>
+            <h3>Warum sich ein Blick auf die BVG-Lösung lohnt</h3>
+            <p>Sammelstiftungen unterscheiden sich zum Teil erheblich bei:</p>
+            <ul>
+              <li>Verwaltungskosten – diese schmälern direkt die Rendite Ihrer Mitarbeitenden,</li>
+              <li>Anlagestrategie und Verzinsung des angesparten Kapitals,</li>
+              <li>Leistungen bei Invalidität und Todesfall,</li>
+              <li>Deckungsgrad und finanzieller Stabilität der Sammelstiftung.</li>
+            </ul>
+            <p>Diese Unterschiede wirken sich direkt darauf aus, wie gut Ihre Mitarbeitenden abgesichert sind – und wie viel das Unternehmen dafür bezahlt.</p>
 
-        <h3>Die Belegschaft muss zustimmen</h3>
-        <p>Ein Punkt, der immer wieder unterschätzt wird: Seit einem Bundesgerichtsurteil braucht die Kündigung eines BVG-Anschlussvertrags das Einverständnis der gesamten Belegschaft oder der Arbeitnehmervertretung – eine blosse Information der Mitarbeitenden reicht nicht aus. Fehlt diese Zustimmung, ist die Kündigung ungültig, und das Unternehmen haftet im schlimmsten Fall im Vorsorgefall selbst.</p>
-        <p>Für KMU heisst das konkret: Der Wechsel ist kein reiner Entscheid der Geschäftsleitung, sondern ein Prozess, der frühzeitig kommuniziert und dokumentiert werden muss.</p>
+            <h3>Die Kündigungsfrist ist der Knackpunkt</h3>
+            <p>Anders als bei vielen Sachversicherungen ist ein BVG-Wechsel nicht kurzfristig möglich. Anschlussverträge bei Sammelstiftungen laufen meist mit einer Kündigungsfrist von sechs Monaten auf Ende Jahr – wer per 1. Januar wechseln möchte, muss also in der Regel bis 30. Juni kündigen. Die genaue Frist steht im Anschlussvertrag und kann leicht abweichen.</p>
+            <p><strong>Unsere Empfehlung:</strong> Beginnen Sie den Vergleichsprozess bereits im Frühling, wenn ein Wechsel per Jahresende infrage kommt. So bleibt genug Zeit für Offerten, Vergleich und die interne Abstimmung.</p>
 
-        <h3>Wechsel bei Prämien- oder Kostenerhöhung</h3>
-        <p>Erhöht die Sammelstiftung ihre Verwaltungskosten innerhalb von drei Jahren um mindestens 10 %, muss sie dies sechs Monate im Voraus ankündigen. In diesem Fall steht dem Unternehmen ausnahmsweise eine kürzere Kündigungsfrist von einem Monat zu – ein Detail, das viele KMU nicht kennen und dadurch ungenutzt lassen.</p>
+            <h3>Die Belegschaft muss zustimmen</h3>
+            <p>Ein Punkt, der immer wieder unterschätzt wird: Seit einem Bundesgerichtsurteil braucht die Kündigung eines BVG-Anschlussvertrags das Einverständnis der gesamten Belegschaft oder der Arbeitnehmervertretung – eine blosse Information der Mitarbeitenden reicht nicht aus. Fehlt diese Zustimmung, ist die Kündigung ungültig, und das Unternehmen haftet im schlimmsten Fall im Vorsorgefall selbst.</p>
+            <p>Für KMU heisst das konkret: Der Wechsel ist kein reiner Entscheid der Geschäftsleitung, sondern ein Prozess, der frühzeitig kommuniziert und dokumentiert werden muss.</p>
 
-        <h3>So gehen wir mit KMU vor</h3>
-        <p>Grössere Unternehmen haben oft eine eigene Vorsorgekommission oder einen spezialisierten Pensionskassenberater. Kleineren und mittleren Unternehmen fehlt dafür meist die Zeit oder das Fachwissen. Unser Vorgehen:</p>
-        <ul>
-          <li><strong>Kennenlernen</strong> – wir verstehen Ihr Unternehmen, Ihre Belegschaft und die bestehende Lösung.</li>
-          <li><strong>Analysieren</strong> – Vorsorgereglement, Kosten, Leistungen und Anlagestrategie im Detail geprüft.</li>
-          <li><strong>Vergleichen</strong> – Angebote verschiedener Sammelstiftungen transparent gegenübergestellt.</li>
-          <li><strong>Entscheiden</strong> – gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt.</li>
-          <li><strong>Betreuen</strong> – wir behalten Deckungsgrad, Verzinsung und Anlagestrategie auch nach dem Wechsel im Blick.</li>
-        </ul>
+            <h3>Wechsel bei Prämien- oder Kostenerhöhung</h3>
+            <p>Erhöht die Sammelstiftung ihre Verwaltungskosten innerhalb von drei Jahren um mindestens 10 %, muss sie dies sechs Monate im Voraus ankündigen. In diesem Fall steht dem Unternehmen ausnahmsweise eine kürzere Kündigungsfrist von einem Monat zu – ein Detail, das viele KMU nicht kennen und dadurch ungenutzt lassen.</p>
 
-        <h3>Unser Rat</h3>
-        <p>Ein BVG-Wechsel ist kein Vorgang, den man in wenigen Tagen erledigt – aber genau deshalb lohnt es sich, frühzeitig zu beginnen. Wer im Frühling startet, hat im Sommer alle Optionen offen. Wer erst im Herbst beginnt, verliert oft ein ganzes Jahr.</p>
+            <h3>So gehen wir mit KMU vor</h3>
+            <p>Grössere Unternehmen haben oft eine eigene Vorsorgekommission oder einen spezialisierten Pensionskassenberater. Kleineren und mittleren Unternehmen fehlt dafür meist die Zeit oder das Fachwissen. Unser Vorgehen:</p>
+            <ul>
+              <li><strong>Kennenlernen</strong> – wir verstehen Ihr Unternehmen, Ihre Belegschaft und die bestehende Lösung.</li>
+              <li><strong>Analysieren</strong> – Vorsorgereglement, Kosten, Leistungen und Anlagestrategie im Detail geprüft.</li>
+              <li><strong>Vergleichen</strong> – Angebote verschiedener Sammelstiftungen transparent gegenübergestellt.</li>
+              <li><strong>Entscheiden</strong> – gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt.</li>
+              <li><strong>Betreuen</strong> – wir behalten Deckungsgrad, Verzinsung und Anlagestrategie auch nach dem Wechsel im Blick.</li>
+            </ul>
 
-        <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Beratung. Prüfen Sie die genauen Fristen und Bestimmungen in Ihrem Anschlussvertrag bzw. lassen Sie diese durch uns prüfen.</p>
+            <h3>Unser Rat</h3>
+            <p>Ein BVG-Wechsel ist kein Vorgang, den man in wenigen Tagen erledigt – aber genau deshalb lohnt es sich, frühzeitig zu beginnen. Wer im Frühling startet, hat im Sommer alle Optionen offen. Wer erst im Herbst beginnt, verliert oft ein ganzes Jahr.</p>
 
-        <div class="cta-row" style="margin-top:30px;"><button class="btn btn-primary" onclick="openBooking()">BVG prüfen lassen</button></div>
-      </article>
+            <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Beratung. Prüfen Sie die genauen Fristen und Bestimmungen in Ihrem Anschlussvertrag bzw. lassen Sie diese durch uns prüfen.</p>
 
-      <article class="article">
-        <div class="article-tag">Steuern &amp; Finanzen</div>
-        <h2>Steuern und Vorsorge: So sparen Sie mit der Säule 3a</h2>
-        <div class="article-image"><img src="images/blog-saeule-3a.jpg" alt="Glas mit Münzen und einer wachsenden Pflanze als Sinnbild fürs Sparen"></div>
-        <p>Die Säule 3a gehört zu den wenigen Möglichkeiten in der Schweiz, bei denen Sie mit derselben Einzahlung gleichzeitig fürs Alter vorsorgen und Steuern sparen. Trotzdem lassen viele jedes Jahr Geld liegen – oft aus reiner Unachtsamkeit. Hier die wichtigsten Punkte für 2026.</p>
-
-        <h3>Der Maximalbetrag 2026</h3>
-        <p>Wie viel Sie einzahlen dürfen, hängt davon ab, ob Sie einer Pensionskasse angeschlossen sind:</p>
-        <ul>
-          <li>Mit Pensionskasse: maximal CHF 7'258.– pro Jahr</li>
-          <li>Ohne Pensionskasse (z. B. Selbstständigerwerbende oder Personen unter der BVG-Eintrittsschwelle von CHF 22'680.– Jahreseinkommen): maximal 20 % des Erwerbseinkommens, bis höchstens CHF 36'288.–</li>
-        </ul>
-        <p>Der volle Betrag kann vollumfänglich vom steuerbaren Einkommen abgezogen werden – je nach Kanton und Einkommen ergibt das schnell eine Steuerersparnis von mehreren hundert bis über tausend Franken pro Jahr.</p>
-
-        <h3>Neu ab 2026: Lücken rückwirkend schliessen</h3>
-        <p>Bisher galt: Verpasst ist verpasst. Seit 2026 können Sie Beitragslücken der letzten zehn Jahre nachträglich einzahlen – vorausgesetzt, Sie waren in der Schweiz erwerbstätig und AHV-pflichtig, und die Lücke ist ab 2025 entstanden (ältere Lücken lassen sich nicht nachzahlen). Diese Nachzahlungen sind zusätzlich zum normalen Jahresmaximum möglich und ebenfalls vollständig steuerlich abziehbar.</p>
-        <p>Das eröffnet vor allem Personen mit unregelmässigem Einkommen – etwa nach einer Familienpause, einem Sabbatical oder in Jahren mit tieferem Verdienst – die Möglichkeit, frühere Lücken steuerwirksam nachzuholen.</p>
-
-        <h3>Wann einzahlen? Am besten früh im Jahr</h3>
-        <p>Ob Sie im Januar oder im Dezember einzahlen, spielt für den Steuerabzug keine Rolle – wohl aber für die Rendite. Wer bereits zu Jahresbeginn einzahlt, profitiert das ganze Jahr von der Verzinsung bzw. bei einer Wertschriftenlösung von der Marktentwicklung. Über 20 bis 30 Jahre kann dieser Unterschied mehrere tausend Franken ausmachen.</p>
-        <p><strong>Praktischer Tipp:</strong> Ein Dauerauftrag verhindert, dass die Einzahlung im Dezember vergessen geht – gerade Einzahlungen am Bankschalter müssen oft schon vor Weihnachten erfolgen, damit sie im laufenden Jahr noch angerechnet werden.</p>
-
-        <h3>Mehrere Konten für den späteren Bezug</h3>
-        <p>Beim Bezug der Säule 3a – spätestens bei der Pensionierung – wird das Kapital als Einmalzahlung besteuert, getrennt vom übrigen Einkommen, aber zu einem reduzierten Satz. Wer sein Guthaben auf mehrere 3a-Konten verteilt (Faustregel: ab rund CHF 50'000.– pro Konto lohnt sich ein weiteres), kann die Bezüge über mehrere Jahre staffeln und so die Steuerprogression brechen. Wichtig dabei: Der jährliche Maximalbetrag gilt pro Person, nicht pro Konto – er darf einfach auf mehrere Konten verteilt eingezahlt werden.</p>
-
-        <h3>Säule 3a ist nicht gleich Säule 3a</h3>
-        <p>Ob ein klassisches Vorsorgekonto oder eine Wertschriftenlösung sinnvoller ist, hängt stark vom Anlagehorizont ab. Wer noch 15 oder mehr Jahre bis zur Pensionierung hat, verschenkt mit einem reinen Sparkonto oft Renditepotenzial. Die passende Strategie hängt aber immer von der persönlichen Risikofähigkeit und -bereitschaft ab – ein pauschales „Wertschriften sind immer besser" greift zu kurz.</p>
-
-        <h3>Unser Rat</h3>
-        <p>Die Säule 3a lohnt sich für die meisten Erwerbstätigen – die Frage ist eher, wie man sie optimal nutzt: Wie viele Konten? Sparkonto oder Wertschriften? Und was macht die neue Nachzahlungsmöglichkeit für Ihre persönliche Situation aus? Wir schauen uns Ihre Vorsorge- und Steuersituation gemeinsam an und zeigen auf, wo bei Ihnen ungenutztes Potenzial liegt.</p>
-
-        <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Steuer- oder Anlageberatung. Die steuerliche Wirkung hängt von Ihrer persönlichen Situation und Ihrem Kanton ab.</p>
-
-        <div class="cta-row" style="margin-top:30px;"><button class="btn btn-ghost" onclick="openBooking()">Steuersituation besprechen</button></div>
-      </article>
-
-      <article class="article">
-        <div class="article-tag">Versicherungen &amp; Vorsorge</div>
-        <h2>Kündigungsfristen bei Versicherungen: Tipps und Tricks für Privatpersonen</h2>
-        <div class="article-image"><img src="images/blog-kuendigungsfristen.jpg" alt="Person unterschreibt ein Kündigungsschreiben"></div>
-        <p>Eine Versicherung zu kündigen klingt einfach – ist es aber nur, wenn man die Fristen und ein paar Stolperfallen kennt. Jede Versicherungsart tickt anders, und ein einziger verpasster Tag kann bedeuten, dass Sie ein weiteres Jahr an einen Vertrag gebunden sind, den Sie eigentlich loswerden wollten. Hier die wichtigsten Fristen für Ihre privaten Versicherungen – plus die Tricks, die in der Praxis wirklich helfen.</p>
-
-        <h3>Die Fristen im Überblick</h3>
-        <div class="article-table-wrap">
-          <table class="article-table">
-            <thead>
-              <tr><th>Versicherung</th><th>Übliche Frist</th><th>Besonderheit</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Krankenkasse Grundversicherung</td><td>Bis 30. November</td><td>Wechsel per 1. Januar, neue Kasse muss aufnehmen</td></tr>
-              <tr><td>Krankenkasse Zusatzversicherung</td><td>Meist 3 Monate vor Ablauf</td><td>Rechtlich getrennt von der Grundversicherung</td></tr>
-              <tr><td>Hausratversicherung</td><td>3 Monate vor Vertragsablauf</td><td>Sonderkündigung nach Schaden (2 Wochen) möglich</td></tr>
-              <tr><td>Privathaftpflicht</td><td>3 Monate vor Vertragsablauf</td><td>Oft im Paket mit Hausrat, separat kündbar</td></tr>
-              <tr><td>Fahrzeugversicherung</td><td>3 Monate vor Ablauf</td><td>Achtung bei Fahrzeugwechsel während der Laufzeit</td></tr>
-              <tr><td>Gebäudeversicherung</td><td>Kantonal unterschiedlich</td><td>In vielen Kantonen obligatorisch bei kant. Anstalt</td></tr>
-            </tbody>
-          </table>
+            <div class="cta-row" style="margin-top:30px;"><button class="btn btn-primary" onclick="event.stopPropagation(); openBooking();">BVG prüfen lassen</button></div>
+          </div>
         </div>
-        <p>Diese Fristen sind die üblichen Standardwerte – die genauen Angaben stehen immer in Ihrer Police oder den Allgemeinen Versicherungsbedingungen (AVB).</p>
 
-        <h3>Trick 1: Nicht das Ausstellungsdatum zählt, sondern das Ablaufdatum</h3>
-        <p>Ein häufiger Fehler: Man orientiert sich am Datum, an dem die Police unterschrieben wurde, statt am tatsächlichen Ablauf- bzw. Verlängerungsdatum. Diese können auseinanderfallen, besonders wenn eine Police im Lauf des Jahres angepasst wurde. Prüfen Sie immer das Feld „Vertragsablauf" oder „Verlängerung" auf Ihrer aktuellen Police.</p>
+        <div class="blog-card" onclick="toggleVCard(this)">
+          <div class="blog-card-image"><img src="images/blog-saeule-3a.jpg" alt="Glas mit Münzen und einer wachsenden Pflanze als Sinnbild fürs Sparen"></div>
+          <div class="blog-card-preview">
+            <div class="article-tag">Steuern &amp; Finanzen</div>
+            <h2>Steuern und Vorsorge: So sparen Sie mit der Säule 3a</h2>
+            <p class="blog-card-excerpt">Die Säule 3a gehört zu den wenigen Möglichkeiten in der Schweiz, bei denen Sie mit derselben Einzahlung gleichzeitig fürs Alter vorsorgen und Steuern sparen. Trotzdem lassen viele jedes Jahr Geld liegen – oft aus reiner Unachtsamkeit.</p>
+            <div class="blog-card-toggle"></div>
+          </div>
+          <div class="article blog-card-full">
+            <p>Die Säule 3a gehört zu den wenigen Möglichkeiten in der Schweiz, bei denen Sie mit derselben Einzahlung gleichzeitig fürs Alter vorsorgen und Steuern sparen. Trotzdem lassen viele jedes Jahr Geld liegen – oft aus reiner Unachtsamkeit. Hier die wichtigsten Punkte für 2026.</p>
 
-        <h3>Trick 2: Kündigung nachweisbar verschicken</h3>
-        <p>Eine Kündigung per normaler Post ohne Nachweis ist riskant – kommt sie zu spät an oder geht verloren, tragen Sie im Zweifel die Beweislast. Nutzen Sie ein Einschreiben oder A-Post Plus mit Sendungsverfolgung, und behalten Sie eine Kopie der Kündigung sowie den Versandbeleg.</p>
+            <h3>Der Maximalbetrag 2026</h3>
+            <p>Wie viel Sie einzahlen dürfen, hängt davon ab, ob Sie einer Pensionskasse angeschlossen sind:</p>
+            <ul>
+              <li>Mit Pensionskasse: maximal CHF 7'258.– pro Jahr</li>
+              <li>Ohne Pensionskasse (z. B. Selbstständigerwerbende oder Personen unter der BVG-Eintrittsschwelle von CHF 22'680.– Jahreseinkommen): maximal 20 % des Erwerbseinkommens, bis höchstens CHF 36'288.–</li>
+            </ul>
+            <p>Der volle Betrag kann vollumfänglich vom steuerbaren Einkommen abgezogen werden – je nach Kanton und Einkommen ergibt das schnell eine Steuerersparnis von mehreren hundert bis über tausend Franken pro Jahr.</p>
 
-        <h3>Trick 3: Nie die alte Police kündigen, bevor die neue steht</h3>
-        <p>Gerade bei obligatorischen Versicherungen wie der Krankenkasse oder der Fahrzeughaftpflicht darf keine Deckungslücke entstehen. Warten Sie die schriftliche Bestätigung der neuen Gesellschaft ab, bevor Sie die alte Police kündigen – auch wenn die Fristen eng werden.</p>
+            <h3>Neu ab 2026: Lücken rückwirkend schliessen</h3>
+            <p>Bisher galt: Verpasst ist verpasst. Seit 2026 können Sie Beitragslücken der letzten zehn Jahre nachträglich einzahlen – vorausgesetzt, Sie waren in der Schweiz erwerbstätig und AHV-pflichtig, und die Lücke ist ab 2025 entstanden (ältere Lücken lassen sich nicht nachzahlen). Diese Nachzahlungen sind zusätzlich zum normalen Jahresmaximum möglich und ebenfalls vollständig steuerlich abziehbar.</p>
+            <p>Das eröffnet vor allem Personen mit unregelmässigem Einkommen – etwa nach einer Familienpause, einem Sabbatical oder in Jahren mit tieferem Verdienst – die Möglichkeit, frühere Lücken steuerwirksam nachzuholen.</p>
 
-        <h3>Trick 4: Auf automatische Vertragsverlängerung achten</h3>
-        <p>Die meisten Versicherungsverträge verlängern sich automatisch um ein weiteres Jahr, wenn nicht fristgerecht gekündigt wird. Ein Kalendereintrag drei bis vier Monate vor dem bekannten Ablaufdatum verhindert, dass die Frist unbemerkt verstreicht.</p>
+            <h3>Wann einzahlen? Am besten früh im Jahr</h3>
+            <p>Ob Sie im Januar oder im Dezember einzahlen, spielt für den Steuerabzug keine Rolle – wohl aber für die Rendite. Wer bereits zu Jahresbeginn einzahlt, profitiert das ganze Jahr von der Verzinsung bzw. bei einer Wertschriftenlösung von der Marktentwicklung. Über 20 bis 30 Jahre kann dieser Unterschied mehrere tausend Franken ausmachen.</p>
+            <p><strong>Praktischer Tipp:</strong> Ein Dauerauftrag verhindert, dass die Einzahlung im Dezember vergessen geht – gerade Einzahlungen am Bankschalter müssen oft schon vor Weihnachten erfolgen, damit sie im laufenden Jahr noch angerechnet werden.</p>
 
-        <h3>Trick 5: Sonderkündigungsrechte kennen und nutzen</h3>
-        <p>Neben der ordentlichen Kündigung gibt es Situationen, in denen ein Vertrag ausserordentlich gekündigt werden kann:</p>
-        <ul>
-          <li>Nach einem Schadenfall – meist innerhalb von zwei Wochen nach Auszahlung der Leistung.</li>
-          <li>Bei einer Prämienerhöhung durch den Versicherer.</li>
-          <li>Bei Wegzug ins Ausland.</li>
-        </ul>
-        <p>Ein normaler Umzug innerhalb der Schweiz oder blosse Unzufriedenheit mit dem Service zählen dagegen nicht als Sonderkündigungsgrund – hier gilt weiterhin die ordentliche Frist.</p>
+            <h3>Mehrere Konten für den späteren Bezug</h3>
+            <p>Beim Bezug der Säule 3a – spätestens bei der Pensionierung – wird das Kapital als Einmalzahlung besteuert, getrennt vom übrigen Einkommen, aber zu einem reduzierten Satz. Wer sein Guthaben auf mehrere 3a-Konten verteilt (Faustregel: ab rund CHF 50'000.– pro Konto lohnt sich ein weiteres), kann die Bezüge über mehrere Jahre staffeln und so die Steuerprogression brechen. Wichtig dabei: Der jährliche Maximalbetrag gilt pro Person, nicht pro Konto – er darf einfach auf mehrere Konten verteilt eingezahlt werden.</p>
 
-        <h3>Trick 6: Grundversicherung und Zusatzversicherung getrennt behandeln</h3>
-        <p>Bei der Krankenkasse ist das der klassische Stolperstein: Grundversicherung (KVG) und Zusatzversicherung (VVG) sind rechtlich komplett getrennt. Eine Kündigung der Grundversicherung kündigt die Zusatzversicherung nicht automatisch mit – und wer die Zusatzversicherung separat kündigt, riskiert bei einem späteren Neuabschluss eine Gesundheitsprüfung.</p>
+            <h3>Säule 3a ist nicht gleich Säule 3a</h3>
+            <p>Ob ein klassisches Vorsorgekonto oder eine Wertschriftenlösung sinnvoller ist, hängt stark vom Anlagehorizont ab. Wer noch 15 oder mehr Jahre bis zur Pensionierung hat, verschenkt mit einem reinen Sparkonto oft Renditepotenzial. Die passende Strategie hängt aber immer von der persönlichen Risikofähigkeit und -bereitschaft ab – ein pauschales „Wertschriften sind immer besser" greift zu kurz.</p>
 
-        <h3>Trick 7: Bei Fahrzeugwechsel genau hinschauen</h3>
-        <p>Verkaufen Sie Ihr Fahrzeug oder schaffen Sie ein neues an, wird die bestehende Fahrzeugversicherung nicht automatisch beendet – meist muss sie überschrieben, angepasst oder separat gekündigt werden. Klären Sie dies direkt mit Ihrer Versicherung, um doppelte Prämien oder eine ungewollte Deckungslücke zu vermeiden.</p>
+            <h3>Unser Rat</h3>
+            <p>Die Säule 3a lohnt sich für die meisten Erwerbstätigen – die Frage ist eher, wie man sie optimal nutzt: Wie viele Konten? Sparkonto oder Wertschriften? Und was macht die neue Nachzahlungsmöglichkeit für Ihre persönliche Situation aus? Wir schauen uns Ihre Vorsorge- und Steuersituation gemeinsam an und zeigen auf, wo bei Ihnen ungenutztes Potenzial liegt.</p>
 
-        <h3>Trick 8: Kündigungsbestätigung einfordern</h3>
-        <p>Nach jeder Kündigung sollten Sie eine schriftliche Bestätigung der Versicherungsgesellschaft verlangen – inklusive Angabe des genauen Kündigungsdatums und einer allfälligen Prämienrückerstattung. Ohne diese Bestätigung haben Sie im Streitfall keinen Nachweis, dass die Kündigung angekommen und akzeptiert wurde.</p>
+            <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Steuer- oder Anlageberatung. Die steuerliche Wirkung hängt von Ihrer persönlichen Situation und Ihrem Kanton ab.</p>
 
-        <h3>Unser Rat</h3>
-        <p>Die meisten Probleme bei Kündigungen entstehen nicht durch komplizierte Regeln, sondern durch simple Terminversäumnisse. Wer sich die relevanten Fristen frühzeitig notiert – am besten drei bis vier Monate vor Vertragsende – hat die Kontrolle zurück, statt vom Kalender überrascht zu werden.</p>
-        <p>Wenn Sie unsicher sind, welche Frist für welche Ihrer Policen gilt, oder gleich mehrere Verträge im Blick behalten möchten: Genau dafür sind wir da.</p>
+            <div class="cta-row" style="margin-top:30px;"><button class="btn btn-ghost" onclick="event.stopPropagation(); openBooking();">Steuersituation besprechen</button></div>
+          </div>
+        </div>
 
-        <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Beratung. Die genauen Fristen können je nach Vertrag, Gesellschaft und Kanton abweichen – massgebend sind immer Ihre persönlichen Vertragsunterlagen bzw. AVB.</p>
+        <div class="blog-card" onclick="toggleVCard(this)">
+          <div class="blog-card-image"><img src="images/blog-kuendigungsfristen.jpg" alt="Person unterschreibt ein Kündigungsschreiben"></div>
+          <div class="blog-card-preview">
+            <div class="article-tag">Versicherungen &amp; Vorsorge</div>
+            <h2>Kündigungsfristen bei Versicherungen: Tipps und Tricks für Privatpersonen</h2>
+            <p class="blog-card-excerpt">Eine Versicherung zu kündigen klingt einfach – ist es aber nur, wenn man die Fristen und ein paar Stolperfallen kennt. Jede Versicherungsart tickt anders, und ein einziger verpasster Tag kann bedeuten, dass Sie ein weiteres Jahr an einen Vertrag gebunden sind, den Sie eigentlich loswerden wollten.</p>
+            <div class="blog-card-toggle"></div>
+          </div>
+          <div class="article blog-card-full">
+            <p>Eine Versicherung zu kündigen klingt einfach – ist es aber nur, wenn man die Fristen und ein paar Stolperfallen kennt. Jede Versicherungsart tickt anders, und ein einziger verpasster Tag kann bedeuten, dass Sie ein weiteres Jahr an einen Vertrag gebunden sind, den Sie eigentlich loswerden wollten. Hier die wichtigsten Fristen für Ihre privaten Versicherungen – plus die Tricks, die in der Praxis wirklich helfen.</p>
 
-        <div class="cta-row" style="margin-top:30px;"><button class="btn btn-ghost" onclick="openBooking()">Meine Situation prüfen</button></div>
-      </article>
+            <h3>Die Fristen im Überblick</h3>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr><th>Versicherung</th><th>Übliche Frist</th><th>Besonderheit</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Krankenkasse Grundversicherung</td><td>Bis 30. November</td><td>Wechsel per 1. Januar, neue Kasse muss aufnehmen</td></tr>
+                  <tr><td>Krankenkasse Zusatzversicherung</td><td>Meist 3 Monate vor Ablauf</td><td>Rechtlich getrennt von der Grundversicherung</td></tr>
+                  <tr><td>Hausratversicherung</td><td>3 Monate vor Vertragsablauf</td><td>Sonderkündigung nach Schaden (2 Wochen) möglich</td></tr>
+                  <tr><td>Privathaftpflicht</td><td>3 Monate vor Vertragsablauf</td><td>Oft im Paket mit Hausrat, separat kündbar</td></tr>
+                  <tr><td>Fahrzeugversicherung</td><td>3 Monate vor Ablauf</td><td>Achtung bei Fahrzeugwechsel während der Laufzeit</td></tr>
+                  <tr><td>Gebäudeversicherung</td><td>Kantonal unterschiedlich</td><td>In vielen Kantonen obligatorisch bei kant. Anstalt</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Diese Fristen sind die üblichen Standardwerte – die genauen Angaben stehen immer in Ihrer Police oder den Allgemeinen Versicherungsbedingungen (AVB).</p>
 
-      <div class="cta-row" style="justify-content:center; margin-top:100px; padding-top:60px; border-top:1px solid var(--line);"><button class="btn btn-ghost" onclick="openBooking()">Thema vorschlagen</button></div>
+            <h3>Trick 1: Nicht das Ausstellungsdatum zählt, sondern das Ablaufdatum</h3>
+            <p>Ein häufiger Fehler: Man orientiert sich am Datum, an dem die Police unterschrieben wurde, statt am tatsächlichen Ablauf- bzw. Verlängerungsdatum. Diese können auseinanderfallen, besonders wenn eine Police im Lauf des Jahres angepasst wurde. Prüfen Sie immer das Feld „Vertragsablauf" oder „Verlängerung" auf Ihrer aktuellen Police.</p>
+
+            <h3>Trick 2: Kündigung nachweisbar verschicken</h3>
+            <p>Eine Kündigung per normaler Post ohne Nachweis ist riskant – kommt sie zu spät an oder geht verloren, tragen Sie im Zweifel die Beweislast. Nutzen Sie ein Einschreiben oder A-Post Plus mit Sendungsverfolgung, und behalten Sie eine Kopie der Kündigung sowie den Versandbeleg.</p>
+
+            <h3>Trick 3: Nie die alte Police kündigen, bevor die neue steht</h3>
+            <p>Gerade bei obligatorischen Versicherungen wie der Krankenkasse oder der Fahrzeughaftpflicht darf keine Deckungslücke entstehen. Warten Sie die schriftliche Bestätigung der neuen Gesellschaft ab, bevor Sie die alte Police kündigen – auch wenn die Fristen eng werden.</p>
+
+            <h3>Trick 4: Auf automatische Vertragsverlängerung achten</h3>
+            <p>Die meisten Versicherungsverträge verlängern sich automatisch um ein weiteres Jahr, wenn nicht fristgerecht gekündigt wird. Ein Kalendereintrag drei bis vier Monate vor dem bekannten Ablaufdatum verhindert, dass die Frist unbemerkt verstreicht.</p>
+
+            <h3>Trick 5: Sonderkündigungsrechte kennen und nutzen</h3>
+            <p>Neben der ordentlichen Kündigung gibt es Situationen, in denen ein Vertrag ausserordentlich gekündigt werden kann:</p>
+            <ul>
+              <li>Nach einem Schadenfall – meist innerhalb von zwei Wochen nach Auszahlung der Leistung.</li>
+              <li>Bei einer Prämienerhöhung durch den Versicherer.</li>
+              <li>Bei Wegzug ins Ausland.</li>
+            </ul>
+            <p>Ein normaler Umzug innerhalb der Schweiz oder blosse Unzufriedenheit mit dem Service zählen dagegen nicht als Sonderkündigungsgrund – hier gilt weiterhin die ordentliche Frist.</p>
+
+            <h3>Trick 6: Grundversicherung und Zusatzversicherung getrennt behandeln</h3>
+            <p>Bei der Krankenkasse ist das der klassische Stolperstein: Grundversicherung (KVG) und Zusatzversicherung (VVG) sind rechtlich komplett getrennt. Eine Kündigung der Grundversicherung kündigt die Zusatzversicherung nicht automatisch mit – und wer die Zusatzversicherung separat kündigt, riskiert bei einem späteren Neuabschluss eine Gesundheitsprüfung.</p>
+
+            <h3>Trick 7: Bei Fahrzeugwechsel genau hinschauen</h3>
+            <p>Verkaufen Sie Ihr Fahrzeug oder schaffen Sie ein neues an, wird die bestehende Fahrzeugversicherung nicht automatisch beendet – meist muss sie überschrieben, angepasst oder separat gekündigt werden. Klären Sie dies direkt mit Ihrer Versicherung, um doppelte Prämien oder eine ungewollte Deckungslücke zu vermeiden.</p>
+
+            <h3>Trick 8: Kündigungsbestätigung einfordern</h3>
+            <p>Nach jeder Kündigung sollten Sie eine schriftliche Bestätigung der Versicherungsgesellschaft verlangen – inklusive Angabe des genauen Kündigungsdatums und einer allfälligen Prämienrückerstattung. Ohne diese Bestätigung haben Sie im Streitfall keinen Nachweis, dass die Kündigung angekommen und akzeptiert wurde.</p>
+
+            <h3>Unser Rat</h3>
+            <p>Die meisten Probleme bei Kündigungen entstehen nicht durch komplizierte Regeln, sondern durch simple Terminversäumnisse. Wer sich die relevanten Fristen frühzeitig notiert – am besten drei bis vier Monate vor Vertragsende – hat die Kontrolle zurück, statt vom Kalender überrascht zu werden.</p>
+            <p>Wenn Sie unsicher sind, welche Frist für welche Ihrer Policen gilt, oder gleich mehrere Verträge im Blick behalten möchten: Genau dafür sind wir da.</p>
+
+            <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Beratung. Die genauen Fristen können je nach Vertrag, Gesellschaft und Kanton abweichen – massgebend sind immer Ihre persönlichen Vertragsunterlagen bzw. AVB.</p>
+
+            <div class="cta-row" style="margin-top:30px;"><button class="btn btn-ghost" onclick="event.stopPropagation(); openBooking();">Meine Situation prüfen</button></div>
+          </div>
+        </div>
+
+        <div class="blog-card" onclick="toggleVCard(this)">
+          <div class="blog-card-image"><img src="images/blog-kuendigungsfristen-kmu.jpg" alt="Team bespricht sich am Tisch im Büro"></div>
+          <div class="blog-card-preview">
+            <div class="article-tag">Versicherungen &amp; Vorsorge</div>
+            <h2>Kündigungsfristen bei Versicherungen: Tipps und Tricks für KMU</h2>
+            <p class="blog-card-excerpt">Bei Unternehmen ist eine Versicherungskündigung selten nur ein administrativer Akt – oft hängen Mitarbeitende, Betriebsabläufe oder gesetzliche Pflichten daran. Wer die Fristen nicht kennt, riskiert ein weiteres Jahr in einer Lösung, die eigentlich nicht mehr passt.</p>
+            <div class="blog-card-toggle"></div>
+          </div>
+          <div class="article blog-card-full">
+            <p>Bei Unternehmen ist eine Versicherungskündigung selten nur ein administrativer Akt – oft hängen Mitarbeitende, Betriebsabläufe oder gesetzliche Pflichten daran. Wer die Fristen nicht kennt, riskiert ein weiteres Jahr in einer Lösung, die eigentlich nicht mehr passt. Hier die wichtigsten Fristen für Ihre betrieblichen Versicherungen – plus die Tricks, die in der Praxis wirklich helfen.</p>
+
+            <h3>Die Fristen im Überblick</h3>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr><th>Versicherung</th><th>Übliche Frist</th><th>Besonderheit</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Betriebshaftpflicht, Sachversicherung</td><td>3 Monate vor Vertragsablauf</td><td>Sonderkündigung nach Schaden (2 Wochen) oder Prämienerhöhung</td></tr>
+                  <tr><td>Berufliche Vorsorge (BVG)</td><td>6 Monate, meist bis 30. Juni</td><td>Zustimmung der Belegschaft zwingend nötig</td></tr>
+                  <tr><td>Unfallversicherung (UVG)</td><td>3 Monate auf Ende Versicherungsjahr</td><td>Nahtloser Anschluss an neuen Versicherer nötig</td></tr>
+                  <tr><td>Krankentaggeldversicherung</td><td>3 Monate vor Vertragsablauf</td><td>Bei Wechsel: laufende Krankheitsfälle beachten</td></tr>
+                  <tr><td>Fahrzeugflotten-Versicherung</td><td>3 Monate vor Ablauf</td><td>Bei Fahrzeugmutationen separat prüfen</td></tr>
+                  <tr><td>Cyber-Versicherung</td><td>3 Monate vor Ablauf</td><td>Häufig noch junge Verträge, Bedingungen variieren stark</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Diese Fristen sind die üblichen Standardwerte – die genauen Angaben stehen immer in Ihrer Police, dem Anschlussvertrag oder den Allgemeinen Versicherungsbedingungen (AVB).</p>
+
+            <h3>Trick 1: Nicht das Ausstellungsdatum zählt, sondern das Ablaufdatum</h3>
+            <p>Ein häufiger Fehler: Man orientiert sich am Datum, an dem die Police unterschrieben wurde, statt am tatsächlichen Ablauf- bzw. Verlängerungsdatum des Vertrags. Prüfen Sie immer das Feld „Vertragsablauf" oder „Verlängerung" – bei mehreren Policen lohnt sich eine zentrale Übersicht aller Ablaufdaten.</p>
+
+            <h3>Trick 2: Kündigung nachweisbar verschicken</h3>
+            <p>Eine Kündigung per normaler Post ohne Nachweis ist riskant – kommt sie zu spät an oder geht verloren, trägt Ihr Unternehmen im Zweifel die Beweislast. Nutzen Sie ein Einschreiben oder A-Post Plus mit Sendungsverfolgung, und archivieren Sie Kündigung sowie Versandbeleg zentral.</p>
+
+            <h3>Trick 3: Nie die alte Police kündigen, bevor die neue steht</h3>
+            <p>Gerade bei obligatorischen Versicherungen wie der Unfallversicherung (UVG) darf zwischen altem und neuem Vertrag keine Deckungslücke entstehen – das Unternehmen bleibt zur Versicherung der Mitarbeitenden verpflichtet. Warten Sie die schriftliche Bestätigung der neuen Gesellschaft ab, bevor Sie kündigen.</p>
+
+            <h3>Trick 4: Bei der BVG die Belegschaft frühzeitig einbeziehen</h3>
+            <p>Der wichtigste Punkt für Unternehmen: Die Kündigung eines BVG-Anschlussvertrags braucht die Zustimmung der gesamten Belegschaft oder der Arbeitnehmervertretung – eine reine Information reicht rechtlich nicht aus. Fehlt diese Zustimmung, ist die Kündigung ungültig, und das Unternehmen haftet im schlimmsten Fall im Vorsorgefall selbst. Planen Sie für diesen Abstimmungsprozess mehrere Wochen zusätzlich ein – die 6-Monats-Frist ist knapper, als sie klingt.</p>
+
+            <h3>Trick 5: Sonderkündigungsrechte kennen und nutzen</h3>
+            <p>Neben der ordentlichen Kündigung gibt es Situationen, in denen ein Vertrag ausserordentlich gekündigt werden kann:</p>
+            <ul>
+              <li>Nach einem Schadenfall – meist innerhalb von zwei Wochen nach Auszahlung der Leistung.</li>
+              <li>Bei einer Prämien- oder Kostenerhöhung durch den Versicherer bzw. die Sammelstiftung.</li>
+              <li>Bei der BVG: Erhöht die Sammelstiftung die Verwaltungskosten innerhalb von drei Jahren um mindestens 10 %, steht dem Unternehmen ausnahmsweise eine kürzere Kündigungsfrist von einem Monat zu.</li>
+            </ul>
+
+            <h3>Trick 6: Betriebseinstellung rechtzeitig melden</h3>
+            <p>Bei der Unfallversicherung (Suva oder privater UVG-Versicherer) gilt bei einer Betriebseinstellung eine Meldepflicht von mindestens 14 Tagen im Voraus. Auch dies wird bei Umstrukturierungen oder Betriebsschliessungen oft vergessen.</p>
+
+            <h3>Trick 7: Mitarbeitermutationen nicht mit Vertragskündigung verwechseln</h3>
+            <p>Ein-, Austritte oder Pensenänderungen bei Mitarbeitenden sind laufende Mutationen und keine Vertragskündigungen – diese müssen zeitnah, aber unabhängig von den grossen Kündigungsfristen gemeldet werden. Eine verspätete Meldung kann bei Schadenfällen zu Deckungsproblemen führen.</p>
+
+            <h3>Trick 8: Kündigungsbestätigung einfordern und zentral ablegen</h3>
+            <p>Nach jeder Kündigung sollte eine schriftliche Bestätigung mit genauem Kündigungsdatum und allfälliger Prämienrückerstattung eingefordert werden. Bei mehreren Policen und Ansprechpartnern lohnt sich eine zentrale, für alle relevanten Personen zugängliche Ablage – gerade bei Zuständigkeitswechseln im Unternehmen.</p>
+
+            <h3>Unser Rat</h3>
+            <p>Bei betrieblichen Versicherungen sind es meist zwei Dinge, die zu Problemen führen: verpasste Fristen und fehlende interne Abstimmung – insbesondere bei der BVG. Wer die Kündigungsfristen kennt und die Belegschaft frühzeitig einbezieht, hat deutlich mehr Verhandlungsspielraum und Zeit für einen sauberen Vergleich.</p>
+            <p>Wenn Sie den Überblick über mehrere Policen und deren Fristen behalten möchten, oder eine BVG-Kündigung korrekt vorbereiten wollen: Genau dafür sind wir da.</p>
+
+            <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Beratung. Die genauen Fristen können je nach Vertrag, Gesellschaft und Sammelstiftung abweichen – massgebend sind immer Ihre persönlichen Vertragsunterlagen bzw. AVB.</p>
+
+            <div class="cta-row" style="margin-top:30px;"><button class="btn btn-primary" onclick="event.stopPropagation(); openBooking();">Unternehmen analysieren lassen</button></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="cta-row" style="justify-content:center; margin-top:80px; padding-top:60px; border-top:1px solid var(--line);"><button class="btn btn-ghost" onclick="openBooking()">Thema vorschlagen</button></div>
     </div>
   </section>
 </main>
