@@ -286,8 +286,6 @@
   .pick-chip:hover{ border-color:var(--pine); }
   .pick-chip.picked{ background:var(--ink); border-color:var(--ink); color:#fff; }
   .pick-chip.picked::before{ content:"✓ "; }
-  .booking-picker{ margin-top:48px; padding-top:40px; border-top:1px solid var(--line); }
-  .booking-picker .q{ font-weight:700; font-family:'Plus Jakarta Sans',sans-serif; margin-bottom:4px; }
 
   /* ---------- Compare cards (illustrative pricing) ---------- */
   .compare-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:36px; }
@@ -843,26 +841,6 @@
         <button class="btn btn-primary" onclick="openBooking()">Kostenloses Erstgespräch buchen</button>
       </div>
       <p class="nudge center">Kostenlos · Unverbindlich · Persönlich</p>
-
-      <div class="booking-picker">
-        <p class="q">Ich bin:</p>
-        <div class="pick-row" style="justify-content:center;">
-          <span class="pick-chip" data-group="persona" onclick="pickOne(this)">Privatperson</span>
-          <span class="pick-chip" data-group="persona" onclick="pickOne(this)">Unternehmen</span>
-        </div>
-        <p class="q" style="margin-top:26px;">Es geht um:</p>
-        <div class="pick-row" style="justify-content:center;">
-          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">Versicherungen</span>
-          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">Vorsorge</span>
-          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">Steuern</span>
-          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">BVG</span>
-          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">Finanzplanung</span>
-          <span class="pick-chip" data-group="topic" onclick="pickOne(this)">Ich weiss es noch nicht</span>
-        </div>
-        <div class="cta-row" style="justify-content:center; margin-top:30px;">
-          <button class="btn btn-ghost" onclick="openBooking()">Termin auswählen</button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -2218,11 +2196,6 @@ document.addEventListener('click', function(e){
   if(el && !el.contains(e.target)){ el.classList.remove('open'); }
 });
 
-function pickOne(el){
-  var group = el.dataset.group;
-  document.querySelectorAll('.pick-chip[data-group="'+group+'"]').forEach(function(c){ c.classList.remove('picked'); });
-  el.classList.add('picked');
-}
 
 var versicherungenMode = 'privat';
 function setVersicherungenMode(mode){
