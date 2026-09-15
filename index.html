@@ -299,6 +299,20 @@
   .compare-card ul{ text-align:left; display:flex; flex-direction:column; gap:8px; font-size:0.9rem; color:var(--stone); }
   .compare-card ul li::before{ content:"— "; }
 
+  /* ---------- Blog articles ---------- */
+  .article{ max-width:720px; margin:0 auto; }
+  .article + .article{ margin-top:100px; padding-top:100px; border-top:1px solid var(--line); }
+  .article-tag{ display:inline-block; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--pine); margin-bottom:14px; }
+  .article h2{ margin-bottom:24px; }
+  .article-image{ aspect-ratio:3/2; overflow:hidden; border-radius:14px; margin:28px 0 36px; }
+  .article-image img{ width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05); display:block; }
+  .article p{ margin:0 0 20px; line-height:1.7; }
+  .article h3{ margin:40px 0 14px; font-size:1.2rem; }
+  .article ul{ margin:20px 0; }
+  .article ul li{ position:relative; padding-left:20px; margin-bottom:10px; line-height:1.6; }
+  .article ul li::before{ content:"—"; position:absolute; left:0; color:var(--pine); }
+  .article .disclaimer{ margin-top:40px; padding-top:20px; border-top:1px solid var(--line); font-size:0.8rem; color:var(--stone); }
+
   /* ---------- BVG Zinseszins-Rechner ---------- */
   .bvg-calc-wrap{ display:grid; grid-template-columns:1.6fr 1fr; gap:24px; align-items:start; margin-top:40px; }
   @media (max-width:980px){ .bvg-calc-wrap{ grid-template-columns:1fr; } }
@@ -1743,7 +1757,7 @@
 
   <section>
     <div class="wrap">
-      <div class="section-head"><h2>Diese Themen erwarten Sie hier</h2><p class="lede">Wir bauen den Blog laufend auf. Die ersten Beiträge folgen in Kürze.</p></div>
+      <div class="section-head"><h2>Diese Themen erwarten Sie hier</h2><p class="lede">Wir bauen den Blog laufend auf – mit praxisnahen Beiträgen zu diesen Schwerpunkten.</p></div>
       <div class="panel3">
         <div>
           <h3>Versicherungen &amp; Vorsorge</h3>
@@ -1758,8 +1772,94 @@
           <p>Neuigkeiten rund um Coverd AG, unser Team und die Weiterentwicklung des Coverd Portals.</p>
         </div>
       </div>
-      <!-- TODO: Erste echte Blogartikel ergänzen (Titel, Datum, Autor, Text) — keine Beispielartikel erfinden -->
-      <div class="cta-row" style="margin-top:36px;"><button class="btn btn-ghost" onclick="openBooking()">Thema vorschlagen</button></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+
+      <article class="article">
+        <div class="article-tag">Versicherungen &amp; Vorsorge</div>
+        <h2>BVG-Wechsel für KMU: Was Sie beachten müssen</h2>
+        <div class="article-image"><img src="images/blog-bvg-wechsel.jpg" alt="Modernes Firmengebäude"></div>
+        <p>Sach- und Haftpflichtversicherungen vergleichen viele Unternehmen regelmässig. Die berufliche Vorsorge (BVG) bleibt dabei oft über Jahre unangetastet – dabei handelt es sich meist um einen der grössten Kostenblöcke im Unternehmen. Wer sie nie überprüft, lässt oft ohne es zu merken Optimierungspotenzial liegen. Hier die wichtigsten Punkte für einen Wechsel.</p>
+
+        <h3>Warum sich ein Blick auf die BVG-Lösung lohnt</h3>
+        <p>Sammelstiftungen unterscheiden sich zum Teil erheblich bei:</p>
+        <ul>
+          <li>Verwaltungskosten – diese schmälern direkt die Rendite Ihrer Mitarbeitenden,</li>
+          <li>Anlagestrategie und Verzinsung des angesparten Kapitals,</li>
+          <li>Leistungen bei Invalidität und Todesfall,</li>
+          <li>Deckungsgrad und finanzieller Stabilität der Sammelstiftung.</li>
+        </ul>
+        <p>Diese Unterschiede wirken sich direkt darauf aus, wie gut Ihre Mitarbeitenden abgesichert sind – und wie viel das Unternehmen dafür bezahlt.</p>
+
+        <h3>Die Kündigungsfrist ist der Knackpunkt</h3>
+        <p>Anders als bei vielen Sachversicherungen ist ein BVG-Wechsel nicht kurzfristig möglich. Anschlussverträge bei Sammelstiftungen laufen meist mit einer Kündigungsfrist von sechs Monaten auf Ende Jahr – wer per 1. Januar wechseln möchte, muss also in der Regel bis 30. Juni kündigen. Die genaue Frist steht im Anschlussvertrag und kann leicht abweichen.</p>
+        <p><strong>Unsere Empfehlung:</strong> Beginnen Sie den Vergleichsprozess bereits im Frühling, wenn ein Wechsel per Jahresende infrage kommt. So bleibt genug Zeit für Offerten, Vergleich und die interne Abstimmung.</p>
+
+        <h3>Die Belegschaft muss zustimmen</h3>
+        <p>Ein Punkt, der immer wieder unterschätzt wird: Seit einem Bundesgerichtsurteil braucht die Kündigung eines BVG-Anschlussvertrags das Einverständnis der gesamten Belegschaft oder der Arbeitnehmervertretung – eine blosse Information der Mitarbeitenden reicht nicht aus. Fehlt diese Zustimmung, ist die Kündigung ungültig, und das Unternehmen haftet im schlimmsten Fall im Vorsorgefall selbst.</p>
+        <p>Für KMU heisst das konkret: Der Wechsel ist kein reiner Entscheid der Geschäftsleitung, sondern ein Prozess, der frühzeitig kommuniziert und dokumentiert werden muss.</p>
+
+        <h3>Wechsel bei Prämien- oder Kostenerhöhung</h3>
+        <p>Erhöht die Sammelstiftung ihre Verwaltungskosten innerhalb von drei Jahren um mindestens 10 %, muss sie dies sechs Monate im Voraus ankündigen. In diesem Fall steht dem Unternehmen ausnahmsweise eine kürzere Kündigungsfrist von einem Monat zu – ein Detail, das viele KMU nicht kennen und dadurch ungenutzt lassen.</p>
+
+        <h3>So gehen wir mit KMU vor</h3>
+        <p>Grössere Unternehmen haben oft eine eigene Vorsorgekommission oder einen spezialisierten Pensionskassenberater. Kleineren und mittleren Unternehmen fehlt dafür meist die Zeit oder das Fachwissen. Unser Vorgehen:</p>
+        <ul>
+          <li><strong>Kennenlernen</strong> – wir verstehen Ihr Unternehmen, Ihre Belegschaft und die bestehende Lösung.</li>
+          <li><strong>Analysieren</strong> – Vorsorgereglement, Kosten, Leistungen und Anlagestrategie im Detail geprüft.</li>
+          <li><strong>Vergleichen</strong> – Angebote verschiedener Sammelstiftungen transparent gegenübergestellt.</li>
+          <li><strong>Entscheiden</strong> – gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt.</li>
+          <li><strong>Betreuen</strong> – wir behalten Deckungsgrad, Verzinsung und Anlagestrategie auch nach dem Wechsel im Blick.</li>
+        </ul>
+
+        <h3>Unser Rat</h3>
+        <p>Ein BVG-Wechsel ist kein Vorgang, den man in wenigen Tagen erledigt – aber genau deshalb lohnt es sich, frühzeitig zu beginnen. Wer im Frühling startet, hat im Sommer alle Optionen offen. Wer erst im Herbst beginnt, verliert oft ein ganzes Jahr.</p>
+
+        <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Beratung. Prüfen Sie die genauen Fristen und Bestimmungen in Ihrem Anschlussvertrag bzw. lassen Sie diese durch uns prüfen.</p>
+
+        <div class="cta-row" style="margin-top:30px;"><button class="btn btn-primary" onclick="openBooking()">BVG prüfen lassen</button></div>
+      </article>
+
+      <article class="article">
+        <div class="article-tag">Steuern &amp; Finanzen</div>
+        <h2>Steuern und Vorsorge: So sparen Sie mit der Säule 3a</h2>
+        <div class="article-image"><img src="images/blog-saeule-3a.jpg" alt="Glas mit Münzen und einer wachsenden Pflanze als Sinnbild fürs Sparen"></div>
+        <p>Die Säule 3a gehört zu den wenigen Möglichkeiten in der Schweiz, bei denen Sie mit derselben Einzahlung gleichzeitig fürs Alter vorsorgen und Steuern sparen. Trotzdem lassen viele jedes Jahr Geld liegen – oft aus reiner Unachtsamkeit. Hier die wichtigsten Punkte für 2026.</p>
+
+        <h3>Der Maximalbetrag 2026</h3>
+        <p>Wie viel Sie einzahlen dürfen, hängt davon ab, ob Sie einer Pensionskasse angeschlossen sind:</p>
+        <ul>
+          <li>Mit Pensionskasse: maximal CHF 7'258.– pro Jahr</li>
+          <li>Ohne Pensionskasse (z. B. Selbstständigerwerbende oder Personen unter der BVG-Eintrittsschwelle von CHF 22'680.– Jahreseinkommen): maximal 20 % des Erwerbseinkommens, bis höchstens CHF 36'288.–</li>
+        </ul>
+        <p>Der volle Betrag kann vollumfänglich vom steuerbaren Einkommen abgezogen werden – je nach Kanton und Einkommen ergibt das schnell eine Steuerersparnis von mehreren hundert bis über tausend Franken pro Jahr.</p>
+
+        <h3>Neu ab 2026: Lücken rückwirkend schliessen</h3>
+        <p>Bisher galt: Verpasst ist verpasst. Seit 2026 können Sie Beitragslücken der letzten zehn Jahre nachträglich einzahlen – vorausgesetzt, Sie waren in der Schweiz erwerbstätig und AHV-pflichtig, und die Lücke ist ab 2025 entstanden (ältere Lücken lassen sich nicht nachzahlen). Diese Nachzahlungen sind zusätzlich zum normalen Jahresmaximum möglich und ebenfalls vollständig steuerlich abziehbar.</p>
+        <p>Das eröffnet vor allem Personen mit unregelmässigem Einkommen – etwa nach einer Familienpause, einem Sabbatical oder in Jahren mit tieferem Verdienst – die Möglichkeit, frühere Lücken steuerwirksam nachzuholen.</p>
+
+        <h3>Wann einzahlen? Am besten früh im Jahr</h3>
+        <p>Ob Sie im Januar oder im Dezember einzahlen, spielt für den Steuerabzug keine Rolle – wohl aber für die Rendite. Wer bereits zu Jahresbeginn einzahlt, profitiert das ganze Jahr von der Verzinsung bzw. bei einer Wertschriftenlösung von der Marktentwicklung. Über 20 bis 30 Jahre kann dieser Unterschied mehrere tausend Franken ausmachen.</p>
+        <p><strong>Praktischer Tipp:</strong> Ein Dauerauftrag verhindert, dass die Einzahlung im Dezember vergessen geht – gerade Einzahlungen am Bankschalter müssen oft schon vor Weihnachten erfolgen, damit sie im laufenden Jahr noch angerechnet werden.</p>
+
+        <h3>Mehrere Konten für den späteren Bezug</h3>
+        <p>Beim Bezug der Säule 3a – spätestens bei der Pensionierung – wird das Kapital als Einmalzahlung besteuert, getrennt vom übrigen Einkommen, aber zu einem reduzierten Satz. Wer sein Guthaben auf mehrere 3a-Konten verteilt (Faustregel: ab rund CHF 50'000.– pro Konto lohnt sich ein weiteres), kann die Bezüge über mehrere Jahre staffeln und so die Steuerprogression brechen. Wichtig dabei: Der jährliche Maximalbetrag gilt pro Person, nicht pro Konto – er darf einfach auf mehrere Konten verteilt eingezahlt werden.</p>
+
+        <h3>Säule 3a ist nicht gleich Säule 3a</h3>
+        <p>Ob ein klassisches Vorsorgekonto oder eine Wertschriftenlösung sinnvoller ist, hängt stark vom Anlagehorizont ab. Wer noch 15 oder mehr Jahre bis zur Pensionierung hat, verschenkt mit einem reinen Sparkonto oft Renditepotenzial. Die passende Strategie hängt aber immer von der persönlichen Risikofähigkeit und -bereitschaft ab – ein pauschales „Wertschriften sind immer besser" greift zu kurz.</p>
+
+        <h3>Unser Rat</h3>
+        <p>Die Säule 3a lohnt sich für die meisten Erwerbstätigen – die Frage ist eher, wie man sie optimal nutzt: Wie viele Konten? Sparkonto oder Wertschriften? Und was macht die neue Nachzahlungsmöglichkeit für Ihre persönliche Situation aus? Wir schauen uns Ihre Vorsorge- und Steuersituation gemeinsam an und zeigen auf, wo bei Ihnen ungenutztes Potenzial liegt.</p>
+
+        <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Steuer- oder Anlageberatung. Die steuerliche Wirkung hängt von Ihrer persönlichen Situation und Ihrem Kanton ab.</p>
+
+        <div class="cta-row" style="margin-top:30px;"><button class="btn btn-ghost" onclick="openBooking()">Steuersituation besprechen</button></div>
+      </article>
+
+      <div class="cta-row" style="justify-content:center; margin-top:100px; padding-top:60px; border-top:1px solid var(--line);"><button class="btn btn-ghost" onclick="openBooking()">Thema vorschlagen</button></div>
     </div>
   </section>
 </main>
