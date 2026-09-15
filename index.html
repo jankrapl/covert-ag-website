@@ -933,7 +933,8 @@
           <span class="pick-chip" onclick="toggleChip(this)">Pensionierung</span>
         </div>
         <p style="margin-top:22px;">Eine Veränderung kann Auswirkungen auf Versicherungen, Vorsorge und Steuern haben.</p>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()">Meine Situation prüfen</button></div>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="checkMySituation()">Meine Situation prüfen</button></div>
+        <p class="stone" style="font-size:0.78rem; margin-top:10px;">Ausgewählte Themen werden bei Klick automatisch an uns übermittelt.</p>
       </div>
     </div>
   </section>
@@ -2274,6 +2275,18 @@ function toggleMobile(){
 
 function toggleChip(el){
   el.classList.toggle('picked');
+}
+
+function checkMySituation(){
+  var picked = Array.prototype.slice.call(document.querySelectorAll('.pick-chip.picked')).map(function(c){ return c.textContent; });
+  if (picked.length) {
+    if (BOOKING_URL) { window.open(BOOKING_URL, '_blank', 'noopener'); }
+    var subject = encodeURIComponent('Veränderung bei mir: ' + picked.join(', '));
+    var body = encodeURIComponent('Hallo Coverd-Team\n\nBei mir hat sich Folgendes verändert: ' + picked.join(', ') + '.\n\nBitte meldet euch bei mir, um meine Situation zu besprechen.');
+    window.location.href = 'mailto:info@coverd.ch?subject=' + subject + '&body=' + body;
+  } else {
+    openBooking();
+  }
 }
 
 function toggleLoginDrop(e){
