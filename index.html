@@ -312,6 +312,13 @@
   .article ul li{ position:relative; padding-left:20px; margin-bottom:10px; line-height:1.6; }
   .article ul li::before{ content:"—"; position:absolute; left:0; color:var(--pine); }
   .article .disclaimer{ margin-top:40px; padding-top:20px; border-top:1px solid var(--line); font-size:0.8rem; color:var(--stone); }
+  .article-table-wrap{ margin:24px 0; overflow-x:auto; }
+  .article-table{ width:100%; border-collapse:collapse; min-width:560px; }
+  .article-table th, .article-table td{ padding:13px 16px; text-align:left; border-bottom:1px solid var(--line); font-size:0.86rem; vertical-align:top; }
+  .article-table thead th{ font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:.04em; color:var(--stone); border-bottom:2px solid var(--ink); }
+  .article-table tbody td:first-child{ font-weight:600; color:var(--ink); }
+  .article-table tbody td:nth-child(2){ color:var(--pine); font-weight:600; white-space:nowrap; }
+  .article-table tbody td:last-child{ color:var(--stone); }
 
   /* ---------- BVG Zinseszins-Rechner ---------- */
   .bvg-calc-wrap{ display:grid; grid-template-columns:1.6fr 1fr; gap:24px; align-items:start; margin-top:40px; }
@@ -1857,6 +1864,69 @@
         <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Steuer- oder Anlageberatung. Die steuerliche Wirkung hängt von Ihrer persönlichen Situation und Ihrem Kanton ab.</p>
 
         <div class="cta-row" style="margin-top:30px;"><button class="btn btn-ghost" onclick="openBooking()">Steuersituation besprechen</button></div>
+      </article>
+
+      <article class="article">
+        <div class="article-tag">Versicherungen &amp; Vorsorge</div>
+        <h2>Kündigungsfristen bei Versicherungen: Tipps und Tricks für Privatpersonen</h2>
+        <div class="article-image"><img src="images/blog-kuendigungsfristen.jpg" alt="Person unterschreibt ein Kündigungsschreiben"></div>
+        <p>Eine Versicherung zu kündigen klingt einfach – ist es aber nur, wenn man die Fristen und ein paar Stolperfallen kennt. Jede Versicherungsart tickt anders, und ein einziger verpasster Tag kann bedeuten, dass Sie ein weiteres Jahr an einen Vertrag gebunden sind, den Sie eigentlich loswerden wollten. Hier die wichtigsten Fristen für Ihre privaten Versicherungen – plus die Tricks, die in der Praxis wirklich helfen.</p>
+
+        <h3>Die Fristen im Überblick</h3>
+        <div class="article-table-wrap">
+          <table class="article-table">
+            <thead>
+              <tr><th>Versicherung</th><th>Übliche Frist</th><th>Besonderheit</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Krankenkasse Grundversicherung</td><td>Bis 30. November</td><td>Wechsel per 1. Januar, neue Kasse muss aufnehmen</td></tr>
+              <tr><td>Krankenkasse Zusatzversicherung</td><td>Meist 3 Monate vor Ablauf</td><td>Rechtlich getrennt von der Grundversicherung</td></tr>
+              <tr><td>Hausratversicherung</td><td>3 Monate vor Vertragsablauf</td><td>Sonderkündigung nach Schaden (2 Wochen) möglich</td></tr>
+              <tr><td>Privathaftpflicht</td><td>3 Monate vor Vertragsablauf</td><td>Oft im Paket mit Hausrat, separat kündbar</td></tr>
+              <tr><td>Fahrzeugversicherung</td><td>3 Monate vor Ablauf</td><td>Achtung bei Fahrzeugwechsel während der Laufzeit</td></tr>
+              <tr><td>Gebäudeversicherung</td><td>Kantonal unterschiedlich</td><td>In vielen Kantonen obligatorisch bei kant. Anstalt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Diese Fristen sind die üblichen Standardwerte – die genauen Angaben stehen immer in Ihrer Police oder den Allgemeinen Versicherungsbedingungen (AVB).</p>
+
+        <h3>Trick 1: Nicht das Ausstellungsdatum zählt, sondern das Ablaufdatum</h3>
+        <p>Ein häufiger Fehler: Man orientiert sich am Datum, an dem die Police unterschrieben wurde, statt am tatsächlichen Ablauf- bzw. Verlängerungsdatum. Diese können auseinanderfallen, besonders wenn eine Police im Lauf des Jahres angepasst wurde. Prüfen Sie immer das Feld „Vertragsablauf" oder „Verlängerung" auf Ihrer aktuellen Police.</p>
+
+        <h3>Trick 2: Kündigung nachweisbar verschicken</h3>
+        <p>Eine Kündigung per normaler Post ohne Nachweis ist riskant – kommt sie zu spät an oder geht verloren, tragen Sie im Zweifel die Beweislast. Nutzen Sie ein Einschreiben oder A-Post Plus mit Sendungsverfolgung, und behalten Sie eine Kopie der Kündigung sowie den Versandbeleg.</p>
+
+        <h3>Trick 3: Nie die alte Police kündigen, bevor die neue steht</h3>
+        <p>Gerade bei obligatorischen Versicherungen wie der Krankenkasse oder der Fahrzeughaftpflicht darf keine Deckungslücke entstehen. Warten Sie die schriftliche Bestätigung der neuen Gesellschaft ab, bevor Sie die alte Police kündigen – auch wenn die Fristen eng werden.</p>
+
+        <h3>Trick 4: Auf automatische Vertragsverlängerung achten</h3>
+        <p>Die meisten Versicherungsverträge verlängern sich automatisch um ein weiteres Jahr, wenn nicht fristgerecht gekündigt wird. Ein Kalendereintrag drei bis vier Monate vor dem bekannten Ablaufdatum verhindert, dass die Frist unbemerkt verstreicht.</p>
+
+        <h3>Trick 5: Sonderkündigungsrechte kennen und nutzen</h3>
+        <p>Neben der ordentlichen Kündigung gibt es Situationen, in denen ein Vertrag ausserordentlich gekündigt werden kann:</p>
+        <ul>
+          <li>Nach einem Schadenfall – meist innerhalb von zwei Wochen nach Auszahlung der Leistung.</li>
+          <li>Bei einer Prämienerhöhung durch den Versicherer.</li>
+          <li>Bei Wegzug ins Ausland.</li>
+        </ul>
+        <p>Ein normaler Umzug innerhalb der Schweiz oder blosse Unzufriedenheit mit dem Service zählen dagegen nicht als Sonderkündigungsgrund – hier gilt weiterhin die ordentliche Frist.</p>
+
+        <h3>Trick 6: Grundversicherung und Zusatzversicherung getrennt behandeln</h3>
+        <p>Bei der Krankenkasse ist das der klassische Stolperstein: Grundversicherung (KVG) und Zusatzversicherung (VVG) sind rechtlich komplett getrennt. Eine Kündigung der Grundversicherung kündigt die Zusatzversicherung nicht automatisch mit – und wer die Zusatzversicherung separat kündigt, riskiert bei einem späteren Neuabschluss eine Gesundheitsprüfung.</p>
+
+        <h3>Trick 7: Bei Fahrzeugwechsel genau hinschauen</h3>
+        <p>Verkaufen Sie Ihr Fahrzeug oder schaffen Sie ein neues an, wird die bestehende Fahrzeugversicherung nicht automatisch beendet – meist muss sie überschrieben, angepasst oder separat gekündigt werden. Klären Sie dies direkt mit Ihrer Versicherung, um doppelte Prämien oder eine ungewollte Deckungslücke zu vermeiden.</p>
+
+        <h3>Trick 8: Kündigungsbestätigung einfordern</h3>
+        <p>Nach jeder Kündigung sollten Sie eine schriftliche Bestätigung der Versicherungsgesellschaft verlangen – inklusive Angabe des genauen Kündigungsdatums und einer allfälligen Prämienrückerstattung. Ohne diese Bestätigung haben Sie im Streitfall keinen Nachweis, dass die Kündigung angekommen und akzeptiert wurde.</p>
+
+        <h3>Unser Rat</h3>
+        <p>Die meisten Probleme bei Kündigungen entstehen nicht durch komplizierte Regeln, sondern durch simple Terminversäumnisse. Wer sich die relevanten Fristen frühzeitig notiert – am besten drei bis vier Monate vor Vertragsende – hat die Kontrolle zurück, statt vom Kalender überrascht zu werden.</p>
+        <p>Wenn Sie unsicher sind, welche Frist für welche Ihrer Policen gilt, oder gleich mehrere Verträge im Blick behalten möchten: Genau dafür sind wir da.</p>
+
+        <p class="disclaimer">Dieser Beitrag ersetzt keine individuelle Beratung. Die genauen Fristen können je nach Vertrag, Gesellschaft und Kanton abweichen – massgebend sind immer Ihre persönlichen Vertragsunterlagen bzw. AVB.</p>
+
+        <div class="cta-row" style="margin-top:30px;"><button class="btn btn-ghost" onclick="openBooking()">Meine Situation prüfen</button></div>
       </article>
 
       <div class="cta-row" style="justify-content:center; margin-top:100px; padding-top:60px; border-top:1px solid var(--line);"><button class="btn btn-ghost" onclick="openBooking()">Thema vorschlagen</button></div>
