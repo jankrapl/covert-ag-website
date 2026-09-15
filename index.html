@@ -188,30 +188,6 @@
   }
   .hero-grid{ display:block; }
 
-  /* portal mock */
-  .portal-mock{ position:relative; height:440px; }
-  .pm-card{
-    position:absolute; background:var(--white); border:1px solid var(--line); border-radius:14px;
-    padding:18px 20px; width:230px; box-shadow:0 18px 40px rgba(20,32,25,.08);
-    opacity:0; transform:translateY(16px); animation:riseIn .7s ease forwards;
-  }
-  .pm-card h4{ font-family:'Plus Jakarta Sans',sans-serif; font-size:1rem; font-weight:500; margin:0 0 6px; }
-  .pm-card p{ font-size:0.8rem; color:var(--stone); margin:0; }
-  .pm1{ top:8%; left:4%; animation-delay:.15s; }
-  .pm2{ top:0%; right:0%; width:190px; animation-delay:.32s; }
-  .pm3{ top:42%; left:22%; width:210px; background:var(--pine); color:var(--paper); animation-delay:.48s; border-color:var(--pine); }
-  .pm3 h4{ color:var(--paper); }
-  .pm3 p{ color:#BFD1FF; }
-  .pm4{ bottom:6%; left:0%; width:200px; animation-delay:.64s; }
-  .pm5{ bottom:0%; right:8%; width:180px; animation-delay:.8s; }
-  @keyframes riseIn{ to{ opacity:1; transform:translateY(0); } }
-  @media (prefers-reduced-motion:reduce){ .pm-card{ animation:none; opacity:1; transform:none; } }
-  @media (max-width:940px){ .portal-mock{ height:320px; } .pm-card{ width:150px; padding:12px 14px; } .pm-card h4{font-size:.85rem;} .pm-card p{font-size:.72rem;} }
-  @media (max-width:640px){ .portal-mock{ display:none; } }
-
-  /* portal screenshot (real product) */
-  .portal-shot-wrap{ display:flex; justify-content:center; }
-  .portal-shot{ width:100%; max-width:960px; border-radius:16px; box-shadow:0 30px 70px rgba(20,32,25,.16); border:1px solid var(--line); display:block; }
 
   /* ---------- Pull quote ---------- */
   .quote-block{
@@ -388,12 +364,6 @@
   .scenario-box .when{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:10px; }
   .scenario-box .flow{ font-weight:700; color:var(--pine); margin-top:10px; }
 
-  /* ---------- Mini dashboard preview ---------- */
-  .mini-dash{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:30px; }
-  @media (max-width:780px){ .mini-dash{ grid-template-columns:1fr 1fr; } }
-  .mini-dash-tile{ background:var(--white); border:1px solid var(--line); border-radius:14px; padding:22px 20px; }
-  .mini-dash-tile .label{ font-size:0.78rem; color:var(--stone); margin-bottom:8px; }
-  .mini-dash-tile .value{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.25rem; color:var(--ink); }
   .dark .chip{ border-color:rgba(255,255,255,.28); background:transparent; color:var(--paper); }
 
   /* ---------- Process steps ---------- */
@@ -515,9 +485,6 @@
   /* ---------- Micro-CTA ---------- */
   .micro-cta{ margin-top:16px; font-size:0.9rem; font-weight:600; color:var(--pine); display:inline-flex; align-items:center; gap:6px; cursor:pointer; }
 
-  /* ---------- Portal preview mock ---------- */
-  .portal-preview{ margin-top:40px; max-width:960px; margin-left:auto; margin-right:auto; }
-  .portal-preview .pm-caption{ margin-top:14px; font-size:0.8rem; color:var(--stone); text-align:center; }
 
   /* ---------- Editorial photos ---------- */
   .photo-frame{ aspect-ratio:4/3; overflow:hidden; border:1px solid var(--line); border-radius:14px; margin-top:26px; max-width:460px; }
@@ -599,14 +566,6 @@
       <p class="nudge">FINMA-registrierter Versicherungsvermittler · Beratung in Olten und schweizweit</p>
       <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
       <div class="hero-tag">Persönlich in Olten · Für Sie in der ganzen Schweiz</div>
-    </div>
-  </section>
-
-  <section class="tight">
-    <div class="wrap" style="max-width:1000px;">
-      <div class="portal-shot-wrap">
-        <img src="images/portal-preview-desktop.png" alt="Coverd Kundenportal Dashboard" class="portal-shot">
-      </div>
     </div>
   </section>
 
@@ -942,12 +901,6 @@
           <p>Dokument benötigt? <strong>Im Portal.</strong></p>
           <p>Änderung? <strong>Digital melden.</strong></p>
         </div>
-        <div class="portal-mock" aria-hidden="true" style="margin-top:24px; height:380px;">
-          <div class="pm-card pm1"><h4>Policen</h4><p>6 aktive Verträge</p></div>
-          <div class="pm-card pm2"><h4>Dokumente</h4><p>24 Dokumente</p></div>
-          <div class="pm-card pm3"><h4>Anliegen</h4><p>1 in Bearbeitung</p></div>
-          <div class="pm-card pm4"><h4>Nachrichten</h4><p>2 neu</p></div>
-        </div>
       </div>
     </div>
   </section>
@@ -1039,21 +992,11 @@
     </div>
   </section>
 
-  <section class="deep" id="u-portal">
-    <div class="wrap cols2">
-      <div>
-        <h2>Eine Plattform für Ihre Versicherungsadministration.</h2>
-        <p class="stone" style="margin-top:14px;">Alles zentral. Direkt mit Coverd verbunden.</p>
-        <div class="cta-row" style="margin-top:16px;"><button class="btn btn-ghost" onclick="goTo('portal')">Firmenportal ansehen</button></div>
-      </div>
-      <div>
-        <div class="portal-mock" aria-hidden="true" style="height:380px;">
-          <div class="pm-card pm1"><h4>Policen</h4><p>Zentral hinterlegt</p></div>
-          <div class="pm-card pm2"><h4>Rechnungen</h4><p>Immer abrufbar</p></div>
-          <div class="pm-card pm3"><h4>Schäden</h4><p>Direkt melden</p></div>
-          <div class="pm-card pm4"><h4>Mitarbeitende</h4><p>Einfach mutieren</p></div>
-        </div>
-      </div>
+  <section class="deep" id="u-portal" style="text-align:center;">
+    <div class="wrap" style="max-width:640px;">
+      <h2>Eine Plattform für Ihre Versicherungsadministration.</h2>
+      <p class="stone" style="margin-top:14px;">Alles zentral. Direkt mit Coverd verbunden.</p>
+      <div class="cta-row" style="justify-content:center; margin-top:16px;"><button class="btn btn-ghost" onclick="goTo('portal')">Firmenportal ansehen</button></div>
     </div>
   </section>
 
@@ -1695,23 +1638,6 @@
     </div>
   </section>
 
-  <section>
-    <div class="wrap">
-      <div class="section-head" style="text-align:center; margin:0 auto;"><h2>Ein Login statt suchen.</h2></div>
-      <div class="mini-dash">
-        <div class="mini-dash-tile"><div class="label">Meine Policen</div><div class="value">6 aktive Policen</div></div>
-        <div class="mini-dash-tile"><div class="label">Meine Dokumente</div><div class="value">24 Dokumente</div></div>
-        <div class="mini-dash-tile"><div class="label">Meine Anliegen</div><div class="value">1 in Bearbeitung</div></div>
-        <div class="mini-dash-tile"><div class="label">Nachrichten</div><div class="value">2 neu</div></div>
-      </div>
-      <div class="portal-preview" style="margin-top:56px;">
-        <div class="portal-shot-wrap">
-          <img src="images/portal-preview-desktop.png" alt="Coverd Kundenportal Dashboard" class="portal-shot">
-        </div>
-        <p class="pm-caption">So sieht Ihr Coverd Portal aus</p>
-      </div>
-    </div>
-  </section>
 
   <section class="deep">
     <div class="wrap cols2">
