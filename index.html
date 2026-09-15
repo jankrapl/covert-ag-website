@@ -80,25 +80,26 @@
   }
   .logo{ cursor:pointer; display:flex; align-items:center; }
   .logo img{ height:26px; width:auto; display:block; }
-  nav.links{ display:flex; align-items:center; gap:30px; }
+  nav.links{ display:flex; align-items:center; gap:30px; align-self:stretch; }
   nav.links a{ font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--ink); position:relative; padding:4px 0; cursor:pointer; }
   nav.links a.active{ color:var(--pine); }
   nav.links a:hover{ color:var(--pine); }
-  .has-drop{ position:relative; }
+  .has-drop{ position:relative; display:flex; align-items:center; align-self:stretch; }
   .drop{
     position:absolute; top:100%; left:50%; transform:translateX(-50%);
     background:var(--white); border:1px solid var(--line); min-width:230px;
-    padding:8px; opacity:0; visibility:hidden; translate:0 6px; transition:.18s ease;
+    padding:8px; opacity:0; visibility:hidden; translate:0 6px;
+    transition:opacity .18s ease, translate .18s ease, visibility 0s linear .25s;
     box-shadow:0 12px 30px rgba(20,32,25,.08);
   }
-  .has-drop:hover .drop{ opacity:1; visibility:visible; translate:0 0; }
+  .has-drop:hover .drop{ opacity:1; visibility:visible; translate:0 0; transition:opacity .18s ease, translate .18s ease, visibility 0s linear 0s; }
   .drop-wide{ display:grid; grid-template-columns:1fr 1fr; gap:2px 20px; min-width:460px; padding:14px; }
   .drop-label{ font-size:0.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--stone); font-weight:700; padding:6px 12px 6px; }
   .drop a{ display:block; padding:10px 12px; font-size:0.9rem; border-radius:8px; text-transform:none; letter-spacing:normal; font-weight:500; }
   .drop a:hover{ background:var(--paper); }
   .login-drop .drop{ left:auto; right:0; transform:none; }
-  .login-drop.open .drop{ opacity:1; visibility:visible; translate:0 0; }
-  .nav-cta{ display:flex; align-items:center; gap:18px; }
+  .login-drop.open .drop{ opacity:1; visibility:visible; translate:0 0; transition:opacity .18s ease, translate .18s ease, visibility 0s linear 0s; }
+  .nav-cta{ display:flex; align-items:center; gap:18px; align-self:stretch; }
   .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px; }
   .burger span{ width:22px; height:2px; background:var(--ink); display:block; }
   @media (max-width:900px){
