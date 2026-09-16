@@ -78,30 +78,30 @@
   .help-dark .btn-white{ align-self:flex-start; margin-top:6px; border:0; background:#FFFFFF; color:#0A0A0B; font:inherit; font-size:14px; font-weight:600; padding:10px 18px; border-radius:999px; cursor:pointer; }
   .help-dark .btn-white:hover{ background:#1F4FFF; color:#FFFFFF; }
   .status-list{ display:flex; flex-direction:column; }
-  .status-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid rgba(255,255,255,0.12); }
+  .status-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid #F0F0EE; }
   .status-row:first-child{ padding-top:2px; }
   .status-row:last-child{ padding-bottom:2px; border-bottom:0; }
   .status-pill{ font-size:13px; font-weight:600; border-radius:999px; padding:6px 14px; white-space:nowrap; flex:none; }
-  .status-pill-ready{ color:#9DB9FF; background:#1B2A4D; }
-  .status-pill-pending{ color:#B9C4D9; background:#20242E; }
-  .status-icon-btn{ border:0; background:transparent; color:#7A7F8A; font-size:14px; cursor:pointer; padding:4px 6px; line-height:1; }
-  .status-icon-btn:hover{ color:#FFFFFF; }
-  .status-add-btn{ align-self:flex-start; margin-top:14px; border:1px dashed rgba(255,255,255,0.28); background:transparent; color:#B9C4D9; font:inherit; font-size:14px; font-weight:600; padding:10px 16px; border-radius:999px; cursor:pointer; }
-  .status-add-btn:hover{ border-color:#9DB9FF; color:#9DB9FF; }
+  .status-pill-ready{ color:#1F4FFF; background:#E8ECFF; }
+  .status-pill-pending{ color:#6E6E6B; background:#F3F3F1; }
+  .status-icon-btn{ border:0; background:transparent; color:#9A9A96; font-size:14px; cursor:pointer; padding:4px 6px; line-height:1; }
+  .status-icon-btn:hover{ color:#0A0A0B; }
+  .status-add-btn{ align-self:flex-start; margin-top:14px; border:1px dashed #C9C9C5; background:transparent; color:#6E6E6B; font:inherit; font-size:14px; font-weight:600; padding:10px 16px; border-radius:999px; cursor:pointer; }
+  .status-add-btn:hover{ border-color:#1F4FFF; color:#1F4FFF; }
   .status-edit-row{ display:flex; flex-direction:column; gap:10px; padding:16px 0; }
   .status-edit-row-fields{ display:flex; gap:10px; flex-wrap:wrap; }
-  .status-edit-input{ flex:1 1 200px; border:1px solid rgba(255,255,255,0.22); background:rgba(255,255,255,0.06); color:#FFFFFF; border-radius:10px; padding:10px 14px; font:inherit; font-size:14px; outline:none; }
-  .status-edit-input:focus{ border-color:#9DB9FF; }
-  .status-edit-input::placeholder{ color:#7A7F8A; }
+  .status-edit-input{ flex:1 1 200px; border:1px solid #E4E4E1; background:#FFFFFF; color:#0A0A0B; border-radius:10px; padding:10px 14px; font:inherit; font-size:14px; outline:none; }
+  .status-edit-input:focus{ border-color:#1F4FFF; }
+  .status-edit-input::placeholder{ color:#9A9A96; }
   .status-kind-toggle{ display:flex; gap:8px; }
-  .status-kind-btn{ border:1px solid rgba(255,255,255,0.22); background:transparent; color:#C9C9C6; font:inherit; font-size:13px; font-weight:600; padding:8px 14px; border-radius:999px; cursor:pointer; }
-  .status-kind-btn.active-ready{ background:#1B2A4D; border-color:#9DB9FF; color:#9DB9FF; }
-  .status-kind-btn.active-pending{ background:#20242E; border-color:#B9C4D9; color:#B9C4D9; }
+  .status-kind-btn{ border:1px solid #E4E4E1; background:transparent; color:#6E6E6B; font:inherit; font-size:13px; font-weight:600; padding:8px 14px; border-radius:999px; cursor:pointer; }
+  .status-kind-btn.active-ready{ background:#E8ECFF; border-color:#1F4FFF; color:#1F4FFF; }
+  .status-kind-btn.active-pending{ background:#F3F3F1; border-color:#6E6E6B; color:#6E6E6B; }
   .status-edit-actions{ display:flex; gap:10px; }
   .status-btn-save{ border:0; background:#1F4FFF; color:#FFFFFF; font:inherit; font-size:13px; font-weight:600; padding:9px 16px; border-radius:999px; cursor:pointer; }
-  .status-btn-save:hover{ background:#9DB9FF; color:#0A0A0B; }
-  .status-btn-cancel{ border:0; background:transparent; color:#B9C4D9; font:inherit; font-size:13px; font-weight:600; padding:9px 12px; cursor:pointer; }
-  .status-btn-cancel:hover{ color:#FFFFFF; }
+  .status-btn-save:hover{ background:#0A0A0B; }
+  .status-btn-cancel{ border:0; background:transparent; color:#6E6E6B; font:inherit; font-size:13px; font-weight:600; padding:9px 12px; cursor:pointer; }
+  .status-btn-cancel:hover{ color:#0A0A0B; }
 
   .grid-2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
   .grid-cards{ display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; }
@@ -280,7 +280,7 @@ function themenCard(){
   const editingId = state.themaEditingId;
   const rows = state.themen.map(t => editingId === t.id ? themaEditRow(t) : `
     <div class="status-row">
-      <span style="font-size:16px; color:#F3F3F1;">${esc(t.label)}</span>
+      <span style="font-size:16px; color:#0A0A0B;">${esc(t.label)}</span>
       <div style="display:flex; align-items:center; gap:8px;">
         <span class="status-pill status-pill-${t.kind}">${esc(t.status)}</span>
         <button class="status-icon-btn" onclick="editThemaStart('${t.id}')" title="Bearbeiten">✎</button>
@@ -289,7 +289,7 @@ function themenCard(){
     </div>`).join('');
   const addRow = editingId === 'new' ? themaEditRow(null) : `<button class="status-add-btn" onclick="addThemaStart()">+ Thema hinzufügen</button>`;
   return `
-  <div class="help-dark">
+  <div class="card" style="display:flex; flex-direction:column; gap:12px;">
     <div style="font-size:17px; font-weight:600;">Für Sie in Vorbereitung</div>
     <div class="status-list">${rows}</div>
     ${addRow}
