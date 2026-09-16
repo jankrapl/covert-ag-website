@@ -159,6 +159,15 @@
   .page-hero .nudge, .home-hero .nudge{ color:rgba(255,255,255,.68); }
   .nudge.center{ text-align:center; }
 
+  /* ---------- Mailto fallback toast ---------- */
+  .mail-toast{
+    position:fixed; left:50%; bottom:28px; transform:translate(-50%, 12px); z-index:200;
+    background:var(--ink); color:#fff; padding:14px 22px; border-radius:12px; max-width:calc(100vw - 48px);
+    font-size:0.88rem; text-align:center; box-shadow:0 16px 40px rgba(20,32,25,.22);
+    opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, transform .2s ease, visibility 0s linear .2s;
+  }
+  .mail-toast.show{ opacity:1; visibility:visible; transform:translate(-50%, 0); transition:opacity .2s ease, transform .2s ease, visibility 0s linear 0s; }
+
   /* ---------- Leistungen hub diagram ---------- */
   .hub-diagram{ position:relative; max-width:760px; margin:56px auto 0; aspect-ratio:1000/526; }
   .hub-lines{ position:absolute; inset:0; width:100%; height:100%; }
@@ -613,7 +622,7 @@
       <p class="lede">Ein Partner für Versicherungen, Vorsorge und Steuern – persönlich beraten, digital betreut.</p>
       <div class="cta-row">
         <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
-        <button class="btn btn-ghost" onclick="window.location.href='mailto:info@coverd.ch'">Situation schildern</button>
+        <button class="btn btn-ghost" onclick="openMail('info@coverd.ch')">Situation schildern</button>
       </div>
       <p class="nudge">FINMA-registrierter Versicherungsvermittler · Beratung in Olten und schweizweit</p>
       <p class="nudge">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
@@ -2279,13 +2288,37 @@ function toggleChip(el){
   el.classList.toggle('picked');
 }
 
+function openMail(address, subject, body){
+  var url = 'mailto:' + address;
+  var params = [];
+  if (subject) { params.push('subject=' + encodeURIComponent(subject)); }
+  if (body) { params.push('body=' + encodeURIComponent(body)); }
+  if (params.length) { url += '?' + params.join('&'); }
+  window.location.href = url;
+  showMailToast(address);
+}
+
+function showMailToast(address){
+  var el = document.getElementById('mailToast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'mailToast';
+    el.className = 'mail-toast';
+    document.body.appendChild(el);
+  }
+  el.textContent = 'Öffnet sich kein E-Mail-Programm? Schreiben Sie uns direkt an ' + address;
+  el.classList.add('show');
+  clearTimeout(window.__mailToastTimer);
+  window.__mailToastTimer = setTimeout(function(){ el.classList.remove('show'); }, 5000);
+}
+
 function checkMySituation(){
   var picked = Array.prototype.slice.call(document.querySelectorAll('.pick-chip.picked')).map(function(c){ return c.textContent; });
   if (picked.length) {
     if (BOOKING_URL) { window.open(BOOKING_URL, '_blank', 'noopener'); }
-    var subject = encodeURIComponent('Veränderung bei mir: ' + picked.join(', '));
-    var body = encodeURIComponent('Hallo Coverd-Team\n\nBei mir hat sich Folgendes verändert: ' + picked.join(', ') + '.\n\nBitte meldet euch bei mir, um meine Situation zu besprechen.');
-    window.location.href = 'mailto:info@coverd.ch?subject=' + subject + '&body=' + body;
+    var subject = 'Veränderung bei mir: ' + picked.join(', ');
+    var body = 'Hallo Coverd-Team\n\nBei mir hat sich Folgendes verändert: ' + picked.join(', ') + '.\n\nBitte meldet euch bei mir, um meine Situation zu besprechen.';
+    openMail('info@coverd.ch', subject, body);
   } else {
     openBooking();
   }
