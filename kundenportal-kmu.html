@@ -82,6 +82,24 @@
   .status-pill{ font-size:13px; font-weight:600; border-radius:999px; padding:6px 14px; white-space:nowrap; flex:none; }
   .status-pill-ready{ color:#9DB9FF; background:#1B2A4D; }
   .status-pill-pending{ color:#B9C4D9; background:#20242E; }
+  .status-icon-btn{ border:0; background:transparent; color:#7A7F8A; font-size:14px; cursor:pointer; padding:4px 6px; line-height:1; }
+  .status-icon-btn:hover{ color:#FFFFFF; }
+  .status-add-btn{ align-self:flex-start; margin-top:14px; border:1px dashed rgba(255,255,255,0.28); background:transparent; color:#B9C4D9; font:inherit; font-size:14px; font-weight:600; padding:10px 16px; border-radius:999px; cursor:pointer; }
+  .status-add-btn:hover{ border-color:#9DB9FF; color:#9DB9FF; }
+  .status-edit-row{ display:flex; flex-direction:column; gap:10px; padding:16px 0; }
+  .status-edit-row-fields{ display:flex; gap:10px; flex-wrap:wrap; }
+  .status-edit-input{ flex:1 1 200px; border:1px solid rgba(255,255,255,0.22); background:rgba(255,255,255,0.06); color:#FFFFFF; border-radius:10px; padding:10px 14px; font:inherit; font-size:14px; outline:none; }
+  .status-edit-input:focus{ border-color:#9DB9FF; }
+  .status-edit-input::placeholder{ color:#7A7F8A; }
+  .status-kind-toggle{ display:flex; gap:8px; }
+  .status-kind-btn{ border:1px solid rgba(255,255,255,0.22); background:transparent; color:#C9C9C6; font:inherit; font-size:13px; font-weight:600; padding:8px 14px; border-radius:999px; cursor:pointer; }
+  .status-kind-btn.active-ready{ background:#1B2A4D; border-color:#9DB9FF; color:#9DB9FF; }
+  .status-kind-btn.active-pending{ background:#20242E; border-color:#B9C4D9; color:#B9C4D9; }
+  .status-edit-actions{ display:flex; gap:10px; }
+  .status-btn-save{ border:0; background:#1F4FFF; color:#FFFFFF; font:inherit; font-size:13px; font-weight:600; padding:9px 16px; border-radius:999px; cursor:pointer; }
+  .status-btn-save:hover{ background:#9DB9FF; color:#0A0A0B; }
+  .status-btn-cancel{ border:0; background:transparent; color:#B9C4D9; font:inherit; font-size:13px; font-weight:600; padding:9px 12px; cursor:pointer; }
+  .status-btn-cancel:hover{ color:#FFFFFF; }
 
   .grid-2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
   .grid-cards{ display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; }
@@ -222,10 +240,117 @@ const state = {
   botOpen: false,
   listening: false,
   voiceOut: false,
-  messages: [{ role: 'bot', text: 'Guten Tag. Ich beantworte Fragen zu Ihren sieben Policen — Prämien, Laufzeiten, Deckungen. Für alles Weitere ist Jan Krapl da.' }]
+  messages: [{ role: 'bot', text: 'Guten Tag. Ich beantworte Fragen zu Ihren sieben Policen — Prämien, Laufzeiten, Deckungen. Für alles Weitere ist Jan Krapl da.' }],
+  themen: [
+    { id: 't1', label: 'Vergleich Sammelstiftungen (BVG)', status: 'Bereit', kind: 'ready' },
+    { id: 't2', label: 'Cyber-Risk-Versicherung erneuern', status: 'In Prüfung', kind: 'pending' },
+    { id: 't3', label: 'UVG-Ausschreibung', status: 'Bereit', kind: 'ready' },
+    { id: 't4', label: 'Nächstes Gespräch', status: 'Mi, 10:00', kind: 'pending' }
+  ],
+  themaEditingId: null,
+  themaEditLabel: '',
+  themaEditStatus: '',
+  themaEditKind: 'ready'
 };
 
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function themenCard(){
+  const editingId = state.themaEditingId;
+  const rows = state.themen.map(t => editingId === t.id ? themaEditRow(t) : `
+    <div class="status-row">
+      <span style="font-size:16px; color:#F3F3F1;">${esc(t.label)}</span>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="status-pill status-pill-${t.kind}">${esc(t.status)}</span>
+        <button class="status-icon-btn" onclick="editThemaStart('${t.id}')" title="Bearbeiten">✎</button>
+        <button class="status-icon-btn" onclick="themaDelete('${t.id}')" title="Entfernen">✕</button>
+      </div>
+    </div>`).join('');
+  const addRow = editingId === 'new' ? themaEditRow(null) : `<button class="status-add-btn" onclick="addThemaStart()">+ Thema hinzufügen</button>`;
+  return `
+  <div class="help-dark">
+    <div style="font-size:17px; font-weight:600;">Für Sie in Vorbereitung</div>
+    <div class="status-list">${rows}</div>
+    ${addRow}
+  </div>`;
+}
+
+function themaEditRow(t){
+  const id = t ? t.id : 'new';
+  const label = state.themaEditLabel;
+  const status = state.themaEditStatus;
+  const kind = state.themaEditKind;
+  return `
+  <div class="status-edit-row">
+    <div class="status-edit-row-fields">
+      <input class="status-edit-input" id="themaLabelInput" placeholder="Thema (z. B. Vergleich Betriebshaftpflicht)" value="${esc(label)}">
+      <input class="status-edit-input" id="themaStatusInput" placeholder="Status (z. B. Bereit)" value="${esc(status)}">
+    </div>
+    <div class="status-kind-toggle">
+      <button type="button" class="status-kind-btn ${kind==='ready'?'active-ready':''}" onclick="setThemaKind('ready')">Blau</button>
+      <button type="button" class="status-kind-btn ${kind==='pending'?'active-pending':''}" onclick="setThemaKind('pending')">Grau</button>
+    </div>
+    <div class="status-edit-actions">
+      <button class="status-btn-save" onclick="themaSave('${id}')">Speichern</button>
+      <button class="status-btn-cancel" onclick="themaCancel()">Abbrechen</button>
+    </div>
+  </div>`;
+}
+
+function syncThemaEditFields(){
+  const l = document.getElementById('themaLabelInput');
+  const s = document.getElementById('themaStatusInput');
+  if (l) state.themaEditLabel = l.value;
+  if (s) state.themaEditStatus = s.value;
+}
+function addThemaStart(){
+  state.themaEditingId = 'new';
+  state.themaEditLabel = '';
+  state.themaEditStatus = '';
+  state.themaEditKind = 'ready';
+  render();
+  const l = document.getElementById('themaLabelInput'); if (l) l.focus();
+}
+function editThemaStart(id){
+  const t = state.themen.find(x => x.id === id);
+  if (!t) return;
+  state.themaEditingId = id;
+  state.themaEditLabel = t.label;
+  state.themaEditStatus = t.status;
+  state.themaEditKind = t.kind;
+  render();
+  const l = document.getElementById('themaLabelInput'); if (l) l.focus();
+}
+function setThemaKind(k){
+  syncThemaEditFields();
+  state.themaEditKind = k;
+  render();
+  const l = document.getElementById('themaLabelInput'); if (l) l.focus();
+}
+function themaCancel(){
+  state.themaEditingId = null;
+  render();
+}
+function themaSave(id){
+  syncThemaEditFields();
+  const label = state.themaEditLabel.trim();
+  let status = state.themaEditStatus.trim();
+  if (!label) { const l = document.getElementById('themaLabelInput'); if (l) l.focus(); return; }
+  if (!status) status = state.themaEditKind === 'ready' ? 'Bereit' : 'In Prüfung';
+  if (id === 'new') {
+    state.themen.push({ id: 't' + Date.now(), label, status, kind: state.themaEditKind });
+  } else {
+    const t = state.themen.find(x => x.id === id);
+    if (t) { t.label = label; t.status = status; t.kind = state.themaEditKind; }
+  }
+  state.themaEditingId = null;
+  render();
+}
+function themaDelete(id){
+  state.themen = state.themen.filter(x => x.id !== id);
+  if (state.themaEditingId === id) state.themaEditingId = null;
+  render();
+}
 
 function go(screen){ state.screen = screen; state.policy = null; state.claim = null; render(); window.scrollTo(0,0); }
 function openPolicy(key){ state.screen = 'policen'; state.policy = key; state.detailTab = 'ueber'; render(); window.scrollTo(0,0); }
@@ -415,21 +540,7 @@ function dashboardView(){
       </div>
     </div>
 
-    <div class="help-dark">
-      <div style="font-size:17px; font-weight:600;">Für Sie in Vorbereitung</div>
-      <div class="status-list">
-        ${[
-          { label: 'Vergleich Sammelstiftungen (BVG)', status: 'Bereit', kind: 'ready' },
-          { label: 'Cyber-Risk-Versicherung erneuern', status: 'In Prüfung', kind: 'pending' },
-          { label: 'UVG-Ausschreibung', status: 'Bereit', kind: 'ready' },
-          { label: 'Nächstes Gespräch', status: 'Mi, 10:00', kind: 'pending' }
-        ].map(s => `
-        <div class="status-row">
-          <span style="font-size:16px; color:#F3F3F1;">${s.label}</span>
-          <span class="status-pill status-pill-${s.kind}">${s.status}</span>
-        </div>`).join('')}
-      </div>
-    </div>
+    ${themenCard()}
 
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1; display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
