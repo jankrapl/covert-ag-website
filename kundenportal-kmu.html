@@ -46,6 +46,8 @@
   .card-hover:hover{ border-color:#0A0A0B; }
   .list-card{ border:1px solid #E4E4E1; background:#FFFFFF; border-radius:20px; padding:24px; cursor:pointer; font:inherit; text-align:left; width:100%; }
   .list-card:hover{ border-color:#0A0A0B; }
+  .icon-btn{ border:0; background:transparent; color:#9A9A96; font-size:14px; cursor:pointer; padding:4px 6px; line-height:1; }
+  .icon-btn:hover{ color:#0A0A0B; }
   .doc-card{ border:1px solid #E4E4E1; background:#FFFFFF; border-radius:18px; padding:22px; display:flex; flex-direction:column; gap:12px; }
   .doc-card:hover{ border-color:#0A0A0B; }
   .pill-outline{ border:1px solid #E4E4E1; background:#FFFFFF; font:inherit; font-size:14px; font-weight:600; padding:10px 16px; border-radius:999px; cursor:pointer; }
@@ -234,6 +236,16 @@ const FAQ = [
 
 const chf = (n) => 'CHF ' + n.toLocaleString('de-CH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
+const ROLES = {
+  admin: { label: 'Administrator', desc: 'Voller Zugriff: Policen, Schadenfälle, Rechnungen, Vertragsdaten und Teamverwaltung.', fg: '#1F4FFF', bg: '#E8ECFF' },
+  sachbearbeitung: { label: 'Sachbearbeitung', desc: 'Policen einsehen, Schadenfälle melden und bearbeiten. Keine Vertrags- oder Teamänderungen.', fg: '#16603A', bg: '#DDF3E6' },
+  rechnungen: { label: 'Rechnungen & Dokumente', desc: 'Zugriff auf Rechnungen und Dokumente. Kein Zugriff auf Schadenfälle oder Vertragsdaten.', fg: '#8A5A00', bg: '#FFF3D6' },
+  ansicht: { label: 'Nur Ansicht', desc: 'Kann alles einsehen, aber nichts ändern, einreichen oder melden.', fg: '#6E6E6B', bg: '#F3F3F1' }
+};
+function initials(name){
+  return String(name).split(' ').filter(Boolean).map(p => p[0]).slice(0,2).join('').toUpperCase();
+}
+
 const state = {
   screen: 'dash', policy: null, claim: null, detailTab: 'ueber', profilTab: 'allg', docFilter: 'Alle',
   notify: { schaden: true, dokumente: true, policen: true, news: false },
@@ -250,7 +262,16 @@ const state = {
   themaEditingId: null,
   themaEditLabel: '',
   themaEditStatus: '',
-  themaEditKind: 'ready'
+  themaEditKind: 'ready',
+  team: [
+    { id: 'm1', name: 'Luca Ferrari', email: 'l.ferrari@bachmann-metallbau.ch', role: 'admin' },
+    { id: 'm2', name: 'Sandra Wyss', email: 's.wyss@bachmann-metallbau.ch', role: 'sachbearbeitung' },
+    { id: 'm3', name: 'Peter Hodel', email: 'buchhaltung@bachmann-metallbau.ch', role: 'rechnungen' }
+  ],
+  teamEditingId: null,
+  teamEditName: '',
+  teamEditEmail: '',
+  teamEditRole: 'sachbearbeitung'
 };
 
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -464,6 +485,7 @@ function sidebar(){
     </nav>
     <div class="sidebar-label spaced">Konto</div>
     <nav class="sidebar-nav">
+      ${navItem('team','Team &amp; Zugriffe', sc==='team', "go('team')")}
       ${navItem('profil','Mein Profil', sc==='profil', "go('profil')")}
       ${navItem('hilfe','Hilfezentrum', sc==='hilfe', "go('hilfe')")}
     </nav>
@@ -477,7 +499,7 @@ function sidebar(){
 function topheader(){
   const policy = POLICIES.find(p => p.key === state.policy);
   const claim = CLAIMS.find(c => c.key === state.claim);
-  const titles = { dash:['Dashboard','Übersicht'], policen:['Policen','Übersicht'], schaden:['Schadenfälle','Übersicht'], dokumente:['Dokumente','Übersicht'], news:['Informationen','Übersicht'], hilfe:['Hilfezentrum','Übersicht'], profil:['Mein Profil','Benutzer'] };
+  const titles = { dash:['Dashboard','Übersicht'], policen:['Policen','Übersicht'], schaden:['Schadenfälle','Übersicht'], dokumente:['Dokumente','Übersicht'], news:['Informationen','Übersicht'], hilfe:['Hilfezentrum','Übersicht'], profil:['Mein Profil','Benutzer'], team:['Team & Zugriffe','Verwalter und Berechtigungen'] };
   const base = titles[state.screen] || titles.dash;
   const pageTitle = policy ? 'Policen' : claim ? 'Schadenfälle' : base[0];
   const pageCrumb = policy ? 'Übersicht · ' + policy.nr : claim ? 'Übersicht · ' + claim.titel : base[1];
@@ -836,6 +858,121 @@ function profilView(){
   </div>`;
 }
 
+function teamView(){
+  const editingId = state.teamEditingId;
+  const cards = state.team.map(m => editingId === m.id ? teamEditCard(m) : teamMemberCard(m)).join('');
+  const addCard = editingId === 'new' ? teamEditCard(null) : `
+    <button class="list-card" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; min-height:190px; color:#6E6E6B;" onclick="addTeamStart()">
+      <span style="font-size:30px; line-height:1; color:#1F4FFF;">+</span>
+      <span style="font-size:15px; font-weight:600;">Verwalter hinzufügen</span>
+    </button>`;
+  return `
+  <div style="display:flex; flex-direction:column; gap:26px;">
+    <p style="margin:0; font-size:16px; color:#6E6E6B; max-width:640px;">Bestimmen Sie, wer für Bachmann Metallbau AG auf das Coverd-Portal zugreifen kann — und mit welchen Berechtigungen.</p>
+    <div class="grid-cards">
+      ${cards}
+      ${addCard}
+    </div>
+    <div class="card" style="padding:28px;">
+      <div style="font-size:17px; font-weight:600; margin-bottom:6px;">Berechtigungsstufen im Überblick</div>
+      <div style="display:flex; flex-direction:column;">
+        ${Object.keys(ROLES).map(k => { const r = ROLES[k]; return `
+        <div style="display:flex; align-items:flex-start; gap:18px; padding:16px 0; border-bottom:1px solid #F0F0EE;">
+          <span class="badge" style="color:${r.fg}; background:${r.bg}; flex:none; min-width:170px; text-align:center;">${r.label}</span>
+          <div style="font-size:14px; color:#6E6E6B; line-height:1.5;">${r.desc}</div>
+        </div>`; }).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+function teamMemberCard(m){
+  const r = ROLES[m.role];
+  return `
+  <div class="list-card" style="cursor:default;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+      <div style="display:flex; gap:14px; align-items:center; min-width:0;">
+        <div style="width:44px; height:44px; border-radius:999px; background:#E8ECFF; color:#1F4FFF; display:grid; place-items:center; font-size:15px; font-weight:700; flex:none;">${esc(initials(m.name))}</div>
+        <div style="min-width:0;"><div style="font-size:16px; font-weight:600;">${esc(m.name)}</div><div style="font-size:13px; color:#6E6E6B; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${esc(m.email)}</div></div>
+      </div>
+      <div style="display:flex; gap:2px; flex:none;">
+        <button class="icon-btn" onclick="editTeamStart('${m.id}')" title="Bearbeiten">✎</button>
+        <button class="icon-btn" onclick="teamDelete('${m.id}')" title="Entfernen">✕</button>
+      </div>
+    </div>
+    <div style="border-top:1px solid #F0F0EE; margin-top:14px; padding-top:14px;">
+      <span class="badge" style="color:${r.fg}; background:${r.bg};">${r.label}</span>
+    </div>
+  </div>`;
+}
+
+function teamEditCard(m){
+  const id = m ? m.id : 'new';
+  const name = state.teamEditName;
+  const email = state.teamEditEmail;
+  const role = state.teamEditRole;
+  return `
+  <div class="list-card" style="cursor:default; display:flex; flex-direction:column; gap:12px;">
+    <div><div style="font-size:13px; font-weight:600; margin-bottom:6px;">Name</div><input class="input" id="teamNameInput" placeholder="Vor- und Nachname" value="${esc(name)}"></div>
+    <div><div style="font-size:13px; font-weight:600; margin-bottom:6px;">E-Mail</div><input class="input" id="teamEmailInput" placeholder="name@firma.ch" value="${esc(email)}"></div>
+    <div><div style="font-size:13px; font-weight:600; margin-bottom:6px;">Berechtigung</div>
+      <select class="input" id="teamRoleInput" style="color:#0A0A0B;">
+        ${Object.keys(ROLES).map(k => `<option value="${k}" ${k===role?'selected':''}>${ROLES[k].label}</option>`).join('')}
+      </select>
+    </div>
+    <div style="display:flex; gap:10px; margin-top:4px;">
+      <button class="btn-blue-sm" onclick="teamSave('${id}')">Speichern</button>
+      <button class="pill-outline" onclick="teamCancel()">Abbrechen</button>
+    </div>
+  </div>`;
+}
+
+function addTeamStart(){
+  state.teamEditingId = 'new';
+  state.teamEditName = '';
+  state.teamEditEmail = '';
+  state.teamEditRole = 'sachbearbeitung';
+  render();
+  const n = document.getElementById('teamNameInput'); if (n) n.focus();
+}
+function editTeamStart(id){
+  const m = state.team.find(x => x.id === id);
+  if (!m) return;
+  state.teamEditingId = id;
+  state.teamEditName = m.name;
+  state.teamEditEmail = m.email;
+  state.teamEditRole = m.role;
+  render();
+  const n = document.getElementById('teamNameInput'); if (n) n.focus();
+}
+function teamCancel(){
+  state.teamEditingId = null;
+  render();
+}
+function teamSave(id){
+  const n = document.getElementById('teamNameInput');
+  const e = document.getElementById('teamEmailInput');
+  const r = document.getElementById('teamRoleInput');
+  const name = (n ? n.value : '').trim();
+  const email = (e ? e.value : '').trim();
+  const role = r ? r.value : 'ansicht';
+  if (!name) { if (n) n.focus(); return; }
+  if (!email) { if (e) e.focus(); return; }
+  if (id === 'new') {
+    state.team.push({ id: 'm' + Date.now(), name, email, role });
+  } else {
+    const m = state.team.find(x => x.id === id);
+    if (m) { m.name = name; m.email = email; m.role = role; }
+  }
+  state.teamEditingId = null;
+  render();
+}
+function teamDelete(id){
+  state.team = state.team.filter(x => x.id !== id);
+  if (state.teamEditingId === id) state.teamEditingId = null;
+  render();
+}
+
 function mainBody(){
   const policy = state.policy && POLICIES.find(p => p.key === state.policy);
   const claim = state.claim && CLAIMS.find(c => c.key === state.claim);
@@ -846,6 +983,7 @@ function mainBody(){
   if (state.screen === 'news') return newsView();
   if (state.screen === 'hilfe') return hilfeView();
   if (state.screen === 'profil') return profilView();
+  if (state.screen === 'team') return teamView();
   return dashboardView();
 }
 
