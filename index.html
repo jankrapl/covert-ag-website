@@ -107,7 +107,7 @@
     .burger{ display:flex; }
   }
   .mobile-panel{
-    display:none; position:fixed; inset:74px 0 0 0; background:var(--paper); z-index:99;
+    display:none; position:fixed; inset:74px 0 0 0; background:var(--paper); z-index:160;
     padding:24px 24px 40px; overflow-y:auto;
   }
   .mobile-panel.open{ display:block; }
@@ -167,6 +167,16 @@
     opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, transform .2s ease, visibility 0s linear .2s;
   }
   .mail-toast.show{ opacity:1; visibility:visible; transform:translate(-50%, 0); transition:opacity .2s ease, transform .2s ease, visibility 0s linear 0s; }
+
+  /* ---------- WhatsApp chat button ---------- */
+  .whatsapp-fab{
+    position:fixed; right:24px; bottom:24px; z-index:150;
+    width:58px; height:58px; border-radius:999px; background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 12px 30px rgba(20,32,25,.25); transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .whatsapp-fab:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(20,32,25,.32); }
+  @media (max-width:640px){ .whatsapp-fab{ right:16px; bottom:16px; width:52px; height:52px; } }
 
   /* ---------- Leistungen hub diagram ---------- */
   .hub-diagram{ position:relative; max-width:760px; margin:56px auto 0; aspect-ratio:1000/526; }
@@ -611,6 +621,10 @@
   <button class="btn btn-ghost" style="margin-top:10px;" onclick="openPortal('unternehmen')">Login Unternehmen</button>
   <button class="btn btn-primary" onclick="openBooking()">Beratung vereinbaren</button>
 </div>
+
+<a class="whatsapp-fab" href="https://wa.me/41782489121" target="_blank" rel="noopener" aria-label="Per WhatsApp schreiben" title="Per WhatsApp schreiben">
+  <svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2m0 1.67c2.24 0 4.35.87 5.93 2.46a8.3 8.3 0 0 1 2.45 5.92c0 4.62-3.76 8.38-8.38 8.38a8.4 8.4 0 0 1-4.27-1.17l-.31-.18-3.12.82.83-3.04-.2-.32a8.35 8.35 0 0 1-1.28-4.46c0-4.62 3.76-8.38 8.38-8.38m-4.8 4.5c-.16 0-.43.06-.66.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.37 1 2.53.13.17 1.7 2.72 4.2 3.71 2.08.82 2.5.66 2.95.62.46-.04 1.48-.6 1.68-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.17-.48-.29-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.17-.29.19-.54.06-.25-.12-1.05-.38-1.99-1.22-.74-.65-1.23-1.46-1.38-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.36-.78-1.86-.2-.48-.4-.42-.56-.42h-.47Z"/></svg>
+</a>
 
 <!-- ================= HOME ================= -->
 <main class="page active" data-page="home">
