@@ -135,7 +135,11 @@
 </head>
 <body>
 <div id="app"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
+if (window.pdfjsLib) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
 const POLICIES = [
   { key: 'kk', produkt: 'Krankenkasse', produktEn: 'Health insurance', gesellschaft: 'Sanitas · Grundversicherung + Zusatz', gesellschaftEn: 'Sanitas · Basic + supplementary insurance', nr: '4471-9920', praemie: 'CHF 289.00 / Monat', praemieEn: 'CHF 289.00 / month', selbst: "Franchise CHF 2'500", selbstEn: "Deductible CHF 2'500", ablauf: '31.12.2026',
     deckung: 'Grundversicherung nach Modell Hausarzt mit Franchise CHF 2 500. Zusatzversicherung für Zahnbehandlung und Alternativmedizin.',
@@ -221,7 +225,10 @@ const state = {
   themaEditingId: null,
   themaEditLabel: '',
   themaEditStatus: '',
-  themaEditKind: 'ready'
+  themaEditKind: 'ready',
+  uploadedDocName: null,
+  uploadedDocText: null,
+  uploadedDocStatus: null
 };
 
 function t(de, en){ return state.lang === 'en' ? en : de; }
@@ -336,7 +343,117 @@ function setDocFilter(f){ state.docFilter = f; render(); }
 function toggleBot(){ state.botOpen = !state.botOpen; render(); }
 function closeBot(){ state.botOpen = false; render(); }
 
+function handlePolicyUpload(event){
+  var file = event.target.files && event.target.files[0];
+  event.target.value = '';
+  if (!file) return;
+  if (!window.pdfjsLib) {
+    state.messages.push({ role: 'bot', text: t('Dokumenten-Analyse ist gerade nicht verfügbar. Bitte später erneut versuchen.', 'Document analysis is not available right now. Please try again later.') });
+    render();
+    return;
+  }
+  state.uploadedDocName = file.name;
+  state.uploadedDocText = null;
+  state.uploadedDocStatus = 'loading';
+  render();
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var typedarray = new Uint8Array(e.target.result);
+    pdfjsLib.getDocument({ data: typedarray }).promise.then(function(pdf){
+      var pagePromises = [];
+      for (var i = 1; i <= pdf.numPages; i++){
+        pagePromises.push(pdf.getPage(i).then(function(page){
+          return page.getTextContent().then(function(tc){
+            return tc.items.map(function(it){ return it.str; }).join(' ');
+          });
+        }));
+      }
+      return Promise.all(pagePromises);
+    }).then(function(pagesText){
+      state.uploadedDocText = pagesText.join('\n');
+      state.uploadedDocStatus = 'ready';
+      state.messages.push({ role: 'bot', text: t(
+        'Dokument „' + file.name + '“ wurde eingelesen. Sie können jetzt Fragen dazu stellen, z. B. „Wie hoch ist die Prämie?“',
+        'Document "' + file.name + '" has been read. You can now ask questions about it, e.g. "What is the premium?"'
+      ) });
+      render();
+    }).catch(function(){
+      state.uploadedDocStatus = 'error';
+      state.messages.push({ role: 'bot', text: t(
+        'Das Dokument konnte nicht gelesen werden. Bitte versuchen Sie es mit einer anderen PDF-Datei.',
+        'The document could not be read. Please try a different PDF file.'
+      ) });
+      render();
+    });
+  };
+  reader.readAsArrayBuffer(file);
+}
+function clearUploadedDoc(){
+  state.uploadedDocName = null;
+  state.uploadedDocText = null;
+  state.uploadedDocStatus = null;
+  render();
+}
+
+function findLabelIndex(text, labels){
+  var lower = text.toLowerCase();
+  for (var i = 0; i < labels.length; i++){
+    var idx = lower.indexOf(labels[i].toLowerCase());
+    if (idx !== -1) return idx;
+  }
+  return -1;
+}
+function extractAmountNear(text, idx, window){
+  if (idx === -1) return null;
+  var slice = text.substr(idx, window || 150);
+  var m = slice.match(/CHF\s*[\d'.,]+/);
+  return m ? m[0].replace(/\s+/g, ' ').trim() : null;
+}
+function extractDatesNear(text, idx, window){
+  if (idx === -1) return null;
+  var slice = text.substr(idx, window || 200);
+  var m = slice.match(/(\d{2}\.\d{2}\.\d{4})\D{0,40}?(\d{2}\.\d{2}\.\d{4})/);
+  return m ? { von: m[1], bis: m[2] } : null;
+}
+function searchUploadedDoc(q){
+  var text = state.uploadedDocText;
+  if (!text) return null;
+  var s = q.toLowerCase();
+  var noteDe = ' (Automatisch erkannt aus „' + state.uploadedDocName + '“ — nicht von einem Berater geprüft.)';
+  var noteEn = ' (Automatically detected from "' + state.uploadedDocName + '" — not verified by an advisor.)';
+
+  if (/(prämie|praemie|kosten|zahle|preis|premium|cost|price)/.test(s)) {
+    var idx = findLabelIndex(text, ['Jahresprämie', 'Prämienforderung', 'Monatsprämie', 'Prämienrechnung', 'Prämie']);
+    var amt = extractAmountNear(text, idx);
+    if (amt) return t('Laut Ihrem hochgeladenen Dokument beträgt die Prämie ' + amt + '.' + noteDe, 'According to your uploaded document, the premium is ' + amt + '.' + noteEn);
+  }
+  if (/(selbstbehalt|franchise|deductible)/.test(s)) {
+    var idxSb = findLabelIndex(text, ['Selbstbehalt', 'Franchise']);
+    var amtSb = extractAmountNear(text, idxSb);
+    if (amtSb) return t('Laut Ihrem hochgeladenen Dokument beträgt der Selbstbehalt ' + amtSb + '.' + noteDe, 'According to your uploaded document, the deductible is ' + amtSb + '.' + noteEn);
+  }
+  if (/(laufzeit|läuft|gültig|gueltig|ablauf|zeitraum|period|valid|expir|von bis)/.test(s)) {
+    var idxD = findLabelIndex(text, ['Prämienforderung', 'Von', 'Vertragsdauer']);
+    var dates = extractDatesNear(text, idxD);
+    if (dates) return t('Laut Ihrem hochgeladenen Dokument läuft der Vertrag vom ' + dates.von + ' bis ' + dates.bis + '.' + noteDe, 'According to your uploaded document, the contract runs from ' + dates.von + ' to ' + dates.bis + '.' + noteEn);
+  }
+  if (/(gesellschaft|anbieter|versicherer|insurer|provider|wer versichert)/.test(s)) {
+    var m = text.match(/([A-ZÄÖÜ][A-Za-zÄÖÜäöüß.\- ]{2,40}(Versicherung(en)?|Assurance)\s?AG)/);
+    if (m) return t('Laut Ihrem hochgeladenen Dokument ist der Versicherer: ' + m[1].trim() + '.' + noteDe, 'According to your uploaded document, the insurer is: ' + m[1].trim() + '.' + noteEn);
+  }
+  if (/(fahrzeug|auto|bmw|car|vehicle)/.test(s)) {
+    var idxF = findLabelIndex(text, ['Fahrzeugversicherung', 'Fahrzeug']);
+    if (idxF !== -1) {
+      var slice = text.substr(idxF, 160).replace(/\s+/g, ' ').trim();
+      return t('Zu Ihrem Fahrzeug fand ich im hochgeladenen Dokument: „' + slice + '“.' + noteDe, 'Regarding your vehicle, I found this in your uploaded document: "' + slice + '".' + noteEn);
+    }
+  }
+  return null;
+}
+
 function answer(q){
+  const docAnswer = searchUploadedDoc(q);
+  if (docAnswer) return docAnswer;
   const s = q.toLowerCase();
   const hit = POLICIES.find((p) => p.tags.some((tag) => s.includes(tag)));
   const prod = (p) => t(p.produkt, p.produktEn);
@@ -868,6 +985,11 @@ function chatWidget(){
         <button onclick="toggleVoiceOut()" title="${state.voiceOut ? t('Antworten nicht mehr vorlesen','Stop reading answers aloud') : t('Antworten vorlesen','Read answers aloud')}" style="border:0; background:transparent; font-size:18px; color:#6E6E6B; cursor:pointer; line-height:1; padding:4px 6px; opacity:${state.voiceOut ? 1 : 0.4};">${state.voiceOut ? '🔊' : '🔈'}</button>
         <button onclick="closeBot()" style="border:0; background:transparent; font-size:20px; color:#6E6E6B; cursor:pointer; line-height:1; padding:4px 6px;">×</button>
       </div>
+      ${state.uploadedDocName ? `
+      <div style="padding:10px 22px; background:#F3F3F1; display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:13px; color:#6E6E6B; border-bottom:1px solid #E4E4E1;">
+        <span>📄 ${esc(state.uploadedDocName)}${state.uploadedDocStatus === 'loading' ? ' — ' + t('wird gelesen…', 'reading…') : state.uploadedDocStatus === 'error' ? ' — ' + t('Fehler','error') : ''}</span>
+        <button onclick="clearUploadedDoc()" title="${t('Dokument entfernen','Remove document')}" style="border:0; background:transparent; cursor:pointer; color:#6E6E6B; font-size:14px; flex:none;">✕</button>
+      </div>` : ''}
       <div class="chat-messages" id="botScroll">
         ${msgs.map(m => `<div style="display:flex; justify-content:${m.role==='user'?'flex-end':'flex-start'};"><div class="chat-bubble" style="background:${m.role==='user'?'#0A0A0B':'#F3F3F1'}; color:${m.role==='user'?'#FFFFFF':'#0A0A0B'};">${esc(m.text)}</div></div>`).join('')}
       </div>
@@ -878,6 +1000,8 @@ function chatWidget(){
         </div>
         <div style="display:flex; gap:10px;">
           <input id="botInput" class="input" placeholder="${state.listening ? t('Ich höre zu …','Listening…') : t('Frage zu Ihren Versicherungen stellen','Ask a question about your insurance')}" onkeydown="onBotKey(event)">
+          <input type="file" id="policyUploadInput" accept="application/pdf" style="display:none;" onchange="handlePolicyUpload(event)">
+          <button class="btn-mic" onclick="document.getElementById('policyUploadInput').click()" title="${t('Policendokument hochladen (PDF)','Upload policy document (PDF)')}">📎</button>
           ${(window.SpeechRecognition || window.webkitSpeechRecognition) ? `<button class="btn-mic ${state.listening ? 'listening' : ''}" onclick="toggleMic()" title="${state.listening ? t('Aufnahme stoppen','Stop recording') : t('Frage per Sprache stellen','Ask a question by voice')}">${state.listening ? '⏹️' : '🎤'}</button>` : ''}
           <button class="btn-blue-sm" onclick="sendFromInput()">${t('Senden','Send')}</button>
         </div>
