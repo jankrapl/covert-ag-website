@@ -137,75 +137,86 @@
 <div id="app"></div>
 <script>
 const POLICIES = [
-  { key: 'kk', produkt: 'Krankenkasse', gesellschaft: 'Sanitas · Grundversicherung + Zusatz', nr: '4471-9920', praemie: 'CHF 289.00 / Monat', selbst: "Franchise CHF 2'500", ablauf: '31.12.2026',
+  { key: 'kk', produkt: 'Krankenkasse', produktEn: 'Health insurance', gesellschaft: 'Sanitas · Grundversicherung + Zusatz', gesellschaftEn: 'Sanitas · Basic + supplementary insurance', nr: '4471-9920', praemie: 'CHF 289.00 / Monat', praemieEn: 'CHF 289.00 / month', selbst: "Franchise CHF 2'500", selbstEn: "Deductible CHF 2'500", ablauf: '31.12.2026',
     deckung: 'Grundversicherung nach Modell Hausarzt mit Franchise CHF 2 500. Zusatzversicherung für Zahnbehandlung und Alternativmedizin.',
-    mutTitel: 'Franchise oder Modell ändern',
-    felder: [['Gewünschte Franchise', 'z. B. CHF 1 500'], ['Versicherungsmodell', 'z. B. Hausarzt'], ['Zusatzversicherung', 'Zahn, Alternativmedizin'], ['Gültig ab', '01.01.2027']],
-    dokumente: [['Police · PDF', 'Versicherungsausweis 2026', '10.01.2026 · 240 KB']],
+    deckungEn: 'Basic insurance under the family doctor model with a deductible of CHF 2 500. Supplementary insurance for dental treatment and alternative medicine.',
+    mutTitel: 'Franchise oder Modell ändern', mutTitelEn: 'Change deductible or model',
+    felder: [['Gewünschte Franchise','Desired deductible', 'z. B. CHF 1 500','e.g. CHF 1 500'], ['Versicherungsmodell','Insurance model', 'z. B. Hausarzt','e.g. family doctor'], ['Zusatzversicherung','Supplementary insurance', 'Zahn, Alternativmedizin','Dental, alternative medicine'], ['Gültig ab','Valid from', '01.01.2027','01.01.2027']],
+    dokumente: [['Police · PDF','Policy · PDF', 'Versicherungsausweis 2026','Insurance certificate 2026', '10.01.2026 · 240 KB']],
     tags: ['kranken', 'krankenkasse', 'arzt', 'franchise', 'zahn', 'sanitas'] },
-  { key: 'auto', produkt: 'Autoversicherung', gesellschaft: 'Mobiliar · Vollkasko', nr: '7712-0043', praemie: 'CHF 94.00 / Monat', selbst: 'CHF 500', ablauf: '31.12.2026',
+  { key: 'auto', produkt: 'Autoversicherung', produktEn: 'Car insurance', gesellschaft: 'Mobiliar · Vollkasko', gesellschaftEn: 'Mobiliar · Fully comprehensive', nr: '7712-0043', praemie: 'CHF 94.00 / Monat', praemieEn: 'CHF 94.00 / month', selbst: 'CHF 500', selbstEn: 'CHF 500', ablauf: '31.12.2026',
     deckung: 'Vollkasko mit Selbstbehalt CHF 500, Bonusstufe 0, Insassenschutz inbegriffen.',
-    mutTitel: 'Fahrzeug oder Kasko ändern',
-    felder: [['Kontrollschild', 'z. B. SO 214 556'], ['Marke und Typ', 'z. B. Skoda Octavia'], ['Stammnummer', 'z. B. 123.456.789'], ['Kaskodeckung', 'Vollkasko'], ['Jährliche Fahrleistung', 'z. B. 12 000 km'], ['Gültig ab', 'TT.MM.JJJJ']],
-    dokumente: [['Police · PDF', 'Police nach Fahrzeugwechsel', '14.06.2026 · 410 KB'], ['Rechnung · PDF', 'Prämienrechnung 2026/27', '28.08.2026 · 120 KB']],
+    deckungEn: 'Fully comprehensive coverage with a deductible of CHF 500, no-claims level 0, occupant protection included.',
+    mutTitel: 'Fahrzeug oder Kasko ändern', mutTitelEn: 'Change vehicle or coverage',
+    felder: [['Kontrollschild','License plate', 'z. B. SO 214 556','e.g. SO 214 556'], ['Marke und Typ','Make and model', 'z. B. Skoda Octavia','e.g. Skoda Octavia'], ['Stammnummer','Vehicle ID number', 'z. B. 123.456.789','e.g. 123.456.789'], ['Kaskodeckung','Collision coverage', 'Vollkasko','Fully comprehensive'], ['Jährliche Fahrleistung','Annual mileage', 'z. B. 12 000 km','e.g. 12 000 km'], ['Gültig ab','Valid from', 'TT.MM.JJJJ','DD.MM.YYYY']],
+    dokumente: [['Police · PDF','Policy · PDF', 'Police nach Fahrzeugwechsel','Policy after vehicle change', '14.06.2026 · 410 KB'], ['Rechnung · PDF','Invoice · PDF', 'Prämienrechnung 2026/27','Premium invoice 2026/27', '28.08.2026 · 120 KB']],
     tags: ['auto', 'fahrzeug', 'kasko', 'kollision', 'garage'] },
-  { key: 'hausrat', produkt: 'Hausrat', gesellschaft: 'Mobiliar', nr: '8814-2290', praemie: 'CHF 42.00 / Monat', selbst: 'CHF 200', ablauf: '31.12.2026',
+  { key: 'hausrat', produkt: 'Hausrat', produktEn: 'Home contents insurance', gesellschaft: 'Mobiliar', gesellschaftEn: 'Mobiliar', nr: '8814-2290', praemie: 'CHF 42.00 / Monat', praemieEn: 'CHF 42.00 / month', selbst: 'CHF 200', selbstEn: 'CHF 200', ablauf: '31.12.2026',
     deckung: "Versicherungssumme CHF 120'000. Feuer, Wasser, Diebstahl zu Hause und auswärts.",
-    mutTitel: 'Summe oder Adresse ändern',
-    felder: [['Wohnadresse', 'Strasse und Nummer'], ['PLZ und Ort', 'z. B. 4600 Olten'], ['Versicherungssumme (CHF)', 'z. B. 120 000'], ['Anzahl Zimmer', 'z. B. 3.5'], ['Wertsachen über CHF 10 000', 'z. B. Klavier'], ['Gültig ab', 'TT.MM.JJJJ']],
-    dokumente: [['Police · PDF', "Hausrat — neue Versicherungssumme CHF 120'000", '01.09.2026 · 380 KB'], ['Schaden · PDF', 'Abrechnung Velodiebstahl', '27.05.2026 · 96 KB']],
+    deckungEn: "Sum insured CHF 120'000. Fire, water, theft at home and away.",
+    mutTitel: 'Summe oder Adresse ändern', mutTitelEn: 'Change amount or address',
+    felder: [['Wohnadresse','Home address', 'Strasse und Nummer','Street and number'], ['PLZ und Ort','Postal code and city', 'z. B. 4600 Olten','e.g. 4600 Olten'], ['Versicherungssumme (CHF)','Sum insured (CHF)', 'z. B. 120 000','e.g. 120 000'], ['Anzahl Zimmer','Number of rooms', 'z. B. 3.5','e.g. 3.5'], ['Wertsachen über CHF 10 000','Valuables over CHF 10 000', 'z. B. Klavier','e.g. piano'], ['Gültig ab','Valid from', 'TT.MM.JJJJ','DD.MM.YYYY']],
+    dokumente: [['Police · PDF','Policy · PDF', "Hausrat — neue Versicherungssumme CHF 120'000","Home contents — new sum insured CHF 120'000", '01.09.2026 · 380 KB'], ['Schaden · PDF','Claim · PDF', 'Abrechnung Velodiebstahl','Settlement: bicycle theft', '27.05.2026 · 96 KB']],
     tags: ['hausrat', 'wohnung', 'möbel', 'velo', 'fahrrad', 'diebstahl', 'einbruch', 'umzug', 'adresse'] },
-  { key: 'phv', produkt: 'Privathaftpflicht', gesellschaft: 'Mobiliar', nr: '8814-2291', praemie: 'CHF 18.00 / Monat', selbst: 'kein Selbstbehalt', ablauf: '31.12.2026',
+  { key: 'phv', produkt: 'Privathaftpflicht', produktEn: 'Personal liability insurance', gesellschaft: 'Mobiliar', gesellschaftEn: 'Mobiliar', nr: '8814-2291', praemie: 'CHF 18.00 / Monat', praemieEn: 'CHF 18.00 / month', selbst: 'kein Selbstbehalt', selbstEn: 'no deductible', ablauf: '31.12.2026',
     deckung: 'Deckungssumme CHF 5 Mio. für Schäden an Personen und Sachen Dritter, inklusive Schäden an gemieteten Wohnungen.',
-    mutTitel: 'Haushaltsangaben ändern',
-    felder: [['Anzahl Personen im Haushalt', 'z. B. 2'], ['Haustiere', 'z. B. ein Hund'], ['Deckungssumme (CHF)', 'z. B. 5 000 000'], ['Gültig ab', 'TT.MM.JJJJ']],
-    dokumente: [['Police · PDF', 'Privathaftpflicht Policenkopie', '02.01.2026 · 210 KB']],
+    deckungEn: 'Coverage of CHF 5 million for injury and property damage to third parties, including damage to rented apartments.',
+    mutTitel: 'Haushaltsangaben ändern', mutTitelEn: 'Change household details',
+    felder: [['Anzahl Personen im Haushalt','Number of people in household', 'z. B. 2','e.g. 2'], ['Haustiere','Pets', 'z. B. ein Hund','e.g. one dog'], ['Deckungssumme (CHF)','Coverage amount (CHF)', 'z. B. 5 000 000','e.g. 5 000 000'], ['Gültig ab','Valid from', 'TT.MM.JJJJ','DD.MM.YYYY']],
+    dokumente: [['Police · PDF','Policy · PDF', 'Privathaftpflicht Policenkopie','Personal liability policy copy', '02.01.2026 · 210 KB']],
     tags: ['haftpflicht', 'privathaftpflicht', 'hund', 'mietwohnung'] },
-  { key: 'leben', produkt: 'Lebensversicherung', gesellschaft: 'Swiss Life · Säule 3a', nr: '2290-5518', praemie: 'CHF 25.00 / Monat', selbst: '—', ablauf: '01.06.2049',
+  { key: 'leben', produkt: 'Lebensversicherung', produktEn: 'Life insurance', gesellschaft: 'Swiss Life · Säule 3a', gesellschaftEn: 'Swiss Life · Pillar 3a', nr: '2290-5518', praemie: 'CHF 25.00 / Monat', praemieEn: 'CHF 25.00 / month', selbst: '—', selbstEn: '—', ablauf: '01.06.2049',
     deckung: "Todesfallkapital CHF 200'000 mit Sparanteil in der Säule 3a, steuerlich abzugsfähig.",
-    mutTitel: 'Beitrag oder Begünstigte ändern',
-    felder: [['Jahresbeitrag (CHF)', 'z. B. 7 056'], ['Begünstigte Person', 'Name und Vorname'], ['Todesfallkapital (CHF)', 'z. B. 200 000'], ['Gültig ab', '01.01.2027']],
-    dokumente: [['Ausweis · PDF', 'Steuerbescheinigung Säule 3a 2025', '15.01.2026 · 84 KB']],
+    deckungEn: "Death benefit of CHF 200'000 with a savings component under Pillar 3a, tax-deductible.",
+    mutTitel: 'Beitrag oder Begünstigte ändern', mutTitelEn: 'Change contribution or beneficiary',
+    felder: [['Jahresbeitrag (CHF)','Annual contribution (CHF)', 'z. B. 7 056','e.g. 7 056'], ['Begünstigte Person','Beneficiary', 'Name und Vorname','Last name and first name'], ['Todesfallkapital (CHF)','Death benefit (CHF)', 'z. B. 200 000','e.g. 200 000'], ['Gültig ab','Valid from', '01.01.2027','01.01.2027']],
+    dokumente: [['Ausweis · PDF','Certificate · PDF', 'Steuerbescheinigung Säule 3a 2025','Tax certificate Pillar 3a 2025', '15.01.2026 · 84 KB']],
     tags: ['leben', 'lebensversicherung', '3a', 'säule', 'vorsorge', 'todesfall', 'steuer'] },
-  { key: 'rs', produkt: 'Rechtsschutz', gesellschaft: 'CAP · Privat und Verkehr', nr: '5560-1174', praemie: 'CHF 18.00 / Monat', selbst: 'kein Selbstbehalt', ablauf: '31.12.2026',
+  { key: 'rs', produkt: 'Rechtsschutz', produktEn: 'Legal protection insurance', gesellschaft: 'CAP · Privat und Verkehr', gesellschaftEn: 'CAP · Private and traffic', nr: '5560-1174', praemie: 'CHF 18.00 / Monat', praemieEn: 'CHF 18.00 / month', selbst: 'kein Selbstbehalt', selbstEn: 'no deductible', ablauf: '31.12.2026',
     deckung: "Anwalts- und Gerichtskosten bis CHF 600'000 im Privat- und Verkehrsrechtsschutz.",
-    mutTitel: 'Deckungsbereich ändern',
-    felder: [['Deckungsbereich', 'Privat und Verkehr'], ['Anzahl Personen', 'z. B. 2'], ['Deckungssumme (CHF)', 'z. B. 600 000'], ['Gültig ab', 'TT.MM.JJJJ']],
-    dokumente: [['Police · PDF', 'Rechtsschutz Policenkopie', '02.01.2026 · 190 KB']],
+    deckungEn: "Attorney and court costs up to CHF 600'000 for private and traffic legal protection.",
+    mutTitel: 'Deckungsbereich ändern', mutTitelEn: 'Change coverage area',
+    felder: [['Deckungsbereich','Coverage area', 'Privat und Verkehr','Private and traffic'], ['Anzahl Personen','Number of people', 'z. B. 2','e.g. 2'], ['Deckungssumme (CHF)','Coverage amount (CHF)', 'z. B. 600 000','e.g. 600 000'], ['Gültig ab','Valid from', 'TT.MM.JJJJ','DD.MM.YYYY']],
+    dokumente: [['Police · PDF','Policy · PDF', 'Rechtsschutz Policenkopie','Legal protection policy copy', '02.01.2026 · 190 KB']],
     tags: ['recht', 'rechtsschutz', 'anwalt', 'gericht', 'streit'] }
 ];
 
 const CLAIMS = [
-  { key: 'wasch', titel: 'Wasserschaden Waschmaschine', sub: 'Hausrat · Mobiliar · gemeldet 05.09.2026', status: 'In Bearbeitung', fg: '#1F4FFF', bg: '#E8ECFF', dot: '#1F4FFF',
-    datum: '05.09.2026', summe: "CHF 2'400.00", selbst: 'CHF 200.00',
+  { key: 'wasch', titel: 'Wasserschaden Waschmaschine', titelEn: 'Water damage – washing machine', sub: 'Hausrat · Mobiliar · gemeldet 05.09.2026', subEn: 'Home contents · Mobiliar · reported 05.09.2026', status: 'In Bearbeitung', statusEn: 'In progress', fg: '#1F4FFF', bg: '#E8ECFF', dot: '#1F4FFF',
+    datum: '05.09.2026', summe: "CHF 2'400.00", selbst: 'CHF 200.00', selbstEn: 'CHF 200.00',
     beschrieb: 'Der Zulaufschlauch der Waschmaschine ist gerissen, Wasser lief in den Korridor. Parkett und Sockelleisten sind beschädigt.',
-    schritte: [['Meldung eingegangen', '05.09.2026'], ['Fotos eingereicht', '06.09.2026'], ['Kostenschätzung in Prüfung', 'offen']] },
-  { key: 'velo', titel: 'Velo gestohlen, Bahnhof Olten', sub: 'Hausrat · Mobiliar · gemeldet 03.05.2026', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
-    datum: '03.05.2026', summe: "CHF 1'440.00", selbst: 'CHF 200.00',
+    beschriebEn: "The washing machine's supply hose burst, and water ran into the hallway. The parquet flooring and skirting boards were damaged.",
+    schritte: [['Meldung eingegangen','Report received', '05.09.2026'], ['Fotos eingereicht','Photos submitted', '06.09.2026'], ['Kostenschätzung in Prüfung','Cost estimate under review', 'offen']] },
+  { key: 'velo', titel: 'Velo gestohlen, Bahnhof Olten', titelEn: 'Bicycle stolen, Olten station', sub: 'Hausrat · Mobiliar · gemeldet 03.05.2026', subEn: 'Home contents · Mobiliar · reported 03.05.2026', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+    datum: '03.05.2026', summe: "CHF 1'440.00", selbst: 'CHF 200.00', selbstEn: 'CHF 200.00',
     beschrieb: 'Das abgeschlossene Velo wurde am Bahnhof entwendet. Polizeirapport lag der Meldung bei.',
-    schritte: [['Meldung eingegangen', '03.05.2026'], ['Polizeirapport geprüft', '12.05.2026'], ["Auszahlung CHF 1'240.00", '27.05.2026']] },
-  { key: 'park', titel: 'Parkschaden Kotflügel', sub: 'Auto · Mobiliar · gemeldet 21.11.2025', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
-    datum: '21.11.2025', summe: "CHF 1'850.00", selbst: 'CHF 500.00',
+    beschriebEn: 'The locked bicycle was stolen at the train station. A police report was attached to the claim.',
+    schritte: [['Meldung eingegangen','Report received', '03.05.2026'], ['Polizeirapport geprüft','Police report reviewed', '12.05.2026'], ["Auszahlung CHF 1'240.00","Payout CHF 1'240.00", '27.05.2026']] },
+  { key: 'park', titel: 'Parkschaden Kotflügel', titelEn: 'Parking damage – fender', sub: 'Auto · Mobiliar · gemeldet 21.11.2025', subEn: 'Car · Mobiliar · reported 21.11.2025', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+    datum: '21.11.2025', summe: "CHF 1'850.00", selbst: 'CHF 500.00', selbstEn: 'CHF 500.00',
     beschrieb: 'Unbekannter Dritter beschädigte beim Parkieren den vorderen rechten Kotflügel.',
-    schritte: [['Meldung eingegangen', '21.11.2025'], ['Garage beauftragt', '25.11.2025'], ['Direkt abgerechnet', '09.12.2025']] },
-  { key: 'nachbar', titel: 'Wasserschaden Küche Nachbarwohnung', sub: 'Privathaftpflicht · Mobiliar · gemeldet 08.02.2025', status: 'Erledigt', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
-    datum: '08.02.2025', summe: "CHF 3'860.00", selbst: 'kein Selbstbehalt',
+    beschriebEn: 'An unknown third party damaged the front right fender while parking.',
+    schritte: [['Meldung eingegangen','Report received', '21.11.2025'], ['Garage beauftragt','Garage commissioned', '25.11.2025'], ['Direkt abgerechnet','Settled directly', '09.12.2025']] },
+  { key: 'nachbar', titel: 'Wasserschaden Küche Nachbarwohnung', titelEn: "Water damage – neighbor's kitchen", sub: 'Privathaftpflicht · Mobiliar · gemeldet 08.02.2025', subEn: 'Personal liability · Mobiliar · reported 08.02.2025', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+    datum: '08.02.2025', summe: "CHF 3'860.00", selbst: 'kein Selbstbehalt', selbstEn: 'no deductible',
     beschrieb: 'Ein übergelaufenes Spülbecken beschädigte die Decke der darunterliegenden Wohnung.',
-    schritte: [['Meldung eingegangen', '08.02.2025'], ['Schaden anerkannt', '20.02.2025'], ["Vollständig übernommen CHF 3'860.00", '14.03.2025']] }
+    beschriebEn: 'An overflowing sink damaged the ceiling of the apartment below.',
+    schritte: [['Meldung eingegangen','Report received', '08.02.2025'], ['Schaden anerkannt','Claim approved', '20.02.2025'], ["Vollständig übernommen CHF 3'860.00","Fully covered CHF 3'860.00", '14.03.2025']] }
 ];
 
 const state = {
   screen: 'dash', policy: null, claim: null, detailTab: 'ueber', profilTab: 'allg', docFilter: 'Alle',
+  lang: 'de',
   notify: { schaden: true, dokumente: true, policen: true, news: false },
   botOpen: false,
   listening: false,
   voiceOut: false,
-  messages: [{ role: 'bot', text: 'Guten Tag. Ich beantworte Fragen zu Ihren sechs Versicherungen — Prämien, Deckungen, Selbstbehalte. Für alles Weitere ist Jan Krapl da.' }],
+  messages: [],
   themen: [
-    { id: 't1', label: 'Vorsorgeanalyse 3. Säule', status: 'Bereit', kind: 'ready' },
-    { id: 't2', label: 'Vergleich Hausratversicherung', status: 'In Prüfung', kind: 'pending' },
-    { id: 't3', label: 'Steueroptimierung Einkauf PK', status: 'Bereit', kind: 'ready' },
-    { id: 't4', label: 'Nächstes Gespräch', status: 'Do, 14:00', kind: 'pending' }
+    { id: 't1', label: 'Vorsorgeanalyse 3. Säule', labelEn: 'Pillar 3a pension analysis', status: 'Bereit', statusEn: 'Ready', kind: 'ready' },
+    { id: 't2', label: 'Vergleich Hausratversicherung', labelEn: 'Home contents insurance comparison', status: 'In Prüfung', statusEn: 'Under review', kind: 'pending' },
+    { id: 't3', label: 'Steueroptimierung Einkauf PK', labelEn: 'Tax optimization: pension fund buy-in', status: 'Bereit', statusEn: 'Ready', kind: 'ready' },
+    { id: 't4', label: 'Nächstes Gespräch', labelEn: 'Next meeting', status: 'Do, 14:00', statusEn: 'Thu, 14:00', kind: 'pending' }
   ],
   themaEditingId: null,
   themaEditLabel: '',
@@ -213,46 +224,49 @@ const state = {
   themaEditKind: 'ready'
 };
 
+function t(de, en){ return state.lang === 'en' ? en : de; }
+function toggleLang(){ state.lang = state.lang === 'de' ? 'en' : 'de'; render(); }
+
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 function themenCard(){
   const editingId = state.themaEditingId;
-  const rows = state.themen.map(t => editingId === t.id ? themaEditRow(t) : `
+  const rows = state.themen.map(th => editingId === th.id ? themaEditRow(th) : `
     <div class="status-row">
-      <span style="font-size:16px; color:#0A0A0B;">${esc(t.label)}</span>
+      <span style="font-size:16px; color:#0A0A0B;">${esc(t(th.label, th.labelEn || th.label))}</span>
       <div style="display:flex; align-items:center; gap:8px;">
-        <span class="status-pill status-pill-${t.kind}">${esc(t.status)}</span>
-        <button class="status-icon-btn" onclick="editThemaStart('${t.id}')" title="Bearbeiten">✎</button>
-        <button class="status-icon-btn" onclick="themaDelete('${t.id}')" title="Entfernen">✕</button>
+        <span class="status-pill status-pill-${th.kind}">${esc(t(th.status, th.statusEn || th.status))}</span>
+        <button class="status-icon-btn" onclick="editThemaStart('${th.id}')" title="${t('Bearbeiten','Edit')}">✎</button>
+        <button class="status-icon-btn" onclick="themaDelete('${th.id}')" title="${t('Entfernen','Remove')}">✕</button>
       </div>
     </div>`).join('');
-  const addRow = editingId === 'new' ? themaEditRow(null) : `<button class="status-add-btn" onclick="addThemaStart()">+ Thema hinzufügen</button>`;
+  const addRow = editingId === 'new' ? themaEditRow(null) : `<button class="status-add-btn" onclick="addThemaStart()">+ ${t('Thema hinzufügen','Add topic')}</button>`;
   return `
   <div class="card" style="display:flex; flex-direction:column; gap:12px;">
-    <div style="font-size:17px; font-weight:600;">Für Sie in Vorbereitung</div>
+    <div style="font-size:17px; font-weight:600;">${t('Für Sie in Vorbereitung','Being prepared for you')}</div>
     <div class="status-list">${rows}</div>
     ${addRow}
   </div>`;
 }
 
-function themaEditRow(t){
-  const id = t ? t.id : 'new';
+function themaEditRow(th){
+  const id = th ? th.id : 'new';
   const label = state.themaEditLabel;
   const status = state.themaEditStatus;
   const kind = state.themaEditKind;
   return `
   <div class="status-edit-row">
     <div class="status-edit-row-fields">
-      <input class="status-edit-input" id="themaLabelInput" placeholder="Thema (z. B. Vergleich Gebäudeversicherung)" value="${esc(label)}">
-      <input class="status-edit-input" id="themaStatusInput" placeholder="Status (z. B. Bereit)" value="${esc(status)}">
+      <input class="status-edit-input" id="themaLabelInput" placeholder="${t('Thema (z. B. Vergleich Gebäudeversicherung)','Topic (e.g. building insurance comparison)')}" value="${esc(label)}">
+      <input class="status-edit-input" id="themaStatusInput" placeholder="${t('Status (z. B. Bereit)','Status (e.g. Ready)')}" value="${esc(status)}">
     </div>
     <div class="status-kind-toggle">
-      <button type="button" class="status-kind-btn ${kind==='ready'?'active-ready':''}" onclick="setThemaKind('ready')">Blau</button>
-      <button type="button" class="status-kind-btn ${kind==='pending'?'active-pending':''}" onclick="setThemaKind('pending')">Grau</button>
+      <button type="button" class="status-kind-btn ${kind==='ready'?'active-ready':''}" onclick="setThemaKind('ready')">${t('Blau','Blue')}</button>
+      <button type="button" class="status-kind-btn ${kind==='pending'?'active-pending':''}" onclick="setThemaKind('pending')">${t('Grau','Gray')}</button>
     </div>
     <div class="status-edit-actions">
-      <button class="status-btn-save" onclick="themaSave('${id}')">Speichern</button>
-      <button class="status-btn-cancel" onclick="themaCancel()">Abbrechen</button>
+      <button class="status-btn-save" onclick="themaSave('${id}')">${t('Speichern','Save')}</button>
+      <button class="status-btn-cancel" onclick="themaCancel()">${t('Abbrechen','Cancel')}</button>
     </div>
   </div>`;
 }
@@ -272,12 +286,12 @@ function addThemaStart(){
   const l = document.getElementById('themaLabelInput'); if (l) l.focus();
 }
 function editThemaStart(id){
-  const t = state.themen.find(x => x.id === id);
-  if (!t) return;
+  const th = state.themen.find(x => x.id === id);
+  if (!th) return;
   state.themaEditingId = id;
-  state.themaEditLabel = t.label;
-  state.themaEditStatus = t.status;
-  state.themaEditKind = t.kind;
+  state.themaEditLabel = th.label;
+  state.themaEditStatus = th.status;
+  state.themaEditKind = th.kind;
   render();
   const l = document.getElementById('themaLabelInput'); if (l) l.focus();
 }
@@ -296,12 +310,12 @@ function themaSave(id){
   const label = state.themaEditLabel.trim();
   let status = state.themaEditStatus.trim();
   if (!label) { const l = document.getElementById('themaLabelInput'); if (l) l.focus(); return; }
-  if (!status) status = state.themaEditKind === 'ready' ? 'Bereit' : 'In Prüfung';
+  if (!status) status = state.themaEditKind === 'ready' ? t('Bereit','Ready') : t('In Prüfung','Under review');
   if (id === 'new') {
     state.themen.push({ id: 't' + Date.now(), label, status, kind: state.themaEditKind });
   } else {
-    const t = state.themen.find(x => x.id === id);
-    if (t) { t.label = label; t.status = status; t.kind = state.themaEditKind; }
+    const th = state.themen.find(x => x.id === id);
+    if (th) { th.label = label; th.status = status; th.kind = state.themaEditKind; }
   }
   state.themaEditingId = null;
   render();
@@ -324,37 +338,39 @@ function closeBot(){ state.botOpen = false; render(); }
 
 function answer(q){
   const s = q.toLowerCase();
-  const hit = POLICIES.find((p) => p.tags.some((t) => s.includes(t)));
-  if (/(prämie|praemie|zahle|kosten|monat|preis|total)/.test(s)) {
-    if (hit) return hit.produkt + ': ' + hit.praemie + ' (' + hit.gesellschaft + ', Police ' + hit.nr + ').';
-    return 'Ihre sechs Versicherungen kosten zusammen CHF 486.00 pro Monat. Grösster Posten: Krankenkasse mit CHF 289.00.';
+  const hit = POLICIES.find((p) => p.tags.some((tag) => s.includes(tag)));
+  const prod = (p) => t(p.produkt, p.produktEn);
+  const praemieTxt = (p) => t(p.praemie, p.praemieEn);
+  if (/(prämie|praemie|zahle|kosten|monat|preis|total|premium|cost|price|month)/.test(s)) {
+    if (hit) return prod(hit) + ': ' + praemieTxt(hit) + ' (' + hit.gesellschaft + ', ' + t('Police','Policy') + ' ' + hit.nr + ').';
+    return t('Ihre sechs Versicherungen kosten zusammen CHF 486.00 pro Monat. Grösster Posten: Krankenkasse mit CHF 289.00.', 'Your six insurance policies cost a total of CHF 486.00 per month. Largest item: health insurance at CHF 289.00.');
   }
-  if (/(selbstbehalt|franchise)/.test(s)) {
-    return 'Ihre Selbstbehalte:\n\nKrankenkasse — Franchise CHF 2 500\nAuto (Vollkasko) — CHF 500\nHausrat — CHF 200\nPrivathaftpflicht — kein Selbstbehalt';
+  if (/(selbstbehalt|franchise|deductible)/.test(s)) {
+    return t('Ihre Selbstbehalte:\n\nKrankenkasse — Franchise CHF 2 500\nAuto (Vollkasko) — CHF 500\nHausrat — CHF 200\nPrivathaftpflicht — kein Selbstbehalt', 'Your deductibles:\n\nHealth insurance — deductible CHF 2 500\nCar (fully comprehensive) — CHF 500\nHome contents — CHF 200\nPersonal liability — no deductible');
   }
-  if (/(velo|fahrrad|gestohlen|diebstahl|einbruch)/.test(s)) {
-    return 'Ja. Ihr Hausrat (Police 8814-2290, Mobiliar) deckt Diebstahl auch auswärts, Selbstbehalt CHF 200. Ein Velodiebstahl wurde im Mai 2026 mit CHF 1\'240.00 abgerechnet.';
+  if (/(velo|fahrrad|gestohlen|diebstahl|einbruch|bike|bicycle|stolen|theft|burglary)/.test(s)) {
+    return t('Ja. Ihr Hausrat (Police 8814-2290, Mobiliar) deckt Diebstahl auch auswärts, Selbstbehalt CHF 200. Ein Velodiebstahl wurde im Mai 2026 mit CHF 1\'240.00 abgerechnet.', 'Yes. Your home contents insurance (policy 8814-2290, Mobiliar) covers theft away from home too, deductible CHF 200. A bicycle theft was settled for CHF 1\'240.00 in May 2026.');
   }
-  if (/(umzug|adresse|neue wohnung)/.test(s)) {
-    return 'Eine neue Adresse melden Sie bei Hausrat über den Reiter "Summe oder Adresse ändern". Wir passen Hausrat, Privathaftpflicht und die Autoversicherung gemeinsam an.';
+  if (/(umzug|adresse|neue wohnung|move|moving|address)/.test(s)) {
+    return t('Eine neue Adresse melden Sie bei Hausrat über den Reiter "Summe oder Adresse ändern". Wir passen Hausrat, Privathaftpflicht und die Autoversicherung gemeinsam an.', 'You can report a new address for home contents insurance via the "Change amount or address" tab. We update home contents, personal liability and car insurance together.');
   }
-  if (/(schaden|anliegen|melden|unfall|bearbeitung)/.test(s)) {
-    return 'Ein Anliegen ist in Bearbeitung: Wasserschaden Waschmaschine (Hausrat, Mobiliar, gemeldet 05.09.2026) — die Fotos sind eingereicht, die Mobiliar prüft die Kostenschätzung.';
+  if (/(schaden|anliegen|melden|unfall|bearbeitung|claim|report|accident|progress)/.test(s)) {
+    return t('Ein Anliegen ist in Bearbeitung: Wasserschaden Waschmaschine (Hausrat, Mobiliar, gemeldet 05.09.2026) — die Fotos sind eingereicht, die Mobiliar prüft die Kostenschätzung.', 'One request is in progress: water damage from a washing machine (home contents, Mobiliar, reported 05.09.2026) — the photos have been submitted, and Mobiliar is reviewing the cost estimate.');
   }
-  if (/(nachricht|ungelesen)/.test(s)) {
-    return 'Sie haben 2 neue Nachrichten im Verlauf auf dem Dashboard. Die jüngste ist von Jan Krapl vom 01.09.2026 zur neuen Hausratpolice.';
+  if (/(nachricht|ungelesen|message|unread)/.test(s)) {
+    return t('Sie haben 2 neue Nachrichten im Verlauf auf dem Dashboard. Die jüngste ist von Jan Krapl vom 01.09.2026 zur neuen Hausratpolice.', 'You have 2 new messages in the history on the dashboard. The most recent is from Jan Krapl on 01.09.2026 about the new home contents policy.');
   }
-  if (/(rechnung|fällig|faellig|zahlung)/.test(s)) {
-    return 'Offen ist eine Rechnung: Autoversicherung CHF 1\'128.00, fällig am 30.09.2026.';
+  if (/(rechnung|fällig|faellig|zahlung|invoice|due|payment)/.test(s)) {
+    return t('Offen ist eine Rechnung: Autoversicherung CHF 1\'128.00, fällig am 30.09.2026.', 'One invoice is outstanding: car insurance CHF 1\'128.00, due on 30.09.2026.');
   }
-  if (/(kündig|wechsel|frist)/.test(s)) {
-    return 'Die Zusatzversicherung der Krankenkasse kann bis 30.11.2026 gekündigt werden. Hausrat und Privathaftpflicht laufen bis 31.12.2026 und verlängern sich automatisch.';
+  if (/(kündig|wechsel|frist|cancel|switch|notice)/.test(s)) {
+    return t('Die Zusatzversicherung der Krankenkasse kann bis 30.11.2026 gekündigt werden. Hausrat und Privathaftpflicht laufen bis 31.12.2026 und verlängern sich automatisch.', 'The supplementary health insurance can be cancelled by 30.11.2026. Home contents and personal liability run until 31.12.2026 and renew automatically.');
   }
-  if (hit) return hit.produkt + ' bei ' + hit.gesellschaft + ' (Police ' + hit.nr + '), ' + hit.praemie + '.\n\n' + hit.deckung;
-  if (/(versichert|deckung|gedeckt|abgedeckt)/.test(s)) {
-    return 'Gedeckt sind Krankheit, Auto, Hausrat, Privathaftpflicht, Rechtsschutz und Vorsorge (Säule 3a). Keine Reiseversicherung — das wäre eine Lücke, wenn Sie oft verreisen.';
+  if (hit) return prod(hit) + ' ' + t('bei','with') + ' ' + hit.gesellschaft + ' (' + t('Police','Policy') + ' ' + hit.nr + '), ' + praemieTxt(hit) + '.\n\n' + t(hit.deckung, hit.deckungEn);
+  if (/(versichert|deckung|gedeckt|abgedeckt|insured|coverage|covered)/.test(s)) {
+    return t('Gedeckt sind Krankheit, Auto, Hausrat, Privathaftpflicht, Rechtsschutz und Vorsorge (Säule 3a). Keine Reiseversicherung — das wäre eine Lücke, wenn Sie oft verreisen.', 'Covered are health, car, home contents, personal liability, legal protection and pension planning (Pillar 3a). No travel insurance — that could be a gap if you travel often.');
   }
-  return 'Dazu finde ich in Ihren Policen keine Angabe. Jan Krapl hilft weiter: 078 248 91 21 oder jkrapl@coverd.ch.';
+  return t('Dazu finde ich in Ihren Policen keine Angabe. Jan Krapl hilft weiter: 078 248 91 21 oder jkrapl@coverd.ch.', "I can't find that in your policies. Jan Krapl can help further: 078 248 91 21 or jkrapl@coverd.ch.");
 }
 
 function send(text){
@@ -421,22 +437,22 @@ function sidebar(){
   return `
   <aside class="sidebar">
     <div class="sidebar-logo"><div class="sidebar-logo-box"><img src="images/coverd-logo.png" alt="coverd ag" style="position:absolute; left:0; top:0; width:132px; height:34px; object-fit:contain; mix-blend-mode:multiply; padding:2px;"></div></div>
-    <div class="sidebar-label">Hauptbereiche</div>
+    <div class="sidebar-label">${t('Hauptbereiche','Main areas')}</div>
     <nav class="sidebar-nav">
-      ${navItem('dash','Dashboard', sc==='dash', "go('dash')")}
-      ${navItem('policen','Meine Versicherungen', sc==='policen', "go('policen')")}
-      ${navItem('schaden','Meine Anliegen', sc==='schaden', "go('schaden')")}
-      ${navItem('dokumente','Dokumente', sc==='dokumente', "go('dokumente')")}
-      ${navItem('news','News', sc==='news', "go('news')")}
+      ${navItem('dash', t('Dashboard','Dashboard'), sc==='dash', "go('dash')")}
+      ${navItem('policen', t('Meine Versicherungen','My Insurance'), sc==='policen', "go('policen')")}
+      ${navItem('schaden', t('Meine Anliegen','My Requests'), sc==='schaden', "go('schaden')")}
+      ${navItem('dokumente', t('Dokumente','Documents'), sc==='dokumente', "go('dokumente')")}
+      ${navItem('news', t('News','News'), sc==='news', "go('news')")}
     </nav>
-    <div class="sidebar-label spaced">Konto</div>
+    <div class="sidebar-label spaced">${t('Konto','Account')}</div>
     <nav class="sidebar-nav">
-      ${navItem('profil','Mein Profil', sc==='profil', "go('profil')")}
-      ${navItem('hilfe','Hilfezentrum', sc==='hilfe', "go('hilfe')")}
+      ${navItem('profil', t('Mein Profil','My Profile'), sc==='profil', "go('profil')")}
+      ${navItem('hilfe', t('Hilfezentrum','Help Center'), sc==='hilfe', "go('hilfe')")}
     </nav>
     <div class="sidebar-advisor">
       <img src="team/jan.jpg" alt="Jan Krapl">
-      <div><div style="font-size:14px; font-weight:600;">Jan Krapl</div><div style="font-size:12px; color:#DCE8FF;">Ihr Berater</div></div>
+      <div><div style="font-size:14px; font-weight:600;">Jan Krapl</div><div style="font-size:12px; color:#DCE8FF;">${t('Ihr Berater','Your advisor')}</div></div>
     </div>
   </aside>`;
 }
@@ -444,18 +460,27 @@ function sidebar(){
 function topheader(){
   const policy = POLICIES.find(p => p.key === state.policy);
   const claim = CLAIMS.find(c => c.key === state.claim);
-  const titles = { dash:['Dashboard','Übersicht'], policen:['Meine Versicherungen','Übersicht'], schaden:['Meine Anliegen','Übersicht'], dokumente:['Meine Dokumente','Übersicht'], news:['Informationen','Übersicht'], hilfe:['Hilfezentrum','Übersicht'], profil:['Mein Profil','Benutzer'] };
+  const titles = {
+    dash:[t('Dashboard','Dashboard'), t('Übersicht','Overview')],
+    policen:[t('Meine Versicherungen','My Insurance'), t('Übersicht','Overview')],
+    schaden:[t('Meine Anliegen','My Requests'), t('Übersicht','Overview')],
+    dokumente:[t('Meine Dokumente','My Documents'), t('Übersicht','Overview')],
+    news:[t('Informationen','Information'), t('Übersicht','Overview')],
+    hilfe:[t('Hilfezentrum','Help Center'), t('Übersicht','Overview')],
+    profil:[t('Mein Profil','My Profile'), t('Benutzer','User')]
+  };
   const base = titles[state.screen] || titles.dash;
-  const pageTitle = policy ? 'Meine Versicherungen' : claim ? 'Meine Anliegen' : base[0];
-  const pageCrumb = policy ? 'Übersicht · ' + policy.nr : claim ? 'Übersicht · ' + claim.titel : base[1];
+  const pageTitle = policy ? t('Meine Versicherungen','My Insurance') : claim ? t('Meine Anliegen','My Requests') : base[0];
+  const pageCrumb = policy ? t('Übersicht','Overview') + ' · ' + policy.nr : claim ? t('Übersicht','Overview') + ' · ' + t(claim.titel, claim.titelEn || claim.titel) : base[1];
   return `
   <header class="topheader">
     <div><div class="title">${esc(pageTitle)}</div><div class="crumb">${esc(pageCrumb)}</div></div>
     <div style="display:flex; align-items:center; gap:14px; margin-left:auto;">
-      <button class="btn-dark" onclick="go('schaden')">Schaden melden</button>
+      <button class="pill-outline" onclick="toggleLang()" title="${t('Auf Englisch anzeigen','Switch to German')}">${t('EN','DE')}</button>
+      <button class="btn-dark" onclick="go('schaden')">${t('Schaden melden','Report a claim')}</button>
       <div class="header-user">
         <div class="avatar">NB</div>
-        <div style="line-height:1.25;"><div style="font-size:14px; font-weight:600;">Nina Brunner</div><div style="font-size:12px; color:#6E6E6B;">Privatkundin seit 2019</div></div>
+        <div style="line-height:1.25;"><div style="font-size:14px; font-weight:600;">Nina Brunner</div><div style="font-size:12px; color:#6E6E6B;">${t('Privatkundin seit 2019','Private customer since 2019')}</div></div>
       </div>
     </div>
   </header>`;
@@ -473,27 +498,27 @@ function dashboardView(){
   return `
   <div style="display:flex; flex-direction:column; gap:28px;">
     <div>
-      <h1 style="margin:0; font-size:38px; font-weight:600; letter-spacing:-0.02em; line-height:1.1;">Guten Tag, Nina</h1>
-      <p style="margin:14px 0 0; font-size:17px; color:#6E6E6B; max-width:520px;">Alles in Ordnung. Eine Rechnung ist im September fällig, sonst gibt es nichts zu tun.</p>
+      <h1 style="margin:0; font-size:38px; font-weight:600; letter-spacing:-0.02em; line-height:1.1;">${t('Guten Tag, Nina','Good afternoon, Nina')}</h1>
+      <p style="margin:14px 0 0; font-size:17px; color:#6E6E6B; max-width:520px;">${t('Alles in Ordnung. Eine Rechnung ist im September fällig, sonst gibt es nichts zu tun.', "Everything is in order. One invoice is due in September, otherwise there's nothing to do.")}</p>
     </div>
     <div class="grid-2">
       <div class="card">
-        <div style="font-size:17px; font-weight:600;">Versicherungen</div>
+        <div style="font-size:17px; font-weight:600;">${t('Versicherungen','Insurance')}</div>
         <div style="display:flex; align-items:center; gap:26px; margin-top:22px;">
           ${ring(100, '#1F4FFF', 6)}
           <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
-            <div><div style="font-size:14px; color:#6E6E6B;">Alle aktiv</div><div style="font-size:19px; font-weight:600; margin-top:2px;">6 Policen</div></div>
-            <div><div style="font-size:14px; color:#6E6E6B;">Prämien pro Monat</div><div style="font-size:19px; font-weight:600; margin-top:2px;">CHF 486.00</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">${t('Alle aktiv','All active')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">${t('6 Policen','6 policies')}</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">${t('Prämien pro Monat','Premiums per month')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">CHF 486.00</div></div>
           </div>
         </div>
       </div>
       <div class="card">
-        <div style="font-size:17px; font-weight:600;">Anliegen</div>
+        <div style="font-size:17px; font-weight:600;">${t('Anliegen','Requests')}</div>
         <div style="display:flex; align-items:center; gap:26px; margin-top:22px;">
           ${ring(25, '#0A0A0B', 4)}
           <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
-            <div><div style="font-size:14px; color:#6E6E6B;">In Bearbeitung</div><div style="font-size:19px; font-weight:600; margin-top:2px; color:#1F4FFF;">1</div></div>
-            <div><div style="font-size:14px; color:#6E6E6B;">Neue Nachrichten</div><div style="font-size:19px; font-weight:600; margin-top:2px;">2</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">${t('In Bearbeitung','In progress')}</div><div style="font-size:19px; font-weight:600; margin-top:2px; color:#1F4FFF;">1</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">${t('Neue Nachrichten','New messages')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">2</div></div>
           </div>
         </div>
       </div>
@@ -503,13 +528,13 @@ function dashboardView(){
 
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1; display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
-        <h2 style="margin:0; font-size:19px; font-weight:600;">Verlauf</h2>
-        <span style="font-size:13px; font-weight:600; color:#1F4FFF; background:#E8ECFF; border-radius:999px; padding:6px 12px;">2 neu</span>
+        <h2 style="margin:0; font-size:19px; font-weight:600;">${t('Verlauf','History')}</h2>
+        <span style="font-size:13px; font-weight:600; color:#1F4FFF; background:#E8ECFF; border-radius:999px; padding:6px 12px;">${t('2 neu','2 new')}</span>
       </div>
       ${[
-        { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '01.09.2026 · 14:20', text: "Guten Tag Frau Brunner, die neue Hausratpolice mit der erhöhten Versicherungssumme von CHF 120'000 ist ausgestellt und liegt unter Dokumente." },
-        { initialen: 'NB', bg: '#F3F3F1', fg: '#6E6E6B', name: 'Nina Brunner', zeit: '26.08.2026 · 18:47', text: 'Wir haben ein Klavier gekauft. Reicht die Hausratsumme noch?' },
-        { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '14.06.2026 · 09:30', text: 'Autoversicherung nach dem Fahrzeugwechsel angepasst, Bonusstufe bleibt erhalten.' }
+        { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '01.09.2026 · 14:20', text: t("Guten Tag Frau Brunner, die neue Hausratpolice mit der erhöhten Versicherungssumme von CHF 120'000 ist ausgestellt und liegt unter Dokumente.", "Good afternoon Ms. Brunner, the new home contents policy with the increased sum insured of CHF 120'000 has been issued and is available under Documents.") },
+        { initialen: 'NB', bg: '#F3F3F1', fg: '#6E6E6B', name: 'Nina Brunner', zeit: '26.08.2026 · 18:47', text: t('Wir haben ein Klavier gekauft. Reicht die Hausratsumme noch?', 'We bought a piano. Is the home contents sum still sufficient?') },
+        { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '14.06.2026 · 09:30', text: t('Autoversicherung nach dem Fahrzeugwechsel angepasst, Bonusstufe bleibt erhalten.', 'Car insurance adjusted after the vehicle change, no-claims bonus level retained.') }
       ].map(v => `
       <div style="display:flex; gap:18px; padding:22px 26px; border-bottom:1px solid #F0F0EE;">
         <div style="width:38px; height:38px; border-radius:999px; background:${v.bg}; color:${v.fg}; display:grid; place-items:center; font-size:13px; font-weight:700; flex:none;">${v.initialen}</div>
@@ -519,22 +544,22 @@ function dashboardView(){
         </div>
       </div>`).join('')}
       <div style="padding:20px 26px; display:flex; gap:12px; align-items:center; background:#FAFAF8;">
-        <input id="verlaufInput" placeholder="Nachricht an Jan Krapl schreiben" class="input" style="flex:1 1 auto; min-width:0;">
-        <button class="btn-dark" style="border-radius:12px;" onclick="alert('In der Demo-Version nicht verfügbar.')">Senden</button>
+        <input id="verlaufInput" placeholder="${t('Nachricht an Jan Krapl schreiben','Write a message to Jan Krapl')}" class="input" style="flex:1 1 auto; min-width:0;">
+        <button class="btn-dark" style="border-radius:12px;" onclick="alert(t('In der Demo-Version nicht verfügbar.','Not available in this demo version.'))">${t('Senden','Send')}</button>
       </div>
     </div>
 
     <div class="card" style="padding:0; overflow:hidden;">
-      <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1;"><h2 style="margin:0; font-size:19px; font-weight:600;">Was als Nächstes ansteht</h2></div>
+      <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1;"><h2 style="margin:0; font-size:19px; font-weight:600;">${t('Was als Nächstes ansteht','What\'s coming up next')}</h2></div>
       ${[
-        { datum: '30.09.2026', titel: 'Autoversicherung — Rechnung fällig', sub: "Police 7712-0043 · Mobiliar · CHF 1'128.00", status: 'Offen', fg: '#8A5A00', bg: '#FFF3D6' },
-        { datum: '30.11.2026', titel: 'Krankenkasse — Kündigungsfrist Zusatz', sub: 'Wir prüfen bis Ende Oktober, ob ein Wechsel sich lohnt.', status: 'Wir melden uns', fg: '#1F4FFF', bg: '#E8ECFF' },
-        { datum: '31.12.2026', titel: 'Hausrat und Privathaftpflicht — Verlängerung', sub: 'Verlängert sich automatisch um ein Jahr.', status: 'Notiert', fg: '#6E6E6B', bg: '#F3F3F1' }
-      ].map(t => `
+        { datum: '30.09.2026', titel: t('Autoversicherung — Rechnung fällig','Car insurance — invoice due'), sub: t("Police 7712-0043 · Mobiliar · CHF 1'128.00", "Policy 7712-0043 · Mobiliar · CHF 1'128.00"), status: t('Offen','Open'), fg: '#8A5A00', bg: '#FFF3D6' },
+        { datum: '30.11.2026', titel: t('Krankenkasse — Kündigungsfrist Zusatz','Health insurance — notice period for supplementary'), sub: t('Wir prüfen bis Ende Oktober, ob ein Wechsel sich lohnt.', "We'll check by the end of October whether switching is worthwhile."), status: t('Wir melden uns',"We'll be in touch"), fg: '#1F4FFF', bg: '#E8ECFF' },
+        { datum: '31.12.2026', titel: t('Hausrat und Privathaftpflicht — Verlängerung','Home contents and personal liability — renewal'), sub: t('Verlängert sich automatisch um ein Jahr.','Automatically renews for one year.'), status: t('Notiert','Noted'), fg: '#6E6E6B', bg: '#F3F3F1' }
+      ].map(tm => `
       <div style="display:flex; align-items:flex-start; gap:18px; padding:22px 26px; border-bottom:1px solid #F0F0EE;">
-        <div class="mono" style="font-size:13px; color:#6E6E6B; width:92px; flex:none; padding-top:2px;">${t.datum}</div>
-        <div style="min-width:0; flex:1 1 auto;"><div style="font-size:16px; font-weight:600;">${t.titel}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${t.sub}</div></div>
-        <span style="flex:none; font-size:13px; font-weight:600; color:${t.fg}; background:${t.bg}; border-radius:999px; padding:6px 12px;">${t.status}</span>
+        <div class="mono" style="font-size:13px; color:#6E6E6B; width:92px; flex:none; padding-top:2px;">${tm.datum}</div>
+        <div style="min-width:0; flex:1 1 auto;"><div style="font-size:16px; font-weight:600;">${tm.titel}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${tm.sub}</div></div>
+        <span style="flex:none; font-size:13px; font-weight:600; color:${tm.fg}; background:${tm.bg}; border-radius:999px; padding:6px 12px;">${tm.status}</span>
       </div>`).join('')}
     </div>
   </div>`;
@@ -543,17 +568,17 @@ function dashboardView(){
 function policenListView(){
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <p style="margin:0; font-size:16px; color:#6E6E6B;">6 Versicherungen · CHF 486.00 pro Monat</p>
+    <p style="margin:0; font-size:16px; color:#6E6E6B;">${t('6 Versicherungen · CHF 486.00 pro Monat','6 insurance policies · CHF 486.00 per month')}</p>
     <div class="grid-cards">
       ${POLICIES.map(p => `
       <button class="list-card" onclick="openPolicy('${p.key}')" style="display:flex; flex-direction:column; gap:14px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px;">
-          <div style="min-width:0;"><div style="font-size:17px; font-weight:600;">${p.produkt}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${p.gesellschaft}</div></div>
-          <span class="badge badge-ok">Aktiv</span>
+          <div style="min-width:0;"><div style="font-size:17px; font-weight:600;">${t(p.produkt, p.produktEn)}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${t(p.gesellschaft, p.gesellschaftEn)}</div></div>
+          <span class="badge badge-ok">${t('Aktiv','Active')}</span>
         </div>
         <div style="display:flex; gap:26px; flex-wrap:wrap; border-top:1px solid #F0F0EE; padding-top:14px;">
-          <div><div class="micro">Prämie</div><div style="font-size:16px; font-weight:600; margin-top:3px;">${p.praemie}</div></div>
-          <div><div class="micro">Police</div><div class="mono" style="font-size:14px; margin-top:5px; color:#4A4A48;">${p.nr}</div></div>
+          <div><div class="micro">${t('Prämie','Premium')}</div><div style="font-size:16px; font-weight:600; margin-top:3px;">${t(p.praemie, p.praemieEn)}</div></div>
+          <div><div class="micro">${t('Police','Policy')}</div><div class="mono" style="font-size:14px; margin-top:5px; color:#4A4A48;">${p.nr}</div></div>
         </div>
       </button>`).join('')}
     </div>
@@ -564,26 +589,26 @@ function policeDetailView(){
   const p = POLICIES.find(x => x.key === state.policy);
   if (!p) return '';
   const dt = state.detailTab;
-  const tabs = [['ueber','Übersicht'], ['dok','Dokumente'], ['mut', p.mutTitel]];
+  const tabs = [['ueber', t('Übersicht','Overview')], ['dok', t('Dokumente','Documents')], ['mut', t(p.mutTitel, p.mutTitelEn)]];
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <button class="pill-outline" style="align-self:flex-start;" onclick="go('policen')">Zurück zu meinen Versicherungen</button>
+    <button class="pill-outline" style="align-self:flex-start;" onclick="go('policen')">${t('Zurück zu meinen Versicherungen','Back to my insurance')}</button>
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:26px 30px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
         <div style="width:56px; height:56px; border-radius:14px; background:#E8ECFF; color:#1F4FFF; display:grid; place-items:center; font-size:22px; font-weight:700; flex:none;">P</div>
         <div style="min-width:0;">
-          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><h1 style="margin:0; font-size:26px; font-weight:600; letter-spacing:-0.01em;">${p.produkt}</h1><span class="badge badge-ok">Aktiv</span></div>
-          <div style="font-size:15px; color:#6E6E6B; margin-top:6px;">${p.gesellschaft} · Police ${p.nr}</div>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><h1 style="margin:0; font-size:26px; font-weight:600; letter-spacing:-0.01em;">${t(p.produkt, p.produktEn)}</h1><span class="badge badge-ok">${t('Aktiv','Active')}</span></div>
+          <div style="font-size:15px; color:#6E6E6B; margin-top:6px;">${t(p.gesellschaft, p.gesellschaftEn)} · ${t('Police','Policy')} ${p.nr}</div>
         </div>
-        <button class="btn-dark" style="margin-left:auto;" onclick="go('schaden')">Schaden melden</button>
+        <button class="btn-dark" style="margin-left:auto;" onclick="go('schaden')">${t('Schaden melden','Report a claim')}</button>
       </div>
       <div class="stat-strip">
-        <div class="stat-cell"><div class="micro">Prämie</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.praemie}</div></div>
-        <div class="stat-cell"><div class="micro">Selbstbehalt</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.selbst}</div></div>
-        <div class="stat-cell"><div class="micro">Läuft bis</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.ablauf}</div></div>
+        <div class="stat-cell"><div class="micro">${t('Prämie','Premium')}</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${t(p.praemie, p.praemieEn)}</div></div>
+        <div class="stat-cell"><div class="micro">${t('Selbstbehalt','Deductible')}</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${t(p.selbst, p.selbstEn)}</div></div>
+        <div class="stat-cell"><div class="micro">${t('Läuft bis','Valid until')}</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${p.ablauf}</div></div>
         <div style="padding:20px 30px; display:flex; align-items:center; gap:12px;">
           <img src="team/jan.jpg" alt="Jan Krapl" style="width:36px; height:36px; border-radius:999px; object-fit:cover; object-position:50% 22%; flex:none;">
-          <div><div class="micro">Ihr Berater</div><div style="font-size:15px; font-weight:600; margin-top:3px;">Jan Krapl</div></div>
+          <div><div class="micro">${t('Ihr Berater','Your advisor')}</div><div style="font-size:15px; font-weight:600; margin-top:3px;">Jan Krapl</div></div>
         </div>
       </div>
     </div>
@@ -594,25 +619,25 @@ function policeDetailView(){
 
     ${dt === 'ueber' ? `
     <div class="card" style="max-width:720px;">
-      <h2 style="margin:0 0 14px; font-size:17px; font-weight:600;">Was gedeckt ist</h2>
-      <p style="margin:0; font-size:16px; line-height:1.6;">${p.deckung}</p>
+      <h2 style="margin:0 0 14px; font-size:17px; font-weight:600;">${t('Was gedeckt ist',"What's covered")}</h2>
+      <p style="margin:0; font-size:16px; line-height:1.6;">${t(p.deckung, p.deckungEn)}</p>
     </div>` : ''}
 
     ${dt === 'dok' ? `
     <div class="grid-docs">
-      ${p.dokumente.map(([typ,name,meta]) => `<div class="doc-card"><div class="micro">${typ}</div><div style="font-size:16px; font-weight:600; line-height:1.35;">${name}</div><div style="font-size:14px; color:#6E6E6B; margin-top:auto;">${meta}</div></div>`).join('')}
+      ${p.dokumente.map(([typ,typEn,name,nameEn,meta]) => `<div class="doc-card"><div class="micro">${t(typ,typEn)}</div><div style="font-size:16px; font-weight:600; line-height:1.35;">${t(name,nameEn)}</div><div style="font-size:14px; color:#6E6E6B; margin-top:auto;">${meta}</div></div>`).join('')}
     </div>` : ''}
 
     ${dt === 'mut' ? `
     <div class="card">
-      <h2 style="margin:0; font-size:19px; font-weight:600;">${p.mutTitel}</h2>
-      <p style="margin:8px 0 0; font-size:15px; color:#6E6E6B;">Police ${p.nr} · ${p.gesellschaft}</p>
+      <h2 style="margin:0; font-size:19px; font-weight:600;">${t(p.mutTitel, p.mutTitelEn)}</h2>
+      <p style="margin:8px 0 0; font-size:15px; color:#6E6E6B;">${t('Police','Policy')} ${p.nr} · ${t(p.gesellschaft, p.gesellschaftEn)}</p>
       <div class="grid-fields" style="margin-top:24px;">
-        ${p.felder.map(([label,ph]) => `<div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${label}</div><input class="input" placeholder="${ph}"></div>`).join('')}
+        ${p.felder.map(([label,labelEn,ph,phEn]) => `<div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t(label,labelEn)}</div><input class="input" placeholder="${t(ph,phEn)}"></div>`).join('')}
       </div>
       <div style="display:flex; gap:14px; align-items:center; margin-top:24px; flex-wrap:wrap;">
-        <button class="btn-blue" onclick="alert('Änderung eingereicht (Demo). Jan Krapl meldet sich innerhalb eines Arbeitstags.')">Änderung senden</button>
-        <span style="font-size:14px; color:#6E6E6B;">Jan Krapl meldet sich innerhalb eines Arbeitstags.</span>
+        <button class="btn-blue" onclick="alert(t('Änderung eingereicht (Demo). Jan Krapl meldet sich innerhalb eines Arbeitstags.','Change submitted (demo). Jan Krapl will get back to you within one business day.'))">${t('Änderung senden','Submit change')}</button>
+        <span style="font-size:14px; color:#6E6E6B;">${t('Jan Krapl meldet sich innerhalb eines Arbeitstags.','Jan Krapl will get back to you within one business day.')}</span>
       </div>
     </div>` : ''}
   </div>`;
@@ -622,25 +647,25 @@ function schadenListView(){
   return `
   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:26px; align-items:start;">
     <div style="min-width:0; display:flex; flex-direction:column; gap:16px;">
-      <p style="margin:0; font-size:16px; color:#6E6E6B;">1 Anliegen in Bearbeitung · 3 erledigte Fälle</p>
+      <p style="margin:0; font-size:16px; color:#6E6E6B;">${t('1 Anliegen in Bearbeitung · 3 erledigte Fälle','1 request in progress · 3 completed cases')}</p>
       ${CLAIMS.map(c => `
       <button class="list-card" onclick="openClaim('${c.key}')" style="display:flex; gap:18px; align-items:flex-start;">
         <div style="width:10px; height:10px; border-radius:999px; background:${c.dot}; margin-top:8px; flex:none;"></div>
-        <div style="min-width:0; flex:1 1 auto;"><div style="font-size:17px; font-weight:600;">${c.titel}</div><div style="font-size:15px; color:#6E6E6B; margin-top:5px;">${c.sub}</div></div>
-        <span style="flex:none; font-size:13px; font-weight:600; color:${c.fg}; background:${c.bg}; border-radius:999px; padding:6px 12px;">${c.status}</span>
+        <div style="min-width:0; flex:1 1 auto;"><div style="font-size:17px; font-weight:600;">${t(c.titel, c.titelEn)}</div><div style="font-size:15px; color:#6E6E6B; margin-top:5px;">${t(c.sub, c.subEn)}</div></div>
+        <span style="flex:none; font-size:13px; font-weight:600; color:${c.fg}; background:${c.bg}; border-radius:999px; padding:6px 12px;">${t(c.status, c.statusEn)}</span>
       </button>`).join('')}
     </div>
     <aside class="card">
-      <h2 style="margin:0; font-size:19px; font-weight:600;">Schaden melden</h2>
-      <p style="margin:10px 0 22px; font-size:15px; color:#6E6E6B; line-height:1.5;">Vier Angaben genügen. Den Rest klären wir mit der Versicherung.</p>
+      <h2 style="margin:0; font-size:19px; font-weight:600;">${t('Schaden melden','Report a claim')}</h2>
+      <p style="margin:10px 0 22px; font-size:15px; color:#6E6E6B; line-height:1.5;">${t('Vier Angaben genügen. Den Rest klären wir mit der Versicherung.', "Four details are enough. We'll clarify the rest with the insurer.")}</p>
       <div style="display:flex; flex-direction:column; gap:16px;">
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Betroffene Versicherung</div>
-          <select class="input" style="color:#0A0A0B;"><option>Bitte auswählen</option>${POLICIES.map(p=>`<option>${p.produkt}</option>`).join('')}</select>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Betroffene Versicherung','Affected insurance')}</div>
+          <select class="input" style="color:#0A0A0B;"><option>${t('Bitte auswählen','Please select')}</option>${POLICIES.map(p=>`<option>${t(p.produkt, p.produktEn)}</option>`).join('')}</select>
         </div>
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Wann ist es passiert?</div><input type="text" class="input" placeholder="TT.MM.JJJJ"></div>
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Was ist passiert?</div><textarea class="input" style="min-height:84px; resize:vertical;" placeholder="In eigenen Worten, ein paar Sätze reichen."></textarea></div>
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Fotos oder Belege</div><div class="dropzone">Dateien hierher ziehen</div></div>
-        <button class="btn-blue" style="font-size:16px; padding:15px 18px;" onclick="alert('Meldung gesendet (Demo). Jan Krapl meldet sich innerhalb eines Arbeitstags.')">Meldung senden</button>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Wann ist es passiert?','When did it happen?')}</div><input type="text" class="input" placeholder="${t('TT.MM.JJJJ','DD.MM.YYYY')}"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Was ist passiert?','What happened?')}</div><textarea class="input" style="min-height:84px; resize:vertical;" placeholder="${t('In eigenen Worten, ein paar Sätze reichen.','In your own words, a few sentences are enough.')}"></textarea></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Fotos oder Belege','Photos or receipts')}</div><div class="dropzone">${t('Dateien hierher ziehen','Drag files here')}</div></div>
+        <button class="btn-blue" style="font-size:16px; padding:15px 18px;" onclick="alert(t('Meldung gesendet (Demo). Jan Krapl meldet sich innerhalb eines Arbeitstags.','Report submitted (demo). Jan Krapl will get back to you within one business day.'))">${t('Meldung senden','Submit report')}</button>
       </div>
     </aside>
   </div>`;
@@ -651,33 +676,33 @@ function schadenDetailView(){
   if (!c) return '';
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <button class="pill-outline" style="align-self:flex-start;" onclick="go('schaden')">Zurück zu meinen Anliegen</button>
+    <button class="pill-outline" style="align-self:flex-start;" onclick="go('schaden')">${t('Zurück zu meinen Anliegen','Back to my requests')}</button>
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:26px 30px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
         <div style="width:56px; height:56px; border-radius:14px; background:#FFF3D6; color:#8A5A00; display:grid; place-items:center; font-size:22px; font-weight:700; flex:none;">S</div>
         <div style="min-width:0;">
-          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><h1 style="margin:0; font-size:26px; font-weight:600; letter-spacing:-0.01em;">${c.titel}</h1><span style="font-size:13px; font-weight:600; color:${c.fg}; background:${c.bg}; border-radius:999px; padding:6px 12px;">${c.status}</span></div>
-          <div style="font-size:15px; color:#6E6E6B; margin-top:6px;">${c.sub}</div>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><h1 style="margin:0; font-size:26px; font-weight:600; letter-spacing:-0.01em;">${t(c.titel, c.titelEn)}</h1><span style="font-size:13px; font-weight:600; color:${c.fg}; background:${c.bg}; border-radius:999px; padding:6px 12px;">${t(c.status, c.statusEn)}</span></div>
+          <div style="font-size:15px; color:#6E6E6B; margin-top:6px;">${t(c.sub, c.subEn)}</div>
         </div>
       </div>
       <div class="stat-strip">
-        <div class="stat-cell"><div class="micro">Schadendatum</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${c.datum}</div></div>
-        <div class="stat-cell"><div class="micro">Schadensumme</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${c.summe}</div></div>
-        <div class="stat-cell"><div class="micro">Selbstbehalt</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${c.selbst}</div></div>
+        <div class="stat-cell"><div class="micro">${t('Schadendatum','Claim date')}</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${c.datum}</div></div>
+        <div class="stat-cell"><div class="micro">${t('Schadensumme','Claim amount')}</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${c.summe}</div></div>
+        <div class="stat-cell"><div class="micro">${t('Selbstbehalt','Deductible')}</div><div style="font-size:16px; font-weight:600; margin-top:5px;">${t(c.selbst, c.selbstEn)}</div></div>
         <div style="padding:20px 30px; display:flex; align-items:center; gap:12px;">
           <img src="team/jan.jpg" alt="Jan Krapl" style="width:36px; height:36px; border-radius:999px; object-fit:cover; object-position:50% 22%; flex:none;">
-          <div><div class="micro">Ihr Berater</div><div style="font-size:15px; font-weight:600; margin-top:3px;">Jan Krapl</div></div>
+          <div><div class="micro">${t('Ihr Berater','Your advisor')}</div><div style="font-size:15px; font-weight:600; margin-top:3px;">Jan Krapl</div></div>
         </div>
       </div>
     </div>
     <div class="grid-2">
-      <div class="card"><h2 style="margin:0 0 14px; font-size:17px; font-weight:600;">Was passiert ist</h2><p style="margin:0; font-size:15px; line-height:1.6;">${c.beschrieb}</p></div>
+      <div class="card"><h2 style="margin:0 0 14px; font-size:17px; font-weight:600;">${t('Was passiert ist','What happened')}</h2><p style="margin:0; font-size:15px; line-height:1.6;">${t(c.beschrieb, c.beschriebEn)}</p></div>
       <div class="card">
-        <h2 style="margin:0 0 18px; font-size:17px; font-weight:600;">Stand der Bearbeitung</h2>
-        ${c.schritte.map(([titel,datum]) => `
+        <h2 style="margin:0 0 18px; font-size:17px; font-weight:600;">${t('Stand der Bearbeitung','Processing status')}</h2>
+        ${c.schritte.map(([titel,titelEn,datum]) => `
         <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:16px;">
           <div style="width:10px; height:10px; border-radius:999px; background:${datum==='offen'?'#C9CFE8':'#1F4FFF'}; margin-top:6px; flex:none;"></div>
-          <div><div style="font-size:15px; font-weight:600;">${titel}</div><div style="font-size:14px; color:#6E6E6B; margin-top:3px;">${datum}</div></div>
+          <div><div style="font-size:15px; font-weight:600;">${t(titel,titelEn)}</div><div style="font-size:14px; color:#6E6E6B; margin-top:3px;">${datum==='offen' ? t('offen','open') : datum}</div></div>
         </div>`).join('')}
       </div>
     </div>
@@ -686,44 +711,44 @@ function schadenDetailView(){
 
 function dokumenteView(){
   const DOKUMENTE = [
-    { typ: 'Police · PDF', farbe: '#1F4FFF', name: "Hausrat — neue Versicherungssumme CHF 120'000", meta: '01.09.2026 · 380 KB' },
-    { typ: 'Rechnung · PDF', farbe: '#6E6E6B', name: 'Autoversicherung — Prämienrechnung 2026/27', meta: '28.08.2026 · 120 KB' },
-    { typ: 'Police · PDF', farbe: '#6E6E6B', name: 'Auto — Police nach Fahrzeugwechsel', meta: '14.06.2026 · 410 KB' },
-    { typ: 'Schaden · PDF', farbe: '#6E6E6B', name: 'Abrechnung Velodiebstahl', meta: '27.05.2026 · 96 KB' },
-    { typ: 'Police · PDF', farbe: '#6E6E6B', name: 'Krankenkasse — Versicherungsausweis 2026', meta: '10.01.2026 · 240 KB' },
-    { typ: 'Übersicht · PDF', farbe: '#6E6E6B', name: 'Versicherungsübersicht Nina Brunner', meta: '10.01.2026 · 88 KB' }
+    { typ: 'Police · PDF', typEn: 'Policy · PDF', farbe: '#1F4FFF', name: "Hausrat — neue Versicherungssumme CHF 120'000", nameEn: "Home contents — new sum insured CHF 120'000", meta: '01.09.2026 · 380 KB' },
+    { typ: 'Rechnung · PDF', typEn: 'Invoice · PDF', farbe: '#6E6E6B', name: 'Autoversicherung — Prämienrechnung 2026/27', nameEn: 'Car insurance — premium invoice 2026/27', meta: '28.08.2026 · 120 KB' },
+    { typ: 'Police · PDF', typEn: 'Policy · PDF', farbe: '#6E6E6B', name: 'Auto — Police nach Fahrzeugwechsel', nameEn: 'Car — policy after vehicle change', meta: '14.06.2026 · 410 KB' },
+    { typ: 'Schaden · PDF', typEn: 'Claim · PDF', farbe: '#6E6E6B', name: 'Abrechnung Velodiebstahl', nameEn: 'Settlement: bicycle theft', meta: '27.05.2026 · 96 KB' },
+    { typ: 'Police · PDF', typEn: 'Policy · PDF', farbe: '#6E6E6B', name: 'Krankenkasse — Versicherungsausweis 2026', nameEn: 'Health insurance — insurance certificate 2026', meta: '10.01.2026 · 240 KB' },
+    { typ: 'Übersicht · PDF', typEn: 'Overview · PDF', farbe: '#6E6E6B', name: 'Versicherungsübersicht Nina Brunner', nameEn: 'Insurance overview Nina Brunner', meta: '10.01.2026 · 88 KB' }
   ];
-  const filters = ['Alle','Policen','Rechnungen','Schaden'];
+  const filters = [['Alle', t('Alle','All')], ['Policen', t('Policen','Policies')], ['Rechnungen', t('Rechnungen','Invoices')], ['Schaden', t('Schaden','Claims')]];
   const filtered = state.docFilter === 'Alle' ? DOKUMENTE : DOKUMENTE.filter(d => d.typ.startsWith(state.docFilter === 'Policen' ? 'Police' : state.docFilter === 'Rechnungen' ? 'Rechnung' : 'Schaden'));
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <p style="margin:0; font-size:16px; color:#6E6E6B;">24 Dateien · Policen, Rechnungen und Schadenbelege</p>
+    <p style="margin:0; font-size:16px; color:#6E6E6B;">${t('24 Dateien · Policen, Rechnungen und Schadenbelege','24 files · Policies, invoices and claim documents')}</p>
     <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      ${filters.map(f => `<button class="filter-pill ${state.docFilter===f?'active':''}" onclick="setDocFilter('${f}')">${f}</button>`).join('')}
+      ${filters.map(([key,label]) => `<button class="filter-pill ${state.docFilter===key?'active':''}" onclick="setDocFilter('${key}')">${label}</button>`).join('')}
     </div>
     <div class="grid-docs">
-      ${filtered.map(d => `<div class="doc-card"><div class="micro" style="color:${d.farbe};">${d.typ}</div><div style="font-size:16px; font-weight:600; line-height:1.35;">${d.name}</div><div style="font-size:14px; color:#6E6E6B; margin-top:auto;">${d.meta}</div></div>`).join('')}
-      ${filtered.length === 0 ? '<p style="color:#6E6E6B;">Keine Dokumente in dieser Kategorie.</p>' : ''}
+      ${filtered.map(d => `<div class="doc-card"><div class="micro" style="color:${d.farbe};">${t(d.typ,d.typEn)}</div><div style="font-size:16px; font-weight:600; line-height:1.35;">${t(d.name,d.nameEn)}</div><div style="font-size:14px; color:#6E6E6B; margin-top:auto;">${d.meta}</div></div>`).join('')}
+      ${filtered.length === 0 ? `<p style="color:#6E6E6B;">${t('Keine Dokumente in dieser Kategorie.','No documents in this category.')}</p>` : ''}
     </div>
   </div>`;
 }
 
 function newsView(){
   const NEWS = [
-    { kategorie: 'Tipp', neu: true, titel: 'Hausrat nach grösseren Anschaffungen prüfen', text: 'Neue Möbel, ein Instrument oder ein E-Bike heben den Wert des Haushalts schnell an. Liegt die Summe zu tief, kürzt die Versicherung im Schadenfall anteilig.', meta: '01.09.2026 · Jan Krapl' },
-    { kategorie: 'Hinweis', neu: true, titel: 'Krankenkasse: Prämien 2027 sind da', text: 'Die neuen Prämien liegen vor. Wer wechseln will, muss die Kündigung bis 30. November einreichen. Wir rechnen Ihnen die Varianten gerne durch.', meta: '20.08.2026 · coverd ag' },
-    { kategorie: 'Recht', neu: false, titel: 'Velo und E-Bike richtig versichern', text: 'Seit dem Wegfall der Velovignette läuft die Haftpflicht über die Privathaftpflicht. Diebstahl auswärts ist nur mit entsprechender Hausratdeckung eingeschlossen.', meta: '12.05.2026 · coverd ag' },
-    { kategorie: 'Intern', neu: false, titel: 'Neues Kundenportal ab Oktober', text: 'Änderungen, Schadenmeldungen und Dokumente laufen künftig über das Portal. Ihre bisherigen Unterlagen sind bereits übernommen.', meta: '12.06.2026 · coverd ag' }
+    { kategorie: 'Tipp', kategorieEn: 'Tip', neu: true, titel: 'Hausrat nach grösseren Anschaffungen prüfen', titelEn: 'Review home contents after major purchases', text: 'Neue Möbel, ein Instrument oder ein E-Bike heben den Wert des Haushalts schnell an. Liegt die Summe zu tief, kürzt die Versicherung im Schadenfall anteilig.', textEn: 'New furniture, an instrument or an e-bike can quickly raise the value of your household contents. If the sum insured is too low, the insurer will reduce payouts proportionally in the event of a claim.', meta: '01.09.2026 · Jan Krapl' },
+    { kategorie: 'Hinweis', kategorieEn: 'Notice', neu: true, titel: 'Krankenkasse: Prämien 2027 sind da', titelEn: 'Health insurance: 2027 premiums are here', text: 'Die neuen Prämien liegen vor. Wer wechseln will, muss die Kündigung bis 30. November einreichen. Wir rechnen Ihnen die Varianten gerne durch.', textEn: "The new premiums are available. Anyone wishing to switch must submit their cancellation by November 30. We're happy to calculate the options for you.", meta: '20.08.2026 · coverd ag' },
+    { kategorie: 'Recht', kategorieEn: 'Legal', neu: false, titel: 'Velo und E-Bike richtig versichern', titelEn: 'Insuring your bike and e-bike correctly', text: 'Seit dem Wegfall der Velovignette läuft die Haftpflicht über die Privathaftpflicht. Diebstahl auswärts ist nur mit entsprechender Hausratdeckung eingeschlossen.', textEn: 'Since the bicycle vignette was abolished, liability is covered through personal liability insurance. Theft away from home is only included with the appropriate home contents coverage.', meta: '12.05.2026 · coverd ag' },
+    { kategorie: 'Intern', kategorieEn: 'Internal', neu: false, titel: 'Neues Kundenportal ab Oktober', titelEn: 'New customer portal from October', text: 'Änderungen, Schadenmeldungen und Dokumente laufen künftig über das Portal. Ihre bisherigen Unterlagen sind bereits übernommen.', textEn: 'Changes, claim reports and documents will now go through the portal. Your existing documents have already been transferred.', meta: '12.06.2026 · coverd ag' }
   ];
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <p style="margin:0; font-size:16px; color:#6E6E6B;">Hinweise und Tipps von coverd ag</p>
+    <p style="margin:0; font-size:16px; color:#6E6E6B;">${t('Hinweise und Tipps von coverd ag','Notices and tips from coverd ag')}</p>
     <div class="grid-news">
       ${NEWS.map(n => `
       <article class="card" style="display:flex; flex-direction:column; gap:12px;">
-        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><span class="micro">${n.kategorie}</span>${n.neu ? '<span style="font-size:12px; font-weight:600; color:#1F4FFF; background:#E8ECFF; border-radius:999px; padding:4px 10px;">neu</span>' : ''}</div>
-        <h2 style="margin:0; font-size:19px; font-weight:600; line-height:1.3;">${n.titel}</h2>
-        <p style="margin:0; font-size:15px; line-height:1.6; color:#4A4A48;">${n.text}</p>
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><span class="micro">${t(n.kategorie,n.kategorieEn)}</span>${n.neu ? `<span style="font-size:12px; font-weight:600; color:#1F4FFF; background:#E8ECFF; border-radius:999px; padding:4px 10px;">${t('neu','new')}</span>` : ''}</div>
+        <h2 style="margin:0; font-size:19px; font-weight:600; line-height:1.3;">${t(n.titel,n.titelEn)}</h2>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#4A4A48;">${t(n.text,n.textEn)}</p>
         <div style="font-size:14px; color:#6E6E6B; margin-top:auto; padding-top:8px;">${n.meta}</div>
       </article>`).join('')}
     </div>
@@ -732,49 +757,49 @@ function newsView(){
 
 function hilfeView(){
   const FAQ = [
-    'Wie melde ich einen Schaden?',
-    'Wo finde ich meine Police als PDF?',
-    'Was mache ich bei einem Umzug?',
-    'Wie ändere ich meine Franchise?',
-    'Wie lange dauert eine Auszahlung?',
-    'Wie ändere ich meine E-Mailadresse?'
+    ['Wie melde ich einen Schaden?','How do I report a claim?'],
+    ['Wo finde ich meine Police als PDF?','Where can I find my policy as a PDF?'],
+    ['Was mache ich bei einem Umzug?','What do I do when I move?'],
+    ['Wie ändere ich meine Franchise?','How do I change my deductible?'],
+    ['Wie lange dauert eine Auszahlung?','How long does a payout take?'],
+    ['Wie ändere ich meine E-Mailadresse?','How do I change my email address?']
   ];
   return `
   <div style="display:flex; flex-direction:column; gap:26px;">
     <div class="card" style="padding:36px;">
-      <h1 style="margin:0; font-size:28px; font-weight:600; letter-spacing:-0.01em;">Wie können wir helfen?</h1>
+      <h1 style="margin:0; font-size:28px; font-weight:600; letter-spacing:-0.01em;">${t('Wie können wir helfen?','How can we help?')}</h1>
       <div style="display:flex; align-items:center; gap:12px; background:#F3F3F1; border:1px solid #E4E4E1; border-radius:999px; padding:14px 20px; margin-top:20px; max-width:560px;">
         <div style="width:8px; height:8px; border-radius:999px; background:#1F4FFF; flex:none;"></div>
-        <input class="input" style="border:0; background:transparent; padding:0;" placeholder="Hilfeseite durchsuchen">
+        <input class="input" style="border:0; background:transparent; padding:0;" placeholder="${t('Hilfeseite durchsuchen','Search the help page')}">
       </div>
     </div>
     <div class="card" style="padding:30px;">
-      <h2 style="margin:0 0 20px; font-size:19px; font-weight:600;">Häufige Fragen</h2>
+      <h2 style="margin:0 0 20px; font-size:19px; font-weight:600;">${t('Häufige Fragen','Frequently asked questions')}</h2>
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px 32px;">
-        ${FAQ.map(f => `<a href="#" onclick="return false;" style="font-size:16px; font-weight:600; line-height:1.4; display:flex; gap:10px; align-items:baseline;"><span style="color:#1F4FFF;">→</span>${f}</a>`).join('')}
+        ${FAQ.map(([fDe,fEn]) => `<a href="#" onclick="return false;" style="font-size:16px; font-weight:600; line-height:1.4; display:flex; gap:10px; align-items:baseline;"><span style="color:#1F4FFF;">→</span>${t(fDe,fEn)}</a>`).join('')}
       </div>
     </div>
     <div class="grid-2" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
-      <div class="card" style="display:flex; flex-direction:column; gap:12px;"><div style="font-size:17px; font-weight:600;">Allgemein</div><p style="margin:0; font-size:15px; color:#6E6E6B; line-height:1.5;">Hilfe und Tipps zur Nutzung des Portals.</p><button class="pill-outline" style="align-self:flex-start; margin-top:6px;">Anzeigen</button></div>
-      <div class="card" style="display:flex; flex-direction:column; gap:12px;"><div style="font-size:17px; font-weight:600;">Sicherheit</div><p style="margin:0; font-size:15px; color:#6E6E6B; line-height:1.5;">Einstellungen, mit denen Sie Ihr Konto schützen.</p><button class="pill-outline" style="align-self:flex-start; margin-top:6px;">Anzeigen</button></div>
-      <div class="help-dark"><div style="font-size:17px; font-weight:600;">Lieber persönlich?</div><p style="margin:0; font-size:15px; color:#B9B9B4; line-height:1.5;">Jan Krapl, 078 248 91 21, jkrapl@coverd.ch</p><button class="btn-white" onclick="alert('Rückruf angefordert (Demo).')">Rückruf anfordern</button></div>
+      <div class="card" style="display:flex; flex-direction:column; gap:12px;"><div style="font-size:17px; font-weight:600;">${t('Allgemein','General')}</div><p style="margin:0; font-size:15px; color:#6E6E6B; line-height:1.5;">${t('Hilfe und Tipps zur Nutzung des Portals.','Help and tips for using the portal.')}</p><button class="pill-outline" style="align-self:flex-start; margin-top:6px;">${t('Anzeigen','View')}</button></div>
+      <div class="card" style="display:flex; flex-direction:column; gap:12px;"><div style="font-size:17px; font-weight:600;">${t('Sicherheit','Security')}</div><p style="margin:0; font-size:15px; color:#6E6E6B; line-height:1.5;">${t('Einstellungen, mit denen Sie Ihr Konto schützen.','Settings to help protect your account.')}</p><button class="pill-outline" style="align-self:flex-start; margin-top:6px;">${t('Anzeigen','View')}</button></div>
+      <div class="help-dark"><div style="font-size:17px; font-weight:600;">${t('Lieber persönlich?','Prefer to talk in person?')}</div><p style="margin:0; font-size:15px; color:#B9B9B4; line-height:1.5;">Jan Krapl, 078 248 91 21, jkrapl@coverd.ch</p><button class="btn-white" onclick="alert(t('Rückruf angefordert (Demo).','Callback requested (demo).'))">${t('Rückruf anfordern','Request a callback')}</button></div>
     </div>
   </div>`;
 }
 
 function profilView(){
   const pt = state.profilTab;
-  const tabs = [['allg','Allgemeine Informationen'],['sicher','Sicherheit'],['benach','Benachrichtigungen']];
-  const titleMap = { allg: 'Persönliche Informationen', sicher: 'Sicherheit', benach: 'Benachrichtigungen' };
-  const subMap = { allg: 'Verwalten Sie Ihre persönlichen Angaben', sicher: 'Einstellungen, mit denen Sie Ihr Konto schützen', benach: 'Bestimmen Sie, worüber wir Sie informieren' };
-  const notifyDefs = [['schaden','Anliegen und Schäden','Statusänderungen und Auszahlungen'], ['dokumente','Dokumente','Neue Policen, Rechnungen und Belege'], ['policen','Versicherungen','Änderungen und Verlängerungen'], ['news','News','Tipps und Hinweise']];
+  const tabs = [['allg', t('Allgemeine Informationen','General information')],['sicher', t('Sicherheit','Security')],['benach', t('Benachrichtigungen','Notifications')]];
+  const titleMap = { allg: t('Persönliche Informationen','Personal information'), sicher: t('Sicherheit','Security'), benach: t('Benachrichtigungen','Notifications') };
+  const subMap = { allg: t('Verwalten Sie Ihre persönlichen Angaben','Manage your personal details'), sicher: t('Einstellungen, mit denen Sie Ihr Konto schützen','Settings to help protect your account'), benach: t('Bestimmen Sie, worüber wir Sie informieren','Choose what we notify you about') };
+  const notifyDefs = [['schaden', t('Anliegen und Schäden','Requests and claims'), t('Statusänderungen und Auszahlungen','Status changes and payouts')], ['dokumente', t('Dokumente','Documents'), t('Neue Policen, Rechnungen und Belege','New policies, invoices and receipts')], ['policen', t('Versicherungen','Insurance'), t('Änderungen und Verlängerungen','Changes and renewals')], ['news', t('News','News'), t('Tipps und Hinweise','Tips and notices')]];
   return `
   <div style="display:flex; flex-wrap:wrap; gap:26px; align-items:flex-start;">
     <aside class="card" style="flex:1 1 280px; max-width:320px; padding:0; overflow:hidden;">
       <div style="padding:26px; display:flex; flex-direction:column; gap:14px; border-bottom:1px solid #E4E4E1;">
         <div style="width:64px; height:64px; border-radius:999px; background:#E8ECFF; color:#1F4FFF; display:grid; place-items:center; font-size:22px; font-weight:700;">NB</div>
-        <div><div style="font-size:18px; font-weight:600;">Nina Brunner</div><div style="font-size:14px; color:#6E6E6B; margin-top:3px;">Privatkundin seit 2019</div></div>
-        <span class="badge badge-ok" style="align-self:flex-start;">Aktiv</span>
+        <div><div style="font-size:18px; font-weight:600;">Nina Brunner</div><div style="font-size:14px; color:#6E6E6B; margin-top:3px;">${t('Privatkundin seit 2019','Private customer since 2019')}</div></div>
+        <span class="badge badge-ok" style="align-self:flex-start;">${t('Aktiv','Active')}</span>
       </div>
       <div style="padding:12px;">
         ${tabs.map(([k,l]) => `<button class="profil-tab ${pt===k?'active':''}" onclick="setProfilTab('${k}')">${l}</button>`).join('')}
@@ -783,26 +808,26 @@ function profilView(){
     <div class="card" style="flex:3 1 420px; min-width:0; padding:30px;">
       <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
         <div><h2 style="margin:0; font-size:19px; font-weight:600;">${titleMap[pt]}</h2><p style="margin:8px 0 0; font-size:15px; color:#6E6E6B;">${subMap[pt]}</p></div>
-        <button class="btn-blue-sm" onclick="alert('Gespeichert (Demo).')">Speichern</button>
+        <button class="btn-blue-sm" onclick="alert(t('Gespeichert (Demo).','Saved (demo).'))">${t('Speichern','Save')}</button>
       </div>
       ${pt === 'allg' ? `
       <div class="grid-fields" style="margin-top:26px;">
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Vorname</div><input class="input" value="Nina"></div>
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Nachname</div><input class="input" value="Brunner"></div>
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Adresse</div><input class="input" value="Kirchgasse 14"></div>
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">PLZ und Ort</div><input class="input" value="4600 Olten"></div>
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Telefon</div><input class="input" value="079 512 33 08"></div>
-        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">E-Mail</div><input class="input" value="nina.brunner@example.ch"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Vorname','First name')}</div><input class="input" value="Nina"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Nachname','Last name')}</div><input class="input" value="Brunner"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Adresse','Address')}</div><input class="input" value="Kirchgasse 14"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('PLZ und Ort','Postal code and city')}</div><input class="input" value="4600 Olten"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Telefon','Phone')}</div><input class="input" value="079 512 33 08"></div>
+        <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('E-Mail','Email')}</div><input class="input" value="nina.brunner@example.ch"></div>
       </div>` : ''}
       ${pt === 'sicher' ? `
       <div style="display:flex; flex-direction:column; gap:22px; margin-top:26px;">
         <div class="grid-fields">
-          <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">E-Mail für die Anmeldung</div><input class="input" value="nina.brunner@example.ch"></div>
-          <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">Handynummer für die Zwei-Faktor-Anmeldung</div><input class="input" value="079 512 33 08"></div>
+          <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('E-Mail für die Anmeldung','Login email')}</div><input class="input" value="nina.brunner@example.ch"></div>
+          <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Handynummer für die Zwei-Faktor-Anmeldung','Phone number for two-factor login')}</div><input class="input" value="079 512 33 08"></div>
         </div>
         <div style="border-top:1px solid #F0F0EE; padding-top:22px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;">
-          <div><div style="font-size:16px; font-weight:600;">Kennwort</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">Zuletzt geändert am 11.03.2026</div></div>
-          <button class="pill-outline">Jetzt ändern</button>
+          <div><div style="font-size:16px; font-weight:600;">${t('Kennwort','Password')}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${t('Zuletzt geändert am 11.03.2026','Last changed on 11.03.2026')}</div></div>
+          <button class="pill-outline">${t('Jetzt ändern','Change now')}</button>
         </div>
       </div>` : ''}
       ${pt === 'benach' ? `
@@ -831,36 +856,39 @@ function mainBody(){
 }
 
 function chatWidget(){
+  const greeting = { role: 'bot', text: t('Guten Tag. Ich beantworte Fragen zu Ihren sechs Versicherungen — Prämien, Deckungen, Selbstbehalte. Für alles Weitere ist Jan Krapl da.', 'Good afternoon. I can answer questions about your six insurance policies — premiums, coverage, deductibles. For everything else, Jan Krapl is here to help.') };
+  const msgs = [greeting, ...state.messages];
   return `
   <div class="chatbot">
     ${state.botOpen ? `
     <div class="chat-panel">
       <div class="chat-head">
         <div style="width:10px; height:10px; border-radius:999px; background:#1F4FFF; flex:none;"></div>
-        <div style="min-width:0; flex:1 1 auto;"><div style="font-size:15px; font-weight:600;">coverd Assistent</div><div style="font-size:13px; color:#6E6E6B;">Antwortet aus Ihren Policen</div></div>
-        <button onclick="toggleVoiceOut()" title="${state.voiceOut ? 'Antworten nicht mehr vorlesen' : 'Antworten vorlesen'}" style="border:0; background:transparent; font-size:18px; color:#6E6E6B; cursor:pointer; line-height:1; padding:4px 6px; opacity:${state.voiceOut ? 1 : 0.4};">${state.voiceOut ? '🔊' : '🔈'}</button>
+        <div style="min-width:0; flex:1 1 auto;"><div style="font-size:15px; font-weight:600;">${t('coverd Assistent','coverd Assistant')}</div><div style="font-size:13px; color:#6E6E6B;">${t('Antwortet aus Ihren Policen','Answers using your policies')}</div></div>
+        <button onclick="toggleVoiceOut()" title="${state.voiceOut ? t('Antworten nicht mehr vorlesen','Stop reading answers aloud') : t('Antworten vorlesen','Read answers aloud')}" style="border:0; background:transparent; font-size:18px; color:#6E6E6B; cursor:pointer; line-height:1; padding:4px 6px; opacity:${state.voiceOut ? 1 : 0.4};">${state.voiceOut ? '🔊' : '🔈'}</button>
         <button onclick="closeBot()" style="border:0; background:transparent; font-size:20px; color:#6E6E6B; cursor:pointer; line-height:1; padding:4px 6px;">×</button>
       </div>
       <div class="chat-messages" id="botScroll">
-        ${state.messages.map(m => `<div style="display:flex; justify-content:${m.role==='user'?'flex-end':'flex-start'};"><div class="chat-bubble" style="background:${m.role==='user'?'#0A0A0B':'#F3F3F1'}; color:${m.role==='user'?'#FFFFFF':'#0A0A0B'};">${esc(m.text)}</div></div>`).join('')}
+        ${msgs.map(m => `<div style="display:flex; justify-content:${m.role==='user'?'flex-end':'flex-start'};"><div class="chat-bubble" style="background:${m.role==='user'?'#0A0A0B':'#F3F3F1'}; color:${m.role==='user'?'#FFFFFF':'#0A0A0B'};">${esc(m.text)}</div></div>`).join('')}
       </div>
       <div class="chat-foot">
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="chip-suggest" onclick="send('Ist mein Velo versichert?')">Ist mein Velo versichert?</button>
-          <button class="chip-suggest" onclick="send('Wie hoch ist mein Selbstbehalt?')">Wie hoch ist mein Selbstbehalt?</button>
+          <button class="chip-suggest" onclick="send('${t('Ist mein Velo versichert?','Is my bike insured?')}')">${t('Ist mein Velo versichert?','Is my bike insured?')}</button>
+          <button class="chip-suggest" onclick="send('${t('Wie hoch ist mein Selbstbehalt?','What is my deductible?')}')">${t('Wie hoch ist mein Selbstbehalt?','What is my deductible?')}</button>
         </div>
         <div style="display:flex; gap:10px;">
-          <input id="botInput" class="input" placeholder="${state.listening ? 'Ich höre zu …' : 'Frage zu Ihren Versicherungen stellen'}" onkeydown="onBotKey(event)">
-          ${(window.SpeechRecognition || window.webkitSpeechRecognition) ? `<button class="btn-mic ${state.listening ? 'listening' : ''}" onclick="toggleMic()" title="${state.listening ? 'Aufnahme stoppen' : 'Frage per Sprache stellen'}">${state.listening ? '⏹️' : '🎤'}</button>` : ''}
-          <button class="btn-blue-sm" onclick="sendFromInput()">Senden</button>
+          <input id="botInput" class="input" placeholder="${state.listening ? t('Ich höre zu …','Listening…') : t('Frage zu Ihren Versicherungen stellen','Ask a question about your insurance')}" onkeydown="onBotKey(event)">
+          ${(window.SpeechRecognition || window.webkitSpeechRecognition) ? `<button class="btn-mic ${state.listening ? 'listening' : ''}" onclick="toggleMic()" title="${state.listening ? t('Aufnahme stoppen','Stop recording') : t('Frage per Sprache stellen','Ask a question by voice')}">${state.listening ? '⏹️' : '🎤'}</button>` : ''}
+          <button class="btn-blue-sm" onclick="sendFromInput()">${t('Senden','Send')}</button>
         </div>
       </div>
     </div>` : ''}
-    <button class="fab" onclick="toggleBot()">Fragen? Assistent öffnen</button>
+    <button class="fab" onclick="toggleBot()">${t('Fragen? Assistent öffnen','Questions? Open assistant')}</button>
   </div>`;
 }
 
 function render(){
+  document.title = t('Kundenportal – coverd ag','Customer Portal – coverd ag');
   document.getElementById('app').innerHTML = `<div class="app-flex">${sidebar()}<div class="main-col">${topheader()}<main class="main-content">${mainBody()}</main></div></div>${chatWidget()}`;
   const sc = document.getElementById('botScroll');
   if (sc) sc.scrollTop = sc.scrollHeight;
