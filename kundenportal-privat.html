@@ -181,11 +181,12 @@ function loadPersisted(){
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return;
     const saved = JSON.parse(raw);
-    if (saved.policies) state.policies = saved.policies;
+    if (saved.policies) state.policies = saved.policies.filter(function(p){ return !p.reading; });
     if (saved.claims) state.claims = saved.claims;
     if (saved.verlauf) state.verlauf = saved.verlauf;
     if (saved.themen) state.themen = saved.themen;
     if (saved.notify) state.notify = saved.notify;
+    persist();
   } catch (e) {}
 }
 function approvePolicy(key){
@@ -857,12 +858,13 @@ function policenListView(){
       ${uploadPolicyButton(uploadLabel)}
     </div>
     <div class="grid-cards">
-      ${state.policies.map(p => p.reading ? `
-      <div class="card" style="display:flex; flex-direction:column; gap:14px; opacity:0.7;">
-        <div style="font-size:17px; font-weight:600;">${t('Wird gelesen…','Reading…')}</div>
-        <div style="font-size:14px; color:#6E6E6B;">${t('Ihre Police wird analysiert.','Your policy is being analyzed.')}</div>
-      </div>` : `
-      <button class="list-card" onclick="openPolicy('${p.key}')" style="display:flex; flex-direction:column; gap:14px;">
+      ${state.policies.map(p => {
+        if (p.reading) return `
+        <div class="card" style="display:flex; flex-direction:column; gap:14px; opacity:0.7;">
+          <div style="font-size:17px; font-weight:600;">${t('Wird gelesen…','Reading…')}</div>
+          <div style="font-size:14px; color:#6E6E6B;">${t('Ihre Police wird analysiert.','Your policy is being analyzed.')}</div>
+        </div>`;
+        const header = `
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px;">
           <div style="min-width:0;"><div style="font-size:17px; font-weight:600;">${t(p.produkt, p.produktEn)}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${t(p.gesellschaft, p.gesellschaftEn)}</div></div>
           <span class="badge ${p.pending ? 'badge-pending' : 'badge-ok'}">${p.pending ? t('In Prüfung','Under review') : t('Aktiv','Active')}</span>
@@ -870,8 +872,17 @@ function policenListView(){
         <div style="display:flex; gap:26px; flex-wrap:wrap; border-top:1px solid #F0F0EE; padding-top:14px;">
           <div><div class="micro">${t('Prämie','Premium')}</div><div style="font-size:16px; font-weight:600; margin-top:3px;">${t(p.praemie, p.praemieEn)}</div></div>
           <div><div class="micro">${t('Selbstbehalt','Deductible')}</div><div style="font-size:14px; margin-top:5px; color:#4A4A48;">${t(p.selbst, p.selbstEn)}</div></div>
-        </div>
-      </button>`).join('')}
+        </div>`;
+        if (!p.pending) return `<button class="list-card" onclick="openPolicy('${p.key}')" style="display:flex; flex-direction:column; gap:14px;">${header}</button>`;
+        return `
+        <div class="list-card" style="display:flex; flex-direction:column; gap:14px; cursor:default;">
+          <div onclick="openPolicy('${p.key}')" style="display:flex; flex-direction:column; gap:14px; cursor:pointer;">${header}</div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; border-top:1px solid #F0F0EE; padding-top:14px;">
+            <button class="btn-blue-sm" onclick="approvePolicy('${p.key}')">${t('Bestätigen','Confirm')}</button>
+            <button class="pill-outline" onclick="rejectPolicy('${p.key}')">${t('Ablehnen','Reject')}</button>
+          </div>
+        </div>`;
+      }).join('')}
     </div>
   </div>`;
 }
