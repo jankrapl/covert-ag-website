@@ -55,6 +55,7 @@
   .filter-pill.active{ background:#0A0A0B; color:#FFFFFF; border:0; }
   .badge{ font-size:13px; font-weight:600; border-radius:999px; padding:6px 12px; display:inline-block; }
   .badge-ok{ color:#16603A; background:#DDF3E6; }
+  .badge-pending{ color:#6E6E6B; background:#F3F3F1; }
   .micro{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#6E6E6B; }
   .mono{ font-family:'JetBrains Mono',monospace; }
   .input{ width:100%; border:1px solid #E4E4E1; border-radius:12px; padding:13px 16px; font:inherit; font-size:15px; outline:none; }
@@ -140,68 +141,6 @@
 if (window.pdfjsLib) {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 }
-const POLICIES = [
-  { key: 'kk', produkt: 'Krankenkasse', produktEn: 'Health insurance', gesellschaft: 'Grundversicherung + Zusatz', gesellschaftEn: 'Basic + supplementary insurance', praemie: 'CHF 289.00 / Monat', praemieEn: 'CHF 289.00 / month', selbst: "Franchise CHF 2'500", selbstEn: "Deductible CHF 2'500", ablauf: '31.12.2026',
-    deckung: 'Grundversicherung nach Modell Hausarzt mit Franchise CHF 2 500. Zusatzversicherung für Zahnbehandlung und Alternativmedizin.',
-    deckungEn: 'Basic insurance under the family doctor model with a deductible of CHF 2 500. Supplementary insurance for dental treatment and alternative medicine.',
-    mutTitel: 'Franchise oder Modell ändern', mutTitelEn: 'Change deductible or model',
-    felder: [['Gewünschte Franchise','Desired deductible', 'z. B. CHF 1 500','e.g. CHF 1 500'], ['Versicherungsmodell','Insurance model', 'z. B. Hausarzt','e.g. family doctor'], ['Zusatzversicherung','Supplementary insurance', 'Zahn, Alternativmedizin','Dental, alternative medicine'], ['Gültig ab','Valid from', '01.01.2027','01.01.2027']],
-    tags: ['kranken', 'krankenkasse', 'arzt', 'franchise', 'zahn', 'sanitas'] },
-  { key: 'auto', produkt: 'Autoversicherung', produktEn: 'Car insurance', gesellschaft: 'Vollkasko', gesellschaftEn: 'Fully comprehensive', praemie: 'CHF 94.00 / Monat', praemieEn: 'CHF 94.00 / month', selbst: 'CHF 500', selbstEn: 'CHF 500', ablauf: '31.12.2026',
-    deckung: 'Vollkasko mit Selbstbehalt CHF 500, Bonusstufe 0, Insassenschutz inbegriffen.',
-    deckungEn: 'Fully comprehensive coverage with a deductible of CHF 500, no-claims level 0, occupant protection included.',
-    mutTitel: 'Fahrzeug oder Kasko ändern', mutTitelEn: 'Change vehicle or coverage',
-    felder: [['Kontrollschild','License plate', 'z. B. SO 214 556','e.g. SO 214 556'], ['Marke und Typ','Make and model', 'z. B. Skoda Octavia','e.g. Skoda Octavia'], ['Stammnummer','Vehicle ID number', 'z. B. 123.456.789','e.g. 123.456.789'], ['Kaskodeckung','Collision coverage', 'Vollkasko','Fully comprehensive'], ['Jährliche Fahrleistung','Annual mileage', 'z. B. 12 000 km','e.g. 12 000 km'], ['Gültig ab','Valid from', 'TT.MM.JJJJ','DD.MM.YYYY']],
-    tags: ['auto', 'fahrzeug', 'kasko', 'kollision', 'garage'] },
-  { key: 'hausrat', produkt: 'Hausrat', produktEn: 'Home contents insurance', gesellschaft: 'Grunddeckung', gesellschaftEn: 'Basic coverage', praemie: 'CHF 42.00 / Monat', praemieEn: 'CHF 42.00 / month', selbst: 'CHF 200', selbstEn: 'CHF 200', ablauf: '31.12.2026',
-    deckung: "Versicherungssumme CHF 120'000. Feuer, Wasser, Diebstahl zu Hause und auswärts.",
-    deckungEn: "Sum insured CHF 120'000. Fire, water, theft at home and away.",
-    mutTitel: 'Summe oder Adresse ändern', mutTitelEn: 'Change amount or address',
-    felder: [['Wohnadresse','Home address', 'Strasse und Nummer','Street and number'], ['PLZ und Ort','Postal code and city', 'z. B. 4600 Olten','e.g. 4600 Olten'], ['Versicherungssumme (CHF)','Sum insured (CHF)', 'z. B. 120 000','e.g. 120 000'], ['Anzahl Zimmer','Number of rooms', 'z. B. 3.5','e.g. 3.5'], ['Wertsachen über CHF 10 000','Valuables over CHF 10 000', 'z. B. Klavier','e.g. piano'], ['Gültig ab','Valid from', 'TT.MM.JJJJ','DD.MM.YYYY']],
-    tags: ['hausrat', 'wohnung', 'möbel', 'velo', 'fahrrad', 'diebstahl', 'einbruch', 'umzug', 'adresse'] },
-  { key: 'phv', produkt: 'Privathaftpflicht', produktEn: 'Personal liability insurance', gesellschaft: 'Grunddeckung', gesellschaftEn: 'Basic coverage', praemie: 'CHF 18.00 / Monat', praemieEn: 'CHF 18.00 / month', selbst: 'kein Selbstbehalt', selbstEn: 'no deductible', ablauf: '31.12.2026',
-    deckung: 'Deckungssumme CHF 5 Mio. für Schäden an Personen und Sachen Dritter, inklusive Schäden an gemieteten Wohnungen.',
-    deckungEn: 'Coverage of CHF 5 million for injury and property damage to third parties, including damage to rented apartments.',
-    mutTitel: 'Haushaltsangaben ändern', mutTitelEn: 'Change household details',
-    felder: [['Anzahl Personen im Haushalt','Number of people in household', 'z. B. 2','e.g. 2'], ['Haustiere','Pets', 'z. B. ein Hund','e.g. one dog'], ['Deckungssumme (CHF)','Coverage amount (CHF)', 'z. B. 5 000 000','e.g. 5 000 000'], ['Gültig ab','Valid from', 'TT.MM.JJJJ','DD.MM.YYYY']],
-    tags: ['haftpflicht', 'privathaftpflicht', 'hund', 'mietwohnung'] },
-  { key: 'leben', produkt: 'Lebensversicherung', produktEn: 'Life insurance', gesellschaft: 'Säule 3a', gesellschaftEn: 'Pillar 3a', praemie: 'CHF 25.00 / Monat', praemieEn: 'CHF 25.00 / month', selbst: '—', selbstEn: '—', ablauf: '01.06.2049',
-    deckung: "Todesfallkapital CHF 200'000 mit Sparanteil in der Säule 3a, steuerlich abzugsfähig.",
-    deckungEn: "Death benefit of CHF 200'000 with a savings component under Pillar 3a, tax-deductible.",
-    mutTitel: 'Beitrag oder Begünstigte ändern', mutTitelEn: 'Change contribution or beneficiary',
-    felder: [['Jahresbeitrag (CHF)','Annual contribution (CHF)', 'z. B. 7 056','e.g. 7 056'], ['Begünstigte Person','Beneficiary', 'Name und Vorname','Last name and first name'], ['Todesfallkapital (CHF)','Death benefit (CHF)', 'z. B. 200 000','e.g. 200 000'], ['Gültig ab','Valid from', '01.01.2027','01.01.2027']],
-    tags: ['leben', 'lebensversicherung', '3a', 'säule', 'vorsorge', 'todesfall', 'steuer'] },
-  { key: 'rs', produkt: 'Rechtsschutz', produktEn: 'Legal protection insurance', gesellschaft: 'Privat und Verkehr', gesellschaftEn: 'Private and traffic', praemie: 'CHF 18.00 / Monat', praemieEn: 'CHF 18.00 / month', selbst: 'kein Selbstbehalt', selbstEn: 'no deductible', ablauf: '31.12.2026',
-    deckung: "Anwalts- und Gerichtskosten bis CHF 600'000 im Privat- und Verkehrsrechtsschutz.",
-    deckungEn: "Attorney and court costs up to CHF 600'000 for private and traffic legal protection.",
-    mutTitel: 'Deckungsbereich ändern', mutTitelEn: 'Change coverage area',
-    felder: [['Deckungsbereich','Coverage area', 'Privat und Verkehr','Private and traffic'], ['Anzahl Personen','Number of people', 'z. B. 2','e.g. 2'], ['Deckungssumme (CHF)','Coverage amount (CHF)', 'z. B. 600 000','e.g. 600 000'], ['Gültig ab','Valid from', 'TT.MM.JJJJ','DD.MM.YYYY']],
-    tags: ['recht', 'rechtsschutz', 'anwalt', 'gericht', 'streit'] }
-];
-
-const CLAIMS = [
-  { key: 'wasch', titel: 'Wasserschaden Waschmaschine', titelEn: 'Water damage – washing machine', sub: 'Hausrat · gemeldet 05.09.2026', subEn: 'Home contents · reported 05.09.2026', status: 'In Bearbeitung', statusEn: 'In progress', fg: '#3D2BFF', bg: '#F5F4FF', dot: '#3D2BFF',
-    datum: '05.09.2026', summe: "CHF 2'400.00", selbst: 'CHF 200.00', selbstEn: 'CHF 200.00',
-    beschrieb: 'Der Zulaufschlauch der Waschmaschine ist gerissen, Wasser lief in den Korridor. Parkett und Sockelleisten sind beschädigt.',
-    beschriebEn: "The washing machine's supply hose burst, and water ran into the hallway. The parquet flooring and skirting boards were damaged.",
-    schritte: [['Meldung eingegangen','Report received', '05.09.2026'], ['Fotos eingereicht','Photos submitted', '06.09.2026'], ['Kostenschätzung in Prüfung','Cost estimate under review', 'offen']] },
-  { key: 'velo', titel: 'Velo gestohlen, Bahnhof Olten', titelEn: 'Bicycle stolen, Olten station', sub: 'Hausrat · gemeldet 03.05.2026', subEn: 'Home contents · reported 03.05.2026', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#D4D1EC',
-    datum: '03.05.2026', summe: "CHF 1'440.00", selbst: 'CHF 200.00', selbstEn: 'CHF 200.00',
-    beschrieb: 'Das abgeschlossene Velo wurde am Bahnhof entwendet. Polizeirapport lag der Meldung bei.',
-    beschriebEn: 'The locked bicycle was stolen at the train station. A police report was attached to the claim.',
-    schritte: [['Meldung eingegangen','Report received', '03.05.2026'], ['Polizeirapport geprüft','Police report reviewed', '12.05.2026'], ["Auszahlung CHF 1'240.00","Payout CHF 1'240.00", '27.05.2026']] },
-  { key: 'park', titel: 'Parkschaden Kotflügel', titelEn: 'Parking damage – fender', sub: 'Auto · gemeldet 21.11.2025', subEn: 'Car · reported 21.11.2025', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#D4D1EC',
-    datum: '21.11.2025', summe: "CHF 1'850.00", selbst: 'CHF 500.00', selbstEn: 'CHF 500.00',
-    beschrieb: 'Unbekannter Dritter beschädigte beim Parkieren den vorderen rechten Kotflügel.',
-    beschriebEn: 'An unknown third party damaged the front right fender while parking.',
-    schritte: [['Meldung eingegangen','Report received', '21.11.2025'], ['Garage beauftragt','Garage commissioned', '25.11.2025'], ['Direkt abgerechnet','Settled directly', '09.12.2025']] },
-  { key: 'nachbar', titel: 'Wasserschaden Küche Nachbarwohnung', titelEn: "Water damage – neighbor's kitchen", sub: 'Privathaftpflicht · gemeldet 08.02.2025', subEn: 'Personal liability · reported 08.02.2025', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#D4D1EC',
-    datum: '08.02.2025', summe: "CHF 3'860.00", selbst: 'kein Selbstbehalt', selbstEn: 'no deductible',
-    beschrieb: 'Ein übergelaufenes Spülbecken beschädigte die Decke der darunterliegenden Wohnung.',
-    beschriebEn: 'An overflowing sink damaged the ceiling of the apartment below.',
-    schritte: [['Meldung eingegangen','Report received', '08.02.2025'], ['Schaden anerkannt','Claim approved', '20.02.2025'], ["Vollständig übernommen CHF 3'860.00","Fully covered CHF 3'860.00", '14.03.2025']] }
-];
-
 const state = {
   loggedIn: false, loginError: false,
   screen: 'dash', policy: null, claim: null, detailTab: 'ueber', profilTab: 'allg',
@@ -211,12 +150,11 @@ const state = {
   listening: false,
   voiceOut: false,
   messages: [],
-  themen: [
-    { id: 't1', label: 'Vorsorgeanalyse 3. Säule', labelEn: 'Pillar 3a pension analysis', status: 'Bereit', statusEn: 'Ready', kind: 'ready' },
-    { id: 't2', label: 'Vergleich Hausratversicherung', labelEn: 'Home contents insurance comparison', status: 'In Prüfung', statusEn: 'Under review', kind: 'pending' },
-    { id: 't3', label: 'Steueroptimierung Einkauf PK', labelEn: 'Tax optimization: pension fund buy-in', status: 'Bereit', statusEn: 'Ready', kind: 'ready' },
-    { id: 't4', label: 'Nächstes Gespräch', labelEn: 'Next meeting', status: 'Do, 14:00', statusEn: 'Thu, 14:00', kind: 'pending' }
-  ],
+  policies: [],
+  claims: [],
+  verlauf: [],
+  policyUploadBusy: false,
+  themen: [],
   themaEditingId: null,
   themaEditLabel: '',
   themaEditStatus: '',
@@ -430,6 +368,119 @@ function clearUploadedDoc(){
   render();
 }
 
+function parseChfAmount(s){
+  if (!s) return 0;
+  var m = String(s).replace(/'/g, '').match(/[\d.,]+/);
+  if (!m) return 0;
+  return parseFloat(m[0].replace(',', '.')) || 0;
+}
+function fmtChf(n){ return 'CHF ' + n.toFixed(2); }
+function totalMonthlyPremium(){
+  return state.policies.reduce(function(sum, p){ return sum + parseChfAmount(p.praemie); }, 0);
+}
+function nowStr(){
+  var d = new Date();
+  function pad(n){ return String(n).padStart(2, '0'); }
+  return pad(d.getDate()) + '.' + pad(d.getMonth() + 1) + '.' + d.getFullYear() + ' · ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+}
+function upcomingItems(){
+  return state.policies
+    .filter(function(p){ return p.ablauf && p.ablauf !== '—' && !p.reading; })
+    .map(function(p){ return {
+      datum: p.ablauf,
+      titel: t(p.produkt, p.produktEn) + ' — ' + t('läuft bis','valid until'),
+      sub: t(p.gesellschaft, p.gesellschaftEn),
+      status: t('Notiert','Noted'), fg: '#6E6E6B', bg: '#F3F3F1'
+    }; });
+}
+function detectProduktFromText(text){
+  var s = text.toLowerCase();
+  var map = [
+    [/kranken|grundversicherung/, 'Krankenkasse', 'Health insurance'],
+    [/fahrzeug|kasko|motorfahrzeug/, 'Autoversicherung', 'Car insurance'],
+    [/hausrat/, 'Hausrat', 'Home contents insurance'],
+    [/haftpflicht/, 'Privathaftpflicht', 'Personal liability insurance'],
+    [/rechtsschutz/, 'Rechtsschutz', 'Legal protection insurance'],
+    [/lebensversicherung|säule 3a|saule 3a/, 'Lebensversicherung', 'Life insurance'],
+    [/reiseversicherung/, 'Reiseversicherung', 'Travel insurance'],
+    [/gebäudeversicherung|gebaeudeversicherung/, 'Gebäudeversicherung', 'Building insurance']
+  ];
+  for (var i = 0; i < map.length; i++){
+    if (map[i][0].test(s)) return { de: map[i][1], en: map[i][2] };
+  }
+  return { de: 'Versicherung', en: 'Insurance' };
+}
+function extractGesellschaft(text){
+  var m = text.match(/([A-ZÄÖÜ][A-Za-zÄÖÜäöüß.\- ]{2,40}(Versicherung(en)?|Assurance)\s?AG)/);
+  return m ? m[1].trim() : null;
+}
+function handleNewPolicyUpload(event){
+  var file = event.target.files && event.target.files[0];
+  event.target.value = '';
+  if (!file) return;
+  if (!window.pdfjsLib) {
+    alert(t('PDF-Analyse ist gerade nicht verfügbar. Bitte später erneut versuchen.', 'PDF analysis is not available right now. Please try again later.'));
+    return;
+  }
+  var pendingKey = 'pending-' + Date.now();
+  state.policyUploadBusy = true;
+  state.policies.push({ key: pendingKey, pending: true, reading: true, produkt: t('Wird gelesen…','Reading…'), produktEn: t('Wird gelesen…','Reading…') });
+  render();
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var typedarray = new Uint8Array(e.target.result);
+    pdfjsLib.getDocument({ data: typedarray }).promise.then(function(pdf){
+      var pagePromises = [];
+      for (var i = 1; i <= pdf.numPages; i++){
+        pagePromises.push(pdf.getPage(i).then(function(page){
+          return page.getTextContent().then(function(tc){
+            return tc.items.map(function(it){ return it.str; }).join(' ');
+          });
+        }));
+      }
+      return Promise.all(pagePromises);
+    }).then(function(pagesText){
+      var text = pagesText.join('\n');
+      var idxP = findLabelIndex(text, ['Jahresprämie', 'Monatsprämie', 'Prämienforderung', 'Prämienrechnung', 'Prämie']);
+      var praemie = extractAmountNear(text, idxP);
+      var idxS = findLabelIndex(text, ['Selbstbehalt', 'Franchise']);
+      var selbst = extractAmountNear(text, idxS);
+      var idxD = findLabelIndex(text, ['Prämienforderung', 'Von', 'Vertragsdauer']);
+      var dates = extractDatesNear(text, idxD);
+      var prod = detectProduktFromText(text);
+      var ges = extractGesellschaft(text);
+      var idx = state.policies.findIndex(function(p){ return p.key === pendingKey; });
+      if (idx !== -1) {
+        state.policies[idx] = {
+          key: pendingKey,
+          pending: true,
+          reading: false,
+          produkt: prod.de, produktEn: prod.en,
+          gesellschaft: ges || t('Wird geprüft','Being reviewed'), gesellschaftEn: ges || t('Wird geprüft','Being reviewed'),
+          praemie: praemie || t('Wird ermittelt','To be determined'), praemieEn: praemie || t('Wird ermittelt','To be determined'),
+          selbst: selbst || '—', selbstEn: selbst || '—',
+          ablauf: dates ? dates.bis : '—',
+          deckung: t('Diese Police wurde hochgeladen und wird von Ihrem Berater geprüft und erfasst.','This policy was uploaded and is being reviewed and recorded by your advisor.'),
+          deckungEn: 'This policy was uploaded and is being reviewed and recorded by your advisor.',
+          mutTitel: t('Änderung anfragen','Request a change'), mutTitelEn: 'Request a change',
+          felder: [],
+          tags: []
+        };
+      }
+      state.verlauf.push({ initialen: 'JK', bg: '#F5F4FF', fg: '#3D2BFF', name: 'Jan Krapl', zeit: nowStr(), text: t('Ihre hochgeladene Police „' + prod.de + '“ ist bei uns eingegangen und wird geprüft.', 'Your uploaded "' + prod.en + '" policy has been received and is being reviewed.') });
+      state.policyUploadBusy = false;
+      render();
+    }).catch(function(){
+      var idx = state.policies.findIndex(function(p){ return p.key === pendingKey; });
+      if (idx !== -1) state.policies.splice(idx, 1);
+      state.policyUploadBusy = false;
+      alert(t('Das Dokument konnte nicht gelesen werden. Bitte versuchen Sie es mit einer anderen PDF-Datei.','The document could not be read. Please try a different PDF file.'));
+      render();
+    });
+  };
+  reader.readAsArrayBuffer(file);
+}
+
 function findLabelIndex(text, labels){
   var lower = text.toLowerCase();
   for (var i = 0; i < labels.length; i++){
@@ -490,37 +541,49 @@ function answer(q){
   const docAnswer = searchUploadedDoc(q);
   if (docAnswer) return docAnswer;
   const s = q.toLowerCase();
-  const hit = POLICIES.find((p) => p.tags.some((tag) => s.includes(tag)));
   const prod = (p) => t(p.produkt, p.produktEn);
   const praemieTxt = (p) => t(p.praemie, p.praemieEn);
+  const noPolicies = t('Sie haben noch keine Policen hochgeladen. Laden Sie Ihre erste Police unter „Meine Versicherungen“ hoch, damit ich dazu Fragen beantworten kann.', 'You haven\'t uploaded any policies yet. Upload your first policy under "My Insurance" so I can answer questions about it.');
+  const hit = state.policies.find((p) => !p.reading && (p.tags || []).some((tag) => s.includes(tag)));
   if (/(prämie|praemie|zahle|kosten|monat|preis|total|premium|cost|price|month)/.test(s)) {
     if (hit) return prod(hit) + ': ' + praemieTxt(hit) + ' (' + t(hit.gesellschaft, hit.gesellschaftEn) + ').';
-    return t('Ihre sechs Versicherungen kosten zusammen CHF 486.00 pro Monat. Grösster Posten: Krankenkasse mit CHF 289.00.', 'Your six insurance policies cost a total of CHF 486.00 per month. Largest item: health insurance at CHF 289.00.');
+    if (state.policies.length === 0) return noPolicies;
+    return t('Ihre Versicherungen kosten zusammen ' + fmtChf(totalMonthlyPremium()) + ' pro Monat.', 'Your insurance policies cost a total of ' + fmtChf(totalMonthlyPremium()) + ' per month.');
   }
   if (/(selbstbehalt|franchise|deductible)/.test(s)) {
-    return t('Ihre Selbstbehalte:\n\nKrankenkasse — Franchise CHF 2 500\nAuto (Vollkasko) — CHF 500\nHausrat — CHF 200\nPrivathaftpflicht — kein Selbstbehalt', 'Your deductibles:\n\nHealth insurance — deductible CHF 2 500\nCar (fully comprehensive) — CHF 500\nHome contents — CHF 200\nPersonal liability — no deductible');
+    if (state.policies.length === 0) return noPolicies;
+    const lines = state.policies.filter(p => !p.reading).map(p => prod(p) + ' — ' + t(p.selbst, p.selbstEn));
+    return lines.length ? t('Ihre Selbstbehalte:\n\n','Your deductibles:\n\n') + lines.join('\n') : noPolicies;
   }
   if (/(velo|fahrrad|gestohlen|diebstahl|einbruch|bike|bicycle|stolen|theft|burglary)/.test(s)) {
-    return t('Ja. Ihr Hausrat deckt Diebstahl auch auswärts, Selbstbehalt CHF 200. Ein früherer Fahrraddiebstahl wurde bereits erfolgreich abgerechnet.', 'Yes. Your home contents insurance covers theft away from home too, deductible CHF 200. An earlier bicycle theft has already been settled successfully.');
+    const hausrat = state.policies.find(p => !p.reading && /hausrat|home contents/i.test(p.produkt + ' ' + (p.produktEn||'')));
+    if (hausrat) return t('Ja. Ihre ' + hausrat.produkt + ' deckt Diebstahl auch auswärts, Selbstbehalt ' + t(hausrat.selbst, hausrat.selbstEn) + '.', 'Yes. Your ' + hausrat.produktEn + ' covers theft away from home too, deductible ' + t(hausrat.selbst, hausrat.selbstEn) + '.');
+    return t('Dazu finde ich keine passende Police. Laden Sie Ihre Hausratversicherung hoch, damit ich das prüfen kann.', "I can't find a matching policy for that. Upload your home contents insurance so I can check.");
   }
   if (/(umzug|adresse|neue wohnung|move|moving|address)/.test(s)) {
-    return t('Eine neue Adresse melden Sie bei Hausrat über den Reiter "Summe oder Adresse ändern". Wir passen Hausrat, Privathaftpflicht und die Autoversicherung gemeinsam an.', 'You can report a new address for home contents insurance via the "Change amount or address" tab. We update home contents, personal liability and car insurance together.');
+    return t('Eine neue Adresse melden Sie am besten direkt bei Jan Krapl — er passt die betroffenen Policen für Sie an.', 'You can report a new address directly to Jan Krapl — he will update the affected policies for you.');
   }
   if (/(schaden|anliegen|melden|unfall|bearbeitung|claim|report|accident|progress)/.test(s)) {
-    return t('Ein Anliegen ist in Bearbeitung: Wasserschaden Waschmaschine (Hausrat, gemeldet 05.09.2026) — die Fotos sind eingereicht, die Kostenschätzung wird geprüft.', 'One request is in progress: water damage from a washing machine (home contents, reported 05.09.2026) — the photos have been submitted, and the cost estimate is being reviewed.');
+    const offen = state.claims.find(c => /bearbeitung|progress/i.test(c.status + ' ' + (c.statusEn||'')));
+    if (offen) return t('Ein Anliegen ist in Bearbeitung: ' + offen.titel + '.', 'One request is in progress: ' + (offen.titelEn || offen.titel) + '.');
+    return t('Aktuell ist kein Anliegen in Bearbeitung.', 'There is currently no request in progress.');
   }
   if (/(nachricht|ungelesen|message|unread)/.test(s)) {
-    return t('Sie haben 2 neue Nachrichten im Verlauf auf dem Dashboard. Die jüngste ist von Jan Krapl vom 01.09.2026 zur neuen Hausratpolice.', 'You have 2 new messages in the history on the dashboard. The most recent is from Jan Krapl on 01.09.2026 about the new home contents policy.');
+    if (state.verlauf.length === 0) return t('Im Verlauf auf dem Dashboard sind noch keine Nachrichten vorhanden.', "There aren't any messages in the dashboard history yet.");
+    const last = state.verlauf[state.verlauf.length - 1];
+    return t('Die jüngste Nachricht im Verlauf ist von ' + last.name + ' vom ' + last.zeit + '.', 'The most recent message in the history is from ' + last.name + ' on ' + last.zeit + '.');
   }
   if (/(rechnung|fällig|faellig|zahlung|invoice|due|payment)/.test(s)) {
-    return t('Offen ist eine Rechnung: Autoversicherung CHF 1\'128.00, fällig am 30.09.2026.', 'One invoice is outstanding: car insurance CHF 1\'128.00, due on 30.09.2026.');
+    return t('Aktuell ist bei uns keine offene Rechnung hinterlegt.', 'There is currently no outstanding invoice on file.');
   }
   if (/(kündig|wechsel|frist|cancel|switch|notice)/.test(s)) {
-    return t('Die Zusatzversicherung der Krankenkasse kann bis 30.11.2026 gekündigt werden. Hausrat und Privathaftpflicht laufen bis 31.12.2026 und verlängern sich automatisch.', 'The supplementary health insurance can be cancelled by 30.11.2026. Home contents and personal liability run until 31.12.2026 and renew automatically.');
+    return t('Kündigungsfristen hängen von der jeweiligen Police ab. Öffnen Sie die gewünschte Police unter „Meine Versicherungen“ oder fragen Sie direkt bei Jan Krapl nach.', 'Notice periods depend on the specific policy. Open the policy under "My Insurance" or ask Jan Krapl directly.');
   }
   if (hit) return prod(hit) + ' (' + t(hit.gesellschaft, hit.gesellschaftEn) + '), ' + praemieTxt(hit) + '.\n\n' + t(hit.deckung, hit.deckungEn);
   if (/(versichert|deckung|gedeckt|abgedeckt|insured|coverage|covered)/.test(s)) {
-    return t('Gedeckt sind Krankheit, Auto, Hausrat, Privathaftpflicht, Rechtsschutz und Vorsorge (Säule 3a). Keine Reiseversicherung — das wäre eine Lücke, wenn Sie oft verreisen.', 'Covered are health, car, home contents, personal liability, legal protection and pension planning (Pillar 3a). No travel insurance — that could be a gap if you travel often.');
+    if (state.policies.length === 0) return noPolicies;
+    const list = state.policies.filter(p => !p.reading).map(prod).join(', ');
+    return list ? t('Gedeckt sind: ' + list + '.', 'Covered: ' + list + '.') : noPolicies;
   }
   return t('Dazu finde ich in Ihren Policen keine Angabe. Jan Krapl hilft weiter: 078 248 91 21 oder jkrapl@coverd.ch.', "I can't find that in your policies. Jan Krapl can help further: 078 248 91 21 or jkrapl@coverd.ch.");
 }
@@ -610,8 +673,8 @@ function sidebar(){
 }
 
 function topheader(){
-  const policy = POLICIES.find(p => p.key === state.policy);
-  const claim = CLAIMS.find(c => c.key === state.claim);
+  const policy = state.policies.find(p => p.key === state.policy);
+  const claim = state.claims.find(c => c.key === state.claim);
   const titles = {
     dash:[t('Dashboard','Dashboard'), t('Übersicht','Overview')],
     policen:[t('Meine Versicherungen','My Insurance'), t('Übersicht','Overview')],
@@ -646,30 +709,36 @@ function ring(pct, color, center, size){
 }
 
 function dashboardView(){
+  const nPolicies = state.policies.filter(p => !p.reading).length;
+  const nPending = state.policies.filter(p => p.pending && !p.reading).length;
+  const nClaimsOpen = state.claims.filter(c => /bearbeitung|progress/i.test(c.status + ' ' + (c.statusEn||''))).length;
+  const upcoming = upcomingItems();
   return `
   <div style="display:flex; flex-direction:column; gap:28px;">
     <div>
       <h1 style="margin:0; font-size:38px; font-weight:600; letter-spacing:-0.02em; line-height:1.1;">${t('Guten Tag, Alex','Good afternoon, Alex')}</h1>
-      <p style="margin:14px 0 0; font-size:17px; color:#6E6E6B; max-width:520px;">${t('Alles in Ordnung. Eine Rechnung ist im September fällig, sonst gibt es nichts zu tun.', "Everything is in order. One invoice is due in September, otherwise there's nothing to do.")}</p>
+      <p style="margin:14px 0 0; font-size:17px; color:#6E6E6B; max-width:520px;">${nPolicies === 0
+        ? t('Noch keine Versicherungen hinterlegt. Laden Sie Ihre erste Police hoch, um loszulegen.', 'No insurance on file yet. Upload your first policy to get started.')
+        : t('Alles im Blick. Laden Sie weitere Policen hoch, sobald Sie welche haben.', 'Everything in view. Upload more policies whenever you have them.')}</p>
     </div>
     <div class="grid-2">
       <div class="card">
         <div style="font-size:17px; font-weight:600;">${t('Versicherungen','Insurance')}</div>
         <div style="display:flex; align-items:center; gap:26px; margin-top:22px;">
-          ${ring(100, '#3D2BFF', 6)}
+          ${ring(nPolicies ? 100 : 0, '#3D2BFF', nPolicies)}
           <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
-            <div><div style="font-size:14px; color:#6E6E6B;">${t('Alle aktiv','All active')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">${t('6 Policen','6 policies')}</div></div>
-            <div><div style="font-size:14px; color:#6E6E6B;">${t('Prämien pro Monat','Premiums per month')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">CHF 486.00</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">${nPending ? t(nPending + ' in Prüfung', nPending + ' under review') : t('Alle aktiv','All active')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">${t(nPolicies + ' Policen', nPolicies + ' policies')}</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">${t('Prämien pro Monat','Premiums per month')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">${fmtChf(totalMonthlyPremium())}</div></div>
           </div>
         </div>
       </div>
       <div class="card">
         <div style="font-size:17px; font-weight:600;">${t('Anliegen','Requests')}</div>
         <div style="display:flex; align-items:center; gap:26px; margin-top:22px;">
-          ${ring(25, '#0A0A0B', 4)}
+          ${ring(state.claims.length ? Math.round(nClaimsOpen / state.claims.length * 100) : 0, '#0A0A0B', state.claims.length)}
           <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
-            <div><div style="font-size:14px; color:#6E6E6B;">${t('In Bearbeitung','In progress')}</div><div style="font-size:19px; font-weight:600; margin-top:2px; color:#3D2BFF;">1</div></div>
-            <div><div style="font-size:14px; color:#6E6E6B;">${t('Neue Nachrichten','New messages')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">2</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">${t('In Bearbeitung','In progress')}</div><div style="font-size:19px; font-weight:600; margin-top:2px; color:#3D2BFF;">${nClaimsOpen}</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">${t('Nachrichten im Verlauf','Messages in history')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">${state.verlauf.length}</div></div>
           </div>
         </div>
       </div>
@@ -680,13 +749,10 @@ function dashboardView(){
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1; display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
         <h2 style="margin:0; font-size:19px; font-weight:600;">${t('Verlauf','History')}</h2>
-        <span style="font-size:13px; font-weight:600; color:#3D2BFF; background:#F5F4FF; border-radius:999px; padding:6px 12px;">${t('2 neu','2 new')}</span>
+        ${state.verlauf.length ? `<span style="font-size:13px; font-weight:600; color:#3D2BFF; background:#F5F4FF; border-radius:999px; padding:6px 12px;">${t(state.verlauf.length + ' Einträge', state.verlauf.length + ' entries')}</span>` : ''}
       </div>
-      ${[
-        { initialen: 'JK', bg: '#F5F4FF', fg: '#3D2BFF', name: 'Jan Krapl', zeit: '01.09.2026 · 14:20', text: t('Guten Tag, Ihre aktualisierte Hausratversicherung ist bereit. Bei Fragen melden Sie sich gerne.', 'Good afternoon, your updated home contents insurance is ready. Feel free to reach out with any questions.') },
-        { initialen: 'AM', bg: '#F3F3F1', fg: '#6E6E6B', name: 'Alex Muster', zeit: '26.08.2026 · 18:47', text: t('Vielen Dank, ich habe noch eine Frage zur Hausratversicherung.', 'Thank you, I still have a question about the home contents insurance.') },
-        { initialen: 'JK', bg: '#F5F4FF', fg: '#3D2BFF', name: 'Jan Krapl', zeit: '14.06.2026 · 09:30', text: t('Ihre Autoversicherung wurde angepasst, die Bonusstufe bleibt erhalten.', 'Your car insurance has been adjusted, the no-claims bonus level is retained.') }
-      ].map(v => `
+      ${state.verlauf.length === 0 ? `<div style="padding:26px; color:#6E6E6B; font-size:15px;">${t('Noch keine Nachrichten. Sobald Sie eine Police hochladen, meldet sich Jan Krapl hier.','No messages yet. Once you upload a policy, Jan Krapl will get in touch here.')}</div>` : ''}
+      ${state.verlauf.map(v => `
       <div style="display:flex; gap:18px; padding:22px 26px; border-bottom:1px solid #F0F0EE;">
         <div style="width:38px; height:38px; border-radius:999px; background:${v.bg}; color:${v.fg}; display:grid; place-items:center; font-size:13px; font-weight:700; flex:none;">${v.initialen}</div>
         <div style="min-width:0; flex:1 1 auto;">
@@ -702,11 +768,8 @@ function dashboardView(){
 
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1;"><h2 style="margin:0; font-size:19px; font-weight:600;">${t('Was als Nächstes ansteht','What\'s coming up next')}</h2></div>
-      ${[
-        { datum: '30.09.2026', titel: t('Autoversicherung — Rechnung fällig','Car insurance — invoice due'), sub: t("Vollkasko · CHF 1'128.00", "Fully comprehensive · CHF 1'128.00"), status: t('Offen','Open'), fg: '#8A5A00', bg: '#FFF3D6' },
-        { datum: '30.11.2026', titel: t('Krankenkasse — Kündigungsfrist Zusatz','Health insurance — notice period for supplementary'), sub: t('Wir prüfen bis Ende Oktober, ob ein Wechsel sich lohnt.', "We'll check by the end of October whether switching is worthwhile."), status: t('Wir melden uns',"We'll be in touch"), fg: '#3D2BFF', bg: '#F5F4FF' },
-        { datum: '31.12.2026', titel: t('Hausrat und Privathaftpflicht — Verlängerung','Home contents and personal liability — renewal'), sub: t('Verlängert sich automatisch um ein Jahr.','Automatically renews for one year.'), status: t('Notiert','Noted'), fg: '#6E6E6B', bg: '#F3F3F1' }
-      ].map(tm => `
+      ${upcoming.length === 0 ? `<div style="padding:26px; color:#6E6E6B; font-size:15px;">${t('Keine anstehenden Termine.','Nothing coming up.')}</div>` : ''}
+      ${upcoming.map(tm => `
       <div style="display:flex; align-items:flex-start; gap:18px; padding:22px 26px; border-bottom:1px solid #F0F0EE;">
         <div class="mono" style="font-size:13px; color:#6E6E6B; width:92px; flex:none; padding-top:2px;">${tm.datum}</div>
         <div style="min-width:0; flex:1 1 auto;"><div style="font-size:16px; font-weight:600;">${tm.titel}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${tm.sub}</div></div>
@@ -716,16 +779,46 @@ function dashboardView(){
   </div>`;
 }
 
+function uploadPolicyButton(label){
+  return `
+  <div>
+    <input type="file" id="newPolicyInput" accept="application/pdf" style="display:none;" onchange="handleNewPolicyUpload(event)">
+    <button class="btn-blue" onclick="document.getElementById('newPolicyInput').click()">+ ${label}</button>
+  </div>`;
+}
 function policenListView(){
+  const n = state.policies.length;
+  const uploadLabel = t('Police hochladen','Upload policy');
+  if (n === 0) {
+    return `
+    <div style="display:flex; flex-direction:column; gap:22px;">
+      <div class="card" style="text-align:center; padding:52px 30px; display:flex; flex-direction:column; align-items:center; gap:16px;">
+        <h2 style="margin:0; font-size:21px; font-weight:600;">${t('Noch keine Versicherungen hinterlegt','No insurance on file yet')}</h2>
+        <p style="margin:0; max-width:460px; font-size:15px; color:#6E6E6B; line-height:1.5;">${t('Laden Sie Ihre Policen als PDF hoch — wir lesen Prämie, Selbstbehalt und Laufzeit automatisch für Sie aus.', 'Upload your policies as a PDF — we automatically read out the premium, deductible and term for you.')}</p>
+        ${uploadPolicyButton(uploadLabel)}
+      </div>
+    </div>`;
+  }
+  const nDone = state.policies.filter(p => !p.reading).length;
+  const summary = nDone > 0
+    ? t(nDone + (nDone===1?' Versicherung':' Versicherungen') + ' · ' + fmtChf(totalMonthlyPremium()) + ' pro Monat', nDone + (nDone===1?' insurance policy':' insurance policies') + ' · ' + fmtChf(totalMonthlyPremium()) + ' per month')
+    : t('Ihre Police wird gerade gelesen …','Your policy is being read right now …');
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
-    <p style="margin:0; font-size:16px; color:#6E6E6B;">${t('6 Versicherungen · CHF 486.00 pro Monat','6 insurance policies · CHF 486.00 per month')}</p>
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+      <p style="margin:0; font-size:16px; color:#6E6E6B;">${summary}</p>
+      ${uploadPolicyButton(uploadLabel)}
+    </div>
     <div class="grid-cards">
-      ${POLICIES.map(p => `
+      ${state.policies.map(p => p.reading ? `
+      <div class="card" style="display:flex; flex-direction:column; gap:14px; opacity:0.7;">
+        <div style="font-size:17px; font-weight:600;">${t('Wird gelesen…','Reading…')}</div>
+        <div style="font-size:14px; color:#6E6E6B;">${t('Ihre Police wird analysiert.','Your policy is being analyzed.')}</div>
+      </div>` : `
       <button class="list-card" onclick="openPolicy('${p.key}')" style="display:flex; flex-direction:column; gap:14px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px;">
           <div style="min-width:0;"><div style="font-size:17px; font-weight:600;">${t(p.produkt, p.produktEn)}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${t(p.gesellschaft, p.gesellschaftEn)}</div></div>
-          <span class="badge badge-ok">${t('Aktiv','Active')}</span>
+          <span class="badge ${p.pending ? 'badge-pending' : 'badge-ok'}">${p.pending ? t('In Prüfung','Under review') : t('Aktiv','Active')}</span>
         </div>
         <div style="display:flex; gap:26px; flex-wrap:wrap; border-top:1px solid #F0F0EE; padding-top:14px;">
           <div><div class="micro">${t('Prämie','Premium')}</div><div style="font-size:16px; font-weight:600; margin-top:3px;">${t(p.praemie, p.praemieEn)}</div></div>
@@ -737,7 +830,7 @@ function policenListView(){
 }
 
 function policeDetailView(){
-  const p = POLICIES.find(x => x.key === state.policy);
+  const p = state.policies.find(x => x.key === state.policy);
   if (!p) return '';
   const dt = state.detailTab;
   const tabs = [['ueber', t('Übersicht','Overview')], ['mut', t(p.mutTitel, p.mutTitelEn)]];
@@ -748,7 +841,7 @@ function policeDetailView(){
       <div style="padding:26px 30px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
         <div style="width:56px; height:56px; border-radius:14px; background:#F5F4FF; color:#3D2BFF; display:grid; place-items:center; font-size:22px; font-weight:700; flex:none;">P</div>
         <div style="min-width:0;">
-          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><h1 style="margin:0; font-size:26px; font-weight:600; letter-spacing:-0.01em;">${t(p.produkt, p.produktEn)}</h1><span class="badge badge-ok">${t('Aktiv','Active')}</span></div>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><h1 style="margin:0; font-size:26px; font-weight:600; letter-spacing:-0.01em;">${t(p.produkt, p.produktEn)}</h1><span class="badge ${p.pending ? 'badge-pending' : 'badge-ok'}">${p.pending ? t('In Prüfung','Under review') : t('Aktiv','Active')}</span></div>
           <div style="font-size:15px; color:#6E6E6B; margin-top:6px;">${t(p.gesellschaft, p.gesellschaftEn)}</div>
         </div>
         <button class="btn-dark" style="margin-left:auto;" onclick="go('schaden')">${t('Schaden melden','Report a claim')}</button>
@@ -778,23 +871,31 @@ function policeDetailView(){
     <div class="card">
       <h2 style="margin:0; font-size:19px; font-weight:600;">${t(p.mutTitel, p.mutTitelEn)}</h2>
       <p style="margin:8px 0 0; font-size:15px; color:#6E6E6B;">${t(p.produkt, p.produktEn)} · ${t(p.gesellschaft, p.gesellschaftEn)}</p>
+      ${p.felder && p.felder.length ? `
       <div class="grid-fields" style="margin-top:24px;">
         ${p.felder.map(([label,labelEn,ph,phEn]) => `<div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t(label,labelEn)}</div><input class="input" placeholder="${t(ph,phEn)}"></div>`).join('')}
       </div>
       <div style="display:flex; gap:14px; align-items:center; margin-top:24px; flex-wrap:wrap;">
         <button class="btn-blue" onclick="alert(t('Änderung eingereicht (Demo). Jan Krapl meldet sich innerhalb eines Arbeitstags.','Change submitted (demo). Jan Krapl will get back to you within one business day.'))">${t('Änderung senden','Submit change')}</button>
         <span style="font-size:14px; color:#6E6E6B;">${t('Jan Krapl meldet sich innerhalb eines Arbeitstags.','Jan Krapl will get back to you within one business day.')}</span>
-      </div>
+      </div>` : `
+      <p style="margin:20px 0 0; font-size:15px; color:#6E6E6B; line-height:1.5;">${t('Diese Police wird gerade von Jan Krapl erfasst. Änderungen können Sie vornehmen, sobald die Prüfung abgeschlossen ist.','This policy is currently being recorded by Jan Krapl. You can request changes once the review is complete.')}</p>`}
     </div>` : ''}
   </div>`;
 }
 
 function schadenListView(){
+  const n = state.claims.length;
+  const nOffen = state.claims.filter(c => /bearbeitung|progress/i.test(c.status + ' ' + (c.statusEn||''))).length;
+  const nErledigt = n - nOffen;
+  const summary = n === 0
+    ? t('Noch keine Anliegen gemeldet.','No requests reported yet.')
+    : t(nOffen + ' Anliegen in Bearbeitung · ' + nErledigt + ' erledigte Fälle', nOffen + ' requests in progress · ' + nErledigt + ' completed cases');
   return `
   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:26px; align-items:start;">
     <div style="min-width:0; display:flex; flex-direction:column; gap:16px;">
-      <p style="margin:0; font-size:16px; color:#6E6E6B;">${t('1 Anliegen in Bearbeitung · 3 erledigte Fälle','1 request in progress · 3 completed cases')}</p>
-      ${CLAIMS.map(c => `
+      <p style="margin:0; font-size:16px; color:#6E6E6B;">${summary}</p>
+      ${state.claims.map(c => `
       <button class="list-card" onclick="openClaim('${c.key}')" style="display:flex; gap:18px; align-items:flex-start;">
         <div style="width:10px; height:10px; border-radius:999px; background:${c.dot}; margin-top:8px; flex:none;"></div>
         <div style="min-width:0; flex:1 1 auto;"><div style="font-size:17px; font-weight:600;">${t(c.titel, c.titelEn)}</div><div style="font-size:15px; color:#6E6E6B; margin-top:5px;">${t(c.sub, c.subEn)}</div></div>
@@ -806,7 +907,7 @@ function schadenListView(){
       <p style="margin:10px 0 22px; font-size:15px; color:#6E6E6B; line-height:1.5;">${t('Vier Angaben genügen. Den Rest klären wir mit der Versicherung.', "Four details are enough. We'll clarify the rest with the insurer.")}</p>
       <div style="display:flex; flex-direction:column; gap:16px;">
         <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Betroffene Versicherung','Affected insurance')}</div>
-          <select class="input" style="color:#0A0A0B;"><option>${t('Bitte auswählen','Please select')}</option>${POLICIES.map(p=>`<option>${t(p.produkt, p.produktEn)}</option>`).join('')}</select>
+          <select class="input" style="color:#0A0A0B;"><option>${t('Bitte auswählen','Please select')}</option>${state.policies.map(p=>`<option>${t(p.produkt, p.produktEn)}</option>`).join('')}</select>
         </div>
         <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Wann ist es passiert?','When did it happen?')}</div><input type="text" class="input" placeholder="${t('TT.MM.JJJJ','DD.MM.YYYY')}"></div>
         <div><div style="font-size:14px; font-weight:600; margin-bottom:7px;">${t('Was ist passiert?','What happened?')}</div><textarea class="input" style="min-height:84px; resize:vertical;" placeholder="${t('In eigenen Worten, ein paar Sätze reichen.','In your own words, a few sentences are enough.')}"></textarea></div>
@@ -818,7 +919,7 @@ function schadenListView(){
 }
 
 function schadenDetailView(){
-  const c = CLAIMS.find(x => x.key === state.claim);
+  const c = state.claims.find(x => x.key === state.claim);
   if (!c) return '';
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
@@ -965,8 +1066,8 @@ function profilView(){
 }
 
 function mainBody(){
-  const policy = state.policy && POLICIES.find(p => p.key === state.policy);
-  const claim = state.claim && CLAIMS.find(c => c.key === state.claim);
+  const policy = state.policy && state.policies.find(p => p.key === state.policy);
+  const claim = state.claim && state.claims.find(c => c.key === state.claim);
   if (state.screen === 'dash') return dashboardView();
   if (state.screen === 'policen') return policy ? policeDetailView() : policenListView();
   if (state.screen === 'schaden') return claim ? schadenDetailView() : schadenListView();
@@ -977,7 +1078,7 @@ function mainBody(){
 }
 
 function chatWidget(){
-  const greeting = { role: 'bot', text: t('Guten Tag. Ich beantworte Fragen zu Ihren sechs Versicherungen — Prämien, Deckungen, Selbstbehalte. Für alles Weitere ist Jan Krapl da.', 'Good afternoon. I can answer questions about your six insurance policies — premiums, coverage, deductibles. For everything else, Jan Krapl is here to help.') };
+  const greeting = { role: 'bot', text: t('Guten Tag. Ich beantworte Fragen zu Ihren Versicherungen — Prämien, Deckungen, Selbstbehalte. Für alles Weitere ist Jan Krapl da.', 'Good afternoon. I can answer questions about your insurance policies — premiums, coverage, deductibles. For everything else, Jan Krapl is here to help.') };
   const msgs = [greeting, ...state.messages];
   return `
   <div class="chatbot">
