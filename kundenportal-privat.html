@@ -488,11 +488,11 @@ function handleNewPolicyUpload(event){
     }).then(function(pagesText){
       var text = pagesText.join('\n');
       var idxP = findLabelIndex(text, ['Jahresprämie', 'Monatsprämie', 'Prämienforderung', 'Prämienrechnung', 'Prämie']);
-      var praemie = extractAmountNear(text, idxP);
+      var praemie = extractAmountNear(text, idxP, 250, true);
       var idxS = findLabelIndex(text, ['Selbstbehalt', 'Franchise']);
-      var selbst = extractAmountNear(text, idxS);
-      var idxD = findLabelIndex(text, ['Prämienforderung', 'Von', 'Vertragsdauer']);
-      var dates = extractDatesNear(text, idxD);
+      var selbst = extractAmountNear(text, idxS, 250, false);
+      var idxD = findLabelIndex(text, ['Beginn', 'Vertragsdauer', 'Prämienforderung', 'Von']);
+      var dates = extractDatesNear(text, idxD, 250);
       var prod = detectProduktFromText(text);
       var ges = extractGesellschaft(text);
       var idx = state.policies.findIndex(function(p){ return p.key === pendingKey; });
@@ -537,15 +537,24 @@ function findLabelIndex(text, labels){
   }
   return -1;
 }
-function extractAmountNear(text, idx, window){
+function extractAmountNear(text, idx, window, allowBareNumber){
   if (idx === -1) return null;
-  var slice = text.substr(idx, window || 150);
-  var m = slice.match(/CHF\s*[\d'.,]+/);
-  return m ? m[0].replace(/\s+/g, ' ').trim() : null;
+  var slice = text.substr(idx, window || 250);
+  var re = /CHF\s*[\d'.,]+(?:\s*(Mio\.?|Million(?:en)?))?/g;
+  var m;
+  while ((m = re.exec(slice))) {
+    if (m[1]) continue;
+    return m[0].replace(/\s+/g, ' ').trim();
+  }
+  if (allowBareNumber) {
+    var m2 = slice.match(/\b\d{1,3}(?:'?\d{3})*\.\d{2}\b/);
+    if (m2) return 'CHF ' + m2[0];
+  }
+  return null;
 }
 function extractDatesNear(text, idx, window){
   if (idx === -1) return null;
-  var slice = text.substr(idx, window || 200);
+  var slice = text.substr(idx, window || 250);
   var m = slice.match(/(\d{2}\.\d{2}\.\d{4})\D{0,40}?(\d{2}\.\d{2}\.\d{4})/);
   return m ? { von: m[1], bis: m[2] } : null;
 }
@@ -558,17 +567,17 @@ function searchUploadedDoc(q){
 
   if (/(prämie|praemie|kosten|zahle|preis|premium|cost|price)/.test(s)) {
     var idx = findLabelIndex(text, ['Jahresprämie', 'Prämienforderung', 'Monatsprämie', 'Prämienrechnung', 'Prämie']);
-    var amt = extractAmountNear(text, idx);
+    var amt = extractAmountNear(text, idx, 250, true);
     if (amt) return t('Laut Ihrem hochgeladenen Dokument beträgt die Prämie ' + amt + '.' + noteDe, 'According to your uploaded document, the premium is ' + amt + '.' + noteEn);
   }
   if (/(selbstbehalt|franchise|deductible)/.test(s)) {
     var idxSb = findLabelIndex(text, ['Selbstbehalt', 'Franchise']);
-    var amtSb = extractAmountNear(text, idxSb);
+    var amtSb = extractAmountNear(text, idxSb, 250, false);
     if (amtSb) return t('Laut Ihrem hochgeladenen Dokument beträgt der Selbstbehalt ' + amtSb + '.' + noteDe, 'According to your uploaded document, the deductible is ' + amtSb + '.' + noteEn);
   }
   if (/(laufzeit|läuft|gültig|gueltig|ablauf|zeitraum|period|valid|expir|von bis)/.test(s)) {
-    var idxD = findLabelIndex(text, ['Prämienforderung', 'Von', 'Vertragsdauer']);
-    var dates = extractDatesNear(text, idxD);
+    var idxD = findLabelIndex(text, ['Beginn', 'Vertragsdauer', 'Prämienforderung', 'Von']);
+    var dates = extractDatesNear(text, idxD, 250);
     if (dates) return t('Laut Ihrem hochgeladenen Dokument läuft der Vertrag vom ' + dates.von + ' bis ' + dates.bis + '.' + noteDe, 'According to your uploaded document, the contract runs from ' + dates.von + ' to ' + dates.bis + '.' + noteEn);
   }
   if (/(gesellschaft|anbieter|versicherer|insurer|provider|wer versichert)/.test(s)) {
