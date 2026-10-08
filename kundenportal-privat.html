@@ -11,20 +11,20 @@
 <style>
   body{ margin:0; background:#F3F3F1; font-family:'Instrument Sans','Helvetica Neue',Helvetica,sans-serif; color:#0A0A0B; -webkit-font-smoothing:antialiased; }
   *{ box-sizing:border-box; }
-  a{ color:#1F4FFF; text-decoration:none; }
+  a{ color:#3D2BFF; text-decoration:none; }
   a:hover{ color:#0A0A0B; }
   button{ font-family:inherit; }
   input, textarea{ font-family:inherit; }
 
   .app-flex{ display:flex; flex-direction:column; min-height:100vh; background:#F3F3F1; }
 
-  .sidebar{ width:100%; flex:none; background:#0A58FD; color:#FFFFFF; display:flex; flex-direction:row; flex-wrap:wrap; align-items:center; gap:8px 10px; padding:14px 16px; }
+  .sidebar{ width:100%; flex:none; background:#161BFD; color:#FFFFFF; display:flex; flex-direction:row; flex-wrap:wrap; align-items:center; gap:8px 10px; padding:14px 16px; }
   .sidebar-logo{ padding:0; flex:none; }
   .sidebar-logo-box{ width:132px; height:34px; overflow:hidden; position:relative; background:#FFFFFF; border-radius:8px; }
   .sidebar-label{ display:none; }
   .sidebar-nav{ display:flex; flex-direction:row; flex-wrap:wrap; gap:6px; }
   .nav-item{ text-align:left; border:0; background:transparent; font:inherit; font-size:13px; font-weight:500; padding:9px 12px; border-radius:10px; cursor:pointer; display:flex; align-items:center; gap:8px; width:auto; white-space:nowrap; }
-  .nav-item:hover{ background:#0A4AD6; }
+  .nav-item:hover{ background:#0B0EE1; }
   .nav-item .dot{ width:8px; height:8px; border-radius:2px; flex:none; }
   .sidebar-advisor{ display:none; }
   .sidebar-advisor img{ width:40px; height:40px; border-radius:999px; object-fit:cover; object-position:50% 22%; flex:none; }
@@ -34,9 +34,9 @@
   .topheader .title{ font-size:20px; font-weight:600; }
   .topheader .crumb{ font-size:14px; color:#6E6E6B; margin-top:2px; }
   .btn-dark{ border:0; background:#0A0A0B; color:#FFFFFF; font:inherit; font-size:15px; font-weight:600; padding:11px 20px; border-radius:999px; cursor:pointer; white-space:nowrap; flex:none; }
-  .btn-dark:hover{ background:#1F4FFF; }
+  .btn-dark:hover{ background:#3D2BFF; }
   .header-user{ display:flex; align-items:center; gap:10px; padding-left:14px; border-left:1px solid #E4E4E1; }
-  .avatar{ width:36px; height:36px; border-radius:999px; background:#E8ECFF; color:#1F4FFF; display:grid; place-items:center; font-size:13px; font-weight:700; flex:none; }
+  .avatar{ width:36px; height:36px; border-radius:999px; background:#F5F4FF; color:#3D2BFF; display:grid; place-items:center; font-size:13px; font-weight:700; flex:none; }
 
   main.main-content{ padding:20px; max-width:1280px; width:100%; }
 
@@ -58,42 +58,42 @@
   .micro{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#6E6E6B; }
   .mono{ font-family:'JetBrains Mono',monospace; }
   .input{ width:100%; border:1px solid #E4E4E1; border-radius:12px; padding:13px 16px; font:inherit; font-size:15px; outline:none; }
-  .input:focus{ border-color:#1F4FFF; }
-  .btn-blue{ border:0; background:#1F4FFF; color:#FFFFFF; font:inherit; font-weight:600; padding:14px 22px; border-radius:12px; cursor:pointer; }
+  .input:focus{ border-color:#3D2BFF; }
+  .btn-blue{ border:0; background:#3D2BFF; color:#FFFFFF; font:inherit; font-weight:600; padding:14px 22px; border-radius:12px; cursor:pointer; }
   .btn-blue:hover{ background:#0A0A0B; }
-  .btn-blue-sm{ border:0; background:#1F4FFF; color:#FFFFFF; font:inherit; font-size:15px; font-weight:600; padding:12px 18px; border-radius:12px; cursor:pointer; }
+  .btn-blue-sm{ border:0; background:#3D2BFF; color:#FFFFFF; font:inherit; font-size:15px; font-weight:600; padding:12px 18px; border-radius:12px; cursor:pointer; }
   .btn-blue-sm:hover{ background:#0A0A0B; }
   .dropzone{ border:1px dashed #C9C9C5; border-radius:12px; padding:20px 16px; font-size:15px; color:#6E6E6B; text-align:center; }
   .toggle{ flex:none; width:52px; height:30px; border-radius:999px; border:0; cursor:pointer; padding:3px; display:flex; }
   .toggle span{ width:24px; height:24px; border-radius:999px; background:#FFFFFF; display:block; }
   .profil-tab{ width:100%; text-align:left; border:0; background:transparent; font:inherit; font-size:15px; font-weight:500; padding:13px 16px; border-radius:12px; cursor:pointer; }
   .profil-tab:hover{ background:#F3F3F1; }
-  .profil-tab.active{ background:#F3F3F1; color:#1F4FFF; }
+  .profil-tab.active{ background:#F3F3F1; color:#3D2BFF; }
   .help-dark{ border:1px solid #0A0A0B; background:#0A0A0B; color:#FFFFFF; border-radius:20px; padding:26px; display:flex; flex-direction:column; gap:12px; }
   .help-dark .btn-white{ align-self:flex-start; margin-top:6px; border:0; background:#FFFFFF; color:#0A0A0B; font:inherit; font-size:14px; font-weight:600; padding:10px 18px; border-radius:999px; cursor:pointer; }
-  .help-dark .btn-white:hover{ background:#1F4FFF; color:#FFFFFF; }
+  .help-dark .btn-white:hover{ background:#3D2BFF; color:#FFFFFF; }
   .status-list{ display:flex; flex-direction:column; }
   .status-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid #F0F0EE; }
   .status-row:first-child{ padding-top:2px; }
   .status-row:last-child{ padding-bottom:2px; border-bottom:0; }
   .status-pill{ font-size:13px; font-weight:600; border-radius:999px; padding:6px 14px; white-space:nowrap; flex:none; }
-  .status-pill-ready{ color:#1F4FFF; background:#E8ECFF; }
+  .status-pill-ready{ color:#3D2BFF; background:#F5F4FF; }
   .status-pill-pending{ color:#6E6E6B; background:#F3F3F1; }
   .status-icon-btn{ border:0; background:transparent; color:#9A9A96; font-size:14px; cursor:pointer; padding:4px 6px; line-height:1; }
   .status-icon-btn:hover{ color:#0A0A0B; }
   .status-add-btn{ align-self:flex-start; margin-top:14px; border:1px dashed #C9C9C5; background:transparent; color:#6E6E6B; font:inherit; font-size:14px; font-weight:600; padding:10px 16px; border-radius:999px; cursor:pointer; }
-  .status-add-btn:hover{ border-color:#1F4FFF; color:#1F4FFF; }
+  .status-add-btn:hover{ border-color:#3D2BFF; color:#3D2BFF; }
   .status-edit-row{ display:flex; flex-direction:column; gap:10px; padding:16px 0; }
   .status-edit-row-fields{ display:flex; gap:10px; flex-wrap:wrap; }
   .status-edit-input{ flex:1 1 200px; border:1px solid #E4E4E1; background:#FFFFFF; color:#0A0A0B; border-radius:10px; padding:10px 14px; font:inherit; font-size:14px; outline:none; }
-  .status-edit-input:focus{ border-color:#1F4FFF; }
+  .status-edit-input:focus{ border-color:#3D2BFF; }
   .status-edit-input::placeholder{ color:#9A9A96; }
   .status-kind-toggle{ display:flex; gap:8px; }
   .status-kind-btn{ border:1px solid #E4E4E1; background:transparent; color:#6E6E6B; font:inherit; font-size:13px; font-weight:600; padding:8px 14px; border-radius:999px; cursor:pointer; }
-  .status-kind-btn.active-ready{ background:#E8ECFF; border-color:#1F4FFF; color:#1F4FFF; }
+  .status-kind-btn.active-ready{ background:#F5F4FF; border-color:#3D2BFF; color:#3D2BFF; }
   .status-kind-btn.active-pending{ background:#F3F3F1; border-color:#6E6E6B; color:#6E6E6B; }
   .status-edit-actions{ display:flex; gap:10px; }
-  .status-btn-save{ border:0; background:#1F4FFF; color:#FFFFFF; font:inherit; font-size:13px; font-weight:600; padding:9px 16px; border-radius:999px; cursor:pointer; }
+  .status-btn-save{ border:0; background:#3D2BFF; color:#FFFFFF; font:inherit; font-size:13px; font-weight:600; padding:9px 16px; border-radius:999px; cursor:pointer; }
   .status-btn-save:hover{ background:#0A0A0B; }
   .status-btn-cancel{ border:0; background:transparent; color:#6E6E6B; font:inherit; font-size:13px; font-weight:600; padding:9px 12px; cursor:pointer; }
   .status-btn-cancel:hover{ color:#0A0A0B; }
@@ -117,17 +117,17 @@
   .fab{ border:0; background:#0A0A0B; color:#FFFFFF; font:inherit; font-size:15px; font-weight:600; padding:16px 24px; border-radius:999px; cursor:pointer; box-shadow:0 12px 32px rgba(10,10,11,0.22); }
   .btn-mic{ border:1px solid #E4E4E1; background:#FFFFFF; width:46px; height:46px; min-width:46px; border-radius:12px; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; flex:none; }
   .btn-mic.listening{ background:#FFECEC; border-color:#E23B3B; }
-  .fab:hover{ background:#1F4FFF; }
+  .fab:hover{ background:#3D2BFF; }
 
   @media (min-width:901px){
     .app-flex{ flex-direction:row; }
     .sidebar{ width:248px; flex-direction:column; flex-wrap:nowrap; align-items:stretch; gap:0; padding:24px 0; position:sticky; top:0; height:100vh; overflow-y:auto; }
     .sidebar-logo{ padding:0 22px 28px; }
-    .sidebar-label{ display:block; padding:0 22px 10px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#DCE8FF; }
+    .sidebar-label{ display:block; padding:0 22px 10px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#E8E9FF; }
     .sidebar-label.spaced{ padding-top:26px; }
     .sidebar-nav{ flex-direction:column; gap:2px; padding:0 12px; }
     .nav-item{ font-size:15px; padding:12px 14px; white-space:normal; }
-    .sidebar-advisor{ display:flex; margin-top:auto; padding:22px 22px 0; border-top:1px solid #3B7BFF; align-items:center; gap:12px; }
+    .sidebar-advisor{ display:flex; margin-top:auto; padding:22px 22px 0; border-top:1px solid #474CFF; align-items:center; gap:12px; }
     main.main-content{ padding:36px; }
     .topheader{ padding:18px 36px; }
   }
@@ -186,22 +186,22 @@ const POLICIES = [
 ];
 
 const CLAIMS = [
-  { key: 'wasch', titel: 'Wasserschaden Waschmaschine', titelEn: 'Water damage – washing machine', sub: 'Hausrat · Mobiliar · gemeldet 05.09.2026', subEn: 'Home contents · Mobiliar · reported 05.09.2026', status: 'In Bearbeitung', statusEn: 'In progress', fg: '#1F4FFF', bg: '#E8ECFF', dot: '#1F4FFF',
+  { key: 'wasch', titel: 'Wasserschaden Waschmaschine', titelEn: 'Water damage – washing machine', sub: 'Hausrat · Mobiliar · gemeldet 05.09.2026', subEn: 'Home contents · Mobiliar · reported 05.09.2026', status: 'In Bearbeitung', statusEn: 'In progress', fg: '#3D2BFF', bg: '#F5F4FF', dot: '#3D2BFF',
     datum: '05.09.2026', summe: "CHF 2'400.00", selbst: 'CHF 200.00', selbstEn: 'CHF 200.00',
     beschrieb: 'Der Zulaufschlauch der Waschmaschine ist gerissen, Wasser lief in den Korridor. Parkett und Sockelleisten sind beschädigt.',
     beschriebEn: "The washing machine's supply hose burst, and water ran into the hallway. The parquet flooring and skirting boards were damaged.",
     schritte: [['Meldung eingegangen','Report received', '05.09.2026'], ['Fotos eingereicht','Photos submitted', '06.09.2026'], ['Kostenschätzung in Prüfung','Cost estimate under review', 'offen']] },
-  { key: 'velo', titel: 'Velo gestohlen, Bahnhof Olten', titelEn: 'Bicycle stolen, Olten station', sub: 'Hausrat · Mobiliar · gemeldet 03.05.2026', subEn: 'Home contents · Mobiliar · reported 03.05.2026', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+  { key: 'velo', titel: 'Velo gestohlen, Bahnhof Olten', titelEn: 'Bicycle stolen, Olten station', sub: 'Hausrat · Mobiliar · gemeldet 03.05.2026', subEn: 'Home contents · Mobiliar · reported 03.05.2026', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#D4D1EC',
     datum: '03.05.2026', summe: "CHF 1'440.00", selbst: 'CHF 200.00', selbstEn: 'CHF 200.00',
     beschrieb: 'Das abgeschlossene Velo wurde am Bahnhof entwendet. Polizeirapport lag der Meldung bei.',
     beschriebEn: 'The locked bicycle was stolen at the train station. A police report was attached to the claim.',
     schritte: [['Meldung eingegangen','Report received', '03.05.2026'], ['Polizeirapport geprüft','Police report reviewed', '12.05.2026'], ["Auszahlung CHF 1'240.00","Payout CHF 1'240.00", '27.05.2026']] },
-  { key: 'park', titel: 'Parkschaden Kotflügel', titelEn: 'Parking damage – fender', sub: 'Auto · Mobiliar · gemeldet 21.11.2025', subEn: 'Car · Mobiliar · reported 21.11.2025', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+  { key: 'park', titel: 'Parkschaden Kotflügel', titelEn: 'Parking damage – fender', sub: 'Auto · Mobiliar · gemeldet 21.11.2025', subEn: 'Car · Mobiliar · reported 21.11.2025', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#D4D1EC',
     datum: '21.11.2025', summe: "CHF 1'850.00", selbst: 'CHF 500.00', selbstEn: 'CHF 500.00',
     beschrieb: 'Unbekannter Dritter beschädigte beim Parkieren den vorderen rechten Kotflügel.',
     beschriebEn: 'An unknown third party damaged the front right fender while parking.',
     schritte: [['Meldung eingegangen','Report received', '21.11.2025'], ['Garage beauftragt','Garage commissioned', '25.11.2025'], ['Direkt abgerechnet','Settled directly', '09.12.2025']] },
-  { key: 'nachbar', titel: 'Wasserschaden Küche Nachbarwohnung', titelEn: "Water damage – neighbor's kitchen", sub: 'Privathaftpflicht · Mobiliar · gemeldet 08.02.2025', subEn: 'Personal liability · Mobiliar · reported 08.02.2025', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#C9CFE8',
+  { key: 'nachbar', titel: 'Wasserschaden Küche Nachbarwohnung', titelEn: "Water damage – neighbor's kitchen", sub: 'Privathaftpflicht · Mobiliar · gemeldet 08.02.2025', subEn: 'Personal liability · Mobiliar · reported 08.02.2025', status: 'Erledigt', statusEn: 'Completed', fg: '#6E6E6B', bg: '#F3F3F1', dot: '#D4D1EC',
     datum: '08.02.2025', summe: "CHF 3'860.00", selbst: 'kein Selbstbehalt', selbstEn: 'no deductible',
     beschrieb: 'Ein übergelaufenes Spülbecken beschädigte die Decke der darunterliegenden Wohnung.',
     beschriebEn: 'An overflowing sink damaged the ceiling of the apartment below.',
@@ -546,7 +546,7 @@ function speak(text){
 }
 
 function navItem(key, label, active, go_){
-  return `<button class="nav-item" style="background:${active ? '#0A4AD6' : 'transparent'}; color:${active ? '#FFFFFF' : '#EAF1FF'}" onclick="${go_}"><span class="dot" style="background:${active ? '#FFFFFF' : '#5B8DFF'}"></span>${label}</button>`;
+  return `<button class="nav-item" style="background:${active ? '#0B0EE1' : 'transparent'}; color:${active ? '#FFFFFF' : '#F6F6FF'}" onclick="${go_}"><span class="dot" style="background:${active ? '#FFFFFF' : '#6768FF'}"></span>${label}</button>`;
 }
 
 function sidebar(){
@@ -569,7 +569,7 @@ function sidebar(){
     </nav>
     <div class="sidebar-advisor">
       <img src="team/jan.jpg" alt="Jan Krapl">
-      <div><div style="font-size:14px; font-weight:600;">Jan Krapl</div><div style="font-size:12px; color:#DCE8FF;">${t('Ihr Berater','Your advisor')}</div></div>
+      <div><div style="font-size:14px; font-weight:600;">Jan Krapl</div><div style="font-size:12px; color:#E8E9FF;">${t('Ihr Berater','Your advisor')}</div></div>
     </div>
   </aside>`;
 }
@@ -606,7 +606,7 @@ function topheader(){
 function ring(pct, color, center, size){
   size = size || 132;
   const inner = Math.round(size * 0.727);
-  return `<div style="width:${size}px; height:${size}px; border-radius:999px; background:conic-gradient(${color} 0 ${pct}%, #DDE3F5 ${pct}% 100%); display:grid; place-items:center; flex:none;">
+  return `<div style="width:${size}px; height:${size}px; border-radius:999px; background:conic-gradient(${color} 0 ${pct}%, #E7E6F8 ${pct}% 100%); display:grid; place-items:center; flex:none;">
     <div style="width:${inner}px; height:${inner}px; border-radius:999px; background:#FFFFFF; display:grid; place-items:center; font-size:30px; font-weight:600;">${center}</div>
   </div>`;
 }
@@ -622,7 +622,7 @@ function dashboardView(){
       <div class="card">
         <div style="font-size:17px; font-weight:600;">${t('Versicherungen','Insurance')}</div>
         <div style="display:flex; align-items:center; gap:26px; margin-top:22px;">
-          ${ring(100, '#1F4FFF', 6)}
+          ${ring(100, '#3D2BFF', 6)}
           <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
             <div><div style="font-size:14px; color:#6E6E6B;">${t('Alle aktiv','All active')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">${t('6 Policen','6 policies')}</div></div>
             <div><div style="font-size:14px; color:#6E6E6B;">${t('Prämien pro Monat','Premiums per month')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">CHF 486.00</div></div>
@@ -634,7 +634,7 @@ function dashboardView(){
         <div style="display:flex; align-items:center; gap:26px; margin-top:22px;">
           ${ring(25, '#0A0A0B', 4)}
           <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
-            <div><div style="font-size:14px; color:#6E6E6B;">${t('In Bearbeitung','In progress')}</div><div style="font-size:19px; font-weight:600; margin-top:2px; color:#1F4FFF;">1</div></div>
+            <div><div style="font-size:14px; color:#6E6E6B;">${t('In Bearbeitung','In progress')}</div><div style="font-size:19px; font-weight:600; margin-top:2px; color:#3D2BFF;">1</div></div>
             <div><div style="font-size:14px; color:#6E6E6B;">${t('Neue Nachrichten','New messages')}</div><div style="font-size:19px; font-weight:600; margin-top:2px;">2</div></div>
           </div>
         </div>
@@ -646,12 +646,12 @@ function dashboardView(){
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1; display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
         <h2 style="margin:0; font-size:19px; font-weight:600;">${t('Verlauf','History')}</h2>
-        <span style="font-size:13px; font-weight:600; color:#1F4FFF; background:#E8ECFF; border-radius:999px; padding:6px 12px;">${t('2 neu','2 new')}</span>
+        <span style="font-size:13px; font-weight:600; color:#3D2BFF; background:#F5F4FF; border-radius:999px; padding:6px 12px;">${t('2 neu','2 new')}</span>
       </div>
       ${[
-        { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '01.09.2026 · 14:20', text: t("Guten Tag Frau Brunner, die neue Hausratpolice mit der erhöhten Versicherungssumme von CHF 120'000 ist ausgestellt und liegt unter Dokumente.", "Good afternoon Ms. Brunner, the new home contents policy with the increased sum insured of CHF 120'000 has been issued and is available under Documents.") },
+        { initialen: 'JK', bg: '#F5F4FF', fg: '#3D2BFF', name: 'Jan Krapl', zeit: '01.09.2026 · 14:20', text: t("Guten Tag Frau Brunner, die neue Hausratpolice mit der erhöhten Versicherungssumme von CHF 120'000 ist ausgestellt und liegt unter Dokumente.", "Good afternoon Ms. Brunner, the new home contents policy with the increased sum insured of CHF 120'000 has been issued and is available under Documents.") },
         { initialen: 'NB', bg: '#F3F3F1', fg: '#6E6E6B', name: 'Nina Brunner', zeit: '26.08.2026 · 18:47', text: t('Wir haben ein Klavier gekauft. Reicht die Hausratsumme noch?', 'We bought a piano. Is the home contents sum still sufficient?') },
-        { initialen: 'JK', bg: '#E8ECFF', fg: '#1F4FFF', name: 'Jan Krapl', zeit: '14.06.2026 · 09:30', text: t('Autoversicherung nach dem Fahrzeugwechsel angepasst, Bonusstufe bleibt erhalten.', 'Car insurance adjusted after the vehicle change, no-claims bonus level retained.') }
+        { initialen: 'JK', bg: '#F5F4FF', fg: '#3D2BFF', name: 'Jan Krapl', zeit: '14.06.2026 · 09:30', text: t('Autoversicherung nach dem Fahrzeugwechsel angepasst, Bonusstufe bleibt erhalten.', 'Car insurance adjusted after the vehicle change, no-claims bonus level retained.') }
       ].map(v => `
       <div style="display:flex; gap:18px; padding:22px 26px; border-bottom:1px solid #F0F0EE;">
         <div style="width:38px; height:38px; border-radius:999px; background:${v.bg}; color:${v.fg}; display:grid; place-items:center; font-size:13px; font-weight:700; flex:none;">${v.initialen}</div>
@@ -670,7 +670,7 @@ function dashboardView(){
       <div style="padding:22px 26px; border-bottom:1px solid #E4E4E1;"><h2 style="margin:0; font-size:19px; font-weight:600;">${t('Was als Nächstes ansteht','What\'s coming up next')}</h2></div>
       ${[
         { datum: '30.09.2026', titel: t('Autoversicherung — Rechnung fällig','Car insurance — invoice due'), sub: t("Police 7712-0043 · Mobiliar · CHF 1'128.00", "Policy 7712-0043 · Mobiliar · CHF 1'128.00"), status: t('Offen','Open'), fg: '#8A5A00', bg: '#FFF3D6' },
-        { datum: '30.11.2026', titel: t('Krankenkasse — Kündigungsfrist Zusatz','Health insurance — notice period for supplementary'), sub: t('Wir prüfen bis Ende Oktober, ob ein Wechsel sich lohnt.', "We'll check by the end of October whether switching is worthwhile."), status: t('Wir melden uns',"We'll be in touch"), fg: '#1F4FFF', bg: '#E8ECFF' },
+        { datum: '30.11.2026', titel: t('Krankenkasse — Kündigungsfrist Zusatz','Health insurance — notice period for supplementary'), sub: t('Wir prüfen bis Ende Oktober, ob ein Wechsel sich lohnt.', "We'll check by the end of October whether switching is worthwhile."), status: t('Wir melden uns',"We'll be in touch"), fg: '#3D2BFF', bg: '#F5F4FF' },
         { datum: '31.12.2026', titel: t('Hausrat und Privathaftpflicht — Verlängerung','Home contents and personal liability — renewal'), sub: t('Verlängert sich automatisch um ein Jahr.','Automatically renews for one year.'), status: t('Notiert','Noted'), fg: '#6E6E6B', bg: '#F3F3F1' }
       ].map(tm => `
       <div style="display:flex; align-items:flex-start; gap:18px; padding:22px 26px; border-bottom:1px solid #F0F0EE;">
@@ -712,7 +712,7 @@ function policeDetailView(){
     <button class="pill-outline" style="align-self:flex-start;" onclick="go('policen')">${t('Zurück zu meinen Versicherungen','Back to my insurance')}</button>
     <div class="card" style="padding:0; overflow:hidden;">
       <div style="padding:26px 30px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
-        <div style="width:56px; height:56px; border-radius:14px; background:#E8ECFF; color:#1F4FFF; display:grid; place-items:center; font-size:22px; font-weight:700; flex:none;">P</div>
+        <div style="width:56px; height:56px; border-radius:14px; background:#F5F4FF; color:#3D2BFF; display:grid; place-items:center; font-size:22px; font-weight:700; flex:none;">P</div>
         <div style="min-width:0;">
           <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><h1 style="margin:0; font-size:26px; font-weight:600; letter-spacing:-0.01em;">${t(p.produkt, p.produktEn)}</h1><span class="badge badge-ok">${t('Aktiv','Active')}</span></div>
           <div style="font-size:15px; color:#6E6E6B; margin-top:6px;">${t(p.gesellschaft, p.gesellschaftEn)} · ${t('Police','Policy')} ${p.nr}</div>
@@ -818,7 +818,7 @@ function schadenDetailView(){
         <h2 style="margin:0 0 18px; font-size:17px; font-weight:600;">${t('Stand der Bearbeitung','Processing status')}</h2>
         ${c.schritte.map(([titel,titelEn,datum]) => `
         <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:16px;">
-          <div style="width:10px; height:10px; border-radius:999px; background:${datum==='offen'?'#C9CFE8':'#1F4FFF'}; margin-top:6px; flex:none;"></div>
+          <div style="width:10px; height:10px; border-radius:999px; background:${datum==='offen'?'#D4D1EC':'#3D2BFF'}; margin-top:6px; flex:none;"></div>
           <div><div style="font-size:15px; font-weight:600;">${t(titel,titelEn)}</div><div style="font-size:14px; color:#6E6E6B; margin-top:3px;">${datum==='offen' ? t('offen','open') : datum}</div></div>
         </div>`).join('')}
       </div>
@@ -828,7 +828,7 @@ function schadenDetailView(){
 
 function dokumenteView(){
   const DOKUMENTE = [
-    { typ: 'Police · PDF', typEn: 'Policy · PDF', farbe: '#1F4FFF', name: "Hausrat — neue Versicherungssumme CHF 120'000", nameEn: "Home contents — new sum insured CHF 120'000", meta: '01.09.2026 · 380 KB' },
+    { typ: 'Police · PDF', typEn: 'Policy · PDF', farbe: '#3D2BFF', name: "Hausrat — neue Versicherungssumme CHF 120'000", nameEn: "Home contents — new sum insured CHF 120'000", meta: '01.09.2026 · 380 KB' },
     { typ: 'Rechnung · PDF', typEn: 'Invoice · PDF', farbe: '#6E6E6B', name: 'Autoversicherung — Prämienrechnung 2026/27', nameEn: 'Car insurance — premium invoice 2026/27', meta: '28.08.2026 · 120 KB' },
     { typ: 'Police · PDF', typEn: 'Policy · PDF', farbe: '#6E6E6B', name: 'Auto — Police nach Fahrzeugwechsel', nameEn: 'Car — policy after vehicle change', meta: '14.06.2026 · 410 KB' },
     { typ: 'Schaden · PDF', typEn: 'Claim · PDF', farbe: '#6E6E6B', name: 'Abrechnung Velodiebstahl', nameEn: 'Settlement: bicycle theft', meta: '27.05.2026 · 96 KB' },
@@ -863,7 +863,7 @@ function newsView(){
     <div class="grid-news">
       ${NEWS.map(n => `
       <article class="card" style="display:flex; flex-direction:column; gap:12px;">
-        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><span class="micro">${t(n.kategorie,n.kategorieEn)}</span>${n.neu ? `<span style="font-size:12px; font-weight:600; color:#1F4FFF; background:#E8ECFF; border-radius:999px; padding:4px 10px;">${t('neu','new')}</span>` : ''}</div>
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><span class="micro">${t(n.kategorie,n.kategorieEn)}</span>${n.neu ? `<span style="font-size:12px; font-weight:600; color:#3D2BFF; background:#F5F4FF; border-radius:999px; padding:4px 10px;">${t('neu','new')}</span>` : ''}</div>
         <h2 style="margin:0; font-size:19px; font-weight:600; line-height:1.3;">${t(n.titel,n.titelEn)}</h2>
         <p style="margin:0; font-size:15px; line-height:1.6; color:#4A4A48;">${t(n.text,n.textEn)}</p>
         <div style="font-size:14px; color:#6E6E6B; margin-top:auto; padding-top:8px;">${n.meta}</div>
@@ -886,14 +886,14 @@ function hilfeView(){
     <div class="card" style="padding:36px;">
       <h1 style="margin:0; font-size:28px; font-weight:600; letter-spacing:-0.01em;">${t('Wie können wir helfen?','How can we help?')}</h1>
       <div style="display:flex; align-items:center; gap:12px; background:#F3F3F1; border:1px solid #E4E4E1; border-radius:999px; padding:14px 20px; margin-top:20px; max-width:560px;">
-        <div style="width:8px; height:8px; border-radius:999px; background:#1F4FFF; flex:none;"></div>
+        <div style="width:8px; height:8px; border-radius:999px; background:#3D2BFF; flex:none;"></div>
         <input class="input" style="border:0; background:transparent; padding:0;" placeholder="${t('Hilfeseite durchsuchen','Search the help page')}">
       </div>
     </div>
     <div class="card" style="padding:30px;">
       <h2 style="margin:0 0 20px; font-size:19px; font-weight:600;">${t('Häufige Fragen','Frequently asked questions')}</h2>
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px 32px;">
-        ${FAQ.map(([fDe,fEn]) => `<a href="#" onclick="return false;" style="font-size:16px; font-weight:600; line-height:1.4; display:flex; gap:10px; align-items:baseline;"><span style="color:#1F4FFF;">→</span>${t(fDe,fEn)}</a>`).join('')}
+        ${FAQ.map(([fDe,fEn]) => `<a href="#" onclick="return false;" style="font-size:16px; font-weight:600; line-height:1.4; display:flex; gap:10px; align-items:baseline;"><span style="color:#3D2BFF;">→</span>${t(fDe,fEn)}</a>`).join('')}
       </div>
     </div>
     <div class="grid-2" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
@@ -914,7 +914,7 @@ function profilView(){
   <div style="display:flex; flex-wrap:wrap; gap:26px; align-items:flex-start;">
     <aside class="card" style="flex:1 1 280px; max-width:320px; padding:0; overflow:hidden;">
       <div style="padding:26px; display:flex; flex-direction:column; gap:14px; border-bottom:1px solid #E4E4E1;">
-        <div style="width:64px; height:64px; border-radius:999px; background:#E8ECFF; color:#1F4FFF; display:grid; place-items:center; font-size:22px; font-weight:700;">NB</div>
+        <div style="width:64px; height:64px; border-radius:999px; background:#F5F4FF; color:#3D2BFF; display:grid; place-items:center; font-size:22px; font-weight:700;">NB</div>
         <div><div style="font-size:18px; font-weight:600;">Nina Brunner</div><div style="font-size:14px; color:#6E6E6B; margin-top:3px;">${t('Privatkundin seit 2019','Private customer since 2019')}</div></div>
         <span class="badge badge-ok" style="align-self:flex-start;">${t('Aktiv','Active')}</span>
       </div>
@@ -952,7 +952,7 @@ function profilView(){
         ${notifyDefs.map(([key,titel,sub]) => { const on = state.notify[key]; return `
         <div style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:18px 0; border-bottom:1px solid #F0F0EE;">
           <div><div style="font-size:16px; font-weight:600;">${titel}</div><div style="font-size:14px; color:#6E6E6B; margin-top:4px;">${sub}</div></div>
-          <button class="toggle" style="background:${on?'#1F4FFF':'#DDDDD9'}; justify-content:${on?'flex-end':'flex-start'};" onclick="toggleNotify('${key}')"><span></span></button>
+          <button class="toggle" style="background:${on?'#3D2BFF':'#DDDDD9'}; justify-content:${on?'flex-end':'flex-start'};" onclick="toggleNotify('${key}')"><span></span></button>
         </div>`; }).join('')}
       </div>` : ''}
     </div>
@@ -980,7 +980,7 @@ function chatWidget(){
     ${state.botOpen ? `
     <div class="chat-panel">
       <div class="chat-head">
-        <div style="width:10px; height:10px; border-radius:999px; background:#1F4FFF; flex:none;"></div>
+        <div style="width:10px; height:10px; border-radius:999px; background:#3D2BFF; flex:none;"></div>
         <div style="min-width:0; flex:1 1 auto;"><div style="font-size:15px; font-weight:600;">${t('coverd Assistent','coverd Assistant')}</div><div style="font-size:13px; color:#6E6E6B;">${t('Antwortet aus Ihren Policen','Answers using your policies')}</div></div>
         <button onclick="toggleVoiceOut()" title="${state.voiceOut ? t('Antworten nicht mehr vorlesen','Stop reading answers aloud') : t('Antworten vorlesen','Read answers aloud')}" style="border:0; background:transparent; font-size:18px; color:#6E6E6B; cursor:pointer; line-height:1; padding:4px 6px; opacity:${state.voiceOut ? 1 : 0.4};">${state.voiceOut ? '🔊' : '🔈'}</button>
         <button onclick="closeBot()" style="border:0; background:transparent; font-size:20px; color:#6E6E6B; cursor:pointer; line-height:1; padding:4px 6px;">×</button>
