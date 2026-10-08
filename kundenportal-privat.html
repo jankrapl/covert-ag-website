@@ -197,11 +197,17 @@ function approvePolicy(key){
   persist();
   render();
 }
-function rejectPolicy(key){
-  if (!confirm(t('Diese Police wirklich ablehnen und entfernen?','Really reject and remove this policy?'))) return;
+function deletePolicy(key){
   const p = state.policies.find(x => x.key === key);
+  if (!p) return;
+  const label = t(p.produkt, p.produktEn);
+  if (!confirm(p.pending
+    ? t('Diese hochgeladene Police wirklich ablehnen und entfernen?','Really reject and remove this uploaded policy?')
+    : t('Diese Police „' + label + '“ wirklich löschen?','Really delete the "' + label + '" policy?'))) return;
   state.policies = state.policies.filter(x => x.key !== key);
-  if (p) state.verlauf.push({ initialen: 'JK', bg: '#F5F4FF', fg: '#3D2BFF', name: 'Jan Krapl', zeit: nowStr(), text: t('Die hochgeladene Police „' + t(p.produkt, p.produktEn) + '“ konnte nicht bestätigt werden. Bitte laden Sie das Dokument erneut hoch oder melden Sie sich bei Jan Krapl.', 'The uploaded "' + t(p.produkt, p.produktEn) + '" policy could not be confirmed. Please re-upload the document or contact Jan Krapl.') });
+  state.verlauf.push({ initialen: 'JK', bg: '#F5F4FF', fg: '#3D2BFF', name: 'Jan Krapl', zeit: nowStr(), text: p.pending
+    ? t('Die hochgeladene Police „' + label + '“ konnte nicht bestätigt werden. Bitte laden Sie das Dokument erneut hoch oder melden Sie sich bei Jan Krapl.', 'The uploaded "' + label + '" policy could not be confirmed. Please re-upload the document or contact Jan Krapl.')
+    : t('Die Police „' + label + '“ wurde auf Ihren Wunsch entfernt.', 'The "' + label + '" policy has been removed at your request.') });
   state.policy = null;
   state.screen = 'policen';
   persist();
@@ -882,13 +888,19 @@ function policenListView(){
           <div><div class="micro">${t('Prämie','Premium')}</div><div style="font-size:16px; font-weight:600; margin-top:3px;">${t(p.praemie, p.praemieEn)}</div></div>
           <div><div class="micro">${t('Selbstbehalt','Deductible')}</div><div style="font-size:14px; margin-top:5px; color:#4A4A48;">${t(p.selbst, p.selbstEn)}</div></div>
         </div>`;
-        if (!p.pending) return `<button class="list-card" onclick="openPolicy('${p.key}')" style="display:flex; flex-direction:column; gap:14px;">${header}</button>`;
+        if (!p.pending) return `
+        <div class="list-card" style="display:flex; flex-direction:column; gap:14px; cursor:default;">
+          <div onclick="openPolicy('${p.key}')" style="display:flex; flex-direction:column; gap:14px; cursor:pointer;">${header}</div>
+          <div style="display:flex; justify-content:flex-end;">
+            <button class="status-icon-btn" onclick="deletePolicy('${p.key}')" title="${t('Police löschen','Delete policy')}">✕ ${t('Löschen','Delete')}</button>
+          </div>
+        </div>`;
         return `
         <div class="list-card" style="display:flex; flex-direction:column; gap:14px; cursor:default;">
           <div onclick="openPolicy('${p.key}')" style="display:flex; flex-direction:column; gap:14px; cursor:pointer;">${header}</div>
           <div style="display:flex; gap:10px; flex-wrap:wrap; border-top:1px solid #F0F0EE; padding-top:14px;">
             <button class="btn-blue-sm" onclick="approvePolicy('${p.key}')">${t('Bestätigen','Confirm')}</button>
-            <button class="pill-outline" onclick="rejectPolicy('${p.key}')">${t('Ablehnen','Reject')}</button>
+            <button class="pill-outline" onclick="deletePolicy('${p.key}')">${t('Ablehnen','Reject')}</button>
           </div>
         </div>`;
       }).join('')}
@@ -930,9 +942,12 @@ function policeDetailView(){
       <p style="margin:10px 0 18px; font-size:15px; color:#6E6E6B;">${t('Als Jan Krapl bestätigen oder ablehnen Sie diese hochgeladene Police hier.','As Jan Krapl, confirm or reject this uploaded policy here.')}</p>
       <div style="display:flex; gap:12px; flex-wrap:wrap;">
         <button class="btn-blue" onclick="approvePolicy('${p.key}')">${t('Als geprüft bestätigen','Confirm as reviewed')}</button>
-        <button class="pill-outline" onclick="rejectPolicy('${p.key}')">${t('Ablehnen und entfernen','Reject and remove')}</button>
+        <button class="pill-outline" onclick="deletePolicy('${p.key}')">${t('Ablehnen und entfernen','Reject and remove')}</button>
       </div>
-    </div>` : ''}
+    </div>` : `
+    <div style="display:flex; justify-content:flex-end;">
+      <button class="pill-outline" onclick="deletePolicy('${p.key}')">${t('Police löschen','Delete policy')}</button>
+    </div>`}
 
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
       ${tabs.map(([k,l]) => `<button class="tab-pill ${dt===k?'active':''}" onclick="setDetailTab('${k}')">${l}</button>`).join('')}
