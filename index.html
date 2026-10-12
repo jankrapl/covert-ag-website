@@ -589,6 +589,10 @@
   .panel3 h3{ margin-bottom:12px; font-size:1.2rem; }
   .panel3 p{ color:var(--stone); font-size:0.94rem; }
 
+  .panel3-cards{ gap:20px; background:none; border:0; }
+  .panel3-cards > div{ border-radius:14px; }
+  @media (max-width:880px){ .panel3-cards{ gap:16px; } }
+
   /* footer */
   footer{ background:var(--ink); color:var(--paper); padding:64px 0 36px; }
   .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; }
@@ -2060,10 +2064,10 @@
     </div>
   </section>
 
-  <section>
+  <section class="deep">
     <div class="wrap">
       <div class="section-head"><h2 data-de="Diese Themen erwarten Sie hier" data-en="What to expect here">Diese Themen erwarten Sie hier</h2><p class="lede" data-de="Wir bauen den Blog laufend auf – mit praxisnahen Beiträgen zu diesen Schwerpunkten." data-en="We're continuously growing this blog – with practical articles on these focus areas.">Wir bauen den Blog laufend auf – mit praxisnahen Beiträgen zu diesen Schwerpunkten.</p></div>
-      <div class="panel3">
+      <div class="panel3 panel3-cards">
         <div>
           <h3 data-de="Versicherungen &amp; Vorsorge" data-en="Insurance &amp; Pension Planning">Versicherungen &amp; Vorsorge</h3>
           <p data-de="Praxisnahe Beiträge zu Absicherung, Vorsorgeplanung und häufigen Stolpersteinen." data-en="Practical articles on coverage, pension planning and common pitfalls.">Praxisnahe Beiträge zu Absicherung, Vorsorgeplanung und häufigen Stolpersteinen.</p>
