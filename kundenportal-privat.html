@@ -56,6 +56,16 @@
   .badge{ font-size:13px; font-weight:600; border-radius:999px; padding:6px 12px; display:inline-block; }
   .badge-ok{ color:#16603A; background:#DDF3E6; }
   .badge-pending{ color:#6E6E6B; background:#F3F3F1; }
+  .kv-grid{ display:flex; flex-direction:column; }
+  .kv-row{ display:flex; gap:20px; align-items:baseline; padding:11px 0; border-bottom:1px solid #F0F0EE; }
+  .kv-row:last-child{ border-bottom:0; }
+  .kv-k{ flex:0 0 230px; max-width:230px; font-size:14px; color:#6E6E6B; overflow-wrap:break-word; }
+  .kv-v{ flex:1 1 auto; min-width:0; font-size:15px; font-weight:500; overflow-wrap:break-word; }
+  @media (max-width:640px){
+    .kv-row{ flex-direction:column; gap:3px; }
+    .kv-k{ flex:none; max-width:none; }
+  }
+  .doc-text{ margin:0; max-height:460px; overflow:auto; background:#F3F3F1; border:1px solid #E4E4E1; border-radius:12px; padding:16px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:1.6; white-space:pre-wrap; overflow-wrap:break-word; }
   .micro{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#6E6E6B; }
   .mono{ font-family:'JetBrains Mono',monospace; }
   .input{ width:100%; border:1px solid #E4E4E1; border-radius:12px; padding:13px 16px; font:inherit; font-size:15px; outline:none; }
@@ -160,6 +170,7 @@ const state = {
   themaEditStatus: '',
   themaEditKind: 'ready',
   uploadedDocName: null,
+  uploadedDocScan: null,
   uploadedDocText: null,
   uploadedDocStatus: null
 };
@@ -388,14 +399,15 @@ function handlePolicyUpload(event){
       var pagePromises = [];
       for (var i = 1; i <= pdf.numPages; i++){
         pagePromises.push(pdf.getPage(i).then(function(page){
-          return page.getTextContent().then(function(tc){
-            return tc.items.map(function(it){ return it.str; }).join(' ');
-          });
+          return page.getTextContent().then(function(tc){ return itemsToLines(tc.items); });
         }));
       }
       return Promise.all(pagePromises);
-    }).then(function(pagesText){
-      state.uploadedDocText = pagesText.join('\n');
+    }).then(function(pageLines){
+      var lines = [];
+      pageLines.forEach(function(pl){ lines = lines.concat(pl); });
+      state.uploadedDocScan = scanDocumentLines(lines);
+      state.uploadedDocText = state.uploadedDocScan.text;
       state.uploadedDocStatus = 'ready';
       state.messages.push({ role: 'bot', text: t(
         'Dokument „' + file.name + '“ wurde eingelesen. Sie können jetzt Fragen dazu stellen, z. B. „Wie hoch ist die Prämie?“',
@@ -416,6 +428,7 @@ function handlePolicyUpload(event){
 function clearUploadedDoc(){
   state.uploadedDocName = null;
   state.uploadedDocText = null;
+  state.uploadedDocScan = null;
   state.uploadedDocStatus = null;
   render();
 }
@@ -464,8 +477,123 @@ function detectProduktFromText(text){
 }
 function extractGesellschaft(text){
   var m = text.match(/([A-ZÄÖÜ][A-Za-zÄÖÜäöüß.\- ]{2,40}(Versicherung(en)?|Assurance)\s?AG)/);
-  return m ? m[1].trim() : null;
+  if (m) return m[1].trim();
+  m = text.match(/\b(AXA|Zurich|Helvetia|Mobiliar|Allianz|Baloise|Basler|Generali|Vaudoise|Swica|CSS|Sanitas|Helsana|Visana|Concordia|Groupe Mutuel|Swiss Life|Smile|TCS|Elvia|ÖKK|Sympany|Atupri)\b/i);
+  return m ? m[1] : null;
 }
+
+// --- Full document scan: rebuild real lines/columns from pdf.js position data ---
+function itemsToLines(items){
+  var rows = [];
+  items.forEach(function(it){
+    if (!it.str || !it.str.trim()) return;
+    var x = it.transform[4], y = it.transform[5];
+    var row = null;
+    for (var i = 0; i < rows.length; i++){
+      if (Math.abs(rows[i].y - y) <= 2.2) { row = rows[i]; break; }
+    }
+    if (!row) { row = { y: y, parts: [] }; rows.push(row); }
+    row.parts.push({ x: x, w: it.width || 0, s: it.str });
+  });
+  rows.sort(function(a,b){ return b.y - a.y; });
+  return rows.map(function(row){
+    row.parts.sort(function(a,b){ return a.x - b.x; });
+    var out = '', prevEnd = null;
+    row.parts.forEach(function(p){
+      if (prevEnd !== null){
+        var gap = p.x - prevEnd;
+        if (gap > 14) out += '\t';
+        else if (gap > 1.2 && !/\s$/.test(out)) out += ' ';
+      }
+      out += p.s;
+      prevEnd = p.x + p.w;
+    });
+    return out.replace(/[ \t]+$/,'');
+  }).filter(function(l){ return l.trim(); });
+}
+function sClean(s){ return String(s).replace(/\s+/g,' ').trim(); }
+function sLabel(s){ return String(s).replace(/\s+/g,' ').replace(/[: ]+$/,'').trim(); }
+function scanDocumentLines(lines){
+  var felder = [], deckungen = [], seen = {};
+  function add(label, value){
+    var l = sLabel(label), v = sClean(value);
+    if (!l || !v) return;
+    if (l.length < 2 || l.length > 70) return;
+    if (/^[\d\s'’.,%-]+$/.test(l)) return;
+    if (/kundenmeinungen|trustpilot/i.test(v)) return;
+    if (l.toLowerCase() === v.toLowerCase()) return;
+    if (v.length > 220) v = v.slice(0,220) + '…';
+    var k = l.toLowerCase() + '=' + v.toLowerCase();
+    if (seen[k]) return;
+    seen[k] = 1;
+    felder.push({ label: l, value: v });
+    if (/^(nicht\s+)?versichert\b|^inklusive\b|^eingeschlossen\b/i.test(v)) {
+      deckungen.push({ label: l, value: v, ok: !/^nicht/i.test(v) });
+    }
+  }
+  lines.forEach(function(line){
+    if (line.indexOf('\t') !== -1){
+      var cols = line.split('\t').map(function(c){ return c.trim(); }).filter(Boolean);
+      if (cols.length === 2){ add(cols[0], cols[1]); return; }
+      if (cols.length >= 3){
+        if (/:$/.test(cols[1])) { add(cols[1], cols.slice(2).join(' · ')); return; }
+        add(cols[0], cols.slice(1).join(' · '));
+        return;
+      }
+    }
+    var m = line.match(/^([^:\t]{2,70}):\s*(.+)$/);
+    if (m) add(m[1], m[2]);
+  });
+  var betraege = [], daten = [];
+  lines.forEach(function(line){
+    var cols = line.split('\t');
+    var lab = sLabel(cols.length >= 3 && /:$/.test(cols[1].trim()) ? cols[1] : cols[0]);
+    var mm = line.match(/CHF\s*[\d'’.,]+(?:\s*(?:Mio\.?|Mia\.?|Million(?:en)?))?/g);
+    if (mm) mm.forEach(function(a){ betraege.push({ label: lab, betrag: sClean(a) }); });
+    var dm = line.match(/\d{2}\.\d{2}\.\d{4}/g);
+    if (dm) dm.forEach(function(d){ daten.push({ label: lab, datum: d }); });
+  });
+  var text = lines.join('\n');
+  if (text.length > 60000) text = text.slice(0, 60000) + '\n…';
+  return { felder: felder, deckungen: deckungen, betraege: betraege, daten: daten, text: text };
+}
+function pickScanField(felder, names){
+  for (var i = 0; i < names.length; i++){
+    for (var j = 0; j < felder.length; j++){
+      if (felder[j].label.toLowerCase().indexOf(names[i].toLowerCase()) !== -1) return felder[j].value;
+    }
+  }
+  return null;
+}
+function pickScanDate(daten, names){
+  for (var i = 0; i < names.length; i++){
+    for (var j = 0; j < daten.length; j++){
+      if (daten[j].label.toLowerCase().indexOf(names[i].toLowerCase()) !== -1) return daten[j].datum;
+    }
+  }
+  return null;
+}
+function extractPolicennummer(text){
+  var m = text.match(/Police[\s-]*(?:Nr\.?|Nummer)\s*:?\s*([\d][\d.\-\/ ]{4,25}\d)/i);
+  if (m) return sClean(m[1]);
+  m = text.match(/(?:Policennummer|Vertragsnummer|Vertrags-Nr\.?)\s*:?\s*([A-Z0-9][\w.\-\/ ]{3,25})/i);
+  return m ? sClean(m[1]) : null;
+}
+function extractDokumentTitel(lines){
+  for (var i = 0; i < Math.min(lines.length, 12); i++){
+    var l = sClean(lines[i]);
+    if (/versicherung/i.test(l) && l.length < 80 && !/^www|@/.test(l)) return l;
+  }
+  return null;
+}
+function normPraemie(v){
+  if (!v) return null;
+  var s = sClean(v);
+  if (/CHF/i.test(s)) return s;
+  if (/^[\d'’.,]+$/.test(s)) return 'CHF ' + s;
+  return s;
+}
+
 function handleNewPolicyUpload(event){
   var file = event.target.files && event.target.files[0];
   event.target.value = '';
@@ -481,26 +609,34 @@ function handleNewPolicyUpload(event){
   var reader = new FileReader();
   reader.onload = function(e){
     var typedarray = new Uint8Array(e.target.result);
+    var seiten = 0;
     pdfjsLib.getDocument({ data: typedarray }).promise.then(function(pdf){
+      seiten = pdf.numPages;
       var pagePromises = [];
       for (var i = 1; i <= pdf.numPages; i++){
         pagePromises.push(pdf.getPage(i).then(function(page){
-          return page.getTextContent().then(function(tc){
-            return tc.items.map(function(it){ return it.str; }).join(' ');
-          });
+          return page.getTextContent().then(function(tc){ return itemsToLines(tc.items); });
         }));
       }
       return Promise.all(pagePromises);
-    }).then(function(pagesText){
-      var text = pagesText.join('\n');
-      var idxP = findLabelIndex(text, ['Jahresprämie', 'Monatsprämie', 'Prämienforderung', 'Prämienrechnung', 'Prämie']);
-      var praemie = extractAmountNear(text, idxP, 250, true);
-      var idxS = findLabelIndex(text, ['Selbstbehalt', 'Franchise']);
-      var selbst = extractAmountNear(text, idxS, 250, false);
-      var idxD = findLabelIndex(text, ['Beginn', 'Vertragsdauer', 'Prämienforderung', 'Von']);
-      var dates = extractDatesNear(text, idxD, 250);
+    }).then(function(pageLines){
+      var lines = [];
+      pageLines.forEach(function(pl){ lines = lines.concat(pl); });
+      var scan = scanDocumentLines(lines);
+      scan.seiten = seiten;
+      scan.dateiname = file.name;
+      var text = scan.text;
+
       var prod = detectProduktFromText(text);
       var ges = extractGesellschaft(text);
+      var praemie = normPraemie(pickScanField(scan.felder, ['Total Jahresprämie','Jahresprämie','Gesamtprämie','Jahresbeitrag','Monatsprämie','Prämie in CHF','Prämie']));
+      var selbst = pickScanField(scan.felder, ['Selbstbehalt','Franchise']);
+      if (selbst && !/CHF|\d/.test(selbst)) selbst = null;
+      var beginn = pickScanDate(scan.daten, ['Beginn','Vertragsbeginn','Gültig ab','Von']);
+      var ende = pickScanDate(scan.daten, ['Ende','Vertragsende','Ablauf','Gültig bis','Bis']);
+      var polNr = extractPolicennummer(text);
+      var titel = extractDokumentTitel(lines);
+
       var idx = state.policies.findIndex(function(p){ return p.key === pendingKey; });
       if (idx !== -1) {
         state.policies[idx] = {
@@ -508,18 +644,23 @@ function handleNewPolicyUpload(event){
           pending: true,
           reading: false,
           produkt: prod.de, produktEn: prod.en,
-          gesellschaft: ges || t('Wird geprüft','Being reviewed'), gesellschaftEn: ges || t('Wird geprüft','Being reviewed'),
+          gesellschaft: ges || titel || t('Wird geprüft','Being reviewed'),
+          gesellschaftEn: ges || titel || t('Wird geprüft','Being reviewed'),
           praemie: praemie || t('Wird ermittelt','To be determined'), praemieEn: praemie || t('Wird ermittelt','To be determined'),
           selbst: selbst || '—', selbstEn: selbst || '—',
-          ablauf: dates ? dates.bis : '—',
-          deckung: t('Diese Police wurde hochgeladen und wird von Ihrem Berater geprüft und erfasst.','This policy was uploaded and is being reviewed and recorded by your advisor.'),
-          deckungEn: 'This policy was uploaded and is being reviewed and recorded by your advisor.',
+          ablauf: ende || '—',
+          beginn: beginn || null,
+          polNr: polNr || null,
+          dokTitel: titel || null,
+          scan: scan,
+          deckung: t('Diese Police wurde hochgeladen und vollständig eingelesen. Unter „Alle Angaben“ sehen Sie jedes erfasste Feld aus dem Dokument.','This policy was uploaded and fully scanned. Under "All details" you can see every field captured from the document.'),
+          deckungEn: 'This policy was uploaded and fully scanned. Under "All details" you can see every field captured from the document.',
           mutTitel: t('Änderung anfragen','Request a change'), mutTitelEn: 'Request a change',
           felder: [],
           tags: []
         };
       }
-      state.verlauf.push({ initialen: 'JK', bg: '#F5F4FF', fg: '#3D2BFF', name: 'Jan Krapl', zeit: nowStr(), text: t('Ihre hochgeladene Police „' + prod.de + '“ ist bei uns eingegangen und wird geprüft.', 'Your uploaded "' + prod.en + '" policy has been received and is being reviewed.') });
+      state.verlauf.push({ initialen: 'JK', bg: '#F5F4FF', fg: '#3D2BFF', name: 'Jan Krapl', zeit: nowStr(), text: t('Ihre hochgeladene Police „' + prod.de + '“ wurde vollständig eingelesen (' + seiten + ' Seiten, ' + scan.felder.length + ' erfasste Angaben) und wird nun geprüft.', 'Your uploaded "' + prod.en + '" policy was fully scanned (' + seiten + ' pages, ' + scan.felder.length + ' captured details) and is now being reviewed.') });
       state.policyUploadBusy = false;
       persist();
       render();
@@ -570,6 +711,25 @@ function searchUploadedDoc(q){
   var s = q.toLowerCase();
   var noteDe = ' (Automatisch erkannt aus „' + state.uploadedDocName + '“ — nicht von einem Berater geprüft.)';
   var noteEn = ' (Automatically detected from "' + state.uploadedDocName + '" — not verified by an advisor.)';
+
+  // Prefer the structured scan: match the question against captured field labels.
+  var sc = state.uploadedDocScan;
+  if (sc && sc.felder && sc.felder.length) {
+    var words = s.replace(/[?.,!;:]/g,' ').split(/\s+/).filter(function(w){ return w.length >= 4; });
+    if (words.length) {
+      var best = null, bestScore = 0;
+      sc.felder.forEach(function(f){
+        var lab = f.label.toLowerCase();
+        var score = 0;
+        words.forEach(function(w){ if (lab.indexOf(w) !== -1) score += w.length; });
+        if (score > bestScore) { bestScore = score; best = f; }
+      });
+      if (best && bestScore >= 4) {
+        return t('Laut Ihrem hochgeladenen Dokument: ' + best.label + ' — ' + best.value + '.' + noteDe,
+                 'According to your uploaded document: ' + best.label + ' — ' + best.value + '.' + noteEn);
+      }
+    }
+  }
 
   if (/(prämie|praemie|kosten|zahle|preis|premium|cost|price)/.test(s)) {
     var idx = findLabelIndex(text, ['Jahresprämie', 'Prämienforderung', 'Monatsprämie', 'Prämienrechnung', 'Prämie']);
@@ -912,7 +1072,11 @@ function policeDetailView(){
   const p = state.policies.find(x => x.key === state.policy);
   if (!p) return '';
   const dt = state.detailTab;
-  const tabs = [['ueber', t('Übersicht','Overview')], ['mut', t(p.mutTitel, p.mutTitelEn)]];
+  const sc = p.scan;
+  const tabs = [['ueber', t('Übersicht','Overview')]];
+  if (sc && sc.felder && sc.felder.length) tabs.push(['alle', t('Alle Angaben','All details') + ' (' + sc.felder.length + ')']);
+  if (sc && sc.text) tabs.push(['volltext', t('Volltext','Full text')]);
+  tabs.push(['mut', t(p.mutTitel, p.mutTitelEn)]);
   return `
   <div style="display:flex; flex-direction:column; gap:22px;">
     <button class="pill-outline" style="align-self:flex-start;" onclick="go('policen')">${t('Zurück zu meinen Versicherungen','Back to my insurance')}</button>
@@ -954,9 +1118,52 @@ function policeDetailView(){
     </div>
 
     ${dt === 'ueber' ? `
-    <div class="card" style="max-width:720px;">
-      <h2 style="margin:0 0 14px; font-size:17px; font-weight:600;">${t('Was gedeckt ist',"What's covered")}</h2>
-      <p style="margin:0; font-size:16px; line-height:1.6;">${t(p.deckung, p.deckungEn)}</p>
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      ${sc ? `
+      <div class="card">
+        <h2 style="margin:0 0 16px; font-size:17px; font-weight:600;">${t('Eckdaten aus Ihrem Dokument','Key facts from your document')}</h2>
+        <div class="kv-grid">
+          ${[
+            [t('Police-Nr.','Policy no.'), p.polNr],
+            [t('Gesellschaft','Insurer'), t(p.gesellschaft, p.gesellschaftEn)],
+            [t('Dokument','Document'), p.dokTitel],
+            [t('Beginn','Start'), p.beginn],
+            [t('Läuft bis','Valid until'), p.ablauf && p.ablauf !== '—' ? p.ablauf : null],
+            [t('Prämie','Premium'), t(p.praemie, p.praemieEn)],
+            [t('Selbstbehalt','Deductible'), p.selbst && p.selbst !== '—' ? p.selbst : null],
+            [t('Zahlbar','Payable'), pickScanField(sc.felder, ['Zahlbar','Zahlungsweise'])]
+          ].filter(r => r[1]).map(r => `<div class="kv-row"><span class="kv-k">${esc(r[0])}</span><span class="kv-v">${esc(r[1])}</span></div>`).join('')}
+        </div>
+        <p style="margin:18px 0 0; font-size:14px; color:#6E6E6B;">${t('Vollständig eingelesen: ' + (sc.seiten||'?') + ' Seiten, ' + sc.felder.length + ' erfasste Angaben.', 'Fully scanned: ' + (sc.seiten||'?') + ' pages, ' + sc.felder.length + ' captured details.')}</p>
+      </div>` : `
+      <div class="card" style="max-width:720px;">
+        <h2 style="margin:0 0 14px; font-size:17px; font-weight:600;">${t('Was gedeckt ist',"What's covered")}</h2>
+        <p style="margin:0; font-size:16px; line-height:1.6;">${t(p.deckung, p.deckungEn)}</p>
+      </div>`}
+
+      ${sc && sc.deckungen && sc.deckungen.length ? `
+      <div class="card">
+        <h2 style="margin:0 0 16px; font-size:17px; font-weight:600;">${t('Deckungen laut Dokument','Coverage per document')}</h2>
+        <div class="kv-grid">
+          ${sc.deckungen.map(d => `<div class="kv-row"><span class="kv-k">${esc(d.label)}</span><span class="kv-v" style="color:${d.ok ? '#16603A' : '#9A9A96'}; font-weight:600;">${esc(d.value)}</span></div>`).join('')}
+        </div>
+      </div>` : ''}
+    </div>` : ''}
+
+    ${dt === 'alle' && sc ? `
+    <div class="card">
+      <h2 style="margin:0 0 6px; font-size:17px; font-weight:600;">${t('Alle erfassten Angaben','All captured details')}</h2>
+      <p style="margin:0 0 16px; font-size:14px; color:#6E6E6B;">${t('Jede Angabe, die wir aus „' + (sc.dateiname||'Ihrem Dokument') + '“ auslesen konnten.', 'Every detail we could read from "' + (sc.dateiname||'your document') + '".')}</p>
+      <div class="kv-grid">
+        ${sc.felder.map(f => `<div class="kv-row"><span class="kv-k">${esc(f.label)}</span><span class="kv-v">${esc(f.value)}</span></div>`).join('')}
+      </div>
+    </div>` : ''}
+
+    ${dt === 'volltext' && sc ? `
+    <div class="card">
+      <h2 style="margin:0 0 6px; font-size:17px; font-weight:600;">${t('Volltext des Dokuments','Full document text')}</h2>
+      <p style="margin:0 0 16px; font-size:14px; color:#6E6E6B;">${t('Der komplette ausgelesene Text — so wie er im PDF steht.','The complete extracted text — exactly as it appears in the PDF.')}</p>
+      <pre class="doc-text">${esc(sc.text)}</pre>
     </div>` : ''}
 
     ${dt === 'mut' ? `
