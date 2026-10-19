@@ -41,7 +41,7 @@
   .main{ padding:20px; max-width:1240px; width:100%; margin:0 auto; display:flex; flex-direction:column; gap:24px; }
 
   /* ---- sidebar ---- */
-  .sidebar{ width:100%; flex:none; background:var(--paper); border-bottom:1px solid var(--line); display:flex; flex-direction:row; flex-wrap:wrap; align-items:center; gap:10px; padding:14px 16px; overflow-x:auto; }
+  .sidebar{ display:none; width:100%; flex:none; background:var(--paper); border-bottom:1px solid var(--line); flex-direction:row; flex-wrap:wrap; align-items:center; gap:10px; padding:14px 16px; overflow-x:auto; }
   .sidebar-logo{ padding:0; flex:none; }
   .sidebar-logo img{ height:22px; width:auto; display:block; }
   .sidebar-group-label{ display:none; }
@@ -56,12 +56,33 @@
   .sidebar-advisor img{ width:40px; height:40px; border-radius:999px; object-fit:cover; object-position:50% 22%; flex:none; }
 
   /* ---- topheader ---- */
-  .topheader{ background:var(--paper); border-bottom:1px solid var(--line); padding:14px 20px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; position:sticky; top:0; z-index:20; }
-  .topheader .title{ font-size:20px; font-weight:700; }
+  .topheader{ background:var(--paper); border-bottom:1px solid var(--line); padding:14px 16px; display:flex; align-items:center; gap:20px; position:sticky; top:0; z-index:20; }
+  .topheader .title{ font-size:18px; font-weight:700; }
   .topheader .crumb{ font-size:13px; color:var(--meta); margin-top:2px; }
-  .header-right{ display:flex; align-items:center; gap:12px; margin-left:auto; flex-wrap:wrap; }
+  .header-right{ display:none; align-items:center; gap:12px; margin-left:auto; flex-wrap:wrap; }
   .header-user{ display:flex; align-items:center; gap:10px; padding-left:14px; border-left:1px solid var(--line); }
   .avatar{ width:36px; height:36px; border-radius:999px; background:var(--accent-light); color:var(--accent-dark); display:grid; place-items:center; font-size:13px; font-weight:700; flex:none; }
+
+  /* ---- mobile menu ---- */
+  .mobile-menu-btn{ margin-left:auto; border:1px solid var(--line); background:var(--paper); width:42px; height:42px; min-width:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-direction:column; gap:4px; }
+  .mobile-menu-btn span{ width:18px; height:2px; background:var(--ink); display:block; border-radius:2px; }
+  .mobile-menu-overlay{ display:none; position:fixed; inset:0; background:var(--paper); z-index:200; overflow-y:auto; padding:18px 20px 32px; }
+  .mobile-menu-overlay.open{ display:block; }
+  .mobile-menu-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+  .mobile-menu-close{ border:1px solid var(--line); background:var(--paper); width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px; line-height:1; color:var(--text); }
+  .mobile-profile-card{ display:flex; align-items:center; gap:12px; padding:16px; background:var(--flat); border-radius:16px; margin-bottom:18px; }
+  .mobile-actions-row{ display:flex; gap:10px; margin-bottom:22px; }
+  .mobile-actions-row .btn{ flex:1 1 auto; justify-content:center; }
+  .mobile-group-label{ font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--meta); padding:18px 2px 8px; }
+  .mobile-group-label:first-of-type{ padding-top:0; }
+  .mobile-nav-row{ width:100%; text-align:left; border:0; background:transparent; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 2px; border-bottom:1px solid var(--line-soft); font-size:17px; font-weight:700; color:var(--text); cursor:pointer; }
+  .mobile-nav-row.active{ color:var(--accent-dark); }
+  .mobile-nav-row .nav-count{ font-size:13px; }
+  .mobile-advisor-card{ display:flex; align-items:center; gap:12px; padding:16px; background:var(--flat); border-radius:16px; margin-top:22px; }
+  .mobile-advisor-card img{ width:44px; height:44px; border-radius:999px; object-fit:cover; object-position:50% 22%; flex:none; }
+  @media (min-width:901px){
+    .mobile-menu-btn, .mobile-menu-overlay{ display:none !important; }
+  }
 
   /* ---- buttons ---- */
   .btn{ border:0; font:inherit; font-weight:700; font-size:15px; padding:13px 20px; border-radius:999px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; white-space:nowrap; }
@@ -196,7 +217,7 @@
 
   @media (min-width:901px){
     .app{ flex-direction:row; }
-    .sidebar{ width:264px; flex-direction:column; flex-wrap:nowrap; align-items:stretch; gap:0; padding:28px 18px; position:sticky; top:0; height:100vh; overflow-y:auto; border-bottom:0; border-right:1px solid var(--line); }
+    .sidebar{ display:flex; width:264px; flex-direction:column; flex-wrap:nowrap; align-items:stretch; gap:0; padding:28px 18px; position:sticky; top:0; height:100vh; overflow-y:auto; border-bottom:0; border-right:1px solid var(--line); }
     .sidebar-logo{ padding:0 10px 26px; }
     .sidebar-logo img{ height:24px; }
     .sidebar-group-label{ display:block; padding:0 10px 10px; font-size:12px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--meta); }
@@ -206,6 +227,9 @@
     .sidebar-advisor{ display:flex; margin-top:auto; padding:18px; border-radius:16px; background:var(--flat); align-items:center; gap:12px; }
     .main{ padding:36px; }
     .topheader{ padding:18px 36px; }
+    .topheader .title{ font-size:20px; }
+    .header-right{ display:flex; }
+    .mobile-menu-btn{ display:none; }
   }
 </style>
 </head>
@@ -220,6 +244,7 @@ const state = {
   loggedIn: false, loginError: false,
   screen: 'dash', policy: null, claim: null, detailTab: 'ueber', profilTab: 'allg',
   lang: 'de',
+  mobileMenuOpen: false,
   notify: { schaden: true, policen: true, news: false },
   botOpen: false,
   listening: false,
@@ -419,8 +444,10 @@ function logout(){
   state.loggedIn = false;
   state.loginError = false;
   state.screen = 'dash';
+  state.mobileMenuOpen = false;
   render();
 }
+function toggleMobileMenu(){ state.mobileMenuOpen = !state.mobileMenuOpen; render(); }
 function loginView(){
   return `
   <div style="min-height:100vh; background:#FFFFFF; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));">
@@ -460,7 +487,7 @@ function loginView(){
   </div>`;
 }
 
-function go(screen){ state.screen = screen; state.policy = null; state.claim = null; render(); window.scrollTo(0,0); }
+function go(screen){ state.screen = screen; state.policy = null; state.claim = null; state.mobileMenuOpen = false; render(); window.scrollTo(0,0); }
 function openPolicy(key){ state.screen = 'policen'; state.policy = key; state.detailTab = 'ueber'; render(); window.scrollTo(0,0); }
 function openClaim(key){ state.screen = 'schaden'; state.claim = key; render(); window.scrollTo(0,0); }
 function setDetailTab(t){ state.detailTab = t; render(); }
@@ -1019,7 +1046,49 @@ function topheader(){
         <div style="line-height:1.25;"><div style="font-size:14px; font-weight:700;">Alex Muster</div><div style="font-size:12px; color:var(--meta);">${t('Privatkundin seit 2019','Private customer since 2019')}</div></div>
       </div>
     </div>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="${t('Menü','Menu')}"><span></span><span></span><span></span></button>
   </header>`;
+}
+
+function mobileMenuPanel(){
+  if (!state.mobileMenuOpen) return '';
+  const sc = state.screen;
+  const nPolicies = state.policies.filter(p => !p.reading).length;
+  const nClaimsOpen = state.claims.filter(c => /bearbeitung|progress/i.test(c.status + ' ' + (c.statusEn||''))).length;
+  const nNews = NEWS.filter(n => n.neu).length;
+  const nMsg = state.verlauf.length;
+  return `
+  <div class="mobile-menu-overlay open">
+    <div class="mobile-menu-head">
+      <img src="images/coverd-logo.png" alt="coverd ag" style="height:22px;">
+      <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="${t('Schliessen','Close')}">×</button>
+    </div>
+    <div class="mobile-profile-card">
+      <div class="avatar" style="width:44px; height:44px; font-size:15px;">AM</div>
+      <div><div style="font-size:16px; font-weight:700;">Alex Muster</div><div style="font-size:13px; color:var(--meta);">${t('Privatkundin seit 2019','Private customer since 2019')}</div></div>
+    </div>
+    <div class="mobile-actions-row">
+      <button class="btn btn-outline btn-sm" onclick="go('dash')">${t('Mitteilungen','Messages')}${nMsg ? ` <span class="badge badge-active">${nMsg}</span>` : ''}</button>
+      <button class="btn btn-outline btn-sm" onclick="toggleLang()">${t('Auf Englisch anzeigen','Switch to German')}</button>
+    </div>
+    <div class="mobile-group-label">${t('Hauptbereiche','Main areas')}</div>
+    <button class="mobile-nav-row ${sc==='dash'?'active':''}" onclick="go('dash')"><span>${t('Dashboard','Dashboard')}</span></button>
+    <button class="mobile-nav-row ${sc==='policen'?'active':''}" onclick="go('policen')"><span>${t('Meine Versicherungen','My Insurance')}</span>${nPolicies ? `<span class="nav-count">${nPolicies}</span>` : ''}</button>
+    <button class="mobile-nav-row ${sc==='schaden'?'active':''}" onclick="go('schaden')"><span>${t('Meine Anliegen','My Requests')}</span>${nClaimsOpen ? `<span class="nav-count">${nClaimsOpen}</span>` : ''}</button>
+    <button class="mobile-nav-row ${sc==='news'?'active':''}" onclick="go('news')"><span>${t('News','News')}</span>${nNews ? `<span class="nav-count">${nNews}</span>` : ''}</button>
+    <div class="mobile-group-label">${t('Konto','Account')}</div>
+    <button class="mobile-nav-row ${sc==='profil'?'active':''}" onclick="go('profil')"><span>${t('Mein Profil','My Profile')}</span></button>
+    <button class="mobile-nav-row ${sc==='hilfe'?'active':''}" onclick="go('hilfe')"><span>${t('Hilfezentrum','Help Center')}</span></button>
+    <button class="mobile-nav-row" style="border-bottom:0; color:var(--meta);" onclick="logout()"><span>${t('Abmelden','Log out')}</span></button>
+    <div class="mobile-advisor-card">
+      <img src="team/jan.jpg" alt="Jan Krapl">
+      <div style="min-width:0; flex:1 1 auto;">
+        <div style="font-size:14px; font-weight:700;">Jan Krapl</div>
+        <div style="font-size:12px; color:var(--meta); margin-bottom:8px;">${t('Ihr Berater','Your advisor')}</div>
+        <button class="btn btn-outline btn-sm" style="width:100%; justify-content:center;" onclick="alert(t('In der Demo-Version nicht verfügbar.','Not available in this demo version.'))">${t('Nachricht senden','Send a message')} →</button>
+      </div>
+    </div>
+  </div>`;
 }
 
 function dashboardView(){
@@ -1520,7 +1589,7 @@ function render(){
     document.getElementById('app').innerHTML = loginView();
     return;
   }
-  document.getElementById('app').innerHTML = `<div class="app">${sidebar()}<div class="main-col">${topheader()}<main class="main">${mainBody()}</main></div></div>${chatWidget()}`;
+  document.getElementById('app').innerHTML = `<div class="app">${sidebar()}<div class="main-col">${topheader()}<main class="main">${mainBody()}</main></div></div>${mobileMenuPanel()}${chatWidget()}`;
   const sc = document.getElementById('botScroll');
   if (sc) sc.scrollTop = sc.scrollHeight;
 }
