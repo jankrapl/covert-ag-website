@@ -366,6 +366,17 @@
   .blog-card .article{ max-width:none; }
   @media (max-width:640px){ .blog-grid{ grid-template-columns:1fr; } }
 
+  /* ---------- Leistung cards (photo + number) ---------- */
+  .leistung-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; margin-top:44px; }
+  .leistung-card{ border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--white); transition:border-color .15s ease; }
+  .leistung-card:hover{ border-color:var(--pine); }
+  .leistung-photo{ aspect-ratio:4/3; overflow:hidden; }
+  .leistung-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .leistung-body{ padding:22px 24px 26px; }
+  .leistung-num{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; color:var(--pine); font-size:0.85rem; margin-bottom:10px; }
+  .leistung-body h3{ margin-bottom:8px; font-size:1.1rem; }
+  .leistung-body p{ color:var(--stone); font-size:0.9rem; margin:0; }
+
   /* ---------- BVG Zinseszins-Rechner ---------- */
   .bvg-calc-wrap{ display:grid; grid-template-columns:1.6fr 1fr; gap:24px; align-items:start; margin-top:40px; }
   @media (max-width:980px){ .bvg-calc-wrap{ grid-template-columns:1fr; } }
@@ -419,132 +430,6 @@
   .bvg-aha p{ color:var(--stone); margin-top:10px; font-size:0.88rem; }
   .bvg-disclaimer{ font-size:0.76rem; color:var(--stone); line-height:1.6; max-width:720px; margin:32px auto 0; text-align:center; }
 
-  /* ============ BVG page rebuild (Startup-Touch spec) ============ */
-  .bvgpage{ font-family:'Archivo', sans-serif; color:#0B0B0C; background:#FFFFFF; text-align:left; }
-  .bvgpage *{ box-sizing:border-box; }
-  .bvgpage h1, .bvgpage h2, .bvgpage h3{ font-family:'Archivo', sans-serif; text-wrap:balance; }
-  .bvgpage section{ padding:0; }
-  .bvgpage-wrap{ max-width:1280px; margin:0 auto; padding:0 32px; }
-  .bvgpage .bvgpage-sec{ padding:96px 0; background:#FFFFFF; }
-  .bvgpage-sec.is-flat{ background:#F2F2F4; }
-  .bvgpage .bvgpage-sec.is-dark{ background:#0B0B0C; color:#FFFFFF; padding:80px 0; }
-  .bvgpage-accent-text{ color:#3D2BFF; }
-  .bvgpage-overline{ font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; }
-  .bvgpage h1{ font-size:clamp(36px,4.2vw,58px); line-height:1.1; font-weight:700; letter-spacing:-0.02em; margin:0; }
-  .bvgpage h2{ font-size:clamp(28px,3vw,42px); line-height:1.15; font-weight:700; letter-spacing:-0.015em; margin:0; }
-  .bvgpage h3{ font-size:22px; line-height:1.3; font-weight:700; margin:0; }
-  .bvgpage-lead{ font-size:20px; line-height:1.5; margin:0; }
-  .bvgpage p, .bvgpage li{ font-size:17px; line-height:1.6; }
-  .bvgpage .is-grey{ color:#3A3A3E; }
-  .bvgpage .is-meta{ color:#68686D; }
-
-  .bvgpage-btn{ display:inline-flex; align-items:center; justify-content:flex-start; gap:10px; background:#3D2BFF; color:#FFFFFF; font-family:'Archivo',sans-serif; font-weight:700; font-size:16px; padding:16px 22px; border-radius:999px; border:0; cursor:pointer; min-width:240px; text-align:left; text-decoration:none; }
-  .bvgpage-btn:hover{ background:#2E1CE6; }
-  .bvgpage-btn-white{ background:#FFFFFF; color:#0B0B0C; }
-  .bvgpage-btn-white:hover{ background:#3D2BFF; color:#FFFFFF; }
-
-  .bvgpage-badges{ display:flex; gap:10px; flex-wrap:wrap; }
-  .bvgpage-badge{ display:inline-flex; align-items:center; padding:7px 14px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; border-radius:12px; }
-  .bvgpage-badge-solid{ background:#3D2BFF; color:#FFFFFF; border-radius:999px; }
-  .bvgpage-badge-outline{ border:1px solid #E4E4E7; color:#0B0B0C; }
-
-  /* 1. Hero */
-  .bvgpage-hero{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr)); }
-  .bvgpage-hero-left{ padding:72px 48px 64px 32px; display:flex; flex-direction:column; gap:28px; }
-  .bvgpage-hero-left .bvgpage-lead{ max-width:540px; }
-  .bvgpage-hero-right{ display:flex; flex-direction:column; }
-  .bvgpage-hero-photo{ position:relative; min-height:300px; flex:1 1 auto; }
-  .bvgpage-hero-photo img{ width:100%; height:100%; object-fit:cover; object-position:center 15%; display:block; }
-  .bvgpage-hero-divider{ height:1px; background:#E4E4E7; flex:none; }
-  .bvgpage-objection{ padding:24px 32px; border-bottom:1px solid #E4E4E7; }
-  .bvgpage-objection:last-child{ border-bottom:0; }
-  .bvgpage-objection-q{ font-weight:700; font-size:18px; margin:0 0 8px; }
-  .bvgpage-objection-a{ font-size:15px; color:#68686D; margin:0; line-height:1.5; }
-
-  /* 2. Problem */
-  .bvgpage-problem{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr)); gap:56px; align-items:start; }
-  .bvgpage-statement{ font-size:22px; font-weight:700; border-top:1px solid #E4E4E7; padding-top:20px; margin-top:20px; }
-  .bvgpage-problem-photo{ aspect-ratio:4/3; border-radius:16px; overflow:hidden; }
-  .bvgpage-problem-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-  /* 3. Beispiel */
-  .bvgpage-example-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:16px; }
-  .bvgpage-example-card{ padding:32px; border-radius:16px; }
-  .bvgpage-example-card.is-tint{ background:rgba(255,255,255,.07); }
-  .bvgpage-example-card.is-light{ background:#FFFFFF; color:#0B0B0C; }
-  .bvgpage-example-label{ font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; margin-bottom:20px; color:#FFFFFF; }
-  .bvgpage-example-card.is-light .bvgpage-example-label{ color:#3D2BFF; }
-  .bvgpage-example-row{ display:flex; justify-content:space-between; gap:16px; font-size:17px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.4); }
-  .bvgpage-example-row:last-child{ border-bottom:0; }
-  .bvgpage-example-list{ font-size:17px; font-weight:600; display:flex; flex-direction:column; gap:10px; margin:0; padding:0; list-style:none; }
-  .bvgpage-example-result{ font-size:24px; font-weight:700; margin:0; }
-  .bvgpage-example-note{ font-size:13px; color:#FFFFFF; margin-top:24px; }
-
-  /* 4. Leistungen */
-  .bvgpage-leistungen-head{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:40px; align-items:end; margin-bottom:48px; }
-  .bvgpage-leistungen-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:16px; }
-  .bvgpage-leistung-card{ border:1px solid #E4E4E7; border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
-  .bvgpage-leistung-photo{ aspect-ratio:4/3; }
-  .bvgpage-leistung-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .bvgpage-leistung-body{ padding:24px; }
-  .bvgpage-leistung-num{ font-size:13px; font-weight:700; color:#3D2BFF; margin-bottom:8px; }
-  .bvgpage-leistung-body h3{ margin-bottom:8px; }
-  .bvgpage-leistung-body p{ margin:0; color:#3A3A3E; font-size:16px; }
-
-  /* 5. Schwerpunkt-Band */
-  .bvgpage-band-inner{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; flex-wrap:wrap; }
-  .bvgpage-band-text{ max-width:760px; }
-  .bvgpage-band-text h2{ color:#FFFFFF; font-size:clamp(26px,2.8vw,38px); }
-  .bvgpage-band-text p{ color:#FFFFFF; opacity:.8; margin-top:16px; }
-
-  /* 6. Ablauf */
-  .bvgpage-ablauf-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr)); border-top:1px solid #E4E4E7; }
-  .bvgpage-ablauf-col{ padding:28px 24px 8px 0; }
-  .bvgpage-ablauf-num{ font-size:32px; font-weight:600; color:#3D2BFF; }
-  .bvgpage-ablauf-col h3{ margin:12px 0 8px; }
-  .bvgpage-ablauf-col p{ margin:0; color:#3A3A3E; font-size:16px; }
-
-  /* 7. Rechner */
-  .bvgpage-rechner-head{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:40px; margin-bottom:48px; }
-  .bvgpage-calc-box{ border:1px solid #E4E4E7; border-radius:16px; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); overflow:hidden; }
-  .bvgpage-calc-left{ padding:28px; display:flex; flex-direction:column; gap:24px; }
-  .bvgpage-calc-right{ padding:28px; display:flex; flex-direction:column; gap:16px; }
-  @media (min-width:701px){ .bvgpage-calc-left{ border-right:1px solid #E4E4E7; } }
-  .bvgpage-slider{ display:flex; flex-direction:column; gap:8px; }
-  .bvgpage-slider-head{ display:flex; justify-content:space-between; gap:12px; font-size:14px; font-weight:700; }
-  .bvgpage-slider-head .val{ color:#3D2BFF; font-weight:700; white-space:nowrap; }
-  .bvgpage-slider input[type="range"]{ width:100%; accent-color:#3D2BFF; }
-  .bvgpage-diff-label{ font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#68686D; }
-  .bvgpage-barchart{ height:180px; display:flex; align-items:flex-end; gap:5px; overflow-x:auto; padding-bottom:2px; }
-  .bvgpage-bar-pair{ flex:0 0 auto; display:flex; align-items:flex-end; gap:2px; height:100%; background:none; border:0; cursor:pointer; padding:0; min-width:9px; }
-  .bvgpage-bar{ width:6px; border-radius:3px 3px 0 0; }
-  .bvgpage-bar-3{ background:#BFB8FF; }
-  .bvgpage-bar-5{ background:#3D2BFF; }
-  .bvgpage-bar-5.is-active{ background:#0B0B0C; }
-  .bvgpage-legend{ display:flex; gap:20px; flex-wrap:wrap; font-size:13px; color:#68686D; }
-  .bvgpage-legend span{ display:inline-flex; align-items:center; gap:6px; }
-  .bvgpage-legend i{ width:10px; height:10px; border-radius:3px; display:inline-block; }
-  .bvgpage-chart-hint{ font-size:13px; color:#68686D; margin:0; }
-  .bvgpage-year-info{ background:#EEECFF; color:#2414B8; border-radius:12px; padding:14px 16px; font-size:14px; font-weight:600; }
-  .bvgpage-diff-amount{ font-size:44px; font-weight:700; color:#3D2BFF; line-height:1.1; }
-  .bvgpage-diff-caption{ font-size:15px; color:#3A3A3E; margin:4px 0 0; }
-  .bvgpage-own-line{ border-top:1px solid #E4E4E7; padding-top:16px; margin-top:4px; font-size:15px; font-weight:600; }
-  .bvgpage-disclaimer{ font-size:13px; color:#3A3A3E; max-width:960px; margin-top:32px; line-height:1.6; }
-
-  /* 8. Überprüfung */
-  .bvgpage-review{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:56px; }
-  .bvgpage-review-list{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); border-top:1px solid #E4E4E7; margin:20px 0; }
-  .bvgpage-review-list div{ font-size:18px; font-weight:700; padding:14px 0; border-bottom:1px solid #E4E4E7; }
-  .bvgpage-review-card{ border:1px solid #E4E4E7; border-radius:16px; padding:36px; box-shadow:0 14px 36px rgba(11,11,12,.08); }
-  .bvgpage-review-card h3{ font-size:30px; color:#3D2BFF; margin-bottom:16px; }
-  .bvgpage-review-card p{ margin:0 0 16px; }
-  .bvgpage-review-card p:last-of-type{ margin-bottom:28px; }
-
-  @media (max-width:760px){
-    .bvgpage .bvgpage-sec{ padding:64px 0; }
-    .bvgpage .bvgpage-sec.is-dark{ padding:56px 0; }
-    .bvgpage-hero-left{ padding:48px 20px 40px 20px; }
-  }
 
   /* ---------- Vorsorge calculator ---------- */
   .calc-box{ background:var(--paper-deep); border-radius:14px; padding:28px 30px; display:flex; flex-wrap:wrap; gap:24px; align-items:center; justify-content:center; margin-top:24px; }
@@ -1630,113 +1515,103 @@
 </main>
 
 <!-- ================= BVG ================= -->
-<main class="page bvgpage" data-page="bvg">
+<main class="page" data-page="bvg">
 
   <!-- 1. Hero -->
-  <section class="bvgpage-sec" style="padding:0;">
-    <div class="bvgpage-hero">
-      <div class="bvgpage-hero-left">
-        <div class="bvgpage-badges">
-          <span class="bvgpage-badge bvgpage-badge-solid" data-de="Schwerpunkt" data-en="Specialty">Schwerpunkt</span>
-          <span class="bvgpage-badge bvgpage-badge-outline" data-de="Berufliche Vorsorge (BVG)" data-en="Occupational Pension (BVG)">Berufliche Vorsorge (BVG)</span>
-        </div>
-        <h1 data-de-html="Wann haben Sie Ihre &lt;span class=&quot;bvgpage-accent-text&quot;&gt;BVG-Lösung&lt;/span&gt; zuletzt verglichen?" data-en-html="When did you last compare your &lt;span class=&quot;bvgpage-accent-text&quot;&gt;BVG pension solution&lt;/span&gt;?">Wann haben Sie Ihre <span class="bvgpage-accent-text">BVG-Lösung</span> zuletzt verglichen?</h1>
-        <p class="bvgpage-lead" data-de="Sie erfahren innert weniger Wochen schwarz auf weiss, ob Ihre Mitarbeitenden zu fairen Konditionen versichert sind – und wie viel Sparpotenzial in Ihrer aktuellen BVG-Lösung steckt." data-en="Within a few weeks, you'll know in black and white whether your employees are insured on fair terms – and how much savings potential your current BVG solution holds.">Sie erfahren innert weniger Wochen schwarz auf weiss, ob Ihre Mitarbeitenden zu fairen Konditionen versichert sind – und wie viel Sparpotenzial in Ihrer aktuellen BVG-Lösung steckt.</p>
-        <div><button class="bvgpage-btn" onclick="openBooking()" data-de="BVG prüfen lassen →" data-en="Get Your BVG Reviewed →">BVG prüfen lassen →</button></div>
-        <p class="is-meta" style="font-size:14px; margin:0;" data-de="Kostenlos &amp; unverbindlich · Für Geschäftsführung, HR und Verwaltungsrat" data-en="Free &amp; non-binding · For management, HR and the board">Kostenlos &amp; unverbindlich · Für Geschäftsführung, HR und Verwaltungsrat</p>
-      </div>
-      <div class="bvgpage-hero-right">
-        <div class="bvgpage-hero-photo"><img src="images/bvg-beratung.jpg" alt="Berater und Kundin besprechen die BVG-Unterlagen" data-de-alt="Berater und Kundin besprechen die BVG-Unterlagen" data-en-alt="Advisor and client reviewing BVG pension documents"></div>
-        <div class="bvgpage-hero-divider"></div>
-        <div class="bvgpage-objection">
-          <p class="bvgpage-objection-q" data-de="„Wir haben doch schon eine Pensionskasse.“" data-en="&quot;But we already have a pension fund.&quot;">„Wir haben doch schon eine Pensionskasse.“</p>
-          <p class="bvgpage-objection-a" data-de="Genau das ist unser Ausgangspunkt: Wir vergleichen Ihre bestehende Lösung, ohne dass Sie vorher kündigen oder etwas ändern müssen." data-en="That's exactly our starting point: we compare your existing solution without you having to cancel or change anything first.">Genau das ist unser Ausgangspunkt: Wir vergleichen Ihre bestehende Lösung, ohne dass Sie vorher kündigen oder etwas ändern müssen.</p>
-        </div>
-        <div class="bvgpage-objection">
-          <p class="bvgpage-objection-q" data-de="„Ein Wechsel ist doch kompliziert.“" data-en="&quot;Switching is complicated, though.&quot;">„Ein Wechsel ist doch kompliziert.“</p>
-          <p class="bvgpage-objection-a" data-de="Die Kündigungsfrist beträgt meist 6 Monate; wir übernehmen die Koordination mit der Belegschaft und der neuen Sammelstiftung für Sie." data-en="The notice period is usually 6 months; we handle the coordination with your workforce and the new collective pension foundation for you.">Die Kündigungsfrist beträgt meist 6 Monate; wir übernehmen die Koordination mit der Belegschaft und der neuen Sammelstiftung für Sie.</p>
-        </div>
-      </div>
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="kicker" data-de="Schwerpunkt · Berufliche Vorsorge (BVG)" data-en="Specialty · Occupational Pension (BVG)">Schwerpunkt · Berufliche Vorsorge (BVG)</div>
+      <h1 data-de="Wann haben Sie Ihre BVG-Lösung zuletzt verglichen?" data-en="When did you last compare your BVG pension solution?">Wann haben Sie Ihre BVG-Lösung zuletzt verglichen?</h1>
+      <p class="lede" data-de="Sie erfahren innert weniger Wochen schwarz auf weiss, ob Ihre Mitarbeitenden zu fairen Konditionen versichert sind – und wie viel Sparpotenzial in Ihrer aktuellen BVG-Lösung steckt." data-en="Within a few weeks, you'll know in black and white whether your employees are insured on fair terms – and how much savings potential your current BVG solution holds.">Sie erfahren innert weniger Wochen schwarz auf weiss, ob Ihre Mitarbeitenden zu fairen Konditionen versichert sind – und wie viel Sparpotenzial in Ihrer aktuellen BVG-Lösung steckt.</p>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()" data-de="BVG prüfen lassen" data-en="Get Your BVG Reviewed">BVG prüfen lassen</button></div>
+      <p class="nudge" data-de="Kostenlos &amp; unverbindlich · Für Geschäftsführung, HR und Verwaltungsrat" data-en="Free &amp; non-binding · For management, HR and the board">Kostenlos &amp; unverbindlich · Für Geschäftsführung, HR und Verwaltungsrat</p>
     </div>
   </section>
 
   <!-- 2. Problem -->
-  <section class="bvgpage-sec">
-    <div class="bvgpage-wrap bvgpage-problem">
+  <section class="deep">
+    <div class="wrap cols2">
       <div>
         <h2 data-de="Oft geprüft wird alles — ausser die berufliche Vorsorge." data-en="Everything gets reviewed — except occupational pensions.">Oft geprüft wird alles — ausser die berufliche Vorsorge.</h2>
-        <p class="is-grey" style="margin-top:16px;" data-de="Sach- und Haftpflichtversicherungen werden regelmässig verglichen. Die BVG oft jahrelang nicht — obwohl sie einer der grössten Kostenblöcke ist." data-en="Property and liability insurance get compared regularly. BVG pensions often go unchecked for years — even though they're one of the largest cost items.">Sach- und Haftpflichtversicherungen werden regelmässig verglichen. Die BVG oft jahrelang nicht — obwohl sie einer der grössten Kostenblöcke ist.</p>
-        <p class="bvgpage-statement" data-de="Die 2. Säule beeinflusst, wie sicher sich Ihre Mitarbeitenden fühlen." data-en="The 2nd pillar affects how secure your employees feel.">Die 2. Säule beeinflusst, wie sicher sich Ihre Mitarbeitenden fühlen.</p>
+        <div class="photo-frame"><img src="images/bvg-beratung.jpg" alt="Berater und Kundin besprechen die BVG-Unterlagen" data-de-alt="Berater und Kundin besprechen die BVG-Unterlagen" data-en-alt="Advisor and client reviewing BVG pension documents"></div>
       </div>
-      <div class="bvgpage-problem-photo"><img src="images/blog-bvg-talente.jpg" alt="Handschlag zwischen Arbeitgeber und Mitarbeiterin im Büro" data-de-alt="Handschlag zwischen Arbeitgeber und Mitarbeiterin im Büro" data-en-alt="Handshake between employer and employee in the office"></div>
+      <div>
+        <p data-de="Sach- und Haftpflichtversicherungen werden regelmässig verglichen. Die BVG oft jahrelang nicht — obwohl sie einer der grössten Kostenblöcke ist." data-en="Property and liability insurance get compared regularly. BVG pensions often go unchecked for years — even though they're one of the largest cost items.">Sach- und Haftpflichtversicherungen werden regelmässig verglichen. Die BVG oft jahrelang nicht — obwohl sie einer der grössten Kostenblöcke ist.</p>
+        <div class="scenario-box">
+          <p style="font-weight:700;" data-de="„Wir haben doch schon eine Pensionskasse.“" data-en="&quot;But we already have a pension fund.&quot;">„Wir haben doch schon eine Pensionskasse.“</p>
+          <p class="stone" style="margin-top:6px;" data-de="Genau das ist unser Ausgangspunkt: Wir vergleichen Ihre bestehende Lösung, ohne dass Sie vorher kündigen oder etwas ändern müssen." data-en="That's exactly our starting point: we compare your existing solution without you having to cancel or change anything first.">Genau das ist unser Ausgangspunkt: Wir vergleichen Ihre bestehende Lösung, ohne dass Sie vorher kündigen oder etwas ändern müssen.</p>
+          <p style="font-weight:700; margin-top:20px;" data-de="„Ein Wechsel ist doch kompliziert.“" data-en="&quot;Switching is complicated, though.&quot;">„Ein Wechsel ist doch kompliziert.“</p>
+          <p class="stone" style="margin-top:6px;" data-de="Die Kündigungsfrist beträgt meist 6 Monate; wir übernehmen die Koordination mit der Belegschaft und der neuen Sammelstiftung für Sie." data-en="The notice period is usually 6 months; we handle the coordination with your workforce and the new collective pension foundation for you.">Die Kündigungsfrist beträgt meist 6 Monate; wir übernehmen die Koordination mit der Belegschaft und der neuen Sammelstiftung für Sie.</p>
+        </div>
+        <div class="quote-block">
+          <p data-de="Die 2. Säule beeinflusst, wie sicher sich Ihre Mitarbeitenden fühlen." data-en="The 2nd pillar affects how secure your employees feel.">Die 2. Säule beeinflusst, wie sicher sich Ihre Mitarbeitenden fühlen.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- 3. Beispiel -->
-  <section class="bvgpage-sec is-dark">
-    <div class="bvgpage-wrap">
-      <h2 style="color:#FFFFFF; margin-bottom:40px;" data-de="Beispiel: KMU mit 25 Mitarbeitenden" data-en="Example: SME with 25 employees">Beispiel: KMU mit 25 Mitarbeitenden</h2>
-      <div class="bvgpage-example-grid">
-        <div class="bvgpage-example-card is-tint">
-          <div class="bvgpage-example-label" data-de="Heute" data-en="Today">Heute</div>
-          <div class="bvgpage-example-row"><span data-de="BVG-Kosten" data-en="BVG costs">BVG-Kosten</span><strong data-de="CHF 100'000" data-en="CHF 100,000">CHF 100'000</strong></div>
-          <div class="bvgpage-example-row"><span data-de="Vorsorgeplan" data-en="Pension plan">Vorsorgeplan</span><strong data-de="bestehend" data-en="existing">bestehend</strong></div>
-          <div class="bvgpage-example-row"><span data-de="Letzte Prüfung" data-en="Last reviewed">Letzte Prüfung</span><strong data-de="vor 5 Jahren" data-en="5 years ago">vor 5 Jahren</strong></div>
+  <section class="dark">
+    <div class="wrap">
+      <h2 style="margin-bottom:8px;" data-de="Beispiel: KMU mit 25 Mitarbeitenden" data-en="Example: SME with 25 employees">Beispiel: KMU mit 25 Mitarbeitenden</h2>
+      <div class="panel3" style="color:var(--ink);">
+        <div>
+          <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--stone); margin-bottom:16px;" data-de="Heute" data-en="Today">Heute</div>
+          <div style="display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-top:1px solid var(--line); font-size:0.9rem;"><span class="stone" data-de="BVG-Kosten" data-en="BVG costs">BVG-Kosten</span><strong data-de="CHF 100'000" data-en="CHF 100,000">CHF 100'000</strong></div>
+          <div style="display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-top:1px solid var(--line); font-size:0.9rem;"><span class="stone" data-de="Vorsorgeplan" data-en="Pension plan">Vorsorgeplan</span><strong data-de="bestehend" data-en="existing">bestehend</strong></div>
+          <div style="display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-top:1px solid var(--line); font-size:0.9rem;"><span class="stone" data-de="Letzte Prüfung" data-en="Last reviewed">Letzte Prüfung</span><strong data-de="vor 5 Jahren" data-en="5 years ago">vor 5 Jahren</strong></div>
         </div>
-        <div class="bvgpage-example-card is-tint">
-          <div class="bvgpage-example-label" data-de="↓ Coverd-Analyse" data-en="↓ Coverd Analysis">↓ Coverd-Analyse</div>
-          <ul class="bvgpage-example-list">
+        <div>
+          <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--stone); margin-bottom:16px;" data-de="↓ Coverd-Analyse" data-en="↓ Coverd Analysis">↓ Coverd-Analyse</div>
+          <ul style="display:flex; flex-direction:column; gap:10px; font-size:0.92rem; font-weight:600;">
             <li data-de="✓ 3 Varianten verglichen" data-en="✓ 3 options compared">✓ 3 Varianten verglichen</li>
             <li data-de="✓ Kosten geprüft" data-en="✓ Costs reviewed">✓ Kosten geprüft</li>
             <li data-de="✓ Leistungen verglichen" data-en="✓ Benefits compared">✓ Leistungen verglichen</li>
             <li data-de="✓ Vorsorgeplan analysiert" data-en="✓ Pension plan analyzed">✓ Vorsorgeplan analysiert</li>
           </ul>
         </div>
-        <div class="bvgpage-example-card is-light">
-          <div class="bvgpage-example-label" data-de="Ergebnis" data-en="Result">Ergebnis</div>
-          <p class="bvgpage-example-result" lang="de" style="hyphens:auto;" data-de="→ Entscheidungsgrundlage für die Geschäftsleitung" data-en="→ Decision basis for management">→ Entscheidungsgrundlage für die Geschäftsleitung</p>
+        <div>
+          <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--stone); margin-bottom:16px;" data-de="Ergebnis" data-en="Result">Ergebnis</div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; color:var(--pine); font-size:1.15rem; margin:0;" data-de="→ Entscheidungsgrundlage für die Geschäftsleitung" data-en="→ Decision basis for management">→ Entscheidungsgrundlage für die Geschäftsleitung</p>
         </div>
       </div>
-      <p class="bvgpage-example-note" data-de="Illustratives Beispiel — keine reale Kundensituation, keine Einsparversprechen." data-en="Illustrative example — not a real customer situation, no savings are promised.">Illustratives Beispiel — keine reale Kundensituation, keine Einsparversprechen.</p>
+      <p class="stone" style="text-align:center; margin-top:28px; font-size:0.8rem;" data-de="Illustratives Beispiel — keine reale Kundensituation, keine Einsparversprechen." data-en="Illustrative example — not a real customer situation, no savings are promised.">Illustratives Beispiel — keine reale Kundensituation, keine Einsparversprechen.</p>
     </div>
   </section>
 
   <!-- 4. Leistungen -->
-  <section class="bvgpage-sec">
-    <div class="bvgpage-wrap">
-      <div class="bvgpage-leistungen-head">
-        <h2 data-de="BVG-Beratung, wie sie für KMU noch selten ist." data-en="BVG advisory the way SMEs rarely get it.">BVG-Beratung, wie sie für KMU noch selten ist.</h2>
-        <p class="is-grey" data-de="Grössere Unternehmen haben oft eigene Vorsorgekommissionen oder externe Pensionskassenberater. KMU fehlt dafür häufig die Zeit oder das spezialisierte Fachwissen — genau hier setzen wir an." data-en="Larger companies often have their own pension committees or external pension fund advisors. SMEs frequently lack the time or specialized expertise for this — that's exactly where we come in.">Grössere Unternehmen haben oft eigene Vorsorgekommissionen oder externe Pensionskassenberater. KMU fehlt dafür häufig die Zeit oder das spezialisierte Fachwissen — genau hier setzen wir an.</p>
-      </div>
-      <div class="bvgpage-leistungen-grid">
-        <div class="bvgpage-leistung-card">
-          <div class="bvgpage-leistung-photo"><img src="images/blog-bvg-wechsel.jpg" alt="Modernes Firmengebäude" data-de-alt="Modernes Firmengebäude" data-en-alt="Modern office building"></div>
-          <div class="bvgpage-leistung-body">
-            <div class="bvgpage-leistung-num">01</div>
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2 data-de="BVG-Beratung, wie sie für KMU noch selten ist." data-en="BVG advisory the way SMEs rarely get it.">BVG-Beratung, wie sie für KMU noch selten ist.</h2><p class="lede" data-de="Grössere Unternehmen haben oft eigene Vorsorgekommissionen oder externe Pensionskassenberater. KMU fehlt dafür häufig die Zeit oder das spezialisierte Fachwissen — genau hier setzen wir an." data-en="Larger companies often have their own pension committees or external pension fund advisors. SMEs frequently lack the time or specialized expertise for this — that's exactly where we come in.">Grössere Unternehmen haben oft eigene Vorsorgekommissionen oder externe Pensionskassenberater. KMU fehlt dafür häufig die Zeit oder das spezialisierte Fachwissen — genau hier setzen wir an.</p></div>
+      <div class="leistung-grid">
+        <div class="leistung-card">
+          <div class="leistung-photo"><img src="images/blog-bvg-wechsel.jpg" alt="Modernes Firmengebäude" data-de-alt="Modernes Firmengebäude" data-en-alt="Modern office building"></div>
+          <div class="leistung-body">
+            <div class="leistung-num">01</div>
             <h3 data-de="BVG-Vergleich &amp; Ausschreibung" data-en="BVG Comparison &amp; Tender">BVG-Vergleich &amp; Ausschreibung</h3>
             <p data-de="Verschiedene Sammelstiftungen im Vergleich." data-en="Comparing different collective pension foundations.">Verschiedene Sammelstiftungen im Vergleich.</p>
           </div>
         </div>
-        <div class="bvgpage-leistung-card">
-          <div class="bvgpage-leistung-photo"><img src="images/img-analyse-dashboard.jpg" alt="Analyse-Dashboard mit Kostenübersicht" data-de-alt="Analyse-Dashboard mit Kostenübersicht" data-en-alt="Analytics dashboard showing a cost overview"></div>
-          <div class="bvgpage-leistung-body">
-            <div class="bvgpage-leistung-num">02</div>
+        <div class="leistung-card">
+          <div class="leistung-photo"><img src="images/img-analyse-dashboard.jpg" alt="Analyse-Dashboard mit Kostenübersicht" data-de-alt="Analyse-Dashboard mit Kostenübersicht" data-en-alt="Analytics dashboard showing a cost overview"></div>
+          <div class="leistung-body">
+            <div class="leistung-num">02</div>
             <h3 data-de="Kosten- &amp; Leistungsanalyse" data-en="Cost &amp; Benefit Analysis">Kosten- &amp; Leistungsanalyse</h3>
             <p data-de="Verständlich statt nur eine Zahl im Ausweis." data-en="Explained clearly, not just a number on a statement.">Verständlich statt nur eine Zahl im Ausweis.</p>
           </div>
         </div>
-        <div class="bvgpage-leistung-card">
-          <div class="bvgpage-leistung-photo"><img src="images/img-betreuung.jpg" alt="Berater im Gespräch mit einem Kunden" data-de-alt="Berater im Gespräch mit einem Kunden" data-en-alt="Advisor in conversation with a client"></div>
-          <div class="bvgpage-leistung-body">
-            <div class="bvgpage-leistung-num">03</div>
+        <div class="leistung-card">
+          <div class="leistung-photo"><img src="images/img-betreuung.jpg" alt="Berater im Gespräch mit einem Kunden" data-de-alt="Berater im Gespräch mit einem Kunden" data-en-alt="Advisor in conversation with a client"></div>
+          <div class="leistung-body">
+            <div class="leistung-num">03</div>
             <h3 data-de="Laufende Betreuung" data-en="Ongoing Support">Laufende Betreuung</h3>
             <p data-de="Wir melden uns, wenn sich etwas ändert." data-en="We reach out when something changes.">Wir melden uns, wenn sich etwas ändert.</p>
           </div>
         </div>
-        <div class="bvgpage-leistung-card">
-          <div class="bvgpage-leistung-photo"><img src="images/img-workshop.jpg" alt="Mitarbeiter-Workshop in einem Büro" data-de-alt="Mitarbeiter-Workshop in einem Büro" data-en-alt="Employee workshop in an office"></div>
-          <div class="bvgpage-leistung-body">
-            <div class="bvgpage-leistung-num">04</div>
+        <div class="leistung-card">
+          <div class="leistung-photo"><img src="images/img-workshop.jpg" alt="Mitarbeiter-Workshop in einem Büro" data-de-alt="Mitarbeiter-Workshop in einem Büro" data-en-alt="Employee workshop in an office"></div>
+          <div class="leistung-body">
+            <div class="leistung-num">04</div>
             <h3 data-de="Kommunikation für Mitarbeitende" data-en="Communication for Employees">Kommunikation für Mitarbeitende</h3>
             <p data-de="Vorsorgeausweise verständlich erklärt." data-en="Pension statements explained in plain language.">Vorsorgeausweise verständlich erklärt.</p>
           </div>
@@ -1746,119 +1621,105 @@
   </section>
 
   <!-- 5. Schwerpunkt-Band -->
-  <section class="bvgpage-sec is-dark">
-    <div class="bvgpage-wrap bvgpage-band-inner">
-      <div class="bvgpage-band-text">
-        <h2 data-de="Ein Schwerpunkt, kein Nebenprodukt." data-en="A specialty, not a side offering.">Ein Schwerpunkt, kein Nebenprodukt.</h2>
-        <p data-de="BVG ist bei uns kein Nebenprodukt — mit gezieltem Fachwissenaufbau im Team." data-en="BVG is not a side offering for us — we've built dedicated expertise within the team.">BVG ist bei uns kein Nebenprodukt — mit gezieltem Fachwissenaufbau im Team.</p>
+  <section class="dark">
+    <div class="wrap cols2">
+      <div>
+        <span style="display:inline-block; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--pine-light);" data-de="Ein Schwerpunkt" data-en="A Specialty">Ein Schwerpunkt</span>
+        <h2 style="margin-top:14px;" data-de="Ein Schwerpunkt, kein Nebenprodukt." data-en="A specialty, not a side offering.">Ein Schwerpunkt, kein Nebenprodukt.</h2>
+        <p style="margin-top:14px; color:rgba(255,255,255,.82);" data-de="BVG ist bei uns kein Nebenprodukt — mit gezieltem Fachwissenaufbau im Team." data-en="BVG is not a side offering for us — we've built dedicated expertise within the team.">BVG ist bei uns kein Nebenprodukt — mit gezieltem Fachwissenaufbau im Team.</p>
       </div>
-      <button class="bvgpage-btn bvgpage-btn-white" onclick="goTo('ueber')" data-de="Unser Team kennenlernen →" data-en="Meet Our Team →">Unser Team kennenlernen →</button>
+      <div>
+        <div class="cta-row"><button class="btn btn-on-dark" onclick="goTo('ueber')" data-de="Unser Team kennenlernen →" data-en="Meet Our Team →">Unser Team kennenlernen →</button></div>
+      </div>
     </div>
   </section>
 
   <!-- 6. Ablauf -->
-  <section class="bvgpage-sec is-flat">
-    <div class="bvgpage-wrap">
-      <h2 style="margin-bottom:48px;" data-de="So gehen wir vor" data-en="Our Approach">So gehen wir vor</h2>
-      <div class="bvgpage-ablauf-grid">
-        <div class="bvgpage-ablauf-col">
-          <div class="bvgpage-ablauf-num">01</div>
-          <h3 data-de="Kennenlernen" data-en="Get Acquainted">Kennenlernen</h3>
-          <p data-de="Wir verstehen Ihr Unternehmen, Ihre Belegschaft und Ihre bestehende Vorsorgelösung." data-en="We get to know your company, your workforce and your existing pension solution.">Wir verstehen Ihr Unternehmen, Ihre Belegschaft und Ihre bestehende Vorsorgelösung.</p>
-        </div>
-        <div class="bvgpage-ablauf-col">
-          <div class="bvgpage-ablauf-num">02</div>
-          <h3 data-de="Analysieren" data-en="Analyze">Analysieren</h3>
-          <p data-de="Wir prüfen Vorsorgereglement, Kosten, Leistungen und Anlagestrategie im Detail." data-en="We review pension regulations, costs, benefits and investment strategy in detail.">Wir prüfen Vorsorgereglement, Kosten, Leistungen und Anlagestrategie im Detail.</p>
-        </div>
-        <div class="bvgpage-ablauf-col">
-          <div class="bvgpage-ablauf-num">03</div>
-          <h3 data-de="Vergleichen" data-en="Compare">Vergleichen</h3>
-          <p data-de="Wir stellen Angebote verschiedener Sammelstiftungen transparent gegenüber." data-en="We transparently compare offers from different collective pension foundations.">Wir stellen Angebote verschiedener Sammelstiftungen transparent gegenüber.</p>
-        </div>
-        <div class="bvgpage-ablauf-col">
-          <div class="bvgpage-ablauf-num">04</div>
-          <h3 data-de="Entscheiden" data-en="Decide">Entscheiden</h3>
-          <p data-de="Gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt." data-en="Together, you choose the solution that fits your company and employees.">Gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt.</p>
-        </div>
-        <div class="bvgpage-ablauf-col">
-          <div class="bvgpage-ablauf-num">05</div>
-          <h3 data-de="Betreuen" data-en="Support">Betreuen</h3>
-          <p data-de="Wir überprüfen Ihre BVG-Lösung laufend und sind Ansprechpartner bei Fragen." data-en="We continuously review your BVG solution and are your point of contact for questions.">Wir überprüfen Ihre BVG-Lösung laufend und sind Ansprechpartner bei Fragen.</p>
-        </div>
+  <section class="deep">
+    <div class="wrap">
+      <div class="section-head"><h2 data-de="So gehen wir vor" data-en="Our Approach">So gehen wir vor</h2></div>
+      <div class="steps">
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/></svg></div><div class="step-body"><div class="num">01</div><h3 data-de="Kennenlernen" data-en="Get Acquainted">Kennenlernen</h3><p data-de="Wir verstehen Ihr Unternehmen, Ihre Belegschaft und Ihre bestehende Vorsorgelösung." data-en="We get to know your company, your workforce and your existing pension solution.">Wir verstehen Ihr Unternehmen, Ihre Belegschaft und Ihre bestehende Vorsorgelösung.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.3" y2="15.3"/></svg></div><div class="step-body"><div class="num">02</div><h3 data-de="Analysieren" data-en="Analyze">Analysieren</h3><p data-de="Wir prüfen Vorsorgereglement, Kosten, Leistungen und Anlagestrategie im Detail." data-en="We review pension regulations, costs, benefits and investment strategy in detail.">Wir prüfen Vorsorgereglement, Kosten, Leistungen und Anlagestrategie im Detail.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></div><div class="step-body"><div class="num">03</div><h3 data-de="Vergleichen" data-en="Compare">Vergleichen</h3><p data-de="Wir stellen Angebote verschiedener Sammelstiftungen transparent gegenüber." data-en="We transparently compare offers from different collective pension foundations.">Wir stellen Angebote verschiedener Sammelstiftungen transparent gegenüber.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 10.8 15.3 16 9.5"/></svg></div><div class="step-body"><div class="num">04</div><h3 data-de="Entscheiden" data-en="Decide">Entscheiden</h3><p data-de="Gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt." data-en="Together, you choose the solution that fits your company and employees.">Gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div><div class="step-body"><div class="num">05</div><h3 data-de="Betreuen" data-en="Support">Betreuen</h3><p data-de="Wir überprüfen Ihre BVG-Lösung laufend und sind Ansprechpartner bei Fragen." data-en="We continuously review your BVG solution and are your point of contact for questions.">Wir überprüfen Ihre BVG-Lösung laufend und sind Ansprechpartner bei Fragen.</p></div></div>
       </div>
     </div>
   </section>
 
   <!-- 7. Zinseszins-Rechner -->
-  <section class="bvgpage-sec">
-    <div class="bvgpage-wrap">
-      <div class="bvgpage-rechner-head">
-        <h2 data-de="Kleine Unterschiede. Grosse Wirkung." data-en="Small differences. Big impact.">Kleine Unterschiede. Grosse Wirkung.</h2>
-        <p class="is-grey" style="font-size:17px;" data-de="Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Tragen Sie Ihre eigenen Werte ein und sehen Sie den Effekt direkt." data-en="In long-term pension planning, even a few percentage points of difference can have a significant impact on your retirement capital over many years. Enter your own figures and see the effect directly.">Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Tragen Sie Ihre eigenen Werte ein und sehen Sie den Effekt direkt.</p>
-      </div>
+  <section>
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; margin:0 auto 0; max-width:640px;"><h2 style="text-align:center;" data-de="Kleine Unterschiede. Grosse Wirkung." data-en="Small differences. Big impact.">Kleine Unterschiede. Grosse Wirkung.</h2><p class="lede" style="margin:16px auto 0; text-align:center;" data-de="Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Tragen Sie Ihre eigenen Werte ein und sehen Sie den Effekt direkt." data-en="In long-term pension planning, even a few percentage points of difference can have a significant impact on your retirement capital over many years. Enter your own figures and see the effect directly.">Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Tragen Sie Ihre eigenen Werte ein und sehen Sie den Effekt direkt.</p></div>
 
-      <div class="bvgpage-calc-box">
-        <div class="bvgpage-calc-left">
-          <div class="bvgpage-slider">
-            <div class="bvgpage-slider-head"><span data-de="Einmalige Einzahlung" data-en="One-time deposit">Einmalige Einzahlung</span><span class="val" id="bvgNewEinmaligVal">CHF 10'000</span></div>
-            <input type="range" id="bvgNewEinmalig" min="0" max="100000" step="1000" value="10000" oninput="bvgNewCalc()">
+      <div class="bvg-calc-wrap">
+        <div class="bvg-calc-card2">
+          <div class="bvg-sliders">
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span data-de="Einmalige Einzahlung" data-en="One-time deposit">Einmalige Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvgPageEinmaligNum" value="10000" min="0" step="500" oninput="bvgSyncRange('bvgPage','Einmalig')"></span></div>
+              <input type="range" class="bvg-range" id="bvgPageEinmalig" min="0" max="100000" step="1000" value="10000" oninput="bvgSyncNum('bvgPage','Einmalig')">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span data-de="Monatliche Einzahlung" data-en="Monthly deposit">Monatliche Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvgPageMonatlichNum" value="500" min="0" step="50" oninput="bvgSyncRange('bvgPage','Monatlich')"></span></div>
+              <input type="range" class="bvg-range" id="bvgPageMonatlich" min="0" max="3000" step="50" value="500" oninput="bvgSyncNum('bvgPage','Monatlich')">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span data-de="Anlagedauer" data-en="Investment period">Anlagedauer</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvgPageJahreNum" value="12" min="1" step="1" oninput="bvgSyncRange('bvgPage','Jahre')"> Jahre</span></div>
+              <input type="range" class="bvg-range" id="bvgPageJahre" min="1" max="40" step="1" value="12" oninput="bvgSyncNum('bvgPage','Jahre')">
+            </div>
+            <div class="bvg-slider">
+              <div class="bvg-slider-head"><span data-de="Wertentwicklung" data-en="Return">Wertentwicklung</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvgPageRenditeNum" value="4" min="0" step="0.1" oninput="bvgSyncRange('bvgPage','Rendite')"> % p.a.</span></div>
+              <input type="range" class="bvg-range" id="bvgPageRendite" min="0" max="8" step="0.5" value="4" oninput="bvgSyncNum('bvgPage','Rendite')">
+            </div>
           </div>
-          <div class="bvgpage-slider">
-            <div class="bvgpage-slider-head"><span data-de="Monatliche Einzahlung" data-en="Monthly deposit">Monatliche Einzahlung</span><span class="val" id="bvgNewMonatlichVal">CHF 500</span></div>
-            <input type="range" id="bvgNewMonatlich" min="0" max="3000" step="50" value="500" oninput="bvgNewCalc()">
+
+          <div class="bvg-stats" id="bvgPageStats"></div>
+          <div class="bvg-chart-wrap">
+            <div class="bvg-chart" id="bvgPageChart"></div>
           </div>
-          <div class="bvgpage-slider">
-            <div class="bvgpage-slider-head"><span data-de="Anlagedauer" data-en="Investment period">Anlagedauer</span><span class="val" id="bvgNewJahreVal">12 <span data-de="Jahre" data-en="years">Jahre</span></span></div>
-            <input type="range" id="bvgNewJahre" min="1" max="40" step="1" value="12" oninput="bvgNewCalc()">
+          <p class="bvg-chart-hint" data-de="Jahr anklicken für die Aufteilung Einzahlung / Wertsteigerung." data-en="Click a year to see the split between contributions and growth.">Jahr anklicken für die Aufteilung Einzahlung / Wertsteigerung.</p>
+        </div>
+
+        <div class="bvg-compare-card">
+          <p class="eyebrow" data-de="Unterschied Ø 3 % vs. Ø 5 % Rendite" data-en="Difference avg. 3% vs. avg. 5% return">Unterschied Ø 3 % vs. Ø 5 % Rendite</p>
+          <div class="bvg-compare-chart" id="bvgPageCompareChart"></div>
+          <div class="bvg-compare-legend">
+            <span><i style="background:var(--line);"></i><span data-de="Ø 3 % Rendite" data-en="avg. 3% return">Ø 3 % Rendite</span></span>
+            <span><i style="background:var(--pine);"></i><span data-de="Ø 5 % Rendite" data-en="avg. 5% return">Ø 5 % Rendite</span></span>
           </div>
-          <div class="bvgpage-slider">
-            <div class="bvgpage-slider-head"><span data-de="Wertentwicklung" data-en="Return">Wertentwicklung</span><span class="val" id="bvgNewRenditeVal">4 % p.a.</span></div>
-            <input type="range" id="bvgNewRendite" min="0" max="8" step="0.5" value="4" oninput="bvgNewCalc()">
+          <div class="bvg-aha">
+            <div class="amount" id="bvgPageDiffAmount">CHF 0</div>
+            <p data-de-html="Unterschied nach &lt;span id=&quot;bvgPageDiffYears&quot;&gt;12&lt;/span&gt; Jahren — bei exakt denselben Einzahlungen." data-en-html="Difference after &lt;span id=&quot;bvgPageDiffYears&quot;&gt;12&lt;/span&gt; years — with exactly the same contributions.">Unterschied nach <span id="bvgPageDiffYears">12</span> Jahren — bei exakt denselben Einzahlungen.</p>
           </div>
         </div>
-        <div class="bvgpage-calc-right">
-          <div class="bvgpage-diff-label" data-de="Unterschied Ø 3 % vs. Ø 5 % Rendite" data-en="Difference avg. 3% vs. avg. 5% return">Unterschied Ø 3 % vs. Ø 5 % Rendite</div>
-          <div class="bvgpage-barchart" id="bvgNewChart"></div>
-          <div class="bvgpage-legend">
-            <span><i style="background:#BFB8FF;"></i><span data-de="Ø 3 % Rendite" data-en="avg. 3% return">Ø 3 % Rendite</span></span>
-            <span><i style="background:#3D2BFF;"></i><span data-de="Ø 5 % Rendite" data-en="avg. 5% return">Ø 5 % Rendite</span></span>
-          </div>
-          <p class="bvgpage-chart-hint" data-de="Jahr anklicken für die Aufteilung Einzahlung / Wertsteigerung." data-en="Click a year to see the split between contributions and growth.">Jahr anklicken für die Aufteilung Einzahlung / Wertsteigerung.</p>
-          <div class="bvgpage-year-info" id="bvgNewYearInfo"></div>
-          <div>
-            <div class="bvgpage-diff-amount" id="bvgNewDiffAmount">CHF 0</div>
-            <p class="bvgpage-diff-caption" id="bvgNewDiffCaption"></p>
-          </div>
-          <div class="bvgpage-own-line" id="bvgNewOwnLine"></div>
-        </div>
       </div>
 
-      <p class="bvgpage-disclaimer" data-de="Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen eingetragenen Werte. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite." data-en="Note: This calculation example is intended solely to illustrate the compound interest effect based on the figures you entered. Fees, taxes, risk benefits, statutory BVG requirements and other factors are not taken into account. The returns shown are neither forecasts nor guarantees. Regularly reviewing a pension solution does not guarantee a higher return.">Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen eingetragenen Werte. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite.</p>
+      <p class="bvg-disclaimer" data-de="Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen eingetragenen Werte. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite." data-en="Note: This calculation example is intended solely to illustrate the compound interest effect based on the figures you entered. Fees, taxes, risk benefits, statutory BVG requirements and other factors are not taken into account. The returns shown are neither forecasts nor guarantees. Regularly reviewing a pension solution does not guarantee a higher return.">Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen eingetragenen Werte. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite.</p>
     </div>
   </section>
 
   <!-- 8. Überprüfung -->
-  <section class="bvgpage-sec">
-    <div class="bvgpage-wrap bvgpage-review">
+  <section>
+    <div class="wrap cols2">
       <div>
         <h2 data-de="Und wann wurde Ihre Vorsorgelösung zuletzt überprüft?" data-en="And when was your pension solution last reviewed?">Und wann wurde Ihre Vorsorgelösung zuletzt überprüft?</h2>
-        <p class="is-grey" style="margin-top:16px;" data-de="Eine Vorsorgelösung begleitet Mitarbeitende und Unternehmen oft über viele Jahre. In dieser Zeit können sich unter anderem verändern:" data-en="A pension solution often stays with employees and companies for many years. During that time, the following can change, among other things:">Eine Vorsorgelösung begleitet Mitarbeitende und Unternehmen oft über viele Jahre. In dieser Zeit können sich unter anderem verändern:</p>
-        <div class="bvgpage-review-list">
-          <div data-de="— Anlagestrategie" data-en="— Investment strategy">— Anlagestrategie</div>
-          <div data-de="— Kosten" data-en="— Costs">— Kosten</div>
-          <div data-de="— Verzinsung" data-en="— Interest rate">— Verzinsung</div>
-          <div data-de="— Vorsorgeplan" data-en="— Pension plan">— Vorsorgeplan</div>
-          <div data-de="— Anbieter" data-en="— Provider">— Anbieter</div>
-          <div data-de="— Unternehmensstruktur" data-en="— Company structure">— Unternehmensstruktur</div>
+        <p style="margin-top:16px;" data-de="Eine Vorsorgelösung begleitet Mitarbeitende und Unternehmen oft über viele Jahre. In dieser Zeit können sich unter anderem verändern:" data-en="A pension solution often stays with employees and companies for many years. During that time, the following can change, among other things:">Eine Vorsorgelösung begleitet Mitarbeitende und Unternehmen oft über viele Jahre. In dieser Zeit können sich unter anderem verändern:</p>
+        <div class="chips">
+          <span class="chip" data-de="Anlagestrategie" data-en="Investment strategy">Anlagestrategie</span>
+          <span class="chip" data-de="Kosten" data-en="Costs">Kosten</span>
+          <span class="chip" data-de="Verzinsung" data-en="Interest rate">Verzinsung</span>
+          <span class="chip" data-de="Vorsorgeplan" data-en="Pension plan">Vorsorgeplan</span>
+          <span class="chip" data-de="Anbieter" data-en="Provider">Anbieter</span>
+          <span class="chip" data-de="Unternehmensstruktur" data-en="Company structure">Unternehmensstruktur</span>
         </div>
-        <p class="is-grey" data-de="Deshalb sollte eine langfristige Vorsorgelösung nicht einfach abgeschlossen und vergessen werden." data-en="That's why a long-term pension solution shouldn't just be signed and forgotten.">Deshalb sollte eine langfristige Vorsorgelösung nicht einfach abgeschlossen und vergessen werden.</p>
+        <p style="margin-top:22px;" data-de="Deshalb sollte eine langfristige Vorsorgelösung nicht einfach abgeschlossen und vergessen werden." data-en="That's why a long-term pension solution shouldn't just be signed and forgotten.">Deshalb sollte eine langfristige Vorsorgelösung nicht einfach abgeschlossen und vergessen werden.</p>
       </div>
-      <div class="bvgpage-review-card">
+      <div class="price-box" style="margin-top:0;">
         <h3 data-de="Coverd prüft. Sie entscheiden." data-en="Coverd reviews. You decide.">Coverd prüft. Sie entscheiden.</h3>
-        <p data-de="Wir analysieren Ihre bestehende BVG-Lösung und zeigen transparent auf, wie sie bei Kosten, Leistungen und Struktur im Vergleich dasteht." data-en="We analyze your existing BVG solution and transparently show how it compares in terms of costs, benefits and structure.">Wir analysieren Ihre bestehende BVG-Lösung und zeigen transparent auf, wie sie bei Kosten, Leistungen und Struktur im Vergleich dasteht.</p>
-        <p class="is-grey" data-de="Nicht mit dem Versprechen einer bestimmten Rendite. Sondern mit dem Ziel, regelmässig zu prüfen, ob Ihre Vorsorgelösung weiterhin zu Ihrem Unternehmen und Ihren Mitarbeitenden passt." data-en="Not with the promise of a specific return. But with the goal of regularly checking whether your pension solution still fits your company and your employees.">Nicht mit dem Versprechen einer bestimmten Rendite. Sondern mit dem Ziel, regelmässig zu prüfen, ob Ihre Vorsorgelösung weiterhin zu Ihrem Unternehmen und Ihren Mitarbeitenden passt.</p>
-        <button class="bvgpage-btn" onclick="openBooking()" data-de="BVG überprüfen lassen →" data-en="Get Your BVG Reviewed →">BVG überprüfen lassen →</button>
+        <p style="margin-top:12px;" data-de="Wir analysieren Ihre bestehende BVG-Lösung und zeigen transparent auf, wie sie bei Kosten, Leistungen und Struktur im Vergleich dasteht." data-en="We analyze your existing BVG solution and transparently show how it compares in terms of costs, benefits and structure.">Wir analysieren Ihre bestehende BVG-Lösung und zeigen transparent auf, wie sie bei Kosten, Leistungen und Struktur im Vergleich dasteht.</p>
+        <p data-de="Nicht mit dem Versprechen einer bestimmten Rendite. Sondern mit dem Ziel, regelmässig zu prüfen, ob Ihre Vorsorgelösung weiterhin zu Ihrem Unternehmen und Ihren Mitarbeitenden passt." data-en="Not with the promise of a specific return. But with the goal of regularly checking whether your pension solution still fits your company and your employees.">Nicht mit dem Versprechen einer bestimmten Rendite. Sondern mit dem Ziel, regelmässig zu prüfen, ob Ihre Vorsorgelösung weiterhin zu Ihrem Unternehmen und Ihren Mitarbeitenden passt.</p>
+        <div class="cta-row" style="margin-top:14px;"><button class="btn btn-primary" onclick="openBooking()" data-de="BVG überprüfen lassen" data-en="Get Your BVG Reviewed">BVG überprüfen lassen</button></div>
       </div>
     </div>
   </section>
@@ -2696,7 +2557,7 @@ function applyLang(lang){
   document.querySelectorAll('[data-lang-label]').forEach(function(el){ el.textContent = lang === 'en' ? 'EN' : 'DE'; });
   try { localStorage.setItem('coverd_lang', lang); } catch(e){}
   if (typeof bvgCalc === 'function' && document.getElementById('bvgEinmalig')) bvgCalc('bvg');
-  if (typeof bvgNewCalc === 'function' && document.getElementById('bvgNewEinmalig')) bvgNewCalc();
+  if (typeof bvgCalc === 'function' && document.getElementById('bvgPageEinmalig')) bvgCalc('bvgPage');
 }
 function toggleLang(){ applyLang(currentLang === 'de' ? 'en' : 'de'); }
 
@@ -2911,71 +2772,7 @@ function bvgSelectYear(ns, year){
 }
 
 if (document.getElementById('bvgEinmalig')) bvgCalc('bvg');
-
-/* ============ New BVG page calculator (bar-pair comparison, Startup-Touch) ============ */
-var bvgNewSelectedYear = null;
-function bvgNewCalc(){
-  var P = parseFloat(document.getElementById('bvgNewEinmalig').value) || 0;
-  var M = parseFloat(document.getElementById('bvgNewMonatlich').value) || 0;
-  var years = Math.max(1, parseInt(document.getElementById('bvgNewJahre').value, 10) || 1);
-  var rate = parseFloat(document.getElementById('bvgNewRendite').value) || 0;
-
-  document.getElementById('bvgNewEinmaligVal').textContent = bvgChf(P);
-  document.getElementById('bvgNewMonatlichVal').textContent = bvgChf(M);
-  document.getElementById('bvgNewJahreVal').innerHTML = years + ' ' + (currentLang === 'en' ? 'years' : 'Jahre');
-  document.getElementById('bvgNewRenditeVal').textContent = rate + ' % p.a.';
-
-  if (bvgNewSelectedYear === null || bvgNewSelectedYear > years) bvgNewSelectedYear = years;
-
-  var s3 = [], s5 = [];
-  for (var k = 1; k <= years; k++){
-    s3.push(bvgFV(P, M, k, 3));
-    s5.push(bvgFV(P, M, k, 5));
-  }
-  var maxV = s5.length ? s5[s5.length - 1] : (P || 1);
-  if (maxV <= 0) maxV = 1;
-
-  var L = currentLang === 'en' ? {
-    jahr: 'Year', einzahlungen: 'Contributions', wertsteigerung: 'Growth at avg. 5% return',
-    unterschiedNach: 'Difference after', jahren: 'years — with exactly the same contributions.',
-    eingabe: 'Your input: avg.', pa: '% p.a. →'
-  } : {
-    jahr: 'Jahr', einzahlungen: 'Einzahlungen', wertsteigerung: 'Wertsteigerung bei Ø 5 % Rendite',
-    unterschiedNach: 'Unterschied nach', jahren: 'Jahren — bei exakt denselben Einzahlungen.',
-    eingabe: 'Ihre Eingabe: Ø', pa: '% p.a. →'
-  };
-
-  var chart = document.getElementById('bvgNewChart');
-  chart.innerHTML = s3.map(function(v3, idx){
-    var year = idx + 1;
-    var v5 = s5[idx];
-    var h3 = Math.max(2, v3 / maxV * 100);
-    var h5 = Math.max(2, v5 / maxV * 100);
-    var active = year === bvgNewSelectedYear;
-    return '<button type="button" class="bvgpage-bar-pair" onclick="bvgNewSelectYear(' + year + ')" aria-label="' + L.jahr + ' ' + year + '">' +
-      '<span class="bvgpage-bar bvgpage-bar-3" style="height:' + h3 + '%"></span>' +
-      '<span class="bvgpage-bar bvgpage-bar-5' + (active ? ' is-active' : '') + '" style="height:' + h5 + '%"></span>' +
-      '</button>';
-  }).join('');
-
-  var y = bvgNewSelectedYear;
-  var principal = P + M * 12 * y;
-  var growth5y = (s5[y - 1] || 0) - principal;
-  document.getElementById('bvgNewYearInfo').textContent =
-    L.jahr + ' ' + y + ': ' + L.einzahlungen + ' ' + bvgChf(principal) + ' · ' + L.wertsteigerung + ': ' + bvgChf(growth5y) + '.';
-
-  var diff = (s5.length ? s5[s5.length - 1] : 0) - (s3.length ? s3[s3.length - 1] : 0);
-  document.getElementById('bvgNewDiffAmount').textContent = bvgChf(diff);
-  document.getElementById('bvgNewDiffCaption').textContent = L.unterschiedNach + ' ' + years + ' ' + L.jahren;
-
-  var ownFV = bvgFV(P, M, years, rate);
-  document.getElementById('bvgNewOwnLine').textContent = L.eingabe + ' ' + rate + ' ' + L.pa + ' ' + bvgChf(ownFV);
-}
-function bvgNewSelectYear(year){
-  bvgNewSelectedYear = year;
-  bvgNewCalc();
-}
-if (document.getElementById('bvgNewEinmalig')) bvgNewCalc();
+if (document.getElementById('bvgPageEinmalig')) bvgCalc('bvgPage');
 
 function updateVorsorgeCalc(){
   var age = parseInt(document.getElementById('calcAge').value, 10) || 0;
