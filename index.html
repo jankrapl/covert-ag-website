@@ -613,8 +613,15 @@
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.4 2.4 3.8 5.7 3.8 9s-1.4 6.6-3.8 9c-2.4-2.4-3.8-5.7-3.8-9s1.4-6.6 3.8-9z"/></svg>
         <span data-lang-label>DE</span>
       </button>
-      <!-- TODO: Kundenlogin wieder einblenden, sobald das Coverd Portal live ist -->
-      <span class="stone" style="font-size:0.78rem;" data-de="Portal in Entwicklung" data-en="Portal in development">Portal in Entwicklung</span>
+      <div class="has-drop login-drop" id="loginDrop">
+        <button class="btn btn-ghost" onclick="toggleLoginDrop(event)" data-de="Kundenlogin" data-en="Client Login">Kundenlogin</button>
+        <div class="drop">
+          <!-- TODO: Portal-URL eintragen -->
+          <a href="kundenportal-privat.html" target="_blank" rel="noopener" data-de="Login Privatperson" data-en="Login Private Client">Login Privatperson</a>
+          <!-- TODO: Portal-URL eintragen -->
+          <a href="kundenportal-kmu.html" target="_blank" rel="noopener" data-de="Login Unternehmen" data-en="Login Business">Login Unternehmen</a>
+        </div>
+      </div>
       <button class="burger" onclick="toggleMobile()" aria-label="Menü"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -629,8 +636,10 @@
   <a onclick="goTo('steuern')" data-de="Steuern" data-en="Taxes">Steuern</a>
   <a onclick="goTo('blog')" data-de="Blog" data-en="Blog">Blog</a>
   <a onclick="goTo('ueber')" data-de="Über Coverd" data-en="About Coverd">Über Coverd</a>
-  <!-- TODO: Login-Buttons wieder einblenden, sobald das Coverd Portal live ist -->
-  <p class="stone" style="margin-top:14px; font-size:0.85rem;" data-de="Das Coverd Portal ist in Entwicklung." data-en="The Coverd Portal is in development.">Das Coverd Portal ist in Entwicklung.</p>
+  <!-- TODO: Portal-URL eintragen -->
+  <a class="btn btn-ghost" style="margin-top:14px;" href="kundenportal-privat.html" target="_blank" rel="noopener" onclick="document.getElementById('mobilePanel').classList.remove('open')" data-de="Login Privatperson" data-en="Login Private Client">Login Privatperson</a>
+  <!-- TODO: Portal-URL eintragen -->
+  <a class="btn btn-ghost" style="margin-top:10px;" href="kundenportal-kmu.html" target="_blank" rel="noopener" onclick="document.getElementById('mobilePanel').classList.remove('open')" data-de="Login Unternehmen" data-en="Login Business">Login Unternehmen</a>
   <button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button>
   <button class="lang-toggle" onclick="toggleLang()">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.4 2.4 3.8 5.7 3.8 9s-1.4 6.6-3.8 9c-2.4-2.4-3.8-5.7-3.8-9s1.4-6.6 3.8-9z"/></svg>
@@ -1668,11 +1677,13 @@
       <div class="kicker" data-de="Kundenportal" data-en="Client Portal">Kundenportal</div>
       <h1 data-de="Alles im Blick. Von überall." data-en="Everything in view. From anywhere.">Alles im Blick. Von überall.</h1>
       <p class="lede" data-de="Policen, Dokumente, Anliegen und Kommunikation – zentral in Ihrem Coverd Portal." data-en="Policies, documents, requests and communication – all central in your Coverd Portal.">Policen, Dokumente, Anliegen und Kommunikation – zentral in Ihrem Coverd Portal.</p>
-      <!-- TODO: Login-Buttons wieder einblenden, sobald das Coverd Portal live ist -->
-      <p class="lede" data-de="Das Coverd Portal ist in Entwicklung." data-en="The Coverd Portal is in development.">Das Coverd Portal ist in Entwicklung.</p>
       <div class="cta-row">
-        <button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button>
+        <!-- TODO: Portal-URL eintragen -->
+        <a class="btn btn-primary" href="kundenportal-privat.html" target="_blank" rel="noopener" data-de="Login Privatperson" data-en="Login Private Client">Login Privatperson</a>
+        <!-- TODO: Portal-URL eintragen -->
+        <a class="btn btn-ghost" href="kundenportal-kmu.html" target="_blank" rel="noopener" data-de="Login Unternehmen" data-en="Login Business">Login Unternehmen</a>
       </div>
+      <p class="nudge" data-de-html="Oder &lt;a onclick=&quot;openBooking()&quot; style=&quot;text-decoration:underline; cursor:pointer;&quot;&gt;Erstgespräch vereinbaren&lt;/a&gt;, wenn Sie noch keinen Zugang haben" data-en-html="Or &lt;a onclick=&quot;openBooking()&quot; style=&quot;text-decoration:underline; cursor:pointer;&quot;&gt;book an initial consultation&lt;/a&gt; if you don't have access yet">Oder <a onclick="openBooking()" style="text-decoration:underline; cursor:pointer;">Erstgespräch vereinbaren</a>, wenn Sie noch keinen Zugang haben</p>
     </div>
   </section>
 
@@ -2574,24 +2585,47 @@ function bvgCalc(ns){
     '<div class="bvg-stat is-total"><div class="amount">' + bvgChf(totalFV) + '</div><div class="label">' + L.vermoegen + '</div></div>';
 
   var chart = document.getElementById(ns + 'Chart');
+  var activeTipHtml = '';
   chart.innerHTML = series.map(function(pt){
     var h = maxFV > 0 ? (pt.fv / maxFV * 100) : 0;
     var active = pt.year === bvgSelectedYear[ns];
     var principalH = pt.fv > 0 ? (pt.principal / pt.fv * 100) : 0;
     var growthH = 100 - principalH;
-    var tip = active ? (
-      '<div class="bvg-bar-tip"><strong>' + bvgChf(pt.fv) + ' ' + L.vermoegenJahr + ' ' + pt.year + '</strong>' +
-      bvgChf(P) + ' ' + L.einmaligeEinzahlung + '<br>' +
-      bvgChf(M * 12 * pt.year) + ' ' + L.monatlicheEinzahlungen + '<br>' +
-      bvgChf(pt.growth) + ' ' + L.wertsteigerung + '</div>'
-    ) : '';
+    if (active) {
+      activeTipHtml = '<div class="bvg-bar-tip"><strong>' + bvgChf(pt.fv) + ' ' + L.vermoegenJahr + ' ' + pt.year + '</strong>' +
+        bvgChf(P) + ' ' + L.einmaligeEinzahlung + '<br>' +
+        bvgChf(M * 12 * pt.year) + ' ' + L.monatlicheEinzahlungen + '<br>' +
+        bvgChf(pt.growth) + ' ' + L.wertsteigerung + '</div>';
+    }
     return '<div class="bvg-bar' + (active ? ' is-active' : '') + '" style="height:' + h + '%" onclick="bvgSelectYear(\'' + ns + '\',' + pt.year + ')">' +
-      tip +
       '<div class="seg seg-growth" style="height:' + growthH + '%"></div>' +
       '<div class="seg seg-principal" style="height:' + principalH + '%"></div>' +
       '<div class="seg seg-flat" style="height:100%"></div>' +
       '</div>';
   }).join('');
+
+  // Tooltip is appended directly to the chart (not the bar) so its position can be
+  // clamped within the chart's own box, regardless of how tall the clicked bar is.
+  if (activeTipHtml) {
+    chart.insertAdjacentHTML('beforeend', activeTipHtml);
+    var activeBar = chart.querySelector('.bvg-bar.is-active');
+    var tipEl = chart.querySelector('.bvg-bar-tip');
+    var barTop = activeBar.offsetTop;
+    var tipH = tipEl.offsetHeight;
+    var desiredTop = barTop - 10 - tipH;
+    tipEl.style.position = 'absolute';
+    tipEl.style.bottom = 'auto';
+    tipEl.style.top = Math.max(4, desiredTop) + 'px';
+
+    var chartW = chart.clientWidth;
+    var barCenter = activeBar.offsetLeft + activeBar.offsetWidth / 2;
+    var tipW = tipEl.offsetWidth;
+    var minLeft = 4;
+    var maxLeft = Math.max(minLeft, chartW - tipW - 4);
+    var desiredLeft = barCenter - tipW / 2;
+    tipEl.style.left = Math.min(Math.max(desiredLeft, minLeft), maxLeft) + 'px';
+    tipEl.style.transform = 'none';
+  }
 
   var s3 = series.map(function(pt){ return bvgFV(P, M, pt.year, 3); });
   var s5 = series.map(function(pt){ return bvgFV(P, M, pt.year, 5); });
@@ -2634,11 +2668,6 @@ function updateVorsorgeCalc(){
   var years = Math.max(0, retire - age);
   document.getElementById('calcYears').textContent = years;
   document.getElementById('calcYearsInline').textContent = years;
-}
-
-function openPortal(mode){
-  document.getElementById('mobilePanel').classList.remove('open');
-  window.location.href = (mode === 'unternehmen') ? 'kundenportal-kmu.html' : 'kundenportal-privat.html';
 }
 
 applyLang(currentLang);
