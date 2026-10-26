@@ -613,13 +613,8 @@
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.4 2.4 3.8 5.7 3.8 9s-1.4 6.6-3.8 9c-2.4-2.4-3.8-5.7-3.8-9s1.4-6.6 3.8-9z"/></svg>
         <span data-lang-label>DE</span>
       </button>
-      <div class="has-drop login-drop" id="loginDrop">
-        <button class="btn btn-ghost" onclick="toggleLoginDrop(event)" data-de="Kundenlogin" data-en="Client Login">Kundenlogin</button>
-        <div class="drop">
-          <a onclick="openPortal('privat')" data-de="Login Privatperson" data-en="Login Private Client">Login Privatperson</a>
-          <a onclick="openPortal('unternehmen')" data-de="Login Unternehmen" data-en="Login Business">Login Unternehmen</a>
-        </div>
-      </div>
+      <!-- TODO: Kundenlogin wieder einblenden, sobald das Coverd Portal live ist -->
+      <span class="stone" style="font-size:0.78rem;" data-de="Portal in Entwicklung" data-en="Portal in development">Portal in Entwicklung</span>
       <button class="burger" onclick="toggleMobile()" aria-label="Menü"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -634,9 +629,9 @@
   <a onclick="goTo('steuern')" data-de="Steuern" data-en="Taxes">Steuern</a>
   <a onclick="goTo('blog')" data-de="Blog" data-en="Blog">Blog</a>
   <a onclick="goTo('ueber')" data-de="Über Coverd" data-en="About Coverd">Über Coverd</a>
-  <button class="btn btn-ghost" style="margin-top:14px;" onclick="openPortal('privat')" data-de="Login Privatperson" data-en="Login Private Client">Login Privatperson</button>
-  <button class="btn btn-ghost" style="margin-top:10px;" onclick="openPortal('unternehmen')" data-de="Login Unternehmen" data-en="Login Business">Login Unternehmen</button>
-  <button class="btn btn-primary" onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</button>
+  <!-- TODO: Login-Buttons wieder einblenden, sobald das Coverd Portal live ist -->
+  <p class="stone" style="margin-top:14px; font-size:0.85rem;" data-de="Das Coverd Portal ist in Entwicklung." data-en="The Coverd Portal is in development.">Das Coverd Portal ist in Entwicklung.</p>
+  <button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button>
   <button class="lang-toggle" onclick="toggleLang()">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.4 2.4 3.8 5.7 3.8 9s-1.4 6.6-3.8 9c-2.4-2.4-3.8-5.7-3.8-9s1.4-6.6 3.8-9z"/></svg>
     <span data-lang-label>DE</span>
@@ -653,21 +648,19 @@
   <section class="home-hero">
     <div class="wrap">
       <div class="kicker" data-de="Versicherungen · Vorsorge · Finanzen · Steuern" data-en="Insurance · Pensions · Finance · Taxes">Versicherungen · Vorsorge · Finanzen · Steuern</div>
-      <h1 data-de-html="Alles geregelt.&lt;br&gt;Alles an einem Ort." data-en-html="Everything organized.&lt;br&gt;All in one place.">Alles geregelt.<br>Alles an einem Ort.</h1>
-      <p class="lede" data-de="Ein Partner für Versicherungen, Vorsorge und Steuern – persönlich beraten, digital betreut." data-en="One partner for insurance, pensions and taxes – personal advice, digitally supported.">Ein Partner für Versicherungen, Vorsorge und Steuern – persönlich beraten, digital betreut.</p>
+      <h1 data-de="Ein Partner. Alles im Blick." data-en="One partner. Everything in view.">Ein Partner. Alles im Blick.</h1>
+      <p class="lede" data-de="Wir sind ein unabhängiger Versicherungsbroker aus Olten. Wir vergleichen Versicherungen und Vorsorgelösungen für Privatpersonen und KMU, erklären verständlich, was Sie wirklich brauchen, und bleiben auch nach dem Abschluss Ihr Ansprechpartner." data-en="We are an independent insurance broker based in Olten. We compare insurance and pension solutions for private individuals and SMEs, explain clearly what you actually need, and remain your point of contact after the contract is signed.">Wir sind ein unabhängiger Versicherungsbroker aus Olten. Wir vergleichen Versicherungen und Vorsorgelösungen für Privatpersonen und KMU, erklären verständlich, was Sie wirklich brauchen, und bleiben auch nach dem Abschluss Ihr Ansprechpartner.</p>
       <div class="cta-row">
-        <button class="btn btn-primary" onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</button>
+        <button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button>
         <button class="btn btn-ghost" onclick="openMail('info@coverd.ch')" data-de="Situation schildern" data-en="Share Your Situation">Situation schildern</button>
       </div>
-      <p class="nudge" data-de="FINMA-registrierter Versicherungsvermittler · Beratung in Olten und schweizweit" data-en="FINMA-registered insurance broker · Advisory in Olten and across Switzerland">FINMA-registrierter Versicherungsvermittler · Beratung in Olten und schweizweit</p>
-      <p class="nudge" data-de="Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages" data-en="Free &amp; non-binding · Response usually within one business day">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
-      <div class="hero-tag" data-de="Persönlich in Olten · Für Sie in der ganzen Schweiz" data-en="Personal service in Olten · For you across Switzerland">Persönlich in Olten · Für Sie in der ganzen Schweiz</div>
+      <p class="nudge" data-de="Kostenloses Erstgespräch · Persönlich in Olten oder per Video" data-en="Free initial consultation · In person in Olten or by video call">Kostenloses Erstgespräch · Persönlich in Olten oder per Video</p>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <div class="section-head"><h2 data-de="Alles aus einer Hand." data-en="Everything in one place.">Alles aus einer Hand.</h2><p class="lede" data-de="Coverd verbindet Ihre wichtigsten finanziellen Themen an einem zentralen Ort — mit uns als Ansprechpartner." data-en="Coverd brings together your most important financial matters in one place — with us as your point of contact.">Coverd verbindet Ihre wichtigsten finanziellen Themen an einem zentralen Ort — mit uns als Ansprechpartner.</p></div>
+      <div class="section-head"><h2 data-de="Alles aus einer Hand." data-en="Everything in one place.">Alles aus einer Hand.</h2><p class="lede" data-de="Versicherungen, Vorsorge und Steuern hängen enger zusammen, als man denkt. Wer heiratet, ein Haus kauft oder eine Firma gründet, merkt das schnell. Deshalb schauen wir uns Ihre Situation als Ganzes an und nicht Police für Police." data-en="Insurance, pensions and taxes are more closely connected than most people realise. Anyone who gets married, buys a house or starts a company notices this quickly. That's why we look at your situation as a whole, not policy by policy.">Versicherungen, Vorsorge und Steuern hängen enger zusammen, als man denkt. Wer heiratet, ein Haus kauft oder eine Firma gründet, merkt das schnell. Deshalb schauen wir uns Ihre Situation als Ganzes an und nicht Police für Police.</p></div>
       <div class="hub-diagram">
         <svg class="hub-lines" viewBox="0 0 1000 526" preserveAspectRatio="none" aria-hidden="true">
           <line x1="500" y1="290" x2="150" y2="70"></line>
@@ -742,7 +735,7 @@
   <section>
     <div class="wrap">
       <div class="section-head" style="text-align:center; margin:0 auto 8px; max-width:640px;">
-        <h2 style="text-align:center;" data-de="Ihre Zeit gehört Ihnen – nicht dem Papierkram." data-en="Your time belongs to you – not to paperwork.">Ihre Zeit gehört Ihnen – nicht dem Papierkram.</h2>
+        <h2 style="text-align:center;" data-de="Was sich mit einem Broker ändert" data-en="What changes with a broker">Was sich mit einem Broker ändert</h2>
         <p class="lede" style="margin:16px auto 0; text-align:center;" data-de="Jede Stunde, die Sie nicht mit Vergleichen, Anrufen und Formularen verbringen, ist eine Stunde für das, was Ihnen wirklich wichtig ist." data-en="Every hour you don't spend comparing, calling and filling out forms is an hour for what actually matters to you.">Jede Stunde, die Sie nicht mit Vergleichen, Anrufen und Formularen verbringen, ist eine Stunde für das, was Ihnen wirklich wichtig ist.</p>
       </div>
 
@@ -766,16 +759,6 @@
           </ul>
         </div>
       </div>
-
-      <div class="stats-row" style="margin-top:40px;">
-        <div class="stat-item"><span class="num" data-de="≈ 12 Std." data-en="≈ 12 hrs.">≈ 12 Std.</span><strong class="stat-headline" data-de="Zeit für Familie statt Formulare" data-en="Time for family instead of forms">Zeit für Familie statt Formulare</strong><p data-de="pro Jahr weniger Aufwand für Vergleiche, Anträge und Papierkram" data-en="less effort per year on comparisons, applications and paperwork">pro Jahr weniger Aufwand für Vergleiche, Anträge und Papierkram</p></div>
-        <div class="stat-item"><span class="num" data-de="5+ Anbieter" data-en="5+ providers">5+ Anbieter</span><strong class="stat-headline" data-de="Sie müssen nicht selbst recherchieren" data-en="You don't have to research it yourself">Sie müssen nicht selbst recherchieren</strong><p data-de="wir kennen den Markt und vergleichen, damit Sie es nicht müssen" data-en="we know the market and compare it so you don't have to">wir kennen den Markt und vergleichen, damit Sie es nicht müssen</p></div>
-        <div class="stat-item"><span class="num" data-de="1 statt 5" data-en="1 instead of 5">1 statt 5</span><strong class="stat-headline" data-de="Nie wieder Hotline-Ping-Pong" data-en="No more hotline ping-pong">Nie wieder Hotline-Ping-Pong</strong><p data-de="ein Ansprechpartner für alle Ihre Versicherungs- und Vorsorgethemen" data-en="one point of contact for all your insurance and pension matters">ein Ansprechpartner für alle Ihre Versicherungs- und Vorsorgethemen</p></div>
-        <div class="stat-item"><span class="num" data-de="30 Min." data-en="30 min.">30 Min.</span><strong class="stat-headline" data-de="Im Ernstfall sofort jemanden erreichen" data-en="Reach someone immediately in an emergency">Im Ernstfall sofort jemanden erreichen</strong><p data-de="statt tagelanger Korrespondenz bei einer Schadenmeldung übers Portal" data-en="instead of days of correspondence when reporting a claim via the portal">statt tagelanger Korrespondenz bei einer Schadenmeldung übers Portal</p></div>
-      </div>
-
-      <p style="margin-top:36px; text-align:center; font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.15rem;" data-de="Sie kümmern sich um Ihr Leben. Wir kümmern uns um den Rest." data-en="You take care of your life. We take care of the rest.">Sie kümmern sich um Ihr Leben. Wir kümmern uns um den Rest.</p>
-      <p class="stone" style="font-size:0.8rem; text-align:center; margin-top:14px;" data-de="Beispielhafte Richtwerte basierend auf typischen Kundensituationen — keine Garantie im Einzelfall." data-en="Illustrative figures based on typical customer situations — no guarantee in individual cases.">Beispielhafte Richtwerte basierend auf typischen Kundensituationen — keine Garantie im Einzelfall.</p>
     </div>
   </section>
 
@@ -785,10 +768,7 @@
         <h2 data-de="Finanzen müssen nicht kompliziert sein." data-en="Finances don't have to be complicated.">Finanzen müssen nicht kompliziert sein.</h2>
       </div>
       <div>
-        <p class="max-text" data-de="Versicherungen bei verschiedenen Gesellschaften. Vorsorgelösungen an unterschiedlichen Orten. Steuerunterlagen, Policen, Rechnungen und Ansprechpartner verteilt über mehrere Systeme. Wir finden: Das geht einfacher." data-en="Insurance with different companies. Pension solutions in different places. Tax documents, policies, invoices and contacts spread across several systems. We think there's a simpler way.">Versicherungen bei verschiedenen Gesellschaften. Vorsorgelösungen an unterschiedlichen Orten. Steuerunterlagen, Policen, Rechnungen und Ansprechpartner verteilt über mehrere Systeme. Wir finden: Das geht einfacher.</p>
-        <p class="max-text stone" data-de="Coverd bringt Ihre Versicherungen, Vorsorge, Finanzen und Steuerthemen zusammen — mit persönlicher Beratung und einer zentralen digitalen Übersicht." data-en="Coverd brings together your insurance, pension, finance and tax matters — with personal advice and one central digital overview.">Coverd bringt Ihre Versicherungen, Vorsorge, Finanzen und Steuerthemen zusammen — mit persönlicher Beratung und einer zentralen digitalen Übersicht.</p>
-        <p class="max-text" style="font-weight:700; color:var(--pine); font-family:'Plus Jakarta Sans',sans-serif;" data-de="Mit Coverd haben Sie ab dem ersten Gespräch einen Ansprechpartner statt fünf – und alle Unterlagen an einem Ort, statt in drei verschiedenen Postfächern." data-en="With Coverd, you have one point of contact instead of five from the very first conversation – and all your documents in one place instead of three different inboxes.">Mit Coverd haben Sie ab dem ersten Gespräch einen Ansprechpartner statt fünf – und alle Unterlagen an einem Ort, statt in drei verschiedenen Postfächern.</p>
-        <div class="quote-block"><p data-de="Ein Partner. Eine Übersicht. Eine Lösung." data-en="One partner. One overview. One solution.">Ein Partner. Eine Übersicht. Eine Lösung.</p></div>
+        <p class="max-text" data-de="Bei vielen Kunden sehen wir dasselbe Bild: Policen bei vier verschiedenen Gesellschaften, Vorsorgeausweise in einem Ordner, die Steuererklärung bei jemand anderem. Niemand hat den Überblick, und deshalb merkt auch niemand, wenn etwas doppelt versichert ist oder eine wichtige Deckung fehlt. Genau das wollen wir ändern." data-en="We see the same picture with many clients: policies with four different companies, pension statements in a folder, the tax return handled by someone else. Nobody has the overview, which means nobody notices when something is insured twice or an important coverage is missing. That's exactly what we want to change.">Bei vielen Kunden sehen wir dasselbe Bild: Policen bei vier verschiedenen Gesellschaften, Vorsorgeausweise in einem Ordner, die Steuererklärung bei jemand anderem. Niemand hat den Überblick, und deshalb merkt auch niemand, wenn etwas doppelt versichert ist oder eine wichtige Deckung fehlt. Genau das wollen wir ändern.</p>
       </div>
     </div>
   </section>
@@ -825,8 +805,9 @@
   <section class="deep">
     <div class="wrap">
       <div class="section-head" style="text-align:center; margin:0 auto 8px; max-width:640px;">
-        <h2 style="text-align:center;" data-de="Neue Marke, erfahrenes Team." data-en="New brand, experienced team.">Neue Marke, erfahrenes Team.</h2>
-        <p class="lede" style="margin:16px auto 0; text-align:center;" data-de="Coverd AG wurde 2026 gegründet – mit dem Ziel, Versicherungsberatung transparenter zu machen. Was neu ist: die Marke. Was nicht neu ist: die Erfahrung unseres Teams." data-en="Coverd AG was founded in 2026 – with the goal of making insurance advice more transparent. What's new is the brand. What isn't new is our team's experience.">Coverd AG wurde 2026 gegründet – mit dem Ziel, Versicherungsberatung transparenter zu machen. Was neu ist: die Marke. Was nicht neu ist: die Erfahrung unseres Teams.</p>
+        <h2 style="text-align:center;" data-de="Neu als Firma, nicht neu im Fach." data-en="New as a company, not new to the field.">Neu als Firma, nicht neu im Fach.</h2>
+        <!-- TODO: Erfahrung/Jahre prüfen -->
+        <p class="lede" style="margin:16px auto 0; text-align:center;" data-de="Coverd wurde 2026 gegründet. Wir arbeiten aber seit Jahren in der Treuhand-, Steuer- und Versicherungsberatung und kennen die Fragen unserer Kunden aus der Praxis." data-en="Coverd was founded in 2026. We have, however, worked for years in fiduciary, tax and insurance advisory, and we know our clients' questions from practical experience.">Coverd wurde 2026 gegründet. Wir arbeiten aber seit Jahren in der Treuhand-, Steuer- und Versicherungsberatung und kennen die Fragen unserer Kunden aus der Praxis.</p>
       </div>
       <div class="services" style="margin-top:44px;">
         <div class="service">
@@ -834,6 +815,7 @@
           <h3 data-de="Erfahrenes Team" data-en="Experienced Team">Erfahrenes Team</h3>
           <p data-de="Langjährige Erfahrung im Versicherungs-, Vorsorge- und Steuerwesen, inkl. dipl. Steuerexperte im Team." data-en="Many years of experience in insurance, pensions and tax, including a certified tax expert on the team.">Langjährige Erfahrung im Versicherungs-, Vorsorge- und Steuerwesen, inkl. dipl. Steuerexperte im Team.</p>
         </div>
+        <!-- TODO: erst nach abgeschlossener FINMA-Registrierung so stehen lassen -->
         <div class="service">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
           <h3 data-de="FINMA-registriert" data-en="FINMA-Registered">FINMA-registriert</h3>
@@ -878,13 +860,13 @@
 
   <section class="deep" id="prozess">
     <div class="wrap">
-      <div class="section-head"><h2 data-de="Persönlich starten. Digital weiterdenken." data-en="Start in person. Continue digitally.">Persönlich starten. Digital weiterdenken.</h2></div>
+      <div class="section-head"><h2 data-de="So arbeiten wir mit Ihnen" data-en="How we work with you">So arbeiten wir mit Ihnen</h2></div>
       <div class="steps">
-        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/></svg></div><div class="step-body"><div class="num">01</div><h3 data-de="Kennenlernen" data-en="Get Acquainted">Kennenlernen</h3><p data-de="In einem persönlichen Erstgespräch lernen wir Sie und Ihre Situation kennen und definieren gemeinsam, wo Handlungsbedarf besteht." data-en="In a personal initial conversation, we get to know you and your situation and jointly define where action is needed.">In einem persönlichen Erstgespräch lernen wir Sie und Ihre Situation kennen und definieren gemeinsam, wo Handlungsbedarf besteht.</p></div></div>
-        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.3" y2="15.3"/></svg></div><div class="step-body"><div class="num">02</div><h3 data-de="Analysieren" data-en="Analyze">Analysieren</h3><p data-de="Wir analysieren bestehende Lösungen, Ihre Bedürfnisse und Ziele und prüfen verschiedene Möglichkeiten am Markt." data-en="We analyze your existing solutions, your needs and goals, and review the various options available on the market.">Wir analysieren bestehende Lösungen, Ihre Bedürfnisse und Ziele und prüfen verschiedene Möglichkeiten am Markt.</p></div></div>
-        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></div><div class="step-body"><div class="num">03</div><h3 data-de="Vergleichen" data-en="Compare">Vergleichen</h3><p data-de="Wir stellen geeignete Lösungen gegenüber und zeigen Unterschiede bei Leistungen, Kosten und weiteren Faktoren transparent auf." data-en="We compare suitable solutions side by side and transparently show differences in benefits, costs and other factors.">Wir stellen geeignete Lösungen gegenüber und zeigen Unterschiede bei Leistungen, Kosten und weiteren Faktoren transparent auf.</p></div></div>
-        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 10.8 15.3 16 9.5"/></svg></div><div class="step-body"><div class="num">04</div><h3 data-de="Entscheiden" data-en="Decide">Entscheiden</h3><p data-de="Gemeinsam besprechen wir die Varianten. Sie entscheiden, welche Lösung am besten zu Ihren Prioritäten passt." data-en="We discuss the options together. You decide which solution best fits your priorities.">Gemeinsam besprechen wir die Varianten. Sie entscheiden, welche Lösung am besten zu Ihren Prioritäten passt.</p></div></div>
-        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div><div class="step-body"><div class="num">05</div><h3 data-de="Betreuen" data-en="Support">Betreuen</h3><p data-de="Ihre Unterlagen werden im Coverd-Portal hinterlegt — wir begleiten Sie auch bei zukünftigen Anliegen." data-en="Your documents are stored in the Coverd Portal — we're also here to support you with future matters.">Ihre Unterlagen werden im Coverd-Portal hinterlegt — wir begleiten Sie auch bei zukünftigen Anliegen.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/></svg></div><div class="step-body"><div class="num">01</div><h3 data-de="Kennenlernen" data-en="Get Acquainted">Kennenlernen</h3><p data-de="Wir lernen Sie und Ihre Situation in einem persönlichen Gespräch kennen." data-en="We get to know you and your situation in a personal conversation.">Wir lernen Sie und Ihre Situation in einem persönlichen Gespräch kennen.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.3" y2="15.3"/></svg></div><div class="step-body"><div class="num">02</div><h3 data-de="Analysieren" data-en="Analyze">Analysieren</h3><p data-de="Wir prüfen Ihre bestehenden Lösungen und die Möglichkeiten am Markt." data-en="We review your existing solutions and the options available on the market.">Wir prüfen Ihre bestehenden Lösungen und die Möglichkeiten am Markt.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></div><div class="step-body"><div class="num">03</div><h3 data-de="Vergleichen" data-en="Compare">Vergleichen</h3><p data-de="Wir stellen passende Lösungen gegenüber und zeigen die Unterschiede auf." data-en="We compare suitable solutions and show you the differences.">Wir stellen passende Lösungen gegenüber und zeigen die Unterschiede auf.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 10.8 15.3 16 9.5"/></svg></div><div class="step-body"><div class="num">04</div><h3 data-de="Entscheiden" data-en="Decide">Entscheiden</h3><p data-de="Sie entscheiden, welche Lösung am besten zu Ihnen passt." data-en="You decide which solution suits you best.">Sie entscheiden, welche Lösung am besten zu Ihnen passt.</p></div></div>
+        <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div><div class="step-body"><div class="num">05</div><h3 data-de="Betreuen" data-en="Support">Betreuen</h3><p data-de="Wir hinterlegen Ihre Unterlagen im Coverd-Portal und bleiben auch danach für Sie da." data-en="We store your documents in the Coverd Portal and remain available to you afterwards.">Wir hinterlegen Ihre Unterlagen im Coverd-Portal und bleiben auch danach für Sie da.</p></div></div>
       </div>
     </div>
   </section>
@@ -894,9 +876,8 @@
       <h2 data-de="Sie müssen heute nichts entscheiden." data-en="You don't have to decide anything today.">Sie müssen heute nichts entscheiden.</h2>
       <p class="lede" style="margin:20px auto 0; text-align:center;" data-de="Lernen Sie uns in einem unverbindlichen Erstgespräch kennen. Wir schauen gemeinsam, wo Sie stehen und ob Coverd Sie unterstützen kann." data-en="Get to know us in a non-binding initial conversation. We'll look together at where you stand and whether Coverd can support you.">Lernen Sie uns in einem unverbindlichen Erstgespräch kennen. Wir schauen gemeinsam, wo Sie stehen und ob Coverd Sie unterstützen kann.</p>
       <div class="cta-row" style="justify-content:center; margin-top:28px;">
-        <button class="btn btn-primary" onclick="openBooking()" data-de="Kostenloses Erstgespräch buchen" data-en="Book a Free Initial Consultation">Kostenloses Erstgespräch buchen</button>
+        <button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button>
       </div>
-      <p class="nudge center" data-de="Kostenlos · Unverbindlich · Persönlich" data-en="Free · Non-binding · Personal">Kostenlos · Unverbindlich · Persönlich</p>
     </div>
   </section>
 
@@ -909,7 +890,7 @@
       <div class="kicker" data-de="Privatkunden" data-en="Private Clients">Privatkunden</div>
       <h1 data-de="Alles geregelt. Für heute und morgen." data-en="Everything organized. For today and tomorrow.">Alles geregelt. Für heute und morgen.</h1>
       <p class="lede" data-de="Versicherungen, Vorsorge, Finanzen und Steuern – mit einem Ansprechpartner und einer zentralen Übersicht." data-en="Insurance, pensions, finances and taxes – with one point of contact and one central overview.">Versicherungen, Vorsorge, Finanzen und Steuern – mit einem Ansprechpartner und einer zentralen Übersicht.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()" data-de="Kostenloses Erstgespräch" data-en="Free Initial Consultation">Kostenloses Erstgespräch</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
       <div class="self-check">
         <p class="q" data-de="Wann haben Sie Ihre Versicherungen zuletzt wirklich überprüft?" data-en="When did you last really review your insurance?">Wann haben Sie Ihre Versicherungen zuletzt wirklich überprüft?</p>
         <p class="a" data-de="Nicht nur die Prämie. Sondern ob die Leistungen noch zu Ihrem heutigen Leben passen." data-en="Not just the premium. But whether the benefits still fit your life today.">Nicht nur die Prämie. Sondern ob die Leistungen noch zu Ihrem heutigen Leben passen.</p>
@@ -987,7 +968,7 @@
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2 data-de="Lernen Sie Coverd unverbindlich kennen." data-en="Get to know Coverd, no strings attached.">Lernen Sie Coverd unverbindlich kennen.</h2>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -1086,7 +1067,7 @@
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2 data-de="Lassen Sie uns über Ihr Unternehmen sprechen." data-en="Let's talk about your business.">Lassen Sie uns über Ihr Unternehmen sprechen.</h2>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -1096,7 +1077,7 @@
   <section class="page-hero">
     <div class="wrap">
       <div class="kicker" data-de="Leistungen · Versicherungen" data-en="Services · Insurance">Leistungen · Versicherungen</div>
-      <h1 data-de="Nicht irgendeine Versicherung. Die passende." data-en="Not just any insurance. The right one.">Nicht irgendeine Versicherung. Die passende.</h1>
+      <h1 data-de="Versicherungen vergleichen und richtig absichern" data-en="Compare insurance and get properly covered">Versicherungen vergleichen und richtig absichern</h1>
       <p class="lede" data-de="Wir vergleichen Anbieter, Leistungen und Preise – Sie entscheiden, welche Lösung zu Ihnen passt." data-en="We compare providers, benefits and prices – you decide which solution fits you.">Wir vergleichen Anbieter, Leistungen und Preise – Sie entscheiden, welche Lösung zu Ihnen passt.</p>
       <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()" data-de="Versicherungen vergleichen" data-en="Compare Insurance">Versicherungen vergleichen</button></div>
       <p class="nudge" data-de="Kostenlos &amp; unverbindlich · Lücken lassen sich oft erst im Gespräch erkennen" data-en="Free &amp; non-binding · Gaps often only become visible in conversation">Kostenlos &amp; unverbindlich · Lücken lassen sich oft erst im Gespräch erkennen</p>
@@ -1252,7 +1233,7 @@
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2 data-de="Nicht einfach versichern. Richtig absichern." data-en="Don't just insure. Cover properly.">Nicht einfach versichern. Richtig absichern.</h2>
+      <div><h2 data-de="Zuerst verstehen, dann vergleichen" data-en="First understand, then compare">Zuerst verstehen, dann vergleichen</h2>
         <div class="photo-frame"><img src="images/versicherungen-familie.jpg" alt="Familie zuhause auf dem Sofa" data-de-alt="Familie zuhause auf dem Sofa" data-en-alt="Family at home on the couch"></div>
       </div>
       <div>
@@ -1328,7 +1309,7 @@
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2 data-de="Auch nach dem Abschluss: Ihre Policen bleiben im Blick." data-en="Even after signing: your policies stay in view.">Auch nach dem Abschluss: Ihre Policen bleiben im Blick.</h2>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -1590,57 +1571,6 @@
     </div>
   </section>
 
-  <!-- 7. Zinseszins-Rechner -->
-  <section>
-    <div class="wrap">
-      <div class="section-head" style="text-align:center; margin:0 auto 0; max-width:640px;"><h2 style="text-align:center;" data-de="Kleine Unterschiede. Grosse Wirkung." data-en="Small differences. Big impact.">Kleine Unterschiede. Grosse Wirkung.</h2><p class="lede" style="margin:16px auto 0; text-align:center;" data-de="Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Tragen Sie Ihre eigenen Werte ein und sehen Sie den Effekt direkt." data-en="In long-term pension planning, even a few percentage points of difference can have a significant impact on your retirement capital over many years. Enter your own figures and see the effect directly.">Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Tragen Sie Ihre eigenen Werte ein und sehen Sie den Effekt direkt.</p></div>
-
-      <div class="bvg-calc-wrap">
-        <div class="bvg-calc-card2">
-          <div class="bvg-sliders">
-            <div class="bvg-slider">
-              <div class="bvg-slider-head"><span data-de="Einmalige Einzahlung" data-en="One-time deposit">Einmalige Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvgPageEinmaligNum" value="10000" min="0" step="500" oninput="bvgSyncRange('bvgPage','Einmalig')"></span></div>
-              <input type="range" class="bvg-range" id="bvgPageEinmalig" min="0" max="100000" step="1000" value="10000" oninput="bvgSyncNum('bvgPage','Einmalig')">
-            </div>
-            <div class="bvg-slider">
-              <div class="bvg-slider-head"><span data-de="Monatliche Einzahlung" data-en="Monthly deposit">Monatliche Einzahlung</span><span class="bvg-num-wrap">CHF <input type="number" class="bvg-num" id="bvgPageMonatlichNum" value="500" min="0" step="50" oninput="bvgSyncRange('bvgPage','Monatlich')"></span></div>
-              <input type="range" class="bvg-range" id="bvgPageMonatlich" min="0" max="3000" step="50" value="500" oninput="bvgSyncNum('bvgPage','Monatlich')">
-            </div>
-            <div class="bvg-slider">
-              <div class="bvg-slider-head"><span data-de="Anlagedauer" data-en="Investment period">Anlagedauer</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvgPageJahreNum" value="12" min="1" step="1" oninput="bvgSyncRange('bvgPage','Jahre')"> Jahre</span></div>
-              <input type="range" class="bvg-range" id="bvgPageJahre" min="1" max="40" step="1" value="12" oninput="bvgSyncNum('bvgPage','Jahre')">
-            </div>
-            <div class="bvg-slider">
-              <div class="bvg-slider-head"><span data-de="Wertentwicklung" data-en="Return">Wertentwicklung</span><span class="bvg-num-wrap"><input type="number" class="bvg-num" id="bvgPageRenditeNum" value="4" min="0" step="0.1" oninput="bvgSyncRange('bvgPage','Rendite')"> % p.a.</span></div>
-              <input type="range" class="bvg-range" id="bvgPageRendite" min="0" max="8" step="0.5" value="4" oninput="bvgSyncNum('bvgPage','Rendite')">
-            </div>
-          </div>
-
-          <div class="bvg-stats" id="bvgPageStats"></div>
-          <div class="bvg-chart-wrap">
-            <div class="bvg-chart" id="bvgPageChart"></div>
-          </div>
-          <p class="bvg-chart-hint" data-de="Jahr anklicken für die Aufteilung Einzahlung / Wertsteigerung." data-en="Click a year to see the split between contributions and growth.">Jahr anklicken für die Aufteilung Einzahlung / Wertsteigerung.</p>
-        </div>
-
-        <div class="bvg-compare-card">
-          <p class="eyebrow" data-de="Unterschied Ø 3 % vs. Ø 5 % Rendite" data-en="Difference avg. 3% vs. avg. 5% return">Unterschied Ø 3 % vs. Ø 5 % Rendite</p>
-          <div class="bvg-compare-chart" id="bvgPageCompareChart"></div>
-          <div class="bvg-compare-legend">
-            <span><i style="background:var(--line);"></i><span data-de="Ø 3 % Rendite" data-en="avg. 3% return">Ø 3 % Rendite</span></span>
-            <span><i style="background:var(--pine);"></i><span data-de="Ø 5 % Rendite" data-en="avg. 5% return">Ø 5 % Rendite</span></span>
-          </div>
-          <div class="bvg-aha">
-            <div class="amount" id="bvgPageDiffAmount">CHF 0</div>
-            <p data-de-html="Unterschied nach &lt;span id=&quot;bvgPageDiffYears&quot;&gt;12&lt;/span&gt; Jahren — bei exakt denselben Einzahlungen." data-en-html="Difference after &lt;span id=&quot;bvgPageDiffYears&quot;&gt;12&lt;/span&gt; years — with exactly the same contributions.">Unterschied nach <span id="bvgPageDiffYears">12</span> Jahren — bei exakt denselben Einzahlungen.</p>
-          </div>
-        </div>
-      </div>
-
-      <p class="bvg-disclaimer" data-de="Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen eingetragenen Werte. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite." data-en="Note: This calculation example is intended solely to illustrate the compound interest effect based on the figures you entered. Fees, taxes, risk benefits, statutory BVG requirements and other factors are not taken into account. The returns shown are neither forecasts nor guarantees. Regularly reviewing a pension solution does not guarantee a higher return.">Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen eingetragenen Werte. Gebühren, Steuern, Risikoleistungen, gesetzliche BVG-Vorgaben und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite.</p>
-    </div>
-  </section>
-
   <!-- 8. Überprüfung -->
   <section>
     <div class="wrap cols2">
@@ -1671,8 +1601,7 @@
     <div class="wrap" style="max-width:680px;">
       <h2 data-de="Lassen Sie uns Ihre berufliche Vorsorge analysieren." data-en="Let's analyze your occupational pension.">Lassen Sie uns Ihre berufliche Vorsorge analysieren.</h2>
       <p class="lede" style="margin:20px auto 0; text-align:center;" data-de="Unverbindlich, transparent, auf Ihr Unternehmen ausgerichtet." data-en="Non-binding, transparent, tailored to your company.">Unverbindlich, transparent, auf Ihr Unternehmen ausgerichtet.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</button></div>
-      <p class="nudge center" data-de="Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages" data-en="Free &amp; non-binding · Response usually within one business day">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -1719,7 +1648,7 @@
         <div class="pick-row" style="margin-top:20px;">
           <div style="display:flex; align-items:center; gap:10px;">
             <img src="team/luca.jpg" alt="Luca Ferrari" style="width:44px; height:44px; border-radius:50%; object-fit:cover;">
-            <span style="font-size:0.88rem;"><strong>Luca Ferrari</strong><br><span class="stone" data-de="Dipl. Steuerexperte (i. A.)" data-en="Certified Tax Expert (in training)">Dipl. Steuerexperte (i. A.)</span></span>
+            <span style="font-size:0.88rem;"><strong>Luca Ferrari</strong><br><span class="stone" data-de="Steuerexperte in Ausbildung" data-en="Tax Expert in Training">Steuerexperte in Ausbildung</span></span>
           </div>
           <div style="display:flex; align-items:center; gap:10px;">
             <img src="team/dominique.jpg" alt="Dominique" style="width:44px; height:44px; border-radius:50%; object-fit:cover;">
@@ -1739,11 +1668,11 @@
       <div class="kicker" data-de="Kundenportal" data-en="Client Portal">Kundenportal</div>
       <h1 data-de="Alles im Blick. Von überall." data-en="Everything in view. From anywhere.">Alles im Blick. Von überall.</h1>
       <p class="lede" data-de="Policen, Dokumente, Anliegen und Kommunikation – zentral in Ihrem Coverd Portal." data-en="Policies, documents, requests and communication – all central in your Coverd Portal.">Policen, Dokumente, Anliegen und Kommunikation – zentral in Ihrem Coverd Portal.</p>
+      <!-- TODO: Login-Buttons wieder einblenden, sobald das Coverd Portal live ist -->
+      <p class="lede" data-de="Das Coverd Portal ist in Entwicklung." data-en="The Coverd Portal is in development.">Das Coverd Portal ist in Entwicklung.</p>
       <div class="cta-row">
-        <button class="btn btn-primary" onclick="openPortal('privat')" data-de="Login Privatperson" data-en="Login Private Client">Login Privatperson</button>
-        <button class="btn btn-ghost" onclick="openPortal('unternehmen')" data-de="Login Unternehmen" data-en="Login Business">Login Unternehmen</button>
+        <button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button>
       </div>
-      <p class="nudge" data-de-html="Oder &lt;a onclick=&quot;openBooking()&quot; style=&quot;text-decoration:underline; cursor:pointer;&quot;&gt;Beratung vereinbaren&lt;/a&gt;, wenn Sie noch keinen Zugang haben" data-en-html="Or &lt;a onclick=&quot;openBooking()&quot; style=&quot;text-decoration:underline; cursor:pointer;&quot;&gt;book a consultation&lt;/a&gt; if you don't have access yet">Oder <a onclick="openBooking()" style="text-decoration:underline; cursor:pointer;">Beratung vereinbaren</a>, wenn Sie noch keinen Zugang haben</p>
     </div>
   </section>
 
@@ -1780,29 +1709,10 @@
   </section>
 
 
-  <section class="deep">
-    <div class="wrap cols2">
-      <div>
-        <div class="scenario-box">
-          <p class="when" data-de="Samstagabend. Wasserschaden." data-en="Saturday evening. Water damage.">Samstagabend. Wasserschaden.</p>
-          <p data-de="Sie müssen nicht überlegen, wer Ihr Ansprechpartner ist oder wo Ihre Police liegt." data-en="You don't have to figure out who your contact is or where your policy is.">Sie müssen nicht überlegen, wer Ihr Ansprechpartner ist oder wo Ihre Police liegt.</p>
-          <p class="flow" data-de-html="Coverd öffnen → Schaden melden → erledigt." data-en-html="Open Coverd → report the claim → done.">Coverd öffnen → Schaden melden → erledigt.</p>
-        </div>
-      </div>
-      <div>
-        <div class="scenario-box">
-          <p class="when" data-de="Montagmorgen. Neuer Mitarbeiter." data-en="Monday morning. New employee.">Montagmorgen. Neuer Mitarbeiter.</p>
-          <p data-de-html="Portal öffnen → Mitarbeiter melden → Coverd übernimmt." data-en-html="Open the portal → report the employee → Coverd takes it from there.">Portal öffnen → Mitarbeiter melden → Coverd übernimmt.</p>
-          <p class="flow" data-de="Plötzlich versteht jeder den Nutzen des Portals." data-en="Suddenly everyone gets the value of the portal.">Plötzlich versteht jeder den Nutzen des Portals.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2 data-de="Technologie ersetzt keine Beratung. Sie macht sie einfacher." data-en="Technology doesn't replace advice. It makes it easier.">Technologie ersetzt keine Beratung. Sie macht sie einfacher.</h2>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -1820,7 +1730,7 @@
 
   <section class="deep">
     <div class="wrap cols2">
-      <div><h2 data-de="Ihre Bedürfnisse bestimmen unsere Empfehlung. Nicht die höchste Provision." data-en="Your needs determine our recommendation. Not the highest commission.">Ihre Bedürfnisse bestimmen unsere Empfehlung. Nicht die höchste Provision.</h2>
+      <div><h2 data-de="Unsere Empfehlung richtet sich nach Ihren Bedürfnissen, nicht nach der Provision." data-en="Our recommendation is based on your needs, not on the commission.">Unsere Empfehlung richtet sich nach Ihren Bedürfnissen, nicht nach der Provision.</h2>
         <div class="photo-frame"><img src="images/transparenz-vertrauen.jpg" alt="Zwei Geschäftspartner geben sich die Hand" data-de-alt="Zwei Geschäftspartner geben sich die Hand" data-en-alt="Two business partners shaking hands"></div>
       </div>
       <div>
@@ -1862,7 +1772,7 @@
         </div>
       </div>
       <p style="margin-top:32px; max-width:720px;" data-de="Unabhängig vom Modell gilt: Wir legen Ihnen offen, wie wir in Ihrem konkreten Fall vergütet werden — bevor Sie sich entscheiden, nicht erst danach. Wenn mehrere Lösungen für Sie infrage kommen, wählen wir nicht automatisch diejenige mit der höchsten Vergütung für uns, sondern die, die zu Ihrer Situation passt." data-en="Regardless of the model: we disclose to you how we are compensated in your specific case — before you decide, not just afterwards. If several solutions could work for you, we don't automatically choose the one that pays us the most, but the one that fits your situation.">Unabhängig vom Modell gilt: Wir legen Ihnen offen, wie wir in Ihrem konkreten Fall vergütet werden — bevor Sie sich entscheiden, nicht erst danach. Wenn mehrere Lösungen für Sie infrage kommen, wählen wir nicht automatisch diejenige mit der höchsten Vergütung für uns, sondern die, die zu Ihrer Situation passt.</p>
-      <div class="cta-row" style="margin-top:36px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</button></div>
+      <div class="cta-row" style="margin-top:36px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 
@@ -1919,19 +1829,23 @@
             <div class="blog-card-toggle"></div>
           </div>
           <div class="article blog-card-full">
+            <!-- TODO: Zahlen vor Livegang mit offiziellen Quellen prüfen -->
             <p data-de-html="&lt;strong&gt;Mehr Rente, mehr 3a, neue BVG-Grenzen: Das bringt 2027.&lt;/strong&gt;" data-en-html="&lt;strong&gt;More pension, more Pillar 3a, new BVG limits: what 2027 brings.&lt;/strong&gt;"><strong>Mehr Rente, mehr 3a, neue BVG-Grenzen: Das bringt 2027.</strong></p>
-            <p data-de="Im Dezember gibt es erstmals eine 13. AHV-Rente. Im Januar steigen die Renten. Und wer clever ist, zahlt 2027 mehr in die Säule 3a ein und spart dabei Steuern. Hier ist alles, was Sie wissen müssen, in zwei Minuten." data-en="In December, there's a 13th AHV pension payment for the first time. In January, pensions increase. And if you're smart, you'll pay more into Pillar 3a in 2027 and save on taxes while doing it. Here's everything you need to know, in two minutes.">Im Dezember gibt es erstmals eine 13. AHV-Rente. Im Januar steigen die Renten. Und wer clever ist, zahlt 2027 mehr in die Säule 3a ein und spart dabei Steuern. Hier ist alles, was Sie wissen müssen, in zwei Minuten.</p>
 
             <h3 data-de="AHV: Zweimal Grund zur Freude" data-en="AHV: Two Reasons to Celebrate">AHV: Zweimal Grund zur Freude</h3>
+            <!-- TODO: Zahlen vor Livegang mit offiziellen Quellen prüfen -->
             <p data-de="Dezember 2026: Rund 2,6 Millionen Rentnerinnen und Rentner erhalten erstmals die 13. AHV-Rente, automatisch und ohne Antrag. Januar 2027: Alle Renten steigen um 1,59 %, die Maximalrente auf CHF 2'560 pro Monat. Spannend bleibt der 29. November: Dann stimmt die Schweiz über eine höhere Mehrwertsteuer zur Finanzierung ab." data-en="December 2026: around 2.6 million pensioners receive the 13th AHV pension payment for the first time, automatically and without having to apply. January 2027: all pensions increase by 1.59%, with the maximum pension rising to CHF 2,560 per month. November 29 remains one to watch: that's when Switzerland votes on a higher VAT rate to help fund it.">Dezember 2026: Rund 2,6 Millionen Rentnerinnen und Rentner erhalten erstmals die 13. AHV-Rente, automatisch und ohne Antrag. Januar 2027: Alle Renten steigen um 1,59 %, die Maximalrente auf CHF 2'560 pro Monat. Spannend bleibt der 29. November: Dann stimmt die Schweiz über eine höhere Mehrwertsteuer zur Finanzierung ab.</p>
 
             <h3 data-de="Säule 3a: Mehr einzahlen, mehr sparen" data-en="Pillar 3a: Contribute More, Save More">Säule 3a: Mehr einzahlen, mehr sparen</h3>
+            <!-- TODO: Zahlen vor Livegang mit offiziellen Quellen prüfen -->
             <p data-de="Neu dürfen Sie CHF 7'373 einzahlen (mit Pensionskasse) und vollständig von den Steuern abziehen. Ein Geheimtipp: Lücken aus 2025 und 2026 können Sie seit diesem Jahr nachzahlen." data-en="You can now contribute CHF 7,373 (if you have a pension fund) and deduct the full amount from your taxes. An insider tip: since this year, you can make back-payments to close gaps from 2025 and 2026.">Neu dürfen Sie CHF 7'373 einzahlen (mit Pensionskasse) und vollständig von den Steuern abziehen. Ein Geheimtipp: Lücken aus 2025 und 2026 können Sie seit diesem Jahr nachzahlen.</p>
 
             <h3 data-de="BVG: Kleine Zahlen, grosse Wirkung für KMU" data-en="BVG: Small Numbers, Big Impact for SMEs">BVG: Kleine Zahlen, grosse Wirkung für KMU</h3>
+            <!-- TODO: Zahlen vor Livegang mit offiziellen Quellen prüfen -->
             <p data-de="Eintrittsschwelle und Koordinationsabzug steigen. Wer knapp über CHF 22'680 verdient und keine Lohnerhöhung bekommt, kann aus der Pensionskasse fallen. Und beim Zins wird es spannend: Die BVG-Kommission empfiehlt 1,75 % statt heute 1,25 %, der Bundesrat entscheidet noch." data-en="The entry threshold and coordination deduction are both rising. Anyone earning just above CHF 22,680 who doesn't get a raise could drop out of the pension fund altogether. And the interest rate is worth watching too: the BVG Commission recommends 1.75% instead of today's 1.25%, though the Federal Council has yet to decide.">Eintrittsschwelle und Koordinationsabzug steigen. Wer knapp über CHF 22'680 verdient und keine Lohnerhöhung bekommt, kann aus der Pensionskasse fallen. Und beim Zins wird es spannend: Die BVG-Kommission empfiehlt 1,75 % statt heute 1,25 %, der Bundesrat entscheidet noch.</p>
 
             <h3 data-de="Die Zahlen auf einen Blick" data-en="The Figures at a Glance">Die Zahlen auf einen Blick</h3>
+            <!-- TODO: Zahlen vor Livegang mit offiziellen Quellen prüfen -->
             <div class="article-table-wrap">
               <table class="article-table">
                 <thead>
@@ -1972,7 +1886,7 @@
             <div class="blog-card-toggle"></div>
           </div>
           <div class="article blog-card-full">
-            <p data-de="Sach- und Haftpflichtversicherungen vergleichen viele Unternehmen regelmässig. Die berufliche Vorsorge (BVG) bleibt dabei oft über Jahre unangetastet – dabei handelt es sich meist um einen der grössten Kostenblöcke im Unternehmen. Wer sie nie überprüft, lässt oft ohne es zu merken Optimierungspotenzial liegen. Hier die wichtigsten Punkte für einen Wechsel." data-en="Many businesses regularly compare their property and liability insurance. Occupational pensions (BVG), however, often go untouched for years – even though they're usually one of the largest cost items in the company. Anyone who never reviews it often leaves optimization potential on the table without realizing it. Here are the key points for a switch.">Sach- und Haftpflichtversicherungen vergleichen viele Unternehmen regelmässig. Die berufliche Vorsorge (BVG) bleibt dabei oft über Jahre unangetastet – dabei handelt es sich meist um einen der grössten Kostenblöcke im Unternehmen. Wer sie nie überprüft, lässt oft ohne es zu merken Optimierungspotenzial liegen. Hier die wichtigsten Punkte für einen Wechsel.</p>
+            <p data-de="Wer sie nie überprüft, lässt oft ohne es zu merken Optimierungspotenzial liegen. Hier die wichtigsten Punkte für einen Wechsel." data-en="Anyone who never reviews it often leaves optimization potential on the table without realizing it. Here are the key points for a switch.">Wer sie nie überprüft, lässt oft ohne es zu merken Optimierungspotenzial liegen. Hier die wichtigsten Punkte für einen Wechsel.</p>
 
             <h3 data-de="Warum sich ein Blick auf die BVG-Lösung lohnt" data-en="Why it pays to take a look at your BVG solution">Warum sich ein Blick auf die BVG-Lösung lohnt</h3>
             <p data-de="Sammelstiftungen unterscheiden sich zum Teil erheblich bei:" data-en="Collective pension foundations can differ significantly in:">Sammelstiftungen unterscheiden sich zum Teil erheblich bei:</p>
@@ -1991,6 +1905,7 @@
             </p>
 
             <h3 data-de="Die Belegschaft muss zustimmen" data-en="The workforce must consent">Die Belegschaft muss zustimmen</h3>
+            <!-- TODO: Rechtsgrundlage prüfen (BVG statt Bundesgerichtsurteil?) -->
             <p data-de="Ein Punkt, der immer wieder unterschätzt wird: Seit einem Bundesgerichtsurteil braucht die Kündigung eines BVG-Anschlussvertrags das Einverständnis der gesamten Belegschaft oder der Arbeitnehmervertretung – eine blosse Information der Mitarbeitenden reicht nicht aus. Fehlt diese Zustimmung, ist die Kündigung ungültig, und das Unternehmen haftet im schlimmsten Fall im Vorsorgefall selbst." data-en="A point that's consistently underestimated: following a Federal Supreme Court ruling, canceling a BVG affiliation contract requires the consent of the entire workforce or the employee representation body – simply informing employees is not enough. Without this consent, the cancellation is invalid, and in the worst case, the company itself becomes liable in a pension event.">Ein Punkt, der immer wieder unterschätzt wird: Seit einem Bundesgerichtsurteil braucht die Kündigung eines BVG-Anschlussvertrags das Einverständnis der gesamten Belegschaft oder der Arbeitnehmervertretung – eine blosse Information der Mitarbeitenden reicht nicht aus. Fehlt diese Zustimmung, ist die Kündigung ungültig, und das Unternehmen haftet im schlimmsten Fall im Vorsorgefall selbst.</p>
             <p data-de="Für KMU heisst das konkret: Der Wechsel ist kein reiner Entscheid der Geschäftsleitung, sondern ein Prozess, der frühzeitig kommuniziert und dokumentiert werden muss." data-en="For SMEs, this means concretely: the switch is not purely a management decision, but a process that must be communicated and documented early.">Für KMU heisst das konkret: Der Wechsel ist kein reiner Entscheid der Geschäftsleitung, sondern ein Prozess, der frühzeitig kommuniziert und dokumentiert werden muss.</p>
 
@@ -2025,7 +1940,7 @@
             <div class="blog-card-toggle"></div>
           </div>
           <div class="article blog-card-full">
-            <p data-de="Die Säule 3a gehört zu den wenigen Möglichkeiten in der Schweiz, bei denen Sie mit derselben Einzahlung gleichzeitig fürs Alter vorsorgen und Steuern sparen. Trotzdem lassen viele jedes Jahr Geld liegen – oft aus reiner Unachtsamkeit. Hier die wichtigsten Punkte für 2026." data-en="Pillar 3a is one of the few ways in Switzerland to save for retirement and reduce your taxes with the same contribution. Yet many people leave money on the table every year – often out of sheer oversight. Here are the key points for 2026.">Die Säule 3a gehört zu den wenigen Möglichkeiten in der Schweiz, bei denen Sie mit derselben Einzahlung gleichzeitig fürs Alter vorsorgen und Steuern sparen. Trotzdem lassen viele jedes Jahr Geld liegen – oft aus reiner Unachtsamkeit. Hier die wichtigsten Punkte für 2026.</p>
+            <p data-de="Hier die wichtigsten Punkte für 2026." data-en="Here are the key points for 2026.">Hier die wichtigsten Punkte für 2026.</p>
 
             <h3 data-de="Der Maximalbetrag 2026" data-en="The Maximum Amount for 2026">Der Maximalbetrag 2026</h3>
             <p data-de="Wie viel Sie einzahlen dürfen, hängt davon ab, ob Sie einer Pensionskasse angeschlossen sind:" data-en="How much you're allowed to contribute depends on whether you're affiliated with a pension fund:">Wie viel Sie einzahlen dürfen, hängt davon ab, ob Sie einer Pensionskasse angeschlossen sind:</p>
@@ -2067,7 +1982,7 @@
             <div class="blog-card-toggle"></div>
           </div>
           <div class="article blog-card-full">
-            <p data-de="Eine Versicherung zu kündigen klingt einfach – ist es aber nur, wenn man die Fristen und ein paar Stolperfallen kennt. Jede Versicherungsart tickt anders, und ein einziger verpasster Tag kann bedeuten, dass Sie ein weiteres Jahr an einen Vertrag gebunden sind, den Sie eigentlich loswerden wollten. Hier die wichtigsten Fristen für Ihre privaten Versicherungen – plus die Tricks, die in der Praxis wirklich helfen." data-en="Cancelling an insurance policy sounds simple – but it only is if you know the deadlines and a few pitfalls. Each type of insurance works differently, and a single missed day can mean you're stuck for another year in a contract you actually wanted to get rid of. Here are the key deadlines for your private insurance policies – plus the tricks that really help in practice.">Eine Versicherung zu kündigen klingt einfach – ist es aber nur, wenn man die Fristen und ein paar Stolperfallen kennt. Jede Versicherungsart tickt anders, und ein einziger verpasster Tag kann bedeuten, dass Sie ein weiteres Jahr an einen Vertrag gebunden sind, den Sie eigentlich loswerden wollten. Hier die wichtigsten Fristen für Ihre privaten Versicherungen – plus die Tricks, die in der Praxis wirklich helfen.</p>
+            <p data-de="Hier die wichtigsten Fristen für Ihre privaten Versicherungen – plus die Tricks, die in der Praxis wirklich helfen." data-en="Here are the key deadlines for your private insurance policies – plus the tricks that really help in practice.">Hier die wichtigsten Fristen für Ihre privaten Versicherungen – plus die Tricks, die in der Praxis wirklich helfen.</p>
 
             <h3 data-de="Die Fristen im Überblick" data-en="Deadlines at a Glance">Die Fristen im Überblick</h3>
             <div class="article-table-wrap">
@@ -2136,7 +2051,7 @@
             <div class="blog-card-toggle"></div>
           </div>
           <div class="article blog-card-full">
-            <p data-de="Bei Unternehmen ist eine Versicherungskündigung selten nur ein administrativer Akt – oft hängen Mitarbeitende, Betriebsabläufe oder gesetzliche Pflichten daran. Wer die Fristen nicht kennt, riskiert ein weiteres Jahr in einer Lösung, die eigentlich nicht mehr passt. Hier die wichtigsten Fristen für Ihre betrieblichen Versicherungen – plus die Tricks, die in der Praxis wirklich helfen." data-en="For businesses, cancelling an insurance policy is rarely just an administrative task – employees, business operations or legal obligations are often tied to it. Anyone who doesn't know the deadlines risks another year in a solution that no longer fits. Here are the key deadlines for your business insurance policies – plus the tricks that really help in practice.">Bei Unternehmen ist eine Versicherungskündigung selten nur ein administrativer Akt – oft hängen Mitarbeitende, Betriebsabläufe oder gesetzliche Pflichten daran. Wer die Fristen nicht kennt, riskiert ein weiteres Jahr in einer Lösung, die eigentlich nicht mehr passt. Hier die wichtigsten Fristen für Ihre betrieblichen Versicherungen – plus die Tricks, die in der Praxis wirklich helfen.</p>
+            <p data-de="Hier die wichtigsten Fristen für Ihre betrieblichen Versicherungen – plus die Tricks, die in der Praxis wirklich helfen." data-en="Here are the key deadlines for your business insurance policies – plus the tricks that really help in practice.">Hier die wichtigsten Fristen für Ihre betrieblichen Versicherungen – plus die Tricks, die in der Praxis wirklich helfen.</p>
 
             <h3 data-de="Die Fristen im Überblick" data-en="Deadlines at a Glance">Die Fristen im Überblick</h3>
             <div class="article-table-wrap">
@@ -2204,7 +2119,7 @@
             <div class="blog-card-toggle"></div>
           </div>
           <div class="article blog-card-full">
-            <p data-de="Gute Mitarbeitende zu finden, wird für viele Schweizer Unternehmen zunehmend anspruchsvoll. Ein attraktiver Lohn allein genügt oft nicht mehr. Bewerberinnen und Bewerber achten verstärkt auf das Gesamtpaket: flexible Arbeitsbedingungen, Entwicklungsmöglichkeiten, Unternehmenskultur – und eine überzeugende berufliche Vorsorge." data-en="Finding good employees is becoming increasingly challenging for many Swiss companies. An attractive salary alone is often no longer enough. Job applicants are paying closer attention to the overall package: flexible working conditions, development opportunities, company culture – and a convincing occupational pension solution.">Gute Mitarbeitende zu finden, wird für viele Schweizer Unternehmen zunehmend anspruchsvoll. Ein attraktiver Lohn allein genügt oft nicht mehr. Bewerberinnen und Bewerber achten verstärkt auf das Gesamtpaket: flexible Arbeitsbedingungen, Entwicklungsmöglichkeiten, Unternehmenskultur – und eine überzeugende berufliche Vorsorge.</p>
+            <p data-de="Bewerberinnen und Bewerber achten verstärkt auf das Gesamtpaket: flexible Arbeitsbedingungen, Entwicklungsmöglichkeiten, Unternehmenskultur – und eine überzeugende berufliche Vorsorge." data-en="Job applicants are paying closer attention to the overall package: flexible working conditions, development opportunities, company culture – and a convincing occupational pension solution.">Bewerberinnen und Bewerber achten verstärkt auf das Gesamtpaket: flexible Arbeitsbedingungen, Entwicklungsmöglichkeiten, Unternehmenskultur – und eine überzeugende berufliche Vorsorge.</p>
             <p data-de="Eine gute BVG-Lösung kann deshalb weit mehr sein als eine gesetzliche Pflicht. Richtig ausgestaltet und verständlich kommuniziert, wird sie zu einem echten Wettbewerbsvorteil im Arbeitsmarkt." data-en="A good BVG solution can therefore be far more than a legal obligation. Designed correctly and communicated clearly, it becomes a genuine competitive advantage in the job market.">Eine gute BVG-Lösung kann deshalb weit mehr sein als eine gesetzliche Pflicht. Richtig ausgestaltet und verständlich kommuniziert, wird sie zu einem echten Wettbewerbsvorteil im Arbeitsmarkt.</p>
 
             <h3 data-de="Die Pensionskasse ist ein oft unterschätzter Mitarbeiterbenefit" data-en="The Pension Fund Is an Often Underestimated Employee Benefit">Die Pensionskasse ist ein oft unterschätzter Mitarbeiterbenefit</h3>
@@ -2327,24 +2242,23 @@
 <main class="page" data-page="ueber">
   <section class="page-hero">
     <div class="wrap">
+      <!-- TODO: Kicker wiederholt jetzt die H1 ("Über Coverd" / "Über Coverd") — vor Livegang prüfen, ob Kicker angepasst werden soll -->
       <div class="kicker" data-de="Über Coverd" data-en="About Coverd">Über Coverd</div>
-      <h1 data-de="Beratung, wie sie sein sollte." data-en="Advice, the way it should be.">Beratung, wie sie sein sollte.</h1>
-      <p class="lede" data-de="Persönlich. Transparent. Digital." data-en="Personal. Transparent. Digital.">Persönlich. Transparent. Digital.</p>
-      <div class="quote-block" style="margin-top:26px;"><p data-de="Ein Ansprechpartner. Alles im Blick." data-en="One point of contact. Everything in view.">Ein Ansprechpartner. Alles im Blick.</p></div>
+      <h1 data-de="Über Coverd" data-en="About Coverd">Über Coverd</h1>
+      <p class="lede" data-de="Drei Gründer mit einem Ziel: Versicherungen und Vorsorge so erklären, dass man sie versteht." data-en="Three founders with one goal: explaining insurance and pension planning so that people actually understand them.">Drei Gründer mit einem Ziel: Versicherungen und Vorsorge so erklären, dass man sie versteht.</p>
     </div>
   </section>
 
   <section class="deep">
     <div class="wrap cols2">
       <div><h2 data-de="Warum wir Coverd aufgebaut haben." data-en="Why we built Coverd.">Warum wir Coverd aufgebaut haben.</h2>
+        <!-- TODO: durch echtes Teamfoto ersetzen -->
         <div class="photo-frame"><img src="images/ueber-advisor.jpg" alt="Beraterin im Gespräch mit einer Kundin" data-de-alt="Beraterin im Gespräch mit einer Kundin" data-en-alt="Advisor talking with a client"></div>
       </div>
       <div>
-        <p data-de="Coverd entstand aus einer einfachen Beobachtung: Jan, Luca und Nicolas haben in ihrem eigenen Umfeld immer wieder gesehen, wie unübersichtlich Versicherungs- und Vorsorgeentscheidungen für Privatpersonen und KMU sind – verteilt auf verschiedene Berater, Gesellschaften und Aktenordner, ohne echten Überblick. Daraus entstand die Idee zu Coverd: ein Partner, der Versicherungen, Vorsorge, Finanzen und Steuern persönlich und digital zusammenbringt." data-en="Coverd grew out of a simple observation: Jan, Luca and Nicolas kept seeing, in their own circles, how confusing insurance and pension decisions are for private individuals and SMEs – spread across different advisors, providers and paper files, with no real overview. That is how the idea for Coverd was born: a partner who brings insurance, pension planning, finances and taxes together, personally and digitally.">Coverd entstand aus einer einfachen Beobachtung: Jan, Luca und Nicolas haben in ihrem eigenen Umfeld immer wieder gesehen, wie unübersichtlich Versicherungs- und Vorsorgeentscheidungen für Privatpersonen und KMU sind – verteilt auf verschiedene Berater, Gesellschaften und Aktenordner, ohne echten Überblick. Daraus entstand die Idee zu Coverd: ein Partner, der Versicherungen, Vorsorge, Finanzen und Steuern persönlich und digital zusammenbringt.</p>
-        <!-- TODO: Hier fehlen noch 2-3 echte Sätze zur tatsächlichen Gründungsgeschichte — werden separat geliefert. -->
-        <p data-de="Weil Beratung nicht davon abhängen sollte, welches Produkt dem Berater die höchste Vergütung bringt." data-en="Because advice should not depend on which product pays the advisor the highest commission.">Weil Beratung nicht davon abhängen sollte, welches Produkt dem Berater die höchste Vergütung bringt.</p>
-        <p data-de="Weil Kunden verstehen sollten, warum ihnen eine Lösung empfohlen wird." data-en="Because clients should understand why a solution is being recommended to them.">Weil Kunden verstehen sollten, warum ihnen eine Lösung empfohlen wird.</p>
-        <p data-de="Und weil Versicherungsadministration heute einfacher funktionieren kann." data-en="And because insurance administration can work more simply today.">Und weil Versicherungsadministration heute einfacher funktionieren kann.</p>
+        <!-- TODO: Text gemeinsam prüfen -->
+        <p data-de="Wir arbeiten seit Jahren mit KMU und Privatpersonen zusammen, bei der Buchhaltung, den Löhnen und den Steuern. Dabei sehen wir immer wieder dasselbe: Die Pensionskasse wurde vor zehn Jahren gewählt und seither nie verglichen. Die Betriebshaftpflicht passt nicht mehr zum heutigen Geschäft. Und privat weiss kaum jemand, was die eigenen Policen eigentlich abdecken." data-en="We have worked for years with SMEs and private individuals on bookkeeping, payroll and taxes. In doing so, we keep seeing the same picture: the pension fund was chosen ten years ago and never compared since. Business liability cover no longer fits today's business. And privately, hardly anyone knows what their own policies actually cover.">Wir arbeiten seit Jahren mit KMU und Privatpersonen zusammen, bei der Buchhaltung, den Löhnen und den Steuern. Dabei sehen wir immer wieder dasselbe: Die Pensionskasse wurde vor zehn Jahren gewählt und seither nie verglichen. Die Betriebshaftpflicht passt nicht mehr zum heutigen Geschäft. Und privat weiss kaum jemand, was die eigenen Policen eigentlich abdecken.</p>
+        <p data-de="Wir haben Coverd gegründet, weil wir überzeugt sind, dass das besser geht: mit einem Ansprechpartner, der unabhängig vergleicht, offenlegt, wie er bezahlt wird, und sich auch nach dem Abschluss meldet." data-en="We founded Coverd because we are convinced there is a better way: with one point of contact who compares independently, discloses how they are paid, and stays in touch after the contract is signed.">Wir haben Coverd gegründet, weil wir überzeugt sind, dass das besser geht: mit einem Ansprechpartner, der unabhängig vergleicht, offenlegt, wie er bezahlt wird, und sich auch nach dem Abschluss meldet.</p>
       </div>
     </div>
   </section>
@@ -2353,7 +2267,6 @@
     <div class="wrap">
       <div class="section-head">
         <h2 data-de="Die Menschen hinter Coverd." data-en="The people behind Coverd.">Die Menschen hinter Coverd.</h2>
-        <p class="lede" data-de="Fachwissen ist wichtig. Vertrauen ist persönlich." data-en="Expertise matters. Trust is personal.">Fachwissen ist wichtig. Vertrauen ist persönlich.</p>
       </div>
       <!-- TODO: LinkedIn-Profil für Dominique ergänzen, sobald vorhanden (Jan, Luca, Nicolas sind bereits verlinkt) -->
       <div class="team-grid">
@@ -2372,7 +2285,7 @@
           <img src="team/luca.jpg" alt="Luca Ferrari">
           <div class="overlay">
             <h4>Luca Ferrari</h4>
-            <div class="role" data-de="Mitinhaber, Dipl. Steuerexperte (i. A.)" data-en="Co-Owner, Certified Tax Expert (in training)">Mitinhaber, Dipl. Steuerexperte (i. A.)</div>
+            <div class="role" data-de="Mitinhaber, Steuerexperte in Ausbildung" data-en="Co-Owner, Tax Expert in Training">Mitinhaber, Steuerexperte in Ausbildung</div>
             <div class="bio" data-de="Steuern &amp; Unternehmensberatung." data-en="Taxes &amp; Business Consulting.">Steuern &amp; Unternehmensberatung.</div>
             <div class="quote"><!-- TODO: echtes Zitat von Luca ergänzen --></div>
             <div class="tags"><span class="tag-pill" data-de="Steuern" data-en="Taxes">Steuern</span><span class="tag-pill">M.A. HSG Accounting &amp; Finance</span></div>
@@ -2390,6 +2303,7 @@
             <div class="links"><a href="https://www.linkedin.com/in/nicolassschneider/" target="_blank" rel="noopener">LinkedIn</a><a onclick="openBooking()" style="cursor:pointer;" data-de="Kontakt" data-en="Contact">Kontakt</a></div>
           </div>
         </div>
+        <!-- TODO: Nachname und LinkedIn-Link für Dominique ergänzen -->
         <div class="team-card" tabindex="0">
           <img src="team/dominique.jpg" alt="Dominique">
           <div class="overlay">
@@ -2403,8 +2317,7 @@
         </div>
       </div>
       <div style="text-align:center; max-width:520px; margin:40px auto 0;">
-        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.15rem;" data-de="Sie wissen, wer für Sie da ist." data-en="You know who is there for you.">Sie wissen, wer für Sie da ist.</p>
-        <p class="stone" data-de="Keine anonyme Hotline. Kein wechselnder Ansprechpartner. Ein Team, das Ihre Situation kennt." data-en="No anonymous hotline. No rotating point of contact. A team that knows your situation.">Keine anonyme Hotline. Kein wechselnder Ansprechpartner. Ein Team, das Ihre Situation kennt.</p>
+        <p class="stone" data-de="Bei uns haben Sie eine feste Ansprechperson, die Ihre Situation kennt." data-en="With us, you have one fixed point of contact who knows your situation.">Bei uns haben Sie eine feste Ansprechperson, die Ihre Situation kennt.</p>
       </div>
     </div>
   </section>
@@ -2420,16 +2333,15 @@
         <span class="chip" data-de="Steuererklärungen für Unternehmen" data-en="Corporate tax returns">Steuererklärungen für Unternehmen</span>
         <span class="chip" data-de="Gesellschaftsgründung" data-en="Company formation">Gesellschaftsgründung</span>
       </div>
-      <p style="margin-top:30px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.15rem;" data-de="Ein Ansprechpartner. Alle Themen. Auch die Buchhaltung." data-en="One point of contact. Every topic. Bookkeeping included.">Ein Ansprechpartner. Alle Themen. Auch die Buchhaltung.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:22px;"><button class="btn btn-ghost" onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:22px;"><button class="btn btn-ghost" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
-      <h2 data-de="Willkommen bei Coverd." data-en="Welcome to Coverd.">Willkommen bei Coverd.</h2>
-      <p class="lede" style="margin:20px auto 0; text-align:center;" data-de="Lernen Sie uns kennen und erfahren Sie, wie wir Beratung neu denken." data-en="Get to know us and discover how we are rethinking advice.">Lernen Sie uns kennen und erfahren Sie, wie wir Beratung neu denken.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</button></div>
+      <h2 data-de="Lernen Sie uns kennen" data-en="Get to know us">Lernen Sie uns kennen</h2>
+      <p class="lede" style="margin:20px auto 0; text-align:center;" data-de="Am einfachsten in einem kurzen, unverbindlichen Gespräch." data-en="The easiest way is a short, non-binding conversation.">Am einfachsten in einem kurzen, unverbindlichen Gespräch.</p>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -2459,11 +2371,12 @@
         <a onclick="goTo('ueber')" data-de="Über Coverd" data-en="About Coverd">Über Coverd</a>
         <a onclick="goTo('blog')">Blog</a>
         <a onclick="goTo('transparenz')" data-de="Transparenz &amp; Vergütung" data-en="Transparency &amp; Compensation">Transparenz &amp; Vergütung</a>
-        <a onclick="openBooking()" data-de="Beratung vereinbaren" data-en="Book a Consultation">Beratung vereinbaren</a>
+        <a onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</a>
       </div>
     </div>
     <div class="foot-legal">
       <!-- TODO: FINMA-Registrierungsnummer und Verbandsmitgliedschaft (falls zutreffend) ergänzen, sobald bekannt — keine Nummer erfinden -->
+      <!-- TODO: erst nach FINMA-Registrierung so stehen lassen -->
       <span data-de="FINMA-registrierter Versicherungsvermittler · Berufshaftpflichtversicherung nach VAG" data-en="FINMA-registered insurance broker · Professional liability insurance under VAG">FINMA-registrierter Versicherungsvermittler · Berufshaftpflichtversicherung nach VAG</span>
     </div>
     <!-- TODO: Direkte Telefonnummer und/oder E-Mail-Adresse im Footer sichtbar machen, sobald final festgelegt (z. B. als <a href="tel:..."> / <a href="mailto:..."> neben "Beratung buchen") -->
