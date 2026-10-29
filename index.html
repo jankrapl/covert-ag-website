@@ -148,6 +148,7 @@
     .page-hero::before, .page-hero::after, .home-hero::before, .home-hero::after{ display:none; }
   }
   .page-hero .wrap, .home-hero .wrap{ position:relative; z-index:1; }
+  .hero-3d-canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
   .page-hero .kicker, .home-hero .kicker{
     display:inline-block; font-size:0.78rem; font-weight:700; text-transform:uppercase;
     letter-spacing:.16em; color:#BFD1FF; margin-bottom:18px;
@@ -208,7 +209,7 @@
     box-shadow:0 10px 24px rgba(11,11,12,.06); cursor:pointer; z-index:1;
     transition:border-color .2s ease, color .2s ease, transform .2s ease;
   }
-  .hub-node:hover{ border-color:var(--pine); color:var(--pine); transform:translate(-50%,-50%) scale(1.05); }
+  .hub-node:hover{ border-color:var(--pine); color:var(--pine); transform:translate(-50%,-50%) scale(1.05); animation-play-state:paused; }
   @media (max-width:720px){
     .hub-diagram{ aspect-ratio:auto; max-width:420px; display:flex; flex-direction:column; gap:14px; }
     .hub-lines{ display:none; }
@@ -216,6 +217,25 @@
     .hub-core{ padding:26px; border-radius:20px; box-shadow:none; }
     .hub-core::before, .hub-core::after{ display:none; }
     .hub-node{ text-align:center; padding:16px 20px; border-radius:16px; }
+  }
+  @media (min-width:721px) and (prefers-reduced-motion: no-preference){
+    .hub-lines line{ stroke-dasharray:6 10; animation:hubFlow 1.1s linear infinite; }
+    .hub-core{ animation:hubPulse 2.6s ease-in-out infinite; }
+    .hub-node{ animation:hubFloat 3.6s ease-in-out infinite; }
+    .hub-node:nth-of-type(3){ animation-delay:.2s; }
+    .hub-node:nth-of-type(4){ animation-delay:.6s; }
+    .hub-node:nth-of-type(5){ animation-delay:.1s; }
+    .hub-node:nth-of-type(6){ animation-delay:.5s; }
+    .hub-node:nth-of-type(7){ animation-delay:.3s; }
+  }
+  @keyframes hubFlow{ to{ stroke-dashoffset:-16; } }
+  @keyframes hubPulse{
+    0%,100%{ box-shadow:0 0 0 1px rgba(0,87,255,.16), 0 0 46px 12px rgba(0,87,255,.28); }
+    50%{ box-shadow:0 0 0 1px rgba(0,87,255,.24), 0 0 60px 16px rgba(0,87,255,.42); }
+  }
+  @keyframes hubFloat{
+    0%,100%{ transform:translate(-50%,-50%) translateY(0); }
+    50%{ transform:translate(-50%,-50%) translateY(-6px); }
   }
   .hero-grid{ display:block; }
 
@@ -246,7 +266,16 @@
   @media (max-width:600px){ .services{ grid-template-columns:1fr; } }
   .service{ padding:0; border:0; }
   .services > .service{ border:0; padding:0; }
-  .service-icon{ width:56px; height:56px; margin:0 auto 22px; background:var(--pine); border-radius:0 20px 20px 20px; display:flex; align-items:center; justify-content:center; }
+  .service-icon{ width:56px; height:56px; margin:0 auto 22px; background:var(--pine); border-radius:0 20px 20px 20px; display:flex; align-items:center; justify-content:center; position:relative; box-shadow:0 3px 0 #2e20c9, 0 6px 0 #241a9e, 0 14px 22px rgba(11,11,12,.22); }
+  @media (prefers-reduced-motion: no-preference){
+    .service-icon{ animation:iconTilt3d 5s ease-in-out infinite; }
+    .service-icon:hover{ animation-play-state:paused; transform:perspective(500px) rotateX(10deg) rotateY(-14deg); }
+  }
+  @keyframes iconTilt3d{
+    0%,100%{ transform:perspective(500px) rotateX(0deg) rotateY(0deg); }
+    25%{ transform:perspective(500px) rotateX(9deg) rotateY(-11deg); }
+    75%{ transform:perspective(500px) rotateX(-7deg) rotateY(11deg); }
+  }
   .service-icon svg{ width:26px; height:26px; }
 
   /* ---------- Versicherungen: Privat/KMU toggle ---------- */
@@ -368,8 +397,10 @@
 
   /* ---------- Leistung cards (photo + number) ---------- */
   .leistung-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; margin-top:44px; }
-  .leistung-card{ border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--white); transition:border-color .15s ease; }
-  .leistung-card:hover{ border-color:var(--pine); }
+  .leistung-card{ position:relative; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--white); transition:border-color .15s ease, transform .25s ease, box-shadow .25s ease; }
+  .leistung-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--pine),var(--pine-light)); transform:scaleX(0); transform-origin:left; transition:transform .3s ease; z-index:1; }
+  .leistung-card:hover{ border-color:var(--pine); transform:translateY(-6px); box-shadow:0 20px 40px rgba(11,11,12,.12); }
+  .leistung-card:hover::before{ transform:scaleX(1); }
   .leistung-photo{ aspect-ratio:4/3; overflow:hidden; }
   .leistung-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
   .leistung-body{ padding:22px 24px 26px; }
@@ -539,6 +570,10 @@
   .lead-card .role{ font-size:0.86rem; color:var(--stone); }
 
   .section-head{ max-width:680px; margin-bottom:8px; }
+  @media (prefers-reduced-motion: no-preference){
+    .section-head.reveal-ready{ opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
+    .section-head.reveal-ready.is-revealed{ opacity:1; transform:none; }
+  }
   .section-head .lede{ margin-top:16px; }
 
   /* ---------- Social proof ---------- */
@@ -655,6 +690,7 @@
 <main class="page active" data-page="home">
 
   <section class="home-hero">
+    <canvas class="hero-3d-canvas" id="hero3dCanvas" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="kicker" data-de="Versicherungen · Vorsorge · Finanzen · Steuern" data-en="Insurance · Pensions · Finance · Taxes">Versicherungen · Vorsorge · Finanzen · Steuern</div>
       <h1 data-de="Ein Partner. Alles im Blick." data-en="One partner. Everything in view.">Ein Partner. Alles im Blick.</h1>
@@ -2399,6 +2435,7 @@
 </footer>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ---------- Language toggle (DE default, EN opt-in) ---------- */
 var currentLang = (function(){ try { return localStorage.getItem('coverd_lang') || 'de'; } catch(e){ return 'de'; } })();
@@ -2444,6 +2481,8 @@ function goTo(page, anchorId){
   } else {
     window.scrollTo({top:0, behavior:'instant'});
   }
+  if (typeof placeHero3DCanvas === 'function') placeHero3DCanvas();
+  if (typeof initScrollReveal === 'function') initScrollReveal();
 }
 function scrollToId(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
@@ -2669,6 +2708,163 @@ function updateVorsorgeCalc(){
   document.getElementById('calcYears').textContent = years;
   document.getElementById('calcYearsInline').textContent = years;
 }
+
+/* ---------- Hero 3D particle network (shared canvas, follows active page) ---------- */
+(function(){
+  if (typeof THREE === 'undefined') return;
+  var canvas = document.getElementById('hero3dCanvas');
+  if (!canvas) return;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.set(0, 0, 7);
+
+  var netGroup = new THREE.Group();
+  var nodeCount = 42;
+  var nodes = [];
+  var nodeGeo = new THREE.SphereGeometry(0.05, 10, 10);
+  var nodeMat = new THREE.MeshBasicMaterial({ color: 0x9d91ff });
+  var nodeMatBright = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  for (var n = 0; n < nodeCount; n++){
+    var mesh = new THREE.Mesh(nodeGeo, n % 7 === 0 ? nodeMatBright : nodeMat);
+    mesh.position.set(
+      (Math.random() - 0.5) * 6.4,
+      (Math.random() - 0.5) * 4.6,
+      (Math.random() - 0.5) * 3.2
+    );
+    netGroup.add(mesh);
+    nodes.push(mesh);
+  }
+  var lineGeo = new THREE.BufferGeometry();
+  var linePositions = [];
+  var maxDist = 2.0;
+  for (var a = 0; a < nodes.length; a++){
+    for (var b = a + 1; b < nodes.length; b++){
+      if (nodes[a].position.distanceTo(nodes[b].position) < maxDist){
+        linePositions.push(nodes[a].position.x, nodes[a].position.y, nodes[a].position.z);
+        linePositions.push(nodes[b].position.x, nodes[b].position.y, nodes[b].position.z);
+      }
+    }
+  }
+  lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+  var lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.18 });
+  netGroup.add(new THREE.LineSegments(lineGeo, lineMat));
+  scene.add(netGroup);
+
+  var ambient = new THREE.AmbientLight(0xffffff, 0.55);
+  scene.add(ambient);
+
+  var activeHero = null;
+
+  window.placeHero3DCanvas = function(){
+    var page = document.querySelector('.page.active');
+    if (!page) return;
+    var hero = page.querySelector('.home-hero, .page-hero');
+    if (!hero) { canvas.style.display = 'none'; activeHero = null; return; }
+    canvas.style.display = 'block';
+    if (hero !== activeHero){
+      hero.insertBefore(canvas, hero.firstChild);
+      activeHero = hero;
+    }
+    resizeRenderer();
+    isVisible = true;
+    renderer.render(scene, camera);
+  };
+
+  function resizeRenderer(){
+    if (!activeHero) return;
+    var w = activeHero.clientWidth, h = activeHero.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', resizeRenderer);
+
+  var targetRotX = 0, targetRotY = 0;
+  document.addEventListener('pointermove', function(e){
+    if (reduceMotion || !activeHero) return;
+    var r = activeHero.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
+    var nx = ((e.clientX - r.left) / r.width) - 0.5;
+    var ny = ((e.clientY - r.top) / r.height) - 0.5;
+    targetRotY = nx * 0.5;
+    targetRotX = ny * 0.3;
+  });
+
+  var isVisible = true;
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      isVisible = entries[0].isIntersecting;
+    }, { threshold: 0.05 }).observe(canvas);
+  }
+
+  var clock = new THREE.Clock();
+  function animate(){
+    requestAnimationFrame(animate);
+    if (!isVisible || !activeHero) return;
+    var t = clock.getElapsedTime();
+    if (!reduceMotion){
+      netGroup.rotation.y = t * 0.06 + targetRotY * 0.6;
+      netGroup.rotation.x = targetRotX * 0.6;
+    }
+    renderer.render(scene, camera);
+  }
+
+  placeHero3DCanvas();
+  animate();
+})();
+
+/* ---------- Scroll-reveal for section headings ---------- */
+var initScrollReveal = (function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var observer = null;
+  if (!reduceMotion && 'IntersectionObserver' in window){
+    observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }
+  return function(){
+    if (!observer) return;
+    document.querySelectorAll('.page.active .section-head:not(.reveal-ready):not(.is-revealed)').forEach(function(el){
+      el.classList.add('reveal-ready');
+      observer.observe(el);
+    });
+  };
+})();
+initScrollReveal();
+
+/* ---------- 3D tilt-on-hover for photo/card elements ---------- */
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+  function attachTilt(el, liftPx){
+    var lift = liftPx ? ' translateY(-' + liftPx + 'px)' : '';
+    el.addEventListener('mousemove', function(e){
+      el.style.transition = 'none';
+      var r = el.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform = 'perspective(900px) rotateY(' + (px * 10) + 'deg) rotateX(' + (-py * 10) + 'deg)' + lift;
+    });
+    el.addEventListener('mouseleave', function(){
+      el.style.transition = 'transform .3s ease';
+      el.style.transform = '';
+    });
+  }
+  document.querySelectorAll('.leistung-card').forEach(function(el){ attachTilt(el, 6); });
+  document.querySelectorAll('.split-panel').forEach(function(el){ attachTilt(el, 0); });
+  document.querySelectorAll('.team-card').forEach(function(el){ attachTilt(el, 0); });
+})();
 
 applyLang(currentLang);
 </script>
