@@ -123,7 +123,7 @@
   section{ padding:96px 0; }
   section.tight{ padding:64px 0; }
   .deep{ background:var(--paper-deep); }
-  .dark{ background:var(--ink); color:var(--paper); }
+  .dark{ background:linear-gradient(150deg, var(--pine) 0%, #16224a 55%, var(--ink) 100%); color:var(--paper); }
   .dark h1,.dark h2,.dark h3{ color:var(--paper); }
   .dark .stone{ color:#A6A6AC; }
   .stone{ color:var(--stone); }
@@ -514,7 +514,7 @@
   @media (max-width:880px){ .panel3-cards{ gap:16px; } }
 
   /* footer */
-  footer{ background:var(--ink); color:var(--paper); padding:64px 0 36px; }
+  footer{ background:linear-gradient(150deg, var(--pine) 0%, #16224a 55%, var(--ink) 100%); color:var(--paper); padding:64px 0 36px; }
   .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; }
   @media (max-width:780px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
   footer .logo{ color:var(--paper); }
@@ -935,7 +935,7 @@
       <div class="kicker" data-de="Privatkunden" data-en="Private Clients">Privatkunden</div>
       <h1 data-de="Alles geregelt. Für heute und morgen." data-en="Everything organized. For today and tomorrow.">Alles geregelt. Für heute und morgen.</h1>
       <p class="lede" data-de="Versicherungen, Vorsorge, Finanzen und Steuern – mit einem Ansprechpartner und einer zentralen Übersicht." data-en="Insurance, pensions, finances and taxes – with one point of contact and one central overview.">Versicherungen, Vorsorge, Finanzen und Steuern – mit einem Ansprechpartner und einer zentralen Übersicht.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking('privat')" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
       <div class="self-check">
         <p class="q" data-de="Wann haben Sie Ihre Versicherungen zuletzt wirklich überprüft?" data-en="When did you last really review your insurance?">Wann haben Sie Ihre Versicherungen zuletzt wirklich überprüft?</p>
         <p class="a" data-de="Nicht nur die Prämie. Sondern ob die Leistungen noch zu Ihrem heutigen Leben passen." data-en="Not just the premium. But whether the benefits still fit your life today.">Nicht nur die Prämie. Sondern ob die Leistungen noch zu Ihrem heutigen Leben passen.</p>
@@ -983,7 +983,7 @@
       <h2 data-de="Mehr Versicherungen bedeuten nicht automatisch mehr Sicherheit." data-en="More insurance doesn't automatically mean more security.">Mehr Versicherungen bedeuten nicht automatisch mehr Sicherheit.</h2>
       <p style="margin-top:18px; color:rgba(255,255,255,.82);" data-de="Zu viel versichert? Doppelt versichert? Eine wichtige Lücke übersehen?" data-en="Over-insured? Double-insured? An important gap overlooked?">Zu viel versichert? Doppelt versichert? Eine wichtige Lücke übersehen?</p>
       <p style="color:rgba(255,255,255,.82);" data-de="Wir prüfen Ihre bestehende Situation, bevor wir über neue Produkte sprechen." data-en="We review your existing situation before we talk about new products.">Wir prüfen Ihre bestehende Situation, bevor wir über neue Produkte sprechen.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:22px;"><button class="btn btn-on-dark" onclick="openBooking()" data-de="Bestehende Versicherungen prüfen" data-en="Review Existing Insurance">Bestehende Versicherungen prüfen</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:22px;"><button class="btn btn-on-dark" onclick="openBooking('privat')" data-de="Bestehende Versicherungen prüfen" data-en="Review Existing Insurance">Bestehende Versicherungen prüfen</button></div>
     </div>
   </section>
 
@@ -1013,7 +1013,7 @@
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2 data-de="Lernen Sie Coverd unverbindlich kennen." data-en="Get to know Coverd, no strings attached.">Lernen Sie Coverd unverbindlich kennen.</h2>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking('privat')" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -1025,7 +1025,7 @@
       <div class="kicker" data-de="Unternehmen" data-en="Business">Unternehmen</div>
       <h1 data-de="Ihre Versicherungen laufen. Ihr Unternehmen auch." data-en="Your insurance runs smoothly. So does your business.">Ihre Versicherungen laufen. Ihr Unternehmen auch.</h1>
       <p class="lede" data-de="Wir analysieren, vergleichen und betreuen Ihre Unternehmensversicherungen – damit Sie sich auf Ihr Geschäft konzentrieren können." data-en="We analyze, compare and manage your business insurance – so you can focus on your business.">Wir analysieren, vergleichen und betreuen Ihre Unternehmensversicherungen – damit Sie sich auf Ihr Geschäft konzentrieren können.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()" data-de="Unternehmen analysieren lassen" data-en="Get Your Business Analyzed">Unternehmen analysieren lassen</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking('unternehmen')" data-de="Unternehmen analysieren lassen" data-en="Get Your Business Analyzed">Unternehmen analysieren lassen</button></div>
       <p class="nudge" data-de="Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages" data-en="Free &amp; non-binding · Response usually within one business day">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
     </div>
   </section>
@@ -1066,7 +1066,7 @@
       <div><h2 data-de="Ist Ihre Versicherung mit Ihrem Unternehmen gewachsen?" data-en="Has your insurance grown along with your business?">Ist Ihre Versicherung mit Ihrem Unternehmen gewachsen?</h2></div>
       <div>
         <p data-de="Unternehmen verändern sich. Versicherungen sollten mitziehen." data-en="Businesses change. Insurance should keep up.">Unternehmen verändern sich. Versicherungen sollten mitziehen.</p>
-        <div class="cta-row" style="margin-top:22px;"><button class="btn btn-ghost" onclick="openBooking()" data-de="Risiken überprüfen" data-en="Review Risks">Risiken überprüfen</button></div>
+        <div class="cta-row" style="margin-top:22px;"><button class="btn btn-ghost" onclick="openBooking('unternehmen')" data-de="Risiken überprüfen" data-en="Review Risks">Risiken überprüfen</button></div>
       </div>
     </div>
   </section>
@@ -1112,7 +1112,7 @@
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2 data-de="Lassen Sie uns über Ihr Unternehmen sprechen." data-en="Let's talk about your business.">Lassen Sie uns über Ihr Unternehmen sprechen.</h2>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking('unternehmen')" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -1124,7 +1124,7 @@
       <div class="kicker" data-de="Leistungen · Versicherungen" data-en="Services · Insurance">Leistungen · Versicherungen</div>
       <h1 data-de="Versicherungen vergleichen und richtig absichern" data-en="Compare insurance and get properly covered">Versicherungen vergleichen und richtig absichern</h1>
       <p class="lede" data-de="Wir vergleichen Anbieter, Leistungen und Preise – Sie entscheiden, welche Lösung zu Ihnen passt." data-en="We compare providers, benefits and prices – you decide which solution fits you.">Wir vergleichen Anbieter, Leistungen und Preise – Sie entscheiden, welche Lösung zu Ihnen passt.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()" data-de="Versicherungen vergleichen" data-en="Compare Insurance">Versicherungen vergleichen</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking('versicherungen')" data-de="Versicherungen vergleichen" data-en="Compare Insurance">Versicherungen vergleichen</button></div>
       <p class="nudge" data-de="Kostenlos &amp; unverbindlich · Lücken lassen sich oft erst im Gespräch erkennen" data-en="Free &amp; non-binding · Gaps often only become visible in conversation">Kostenlos &amp; unverbindlich · Lücken lassen sich oft erst im Gespräch erkennen</p>
     </div>
   </section>
@@ -1354,7 +1354,7 @@
   <section style="text-align:center; padding:120px 0;">
     <div class="wrap" style="max-width:680px;">
       <h2 data-de="Auch nach dem Abschluss: Ihre Policen bleiben im Blick." data-en="Even after signing: your policies stay in view.">Auch nach dem Abschluss: Ihre Policen bleiben im Blick.</h2>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking('versicherungen')" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -1366,7 +1366,7 @@
       <div class="kicker" data-de="Leistungen · Vorsorge &amp; Finanzplanung" data-en="Services · Pension &amp; Financial Planning">Leistungen · Vorsorge &amp; Finanzplanung</div>
       <h1 data-de="Wissen Sie, was später für Sie übrig bleibt?" data-en="Do you know what will be left for you later?">Wissen Sie, was später für Sie übrig bleibt?</h1>
       <p class="lede" data-de="Vorsorge, Vermögensaufbau und Pensionierung – heute planen, statt später überrascht zu werden." data-en="Pension planning, wealth building and retirement – plan today instead of being surprised later.">Vorsorge, Vermögensaufbau und Pensionierung – heute planen, statt später überrascht zu werden.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()" data-de="Vorsorge prüfen" data-en="Review Pension Plan">Vorsorge prüfen</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking('vorsorge')" data-de="Vorsorge prüfen" data-en="Review Pension Plan">Vorsorge prüfen</button></div>
       <p class="nudge" data-de="Je früher Sie planen, desto mehr Möglichkeiten bleiben Ihnen" data-en="The earlier you plan, the more options you keep">Je früher Sie planen, desto mehr Möglichkeiten bleiben Ihnen</p>
     </div>
   </section>
@@ -1401,7 +1401,7 @@
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg></div>
           <h3>Pensionsplanung</h3>
           <p>Szenarien statt Vermutungen.</p>
-          <a class="go" onclick="openBooking()">Situation schildern</a>
+          <a class="go" onclick="openBooking('vorsorge')">Situation schildern</a>
         </div>
       </div>
     </div>
@@ -1491,7 +1491,7 @@
       <div class="kicker" data-de="Schwerpunkt · Berufliche Vorsorge (BVG)" data-en="Specialty · Occupational Pension (BVG)">Schwerpunkt · Berufliche Vorsorge (BVG)</div>
       <h1 data-de="Wann haben Sie Ihre BVG-Lösung zuletzt verglichen?" data-en="When did you last compare your BVG pension solution?">Wann haben Sie Ihre BVG-Lösung zuletzt verglichen?</h1>
       <p class="lede" data-de="Sie erfahren innert weniger Wochen schwarz auf weiss, ob Ihre Mitarbeitenden zu fairen Konditionen versichert sind – und wie viel Sparpotenzial in Ihrer aktuellen BVG-Lösung steckt." data-en="Within a few weeks, you'll know in black and white whether your employees are insured on fair terms – and how much savings potential your current BVG solution holds.">Sie erfahren innert weniger Wochen schwarz auf weiss, ob Ihre Mitarbeitenden zu fairen Konditionen versichert sind – und wie viel Sparpotenzial in Ihrer aktuellen BVG-Lösung steckt.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()" data-de="BVG prüfen lassen" data-en="Get Your BVG Reviewed">BVG prüfen lassen</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking('bvg')" data-de="BVG prüfen lassen" data-en="Get Your BVG Reviewed">BVG prüfen lassen</button></div>
       <p class="nudge" data-de="Kostenlos &amp; unverbindlich · Für Geschäftsführung, HR und Verwaltungsrat" data-en="Free &amp; non-binding · For management, HR and the board">Kostenlos &amp; unverbindlich · Für Geschäftsführung, HR und Verwaltungsrat</p>
     </div>
   </section>
@@ -1636,7 +1636,7 @@
         <h3 data-de="Coverd prüft. Sie entscheiden." data-en="Coverd reviews. You decide.">Coverd prüft. Sie entscheiden.</h3>
         <p style="margin-top:12px;" data-de="Wir analysieren Ihre bestehende BVG-Lösung und zeigen transparent auf, wie sie bei Kosten, Leistungen und Struktur im Vergleich dasteht." data-en="We analyze your existing BVG solution and transparently show how it compares in terms of costs, benefits and structure.">Wir analysieren Ihre bestehende BVG-Lösung und zeigen transparent auf, wie sie bei Kosten, Leistungen und Struktur im Vergleich dasteht.</p>
         <p data-de="Nicht mit dem Versprechen einer bestimmten Rendite. Sondern mit dem Ziel, regelmässig zu prüfen, ob Ihre Vorsorgelösung weiterhin zu Ihrem Unternehmen und Ihren Mitarbeitenden passt." data-en="Not with the promise of a specific return. But with the goal of regularly checking whether your pension solution still fits your company and your employees.">Nicht mit dem Versprechen einer bestimmten Rendite. Sondern mit dem Ziel, regelmässig zu prüfen, ob Ihre Vorsorgelösung weiterhin zu Ihrem Unternehmen und Ihren Mitarbeitenden passt.</p>
-        <div class="cta-row" style="margin-top:14px;"><button class="btn btn-primary" onclick="openBooking()" data-de="BVG überprüfen lassen" data-en="Get Your BVG Reviewed">BVG überprüfen lassen</button></div>
+        <div class="cta-row" style="margin-top:14px;"><button class="btn btn-primary" onclick="openBooking('bvg')" data-de="BVG überprüfen lassen" data-en="Get Your BVG Reviewed">BVG überprüfen lassen</button></div>
       </div>
     </div>
   </section>
@@ -1646,7 +1646,7 @@
     <div class="wrap" style="max-width:680px;">
       <h2 data-de="Lassen Sie uns Ihre berufliche Vorsorge analysieren." data-en="Let's analyze your occupational pension.">Lassen Sie uns Ihre berufliche Vorsorge analysieren.</h2>
       <p class="lede" style="margin:20px auto 0; text-align:center;" data-de="Unverbindlich, transparent, auf Ihr Unternehmen ausgerichtet." data-en="Non-binding, transparent, tailored to your company.">Unverbindlich, transparent, auf Ihr Unternehmen ausgerichtet.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
+      <div class="cta-row" style="justify-content:center; margin-top:26px;"><button class="btn btn-primary" onclick="openBooking('bvg')" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
     </div>
   </section>
 </main>
@@ -1658,7 +1658,7 @@
       <div class="kicker" data-de="Leistungen · Steuern" data-en="Services · Taxes">Leistungen · Steuern</div>
       <h1 data-de="Steuern erledigt." data-en="Taxes handled.">Steuern erledigt.</h1>
       <p class="lede" data-de="Steuererklärung, Steuerberatung und Steueroptimierung für Privatpersonen und Unternehmen." data-en="Tax returns, tax advice and tax optimization for private individuals and businesses.">Steuererklärung, Steuerberatung und Steueroptimierung für Privatpersonen und Unternehmen.</p>
-      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking()" data-de="Steueranfrage starten" data-en="Start a Tax Inquiry">Steueranfrage starten</button></div>
+      <div class="cta-row"><button class="btn btn-primary" onclick="openBooking('steuern')" data-de="Steueranfrage starten" data-en="Start a Tax Inquiry">Steueranfrage starten</button></div>
       <p class="nudge" data-de="Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages" data-en="Free &amp; non-binding · Response usually within one business day">Kostenlos &amp; unverbindlich · Antwort in der Regel innerhalb eines Werktages</p>
     </div>
   </section>
@@ -1670,7 +1670,7 @@
       </div>
       <div>
         <p style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700;" data-de-html="Unterlagen übermitteln → Prüfung durch Coverd → Steuererklärung fertig." data-en-html="Submit documents → review by Coverd → tax return done.">Unterlagen übermitteln → Prüfung durch Coverd → Steuererklärung fertig.</p>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()" data-de="Steuererklärung erstellen lassen" data-en="Get Your Tax Return Filed">Steuererklärung erstellen lassen</button></div>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking('steuern')" data-de="Steuererklärung erstellen lassen" data-en="Get Your Tax Return Filed">Steuererklärung erstellen lassen</button></div>
       </div>
     </div>
   </section>
@@ -1680,7 +1680,7 @@
       <div><h2 data-de="Steueroptimierung beginnt vor der Steuererklärung." data-en="Tax optimization starts before the tax return.">Steueroptimierung beginnt vor der Steuererklärung.</h2></div>
       <div>
         <p data-de="Wer erst beim Ausfüllen über seine Steuern nachdenkt, kann viele Entscheidungen nicht mehr rückwirkend ändern. Deshalb beraten wir vorausschauend." data-en="If you only think about your taxes while filling out the form, many decisions can no longer be changed retroactively. That's why we advise proactively.">Wer erst beim Ausfüllen über seine Steuern nachdenkt, kann viele Entscheidungen nicht mehr rückwirkend ändern. Deshalb beraten wir vorausschauend.</p>
-        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking()" data-de="Steuersituation besprechen" data-en="Discuss Your Tax Situation">Steuersituation besprechen</button></div>
+        <div class="cta-row"><button class="btn btn-ghost" onclick="openBooking('steuern')" data-de="Steuersituation besprechen" data-en="Discuss Your Tax Situation">Steuersituation besprechen</button></div>
       </div>
     </div>
   </section>
@@ -1700,7 +1700,7 @@
             <span style="font-size:0.88rem;"><strong>Dominique</strong><br><span class="stone" data-de="Dipl. Steuerexperte" data-en="Certified Tax Expert">Dipl. Steuerexperte</span></span>
           </div>
         </div>
-        <div class="cta-row" style="margin-top:22px;"><button class="btn btn-ghost" onclick="openBooking()" data-de="Steuerberatung" data-en="Tax Advisory">Steuerberatung</button></div>
+        <div class="cta-row" style="margin-top:22px;"><button class="btn btn-ghost" onclick="openBooking('steuern')" data-de="Steuerberatung" data-en="Tax Advisory">Steuerberatung</button></div>
       </div>
     </div>
   </section>
@@ -2464,9 +2464,27 @@ function applyLang(lang){
 function toggleLang(){ applyLang(currentLang === 'de' ? 'en' : 'de'); }
 
 var BOOKING_URL = 'https://calendar.app.google/DXkmpuPdzdHy3rFJ9';
-function openBooking(){
-  if (BOOKING_URL) {
-    window.open(BOOKING_URL, '_blank', 'noopener');
+/* Eigene Google-Kalender-Terminpläne pro Thema (Google Kalender > Terminplan erstellen).
+   Trägt man hier einen Link ein, zeigt der Termin in Google Kalender automatisch das
+   Thema im Titel, ohne dass der Kunde etwas eintippen muss. Leer = genereller Link oben. */
+var BOOKING_URLS = {
+  // TODO: Google-Kalender-Terminplan-Link für "Versicherungen" eintragen
+  versicherungen: '',
+  // TODO: Google-Kalender-Terminplan-Link für "Vorsorge" eintragen
+  vorsorge: '',
+  // TODO: Google-Kalender-Terminplan-Link für "BVG" eintragen
+  bvg: '',
+  // TODO: Google-Kalender-Terminplan-Link für "Steuern" eintragen
+  steuern: '',
+  // TODO: Google-Kalender-Terminplan-Link für "Unternehmen" eintragen
+  unternehmen: '',
+  // TODO: Google-Kalender-Terminplan-Link für "Privatkunden" eintragen
+  privat: ''
+};
+function openBooking(topic){
+  var url = (topic && BOOKING_URLS[topic]) ? BOOKING_URLS[topic] : BOOKING_URL;
+  if (url) {
+    window.open(url, '_blank', 'noopener');
   } else {
     goTo('home', 'kontakt');
   }
