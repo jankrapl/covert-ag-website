@@ -1,6 +1,6 @@
 ---
 title: "Insurance Notice Periods: Tips and Tricks for Private Individuals"
-seoTitle: "Insurance notice periods: tips for private individuals"
+seoTitle: "Insurance notice periods: private individuals"
 excerpt: "Cancelling an insurance policy sounds simple – but it only is if you know the deadlines and a few pitfalls. Each type of insurance works differently, and a single missed day can mean you're stuck for another year in a contract you actually wanted to get rid of."
 category: "vorsorge"
 date: 2026-09-15

@@ -10,7 +10,7 @@ const de = lang === 'de';
 const name = de ? 'Impressum' : 'Legal Notice';
 const finma = site.finma;
 ---
-<Base lang={lang} route="impressum" title={`${name} | Coverd`} description={de ? 'Impressum der Coverd AG, Olten: Kontaktangaben und rechtliche Hinweise.' : 'Legal notice of Coverd AG, Olten: contact details and legal information.'} header="solid" crumb={[{ name }]}>
+<Base lang={lang} route="impressum" title={`${name} | Coverd`} description={de ? 'Impressum der Coverd AG in Olten: Anbieterin, Kontaktangaben, Haftungsausschluss, Urheberrechte und Hinweise zu den Bildern auf dieser Website.' : 'Legal notice of Coverd AG in Olten: provider, contact details, disclaimer, copyright and information about the images used on this website.'} header="solid" crumb={[{ name }]}>
   <section class="plainhead">
     <div class="wrap">
       <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href={url('home', lang)}>{ui[lang].home}</a></li><li aria-current="page">{name}</li></ol></nav>

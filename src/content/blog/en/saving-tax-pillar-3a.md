@@ -1,6 +1,6 @@
 ---
 title: "Taxes and Pension Planning: How to Save with Pillar 3a"
-seoTitle: "Saving tax with Pillar 3a: maximum, back-payments, withdrawal"
+seoTitle: "Saving tax with Pillar 3a: what applies"
 excerpt: "Pillar 3a is one of the few ways in Switzerland to save for retirement and reduce your taxes with the same contribution. Yet many people leave money on the table every year – often out of sheer oversight."
 category: "steuern"
 date: 2026-09-15

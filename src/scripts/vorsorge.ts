@@ -75,15 +75,21 @@ if (root) {
     drawTable();
   }
 
+  const chartBox = $('cChart');
+
   function drawChart(maxTotal: number) {
-    const W = 720, H = 300, L = 56, R = 8, T = 26, B = 26;
+    // Drawn at the container's real width, so axis text stays 12px on a phone.
+    const W = Math.max(280, Math.round(chartBox.clientWidth));
+    const H = W < 520 ? 240 : 300;
+    const L = W < 520 ? 44 : 56, R = 8, T = 26, B = 26;
     const plotW = W - L - R, plotH = H - T - B;
     const step = niceStep(maxTotal || 1);
     const yMax = Math.max(step, Math.ceil(maxTotal / step) * step);
     const y = (v: number) => T + plotH - (v / yMax) * plotH;
     const band = plotW / series.length;
     const barW = Math.min(24, Math.max(4, band * 0.72));
-    const everyNth = series.length > 24 ? 5 : series.length > 12 ? 2 : 1;
+    const roomFor = Math.max(4, Math.floor(plotW / 34));
+    const everyNth = [1, 2, 5, 10].find((n) => series.length / n <= roomFor) ?? 10;
 
     let grid = '';
     for (let v = 0; v <= yMax + 1e-6; v += step) {
@@ -127,7 +133,6 @@ if (root) {
 
   // Tooltip
   const tip = $<HTMLElement>('cTip');
-  const chartBox = $('cChart');
   function showTip(hit: SVGElement) {
     const d = series[Number(hit.dataset.i)];
     if (!d) return;
@@ -156,4 +161,5 @@ if (root) {
     num.addEventListener('input', () => { if (num.value !== '') range.value = num.value; render(); });
   }
   render();
+  new ResizeObserver(() => { tip.hidden = true; render(); }).observe(chartBox);
 }

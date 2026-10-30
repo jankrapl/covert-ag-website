@@ -1,6 +1,9 @@
 // Shared behaviour. The site works without this: navigation is plain links, the insurance list
 // shows both groups, and sections are visible by default (see html.js in global.css).
 
+// Tells the failsafe in Base.astro that scripts loaded. Otherwise it reveals all content after 3s.
+(window as unknown as { __coverdReady: boolean }).__coverdReady = true;
+
 const hdr = document.getElementById('hdr');
 
 function onScroll() {

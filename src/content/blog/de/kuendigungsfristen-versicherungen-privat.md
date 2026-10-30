@@ -1,6 +1,6 @@
 ---
 title: "Kündigungsfristen bei Versicherungen: Tipps und Tricks für Privatpersonen"
-seoTitle: "Kündigungsfristen bei Versicherungen: Tipps für Privatpersonen"
+seoTitle: "Kündigungsfristen Versicherungen: Tipps für Private"
 excerpt: "Eine Versicherung zu kündigen klingt einfach – ist es aber nur, wenn man die Fristen und ein paar Stolperfallen kennt. Jede Versicherungsart tickt anders, und ein einziger verpasster Tag kann bedeuten, dass Sie ein weiteres Jahr an einen Vertrag gebunden sind, den Sie eigentlich loswerden wollten."
 category: "vorsorge"
 date: 2026-09-15

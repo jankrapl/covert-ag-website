@@ -1,6 +1,6 @@
 ---
 title: "Vorsorge und AHV – die neuen Zahlen im Überblick"
-seoTitle: "Vorsorge 2027: AHV, Säule 3a und BVG-Zahlen im Überblick"
+seoTitle: "Vorsorge 2027: AHV-, 3a- und BVG-Zahlen"
 excerpt: "Im Dezember gibt es erstmals eine 13. AHV-Rente. Im Januar steigen die Renten. Und wer clever ist, zahlt 2027 mehr in die Säule 3a ein und spart dabei Steuern. Hier ist alles, was Sie wissen müssen, in zwei Minuten."
 category: "vorsorge"
 date: 2026-10-12

@@ -1,6 +1,6 @@
 ---
 title: "Steuern und Vorsorge: So sparen Sie mit der Säule 3a"
-seoTitle: "Steuern sparen mit der Säule 3a: Maximalbetrag, Nachzahlung, Bezug"
+seoTitle: "Steuern sparen mit der Säule 3a: Das gilt"
 excerpt: "Die Säule 3a gehört zu den wenigen Möglichkeiten in der Schweiz, bei denen Sie mit derselben Einzahlung gleichzeitig fürs Alter vorsorgen und Steuern sparen. Trotzdem lassen viele jedes Jahr Geld liegen – oft aus reiner Unachtsamkeit."
 category: "steuern"
 date: 2026-09-15

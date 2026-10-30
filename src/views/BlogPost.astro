@@ -8,7 +8,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { dateFmt, ui, url, type Lang } from '../i18n';
 import { bookingUrl } from '../data/site';
 import { article } from '../lib/schema';
-import { categories, postCta, postPath, postSlug, readingTime } from '../lib/blog';
+import { categories, postCta, postImageAlt, postPath, readingTime } from '../lib/blog';
 
 interface Props { post: CollectionEntry<'blog'> }
 const { post } = Astro.props;
@@ -42,7 +42,7 @@ const more = lang === 'de' ? 'Weitere Beiträge' : 'More Articles';
   </section>
   <section class="sec--paper">
     <div class="wrap" style="max-width:62rem">
-      <div class="figure ratio-32"><Img name={post.data.image} alt="" priority sizes="(max-width: 1000px) 100vw, 900px" /></div>
+      <div class="figure ratio-32"><Img name={post.data.image} alt={postImageAlt[post.data.translationKey]?.[lang] ?? ""} priority sizes="(max-width: 1000px) 100vw, 900px" /></div>
     </div>
   </section>
   <section class="sec sec--paper" style="padding-top:clamp(36px,5vw,64px)">

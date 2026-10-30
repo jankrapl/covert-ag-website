@@ -1,6 +1,6 @@
 ---
 title: "Eine gute BVG-Lösung: Wie Unternehmen Talente gewinnen und Mitarbeitende langfristig binden"
-seoTitle: "Mit einer guten BVG-Lösung Talente gewinnen und binden"
+seoTitle: "BVG-Lösung: Talente gewinnen und binden"
 excerpt: "Gute Mitarbeitende zu finden, wird für viele Schweizer Unternehmen zunehmend anspruchsvoll. Ein attraktiver Lohn allein genügt oft nicht mehr."
 category: "vorsorge"
 date: 2026-09-23

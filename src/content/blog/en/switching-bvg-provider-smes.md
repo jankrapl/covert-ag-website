@@ -1,6 +1,6 @@
 ---
 title: "Switching Your BVG Provider as an SME: What to Watch Out For"
-seoTitle: "Switching BVG provider as an SME: deadlines, consent, process"
+seoTitle: "Switching BVG provider as an SME"
 excerpt: "Many businesses regularly compare their property and liability insurance. Occupational pensions (BVG), however, often go untouched for years – even though they're usually one of the largest cost items in the company."
 category: "vorsorge"
 date: 2026-09-15

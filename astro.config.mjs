@@ -10,9 +10,8 @@ export default defineConfig({
   compressHTML: true,
   devToolbar: { enabled: false },
   integrations: [
-    sitemap({
-      i18n: { defaultLocale: 'de', locales: { de: 'de-CH', en: 'en' } },
-      filter: (page) => !page.includes('/404'),
-    }),
+    // Language pairs are declared as hreflang on each page: the sitemap's own i18n option only pairs
+    // identical slugs, and ours differ per language.
+    sitemap({ filter: (page) => !page.includes('/404') }),
   ],
 });

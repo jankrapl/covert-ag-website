@@ -60,7 +60,7 @@ const schemas = trail ? [...jsonld, trail] : jsonld;
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preload" href="/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <script is:inline>document.documentElement.classList.add('js')</script>
+    <script is:inline>(function(d){d.classList.add('js');setTimeout(function(){if(!window.__coverdReady)d.classList.remove('js')},3000)})(document.documentElement)</script>
     {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
   <body>

@@ -1,6 +1,6 @@
 ---
 title: "Pensions and AHV: The New Figures at a Glance"
-seoTitle: "Pensions 2027: AHV, Pillar 3a and BVG figures at a glance"
+seoTitle: "Pensions 2027: AHV, Pillar 3a and BVG figures"
 excerpt: "In December, there's a 13th AHV pension payment for the first time. In January, pensions increase. And if you're smart, you'll pay more into Pillar 3a in 2027 and save on taxes while doing it. Here's everything you need to know, in two minutes."
 category: "vorsorge"
 date: 2026-10-12
