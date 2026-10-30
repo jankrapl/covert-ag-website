@@ -1,0 +1,303 @@
+{
+ "blog-bvg-loesung-talente-gewinnen": {
+  "width": 1536,
+  "height": 1024,
+  "widths": [
+   480,
+   800,
+   1200,
+   1536
+  ]
+ },
+ "blog-bvg-wechsel-kmu": {
+  "width": 1536,
+  "height": 1024,
+  "widths": [
+   480,
+   800,
+   1200,
+   1536
+  ]
+ },
+ "blog-kuendigungsfristen-versicherungen-kmu": {
+  "width": 1536,
+  "height": 1024,
+  "widths": [
+   480,
+   800,
+   1200,
+   1536
+  ]
+ },
+ "blog-kuendigungsfristen-versicherungen-privat": {
+  "width": 1536,
+  "height": 1024,
+  "widths": [
+   480,
+   800,
+   1200,
+   1536
+  ]
+ },
+ "blog-steuern-sparen-saeule-3a": {
+  "width": 1536,
+  "height": 1024,
+  "widths": [
+   480,
+   800,
+   1200,
+   1536
+  ]
+ },
+ "blog-vorsorge-ahv-zahlen-2027": {
+  "width": 1536,
+  "height": 1024,
+  "widths": [
+   480,
+   800,
+   1200,
+   1536
+  ]
+ },
+ "bridge-inside": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "bridge-open": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "bvg-hero": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "card-bvg": {
+  "width": 1200,
+  "height": 1488,
+  "widths": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "card-privat": {
+  "width": 1200,
+  "height": 1488,
+  "widths": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "card-unternehmen": {
+  "width": 1200,
+  "height": 1488,
+  "widths": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "home-hero": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "overview": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "privat-hero": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "privat-leben": {
+  "width": 1200,
+  "height": 1488,
+  "widths": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "steuern-hero": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "transparenz-hero": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "ueber-hero": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "ueber-story": {
+  "width": 1600,
+  "height": 1200,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "unternehmen-admin": {
+  "width": 1600,
+  "height": 1200,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "unternehmen-hero": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "versicherungen-beratung": {
+  "width": 1600,
+  "height": 1200,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "versicherungen-hero": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "vorsorge-check": {
+  "width": 1600,
+  "height": 1200,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "vorsorge-hero": {
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "dominique": {
+  "width": 309,
+  "height": 315,
+  "widths": [
+   240,
+   309
+  ]
+ },
+ "jan": {
+  "width": 640,
+  "height": 800,
+  "widths": [
+   240,
+   320,
+   640
+  ]
+ },
+ "luca": {
+  "width": 318,
+  "height": 389,
+  "widths": [
+   240,
+   318
+  ]
+ },
+ "nicolas": {
+  "width": 299,
+  "height": 339,
+  "widths": [
+   240,
+   299
+  ]
+ }
+}

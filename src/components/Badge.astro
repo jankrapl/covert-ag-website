@@ -1,0 +1,6 @@
+---
+import { ui, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<span class="badge">{ui[lang].soon}</span>

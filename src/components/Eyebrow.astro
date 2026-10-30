@@ -1,0 +1,5 @@
+---
+interface Props { center?: boolean; tag?: string }
+const { center = false, tag: Tag = 'p' } = Astro.props;
+---
+<Tag class:list={['eyebrow', { 'eyebrow--center': center }]}><slot /></Tag>

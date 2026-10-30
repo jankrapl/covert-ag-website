@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Btn from '../components/Btn.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import TeamCard from '../components/TeamCard.astro';
+import { url, type Lang } from '../i18n';
+import { bookingUrl } from '../data/site';
+import { team } from '../data/team';
+import { service } from '../lib/schema';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = {
+  de: {
+    title: 'Steuererklärung & Steuerberatung in Olten | Coverd',
+    desc: 'Steuererklärung, Steuerberatung und Steueroptimierung für Privatpersonen und Unternehmen. Sie liefern die Unterlagen, wir kümmern uns um den Rest.',
+    eyebrow: 'Leistungen · Steuern',
+    crumb: 'Steuern',
+    h1: 'Steuern erledigt.',
+    lede: 'Steuererklärung, Steuerberatung und Steueroptimierung für Privatpersonen und Unternehmen.',
+    alt: 'Hände ordnen Unterlagen an einem Schreibtisch neben Rechner und Laptop',
+    btn: 'Steueranfrage starten',
+    nudge: 'Kostenlos & unverbindlich · Antwort in der Regel innerhalb eines Werktages',
+    flowK: 'Steuererklärung',
+    flowH: 'Sie liefern die Unterlagen. Wir kümmern uns darum.',
+    flow: ['Unterlagen übermitteln', 'Prüfung durch Coverd', 'Steuererklärung fertig'],
+    flowBtn: 'Steuererklärung erstellen lassen',
+    optK: 'Steueroptimierung',
+    optH: 'Steueroptimierung beginnt vor der Steuererklärung.',
+    optP: 'Wer erst beim Ausfüllen über seine Steuern nachdenkt, kann viele Entscheidungen nicht mehr rückwirkend ändern. Deshalb beraten wir vorausschauend.',
+    optBtn: 'Steuersituation besprechen',
+    optAlt: 'Glas mit Schweizer Münzen und ein junger Setzling auf einem Fenstersims',
+    expK: 'Fachpersonen',
+    expH: 'Komplexe Frage? Fachperson.',
+    expP: 'Für anspruchsvollere steuerliche Fragestellungen stehen bei Coverd entsprechend qualifizierte Fachpersonen und diplomierte Steuerexperten zur Verfügung.',
+    ctaH: 'Lassen Sie uns über Ihre Steuern sprechen.',
+    ctaP: 'Am einfachsten in einem kurzen, unverbindlichen Gespräch.',
+  },
+  en: {
+    title: 'Tax Returns & Tax Advice in Olten | Coverd',
+    desc: 'Tax returns, tax advice and tax optimization for private individuals and businesses. You provide the documents, we take care of the rest.',
+    eyebrow: 'Services · Taxes',
+    crumb: 'Taxes',
+    h1: 'Taxes handled.',
+    lede: 'Tax returns, tax advice and tax optimization for private individuals and businesses.',
+    alt: 'Hands organizing documents at a desk next to a calculator and laptop',
+    btn: 'Start a Tax Inquiry',
+    nudge: 'Free & non-binding · Response usually within one business day',
+    flowK: 'Tax return',
+    flowH: 'You provide the documents. We take care of the rest.',
+    flow: ['Submit documents', 'Review by Coverd', 'Tax return done'],
+    flowBtn: 'Get Your Tax Return Filed',
+    optK: 'Tax optimization',
+    optH: 'Tax optimization starts before the tax return.',
+    optP: "If you only think about your taxes while filling out the form, many decisions can no longer be changed retroactively. That's why we advise proactively.",
+    optBtn: 'Discuss Your Tax Situation',
+    optAlt: 'A jar of Swiss coins and a young seedling on a windowsill',
+    expK: 'Specialists',
+    expH: 'Complex question? Ask an expert.',
+    expP: 'For more demanding tax questions, Coverd has appropriately qualified specialists and certified tax experts available.',
+    ctaH: "Let's talk about your taxes.",
+    ctaP: 'The easiest way is a short, non-binding conversation.',
+  },
+}[lang];
+const experts = team.filter((p) => p.photo === 'luca' || p.photo === 'dominique');
+---
+<Base lang={lang} route="steuern" title={c.title} description={c.desc} image="steuern-hero" crumb={[{ name: c.crumb }]} jsonld={[service(lang, c.crumb, c.desc, url('steuern', lang))]}>
+  <PageHero lang={lang} eyebrow={c.eyebrow} title={c.h1} lede={c.lede} nudge={c.nudge} image="steuern-hero" alt={c.alt} crumb={c.crumb}>
+    <Btn href={bookingUrl('steuern')} variant="amber">{c.btn}</Btn>
+  </PageHero>
+
+  <section class="sec sec--paper">
+    <div class="wrap">
+      <SectionHead eyebrow={c.flowK} title={c.flowH}><Btn href={bookingUrl('steuern')}>{c.flowBtn}</Btn></SectionHead>
+      <ol class="flow" data-reveal>{c.flow.map((x) => <li class="h3">{x}</li>)}</ol>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap split split--flip">
+      <div class="figure ratio-32" data-reveal><Img name="blog-steuern-sparen-saeule-3a" alt={c.optAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
+      <div data-reveal>
+        <Eyebrow>{c.optK}</Eyebrow>
+        <h2 style="margin-top:14px">{c.optH}</h2>
+        <p class="lede muted" style="margin-top:18px">{c.optP}</p>
+        <div class="btn-row" style="margin-top:24px"><Btn href={bookingUrl('steuern')} variant="line">{c.optBtn}</Btn></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--paper">
+    <div class="wrap split split--top">
+      <div data-reveal>
+        <Eyebrow>{c.expK}</Eyebrow>
+        <h2 style="margin-top:14px">{c.expH}</h2>
+        <p class="lede muted" style="margin-top:18px">{c.expP}</p>
+      </div>
+      <div class="team team--2">{experts.map((p) => <TeamCard person={p} lang={lang} sizes="300px" />)}</div>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} title={c.ctaH} text={c.ctaP} topic="steuern" />
+</Base>

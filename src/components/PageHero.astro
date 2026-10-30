@@ -1,0 +1,28 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import Img from './Img.astro';
+import { ui, url, type Lang } from '../i18n';
+interface Props {
+  lang: Lang;
+  eyebrow: string;
+  title: string;
+  lede?: string;
+  nudge?: string;
+  image: string;
+  alt: string;
+  position?: string;
+  crumb: string;
+}
+const { lang, eyebrow, title, lede, nudge, image, alt, position, crumb } = Astro.props;
+---
+<section class="phero">
+  <Img class="phero__img" name={image} alt={alt} priority style={position ? `object-position:${position}` : undefined} />
+  <div class="wrap phero__in on-dark">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href={url('home', lang)}>{ui[lang].home}</a></li><li aria-current="page">{crumb}</li></ol></nav>
+    <Eyebrow>{eyebrow}</Eyebrow>
+    <h1>{title}</h1>
+    {lede && <p class="lede">{lede}</p>}
+    {Astro.slots.has('default') && <div class="btn-row"><slot /></div>}
+    {nudge && <p class="phero__nudge">{nudge}</p>}
+  </div>
+</section>

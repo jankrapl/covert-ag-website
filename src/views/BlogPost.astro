@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { dateFmt, ui, url, type Lang } from '../i18n';
+import { bookingUrl } from '../data/site';
+import { article } from '../lib/schema';
+import { categories, postCta, postPath, postSlug, readingTime } from '../lib/blog';
+
+interface Props { post: CollectionEntry<'blog'> }
+const { post } = Astro.props;
+const lang = post.data.lang as Lang;
+const { Content } = await render(post);
+const all = await getCollection('blog');
+const twin = all.find((p) => p.data.translationKey === post.data.translationKey && p.data.lang !== lang);
+const alternates = { de: lang === 'de' ? postPath(post) : twin ? postPath(twin) : '/blog/', en: lang === 'en' ? postPath(post) : twin ? postPath(twin) : '/en/blog/' };
+const related = all
+  .filter((p) => p.data.lang === lang && p.id !== post.id)
+  .sort((a, b) => Number(b.data.category === post.data.category) - Number(a.data.category === post.data.category) || b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+const cta = postCta[post.data.translationKey];
+const blogName = ui[lang].blog;
+const path = postPath(post);
+const more = lang === 'de' ? 'Weitere Beiträge' : 'More Articles';
+---
+<Base lang={lang} title={`${post.data.seoTitle} | Coverd`} description={post.data.excerpt.length > 158 ? `${post.data.excerpt.slice(0, 155).replace(/\s+\S*$/, '')}…` : post.data.excerpt} alternates={alternates} header="solid" type="article" image={post.data.image}
+  crumb={[{ name: blogName, href: url('blog', lang) }, { name: post.data.title }]}
+  jsonld={[article({ lang, title: post.data.title, description: post.data.excerpt, path, image: `/og/${post.data.image}.jpg`, date: post.data.date })]}>
+  <section class="plainhead" style="padding-bottom:clamp(24px,3vw,36px)">
+    <div class="wrap narrow" style="max-width:62rem">
+      <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href={url('home', lang)}>{ui[lang].home}</a></li><li><a href={url('blog', lang)}>{blogName}</a></li></ol></nav>
+      <Eyebrow>{categories[post.data.category][lang]}</Eyebrow>
+      <h1>{post.data.title}</h1>
+      <div class="post-meta" style="margin-top:16px">
+        <time datetime={post.data.date.toISOString().slice(0, 10)}>{dateFmt(post.data.date, lang)}</time>
+        <span>{readingTime(post.body ?? '')} {ui[lang].minutes}</span>
+      </div>
+    </div>
+  </section>
+  <section class="sec--paper">
+    <div class="wrap" style="max-width:62rem">
+      <div class="figure ratio-32"><Img name={post.data.image} alt="" priority sizes="(max-width: 1000px) 100vw, 900px" /></div>
+    </div>
+  </section>
+  <section class="sec sec--paper" style="padding-top:clamp(36px,5vw,64px)">
+    <div class="wrap">
+      <article class="art art--post">
+        <p class="art__lead">{post.data.excerpt}</p>
+        <Content />
+      </article>
+      {cta && <div class="art" style="margin-top:36px"><Btn href={bookingUrl(cta.topic)}>{cta.label[lang]}</Btn></div>}
+    </div>
+  </section>
+  <section class="sec sec--soft sec--tight">
+    <div class="wrap">
+      <header class="shead" style="margin-bottom:28px">
+        <h2 class="h3" style="font-size:clamp(1.5rem,2.4vw,2rem)">{more}</h2>
+        <div class="shead__side" style="justify-items:end"><a class="tlink" href={url('blog', lang)}>{ui[lang].blog} <Icon name="arrow-up" /></a></div>
+      </header>
+      <div class="pgrid">
+        {related.map((p) => (
+          <a class="pcard" href={postPath(p)}>
+            <div class="pcard__img"><Img name={p.data.image} alt="" sizes="(max-width: 600px) 100vw, 33vw" /></div>
+            <div class="post-meta"><span>{categories[p.data.category][lang]}</span></div>
+            <h3>{p.data.title}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

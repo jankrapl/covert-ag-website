@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Img from '../components/Img.astro';
+import { url, ui, type Lang } from '../i18n';
+import { site, bookingUrl } from '../data/site';
+import { organization } from '../lib/schema';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = {
+  de: {
+    title: 'Kontakt & Erstgespräch | Coverd Olten',
+    desc: 'Erstgespräch vereinbaren oder Situation schildern: kostenlos und unverbindlich, persönlich in Olten oder per Video. Antwort in der Regel innerhalb eines Werktages.',
+    crumb: 'Kontakt',
+    eyebrow: 'Kontakt',
+    h1: 'Lernen Sie uns kennen',
+    lede: 'Am einfachsten in einem kurzen, unverbindlichen Gespräch.',
+    book: 'Erstgespräch vereinbaren',
+    bookP: 'Kostenlos · Persönlich in Olten oder per Video',
+    mail: 'E-Mail',
+    mailP: 'Antwort in der Regel innerhalb eines Werktages',
+    wa: 'WhatsApp',
+    place: 'Standort',
+    placeP: 'Persönlich in Olten, für Sie in der ganzen Schweiz.',
+    formH: 'Situation schildern',
+    formP: 'Beschreiben Sie kurz, worum es geht. Wir melden uns bei Ihnen.',
+    name: 'Name',
+    email: 'E-Mail',
+    phone: 'Telefon (optional)',
+    who: 'Ich bin',
+    whoO: ['Privatperson', 'Unternehmen'],
+    topic: 'Thema',
+    topics: ['Versicherungen', 'Vorsorge & Finanzplanung', 'Berufliche Vorsorge (BVG)', 'Steuern', 'Etwas anderes'],
+    msg: 'Ihre Nachricht',
+    prefill: 'Mein Anliegen:',
+    consent: 'Ich bin einverstanden, dass Coverd meine Angaben zur Bearbeitung meiner Anfrage verwendet.',
+    privacy: 'Mehr dazu im Datenschutz',
+    send: 'E-Mail vorbereiten',
+    note: 'Beim Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Nachricht. Auf dieser Website wird nichts gespeichert.',
+    ok: `Öffnet sich kein E-Mail-Programm? Schreiben Sie uns direkt an ${site.email}.`,
+    subject: 'Anfrage über coverd.ch',
+    alt: 'Blick durch eine gedeckte Holzbrücke in die Altstadt',
+  },
+  en: {
+    title: 'Contact & Initial Consultation | Coverd Olten',
+    desc: 'Book an initial consultation or share your situation: free and non-binding, in person in Olten or by video call. Response usually within one business day.',
+    crumb: 'Contact',
+    eyebrow: 'Contact',
+    h1: 'Get to know us',
+    lede: 'The easiest way is a short, non-binding conversation.',
+    book: 'Book an Initial Consultation',
+    bookP: 'Free · In person in Olten or by video call',
+    mail: 'Email',
+    mailP: 'Response usually within one business day',
+    wa: 'WhatsApp',
+    place: 'Location',
+    placeP: 'Personal in Olten, for you across Switzerland.',
+    formH: 'Share your situation',
+    formP: "Tell us briefly what it's about. We'll get back to you.",
+    name: 'Name',
+    email: 'Email',
+    phone: 'Phone (optional)',
+    who: 'I am',
+    whoO: ['A private individual', 'A business'],
+    topic: 'Topic',
+    topics: ['Insurance', 'Pension & Financial Planning', 'Occupational Pension (BVG)', 'Taxes', 'Something else'],
+    msg: 'Your message',
+    prefill: 'My request:',
+    consent: 'I agree that Coverd may use my details to process my enquiry.',
+    privacy: 'More in our privacy policy',
+    send: 'Prepare Email',
+    note: 'When you submit, your email program opens with the finished message. Nothing is stored on this website.',
+    ok: `Email client did not open? Write to us directly at ${site.email}.`,
+    subject: 'Enquiry via coverd.ch',
+    alt: 'View through a covered wooden bridge towards the old town',
+  },
+}[lang];
+---
+<Base lang={lang} route="kontakt" title={c.title} description={c.desc} header="solid" image="bridge-open" crumb={[{ name: c.crumb }]} jsonld={[organization(lang)]}>
+  <section class="plainhead">
+    <div class="wrap">
+      <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href={url('home', lang)}>{ui[lang].home}</a></li><li aria-current="page">{c.crumb}</li></ol></nav>
+      <Eyebrow>{c.eyebrow}</Eyebrow>
+      <h1>{c.h1}</h1>
+      <p class="lede muted" style="margin-top:14px">{c.lede}</p>
+    </div>
+  </section>
+
+  <section class="sec sec--paper" style="padding-top:clamp(24px,3vw,40px)">
+    <div class="wrap split split--top split--5-7">
+      <div>
+        <div class="btn-row"><Btn href={bookingUrl()}>{c.book}</Btn></div>
+        <p class="small muted" style="margin-top:10px">{c.bookP}</p>
+        <div class="contact-list" style="margin-top:28px">
+          <a class="contact-item" href={`mailto:${site.email}`}><h2 class="h4">{c.mail}: {site.email}</h2><Icon name="arrow-up" /><p>{c.mailP}</p></a>
+          {site.phone && <a class="contact-item" href={site.phone.href}><h2 class="h4">{site.phone.label}</h2><Icon name="arrow-up" /></a>}
+          <a class="contact-item" href={site.whatsapp.href} target="_blank" rel="noopener"><h2 class="h4">{c.wa}: {site.whatsapp.label}</h2><Icon name="arrow-up" /></a>
+          <div class="contact-item">
+            <h2 class="h4">{c.place}: {site.address ? `${site.address.street}, ${site.address.zip} ${site.address.city}` : site.city}</h2>
+            <p style="grid-column:1/-1">{c.placeP}</p>
+          </div>
+        </div>
+        <div class="figure ratio-32" style="margin-top:28px"><Img name="bridge-open" alt={c.alt} sizes="(max-width: 860px) 100vw, 40vw" /></div>
+      </div>
+      <div class="sec--soft" style="padding:clamp(22px,3vw,40px)">
+        <h2 class="h3" style="font-size:clamp(1.5rem,2.4vw,2rem)">{c.formH}</h2>
+        <p class="muted" style="margin-top:8px">{c.formP}</p>
+        <form class="form" id="contactForm" style="margin-top:24px" data-email={site.email} data-subject={c.subject} data-prefill={c.prefill}>
+          <div class="form__row">
+            <div class="field"><label for="f-name">{c.name}</label><input id="f-name" name="name" type="text" autocomplete="name" required /></div>
+            <div class="field"><label for="f-email">{c.email}</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
+          </div>
+          <div class="form__row">
+            <div class="field"><label for="f-phone">{c.phone}</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="field">
+              <label for="f-who">{c.who}</label>
+              <select id="f-who" name="who">{c.whoO.map((o) => <option>{o}</option>)}</select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-topic">{c.topic}</label>
+            <select id="f-topic" name="topic">{c.topics.map((o) => <option>{o}</option>)}</select>
+          </div>
+          <div class="field"><label for="f-msg">{c.msg}</label><textarea id="f-msg" name="message" required></textarea></div>
+          <label class="check"><input type="checkbox" name="consent" required /><span>{c.consent} <a href={url('datenschutz', lang)}>{c.privacy}</a>.</span></label>
+          <div class="btn-row"><button class="btn" type="submit"><span class="btn__t">{c.send}</span><span class="btn__i"><Icon name="arrow-up" /></span></button></div>
+          <p class="form__note">{c.note}</p>
+          <p class="form__ok" id="formOk" role="status">{c.ok}</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // The form composes an email in the visitor's mail program. To collect enquiries directly later,
+  // point the submit handler at an endpoint; the markup does not need to change.
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  if (form) {
+    const topics = new URLSearchParams(location.search).getAll('thema').filter(Boolean);
+    const msg = form.elements.namedItem('message') as HTMLTextAreaElement;
+    if (topics.length) msg.value = `${form.dataset.prefill} ${topics.join(', ')}\n\n`;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const body = [
+        d.get('message'),
+        '',
+        `${d.get('name')} · ${d.get('email')}${d.get('phone') ? ` · ${d.get('phone')}` : ''}`,
+        `${d.get('who')} · ${d.get('topic')}`,
+      ].join('\n');
+      location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(`${form.dataset.subject}: ${d.get('topic')}`)}&body=${encodeURIComponent(body)}`;
+      document.getElementById('formOk')?.classList.add('is-on');
+    });
+  }
+</script>

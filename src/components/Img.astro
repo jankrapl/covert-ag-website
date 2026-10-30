@@ -1,0 +1,32 @@
+---
+// Responsive image from the optimised set. `sizes` should describe the rendered width.
+import images from '../data/images.json';
+
+type Manifest = Record<string, { width: number; height: number; widths: number[] }>;
+interface Props {
+  name: string;
+  alt: string;
+  sizes?: string;
+  class?: string;
+  priority?: boolean;
+  style?: string;
+}
+const { name, alt, sizes = '100vw', class: className, priority = false, style } = Astro.props;
+const meta = (images as Manifest)[name];
+if (!meta) throw new Error(`Unknown image: ${name}. Run npm run images.`);
+const srcset = meta.widths.map((w) => `/img/${name}-${w}.webp ${w}w`).join(', ');
+const fallback = meta.widths[Math.min(1, meta.widths.length - 1)];
+---
+<img
+  class={className}
+  style={style}
+  src={`/img/${name}-${fallback}.webp`}
+  srcset={srcset}
+  sizes={sizes}
+  width={meta.width}
+  height={meta.height}
+  alt={alt}
+  loading={priority ? 'eager' : 'lazy'}
+  decoding={priority ? 'sync' : 'async'}
+  fetchpriority={priority ? 'high' : undefined}
+/>

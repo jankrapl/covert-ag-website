@@ -1,0 +1,75 @@
+---
+import Logo from './Logo.astro';
+import Btn from './Btn.astro';
+import Icon from './Icon.astro';
+import Badge from './Badge.astro';
+import { ui, url, type Lang, type RouteId } from '../i18n';
+import { bookingUrl } from '../data/site';
+
+interface Props { lang: Lang; mode: 'overlay' | 'solid'; route?: RouteId; altHref: string }
+const { lang, mode, route, altHref } = Astro.props;
+const t = ui[lang];
+const cur = (id: RouteId) => (route === id ? 'page' : undefined);
+const otherLang = lang === 'de' ? 'en' : 'de';
+const insBiz = `${url('versicherungen', lang)}#unternehmen`;
+---
+<a class="skip" href="#main">{t.skip}</a>
+<header class="hdr" data-mode={mode} id="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href={url('home', lang)} aria-label={`Coverd – ${t.home}`}><Logo title="Coverd" /></a>
+    <nav class="nav" aria-label={lang === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
+      <a href={url('privat', lang)} aria-current={cur('privat')}>{t.privat}</a>
+      <a href={url('unternehmen', lang)} aria-current={cur('unternehmen')}>{t.unternehmen}</a>
+      <div class="drop" data-drop>
+        <button class="drop__btn" type="button" aria-expanded="false" aria-controls="drop-services">{t.leistungen} <Icon name="chev" /></button>
+        <div class="drop__panel drop__panel--wide" id="drop-services">
+          <div>
+            <p class="drop__t">{t.forPrivat}</p>
+            <a href={url('versicherungen', lang)}>{t.versicherungen}</a>
+            <a href={url('vorsorge', lang)}>{t.vorsorge}</a>
+            <a href={url('steuern', lang)}>{t.steuern}</a>
+          </div>
+          <div>
+            <p class="drop__t">{t.forUnternehmen}</p>
+            <a href={insBiz}>{t.versicherungenKmu}</a>
+            <a href={url('steuern', lang)}>{t.steuernKmu}</a>
+            <a href={url('bvg', lang)}>{t.bvg}</a>
+          </div>
+        </div>
+      </div>
+      <a href={url('blog', lang)} aria-current={cur('blog')}>{t.blog}</a>
+      <a href={url('ueber', lang)} aria-current={cur('ueber')}>{t.ueber}</a>
+    </nav>
+    <div class="hdr__end">
+      <a class="lang" href={altHref} lang={otherLang} hreflang={otherLang === 'de' ? 'de-CH' : 'en'} aria-label={t.switchLangLabel}>{t.switchLangShort}</a>
+      <div class="drop drop--end" data-drop>
+        <button class="drop__btn" type="button" aria-expanded="false" aria-controls="drop-login">{t.kundenlogin} <Icon name="chev" /></button>
+        <div class="drop__panel" id="drop-login">
+          <span class="soon-item" aria-disabled="true">{t.loginPrivat} <Badge lang={lang} /></span>
+          <span class="soon-item" aria-disabled="true">{t.loginKmu} <Badge lang={lang} /></span>
+        </div>
+      </div>
+      <Btn href={bookingUrl()} size="sm">{t.book}</Btn>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label={t.menu} data-open-label={t.menu} data-close-label={t.close}><span></span></button>
+    </div>
+  </div>
+  <div class="mnav" id="mnav">
+    <nav class="mnav__main" aria-label={lang === 'de' ? 'Mobile Navigation' : 'Mobile navigation'}>
+      <a href={url('privat', lang)}>{t.privat}</a>
+      <a href={url('unternehmen', lang)}>{t.unternehmen}</a>
+      <a href={url('versicherungen', lang)}>{t.versicherungen}</a>
+      <a href={url('vorsorge', lang)}>{t.vorsorge}</a>
+      <a href={url('bvg', lang)}>{t.bvg}</a>
+      <a href={url('steuern', lang)}>{t.steuern}</a>
+      <a href={url('blog', lang)}>{t.blog}</a>
+      <a href={url('ueber', lang)}>{t.ueber}</a>
+      <a href={url('kontakt', lang)}>{t.kontakt}</a>
+    </nav>
+    <div>
+      <p class="mnav__sub">{t.kundenlogin}</p>
+      <span class="soon-item" aria-disabled="true">{t.loginPrivat} <Badge lang={lang} /></span>
+      <span class="soon-item" aria-disabled="true">{t.loginKmu} <Badge lang={lang} /></span>
+    </div>
+    <Btn href={bookingUrl()}>{t.book}</Btn>
+  </div>
+</header>

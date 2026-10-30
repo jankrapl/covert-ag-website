@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { url, ui, type Lang } from '../i18n';
+import { site } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const de = lang === 'de';
+const name = de ? 'Impressum' : 'Legal Notice';
+const finma = site.finma;
+---
+<Base lang={lang} route="impressum" title={`${name} | Coverd`} description={de ? 'Impressum der Coverd AG, Olten: Kontaktangaben und rechtliche Hinweise.' : 'Legal notice of Coverd AG, Olten: contact details and legal information.'} header="solid" crumb={[{ name }]}>
+  <section class="plainhead">
+    <div class="wrap">
+      <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href={url('home', lang)}>{ui[lang].home}</a></li><li aria-current="page">{name}</li></ol></nav>
+      <Eyebrow>{site.legalName}</Eyebrow>
+      <h1>{name}</h1>
+    </div>
+  </section>
+  <section class="sec sec--soft" style="padding-top:clamp(32px,4vw,56px)">
+    <div class="wrap">
+      <div class="art legal">
+        <h2 style="margin-top:0">{de ? 'Anbieterin' : 'Provider'}</h2>
+        <p>
+          {site.legalName}<br />
+          {site.address ? <>{site.address.street}<br />{site.address.zip} {site.address.city}<br /></> : <>{site.city}<br /></>}
+          {de ? 'Schweiz' : 'Switzerland'}
+        </p>
+        <p>
+          {de ? 'E-Mail' : 'Email'}: <a href={`mailto:${site.email}`}>{site.email}</a><br />
+          {site.phone && <>{de ? 'Telefon' : 'Phone'}: <a href={site.phone.href}>{site.phone.label}</a><br /></>}
+          WhatsApp: <a href={site.whatsapp.href} target="_blank" rel="noopener">{site.whatsapp.label}</a>
+        </p>
+        {(site.uid || site.registerOffice) && (
+          <>
+            <h2>{de ? 'Handelsregister' : 'Commercial register'}</h2>
+            <p>
+              {site.uid && <>UID: {site.uid}<br /></>}
+              {site.registerOffice}
+            </p>
+          </>
+        )}
+        {site.boardMembers && (
+          <>
+            <h2>{de ? 'Vertretungsberechtigte Personen' : 'Authorised representatives'}</h2>
+            <p>{site.boardMembers.join(', ')}</p>
+          </>
+        )}
+        {finma.registered && (
+          <>
+            <h2>{de ? 'Aufsicht' : 'Supervision'}</h2>
+            <p>
+              {de ? 'Registrierter Versicherungsvermittler im Register der Eidgenössischen Finanzmarktaufsicht FINMA, Laupenstrasse 27, 3003 Bern.' : 'Registered insurance intermediary in the register of the Swiss Financial Market Supervisory Authority FINMA, Laupenstrasse 27, 3003 Bern.'}
+              {finma.number && <> {de ? 'Registernummer' : 'Register number'}: {finma.number}.</>}
+            </p>
+          </>
+        )}
+        {site.ombudsman && (
+          <>
+            <h2>{de ? 'Ombudsstelle' : 'Ombudsman'}</h2>
+            <p>{site.ombudsman}</p>
+          </>
+        )}
+        <h2>{de ? 'Haftungsausschluss' : 'Disclaimer'}</h2>
+        {de ? (
+          <p>Die Inhalte dieser Website wurden mit Sorgfalt erstellt. Wir übernehmen jedoch keine Gewähr für ihre Richtigkeit, Vollständigkeit und Aktualität. Die Informationen, Beispiele und Rechner dienen der allgemeinen Orientierung und ersetzen keine individuelle Beratung.</p>
+        ) : (
+          <p>The content of this website has been prepared with care. However, we accept no liability for its accuracy, completeness or timeliness. The information, examples and calculators are for general guidance only and do not replace individual advice.</p>
+        )}
+        <h2>{de ? 'Externe Links' : 'External links'}</h2>
+        {de ? (
+          <p>Diese Website enthält Links auf Angebote Dritter. Für deren Inhalte sind ausschliesslich die jeweiligen Betreiber verantwortlich.</p>
+        ) : (
+          <p>This website contains links to third-party services. Their operators alone are responsible for their content.</p>
+        )}
+        <h2>{de ? 'Urheberrechte und Bilder' : 'Copyright and images'}</h2>
+        {de ? (
+          <p>Texte, Grafiken und Bilder dieser Website sind urheberrechtlich geschützt. Die Porträts im Team zeigen unsere Mitarbeitenden. Alle übrigen Bilder sind mit künstlicher Intelligenz erzeugte Stimmungsbilder und zeigen keine realen Kundinnen, Kunden oder Orte.</p>
+        ) : (
+          <p>The text, graphics and images on this website are protected by copyright. The team portraits show our staff. All other images are AI-generated mood images and do not show real clients or places.</p>
+        )}
+      </div>
+    </div>
+  </section>
+</Base>

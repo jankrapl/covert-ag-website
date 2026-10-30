@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { getCollection } from 'astro:content';
+import { dateFmt, ui, url, type Lang } from '../i18n';
+import { site } from '../data/site';
+import { categories, postPath, readingTime } from '../lib/blog';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = {
+  de: {
+    title: 'Blog: Versicherungen, Vorsorge & Steuern erklärt | Coverd',
+    desc: 'Einordnungen zu Versicherungen, Vorsorge, Finanzen und Steuern in der Schweiz: verständlich erklärt, ohne Fachjargon.',
+    eyebrow: 'Blog',
+    h1: 'Aktuelles von Coverd.',
+    lede: 'Einordnungen zu Versicherungen, Vorsorge, Finanzen und Steuern – verständlich erklärt, ohne Fachjargon.',
+    alt: 'Blick vom Jura über das Mittelland im Morgennebel',
+    topicK: 'Themen',
+    topicH: 'Diese Themen erwarten Sie hier',
+    topicP: 'Wir bauen den Blog laufend auf, mit praxisnahen Beiträgen zu diesen Schwerpunkten.',
+    topics: [
+      { t: 'Versicherungen & Vorsorge', p: 'Praxisnahe Beiträge zu Absicherung, Vorsorgeplanung und häufigen Stolpersteinen.' },
+      { t: 'Steuern & Finanzen', p: 'Verständliche Hintergründe zu Steuerthemen, Optimierungsmöglichkeiten und Finanzplanung.' },
+      { t: 'Aktuelles von Coverd', p: 'Neuigkeiten rund um Coverd AG, unser Team und die Weiterentwicklung des Coverd Portals.' },
+    ],
+    allH: 'Alle Beiträge',
+    suggest: 'Thema vorschlagen',
+    suggestS: 'Themenvorschlag für den Blog',
+    ctaH: 'Lernen Sie uns kennen',
+    ctaP: 'Am einfachsten in einem kurzen, unverbindlichen Gespräch.',
+  },
+  en: {
+    title: 'Blog: Insurance, Pensions & Taxes Explained | Coverd',
+    desc: 'Perspectives on insurance, pensions, finance and taxes in Switzerland: explained clearly, without jargon.',
+    eyebrow: 'Blog',
+    h1: 'News from Coverd.',
+    lede: 'Perspectives on insurance, pensions, finance and taxes – explained clearly, without jargon.',
+    alt: 'View from the Jura across the Swiss plateau in morning mist',
+    topicK: 'Topics',
+    topicH: 'What you can expect here',
+    topicP: 'We are building up the blog step by step, with practical articles on these topics.',
+    topics: [
+      { t: 'Insurance & Pension Planning', p: 'Practical articles on coverage, pension planning and common pitfalls.' },
+      { t: 'Taxes & Finance', p: 'Clear background on tax topics, optimization options and financial planning.' },
+      { t: 'News from Coverd', p: 'News about Coverd AG, our team and the ongoing development of the Coverd Portal.' },
+    ],
+    allH: 'All Articles',
+    suggest: 'Suggest a Topic',
+    suggestS: 'Topic suggestion for the blog',
+    ctaH: 'Get to know us',
+    ctaP: 'The easiest way is a short, non-binding conversation.',
+  },
+}[lang];
+const posts = (await getCollection('blog', (p) => p.data.lang === lang)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Base lang={lang} route="blog" title={c.title} description={c.desc} image="overview" crumb={[{ name: c.eyebrow }]}>
+  <PageHero lang={lang} eyebrow={c.eyebrow} title={c.h1} lede={c.lede} image="overview" alt={c.alt} crumb={c.eyebrow} position="50% 70%" />
+
+  <section class="sec sec--soft">
+    <div class="wrap">
+      <SectionHead title={c.allH}><a class="tlink" href={`mailto:${site.email}?subject=${encodeURIComponent(c.suggestS)}`}>{c.suggest} <Icon name="arrow-up" /></a></SectionHead>
+      <div class="pgrid">
+        {posts.map((p) => (
+          <a class="pcard" href={postPath(p)} data-reveal>
+            <div class="pcard__img"><Img name={p.data.image} alt="" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" /></div>
+            <div class="post-meta"><span>{categories[p.data.category][lang]}</span><time datetime={p.data.date.toISOString().slice(0, 10)}>{dateFmt(p.data.date, lang)}</time></div>
+            <h3>{p.data.title}</h3>
+            <p>{p.data.excerpt}</p>
+            <span class="tlink">{ui[lang].readArticle} <Icon name="arrow-up" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--paper sec--tight">
+    <div class="wrap">
+      <SectionHead eyebrow={c.topicK} title={c.topicH}><p class="muted">{c.topicP}</p></SectionHead>
+      <div class="tiles tiles--3" data-reveal>
+        {c.topics.map((t) => <div class="tile" style="min-height:0"><h3>{t.t}</h3><p>{t.p}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} title={c.ctaH} text={c.ctaP} />
+</Base>

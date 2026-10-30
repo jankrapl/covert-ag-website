@@ -1,0 +1,391 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
+import Badge from '../components/Badge.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Process from '../components/Process.astro';
+import CtaBand from '../components/CtaBand.astro';
+import TeamCard from '../components/TeamCard.astro';
+import { getCollection } from 'astro:content';
+import { url, ui, dateFmt, type Lang } from '../i18n';
+import { site, bookingUrl } from '../data/site';
+import { team } from '../data/team';
+import { organization, website } from '../lib/schema';
+import { postPath, categories, readingTime } from '../lib/blog';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const copy = {
+  de: {
+    title: 'Coverd AG: Unabhängiger Versicherungsbroker in Olten',
+    desc: 'Versicherungen, Vorsorge und Steuern aus einer Hand: Coverd vergleicht unabhängig für Privatpersonen und KMU, persönlich in Olten oder per Video.',
+    heroAlt: 'Gedeckte Holzbrücke über einen Fluss in einer Schweizer Altstadt zur blauen Stunde',
+    eyebrow: 'Versicherungen · Vorsorge · Finanzen · Steuern',
+    h1: 'Ein Partner.<br />Alles im Blick.',
+    lede: 'Wir sind ein unabhängiger Versicherungsbroker aus Olten. Wir vergleichen Versicherungen und Vorsorgelösungen für Privatpersonen und KMU, erklären verständlich, was Sie wirklich brauchen, und bleiben auch nach dem Abschluss Ihr Ansprechpartner.',
+    book: 'Erstgespräch vereinbaren',
+    situation: 'Situation schildern',
+    nudge: 'Kostenloses Erstgespräch · Persönlich in Olten oder per Video',
+    introKicker: 'Über Coverd',
+    introH: 'Alles aus einer Hand.',
+    introP: 'Versicherungen, Vorsorge und Steuern hängen enger zusammen, als man denkt. Wer heiratet, ein Haus kauft oder eine Firma gründet, merkt das schnell. Deshalb schauen wir uns Ihre Situation als Ganzes an und nicht Police für Police.',
+    introBtn: 'Mehr über Coverd',
+    introAlt: 'Zwei Personen stehen an einem Fenster und blicken über den Fluss auf eine gedeckte Holzbrücke',
+    facts: [
+      ['1', 'feste Ansprechperson für alle Themen'],
+      ['4', 'Fachgebiete aus einer Hand'],
+      ['21', 'Versicherungsarten im Überblick'],
+      ['0', 'Franken für das Erstgespräch'],
+    ],
+    whoK: 'Für wen wir da sind',
+    whoH: 'Wer sind Sie?',
+    who: [
+      { k: 'Privatkunden', t: 'Ihre Finanzen. Ihre Versicherungen. Ihre Übersicht.', p: 'Von der ersten Versicherung über Vorsorge und Vermögensplanung bis zur jährlichen Steuererklärung begleiten wir Sie langfristig in Ihren finanziellen Fragen.', m: 'Für Privatkunden', href: 'privat', img: 'card-privat', alt: 'Vater trägt sein Kind auf den Schultern durch einen Herbstwald' },
+      { k: 'Unternehmen', t: 'Damit Sie sich um Ihr Unternehmen kümmern können.', p: 'Coverd unterstützt KMU und Unternehmen bei der Analyse, Optimierung und laufenden Betreuung ihrer Versicherungslösungen, persönlich beraten.', m: 'Für Unternehmen', href: 'unternehmen', img: 'card-unternehmen', alt: 'Inhaberin einer Bäckerei prüft ein Klemmbrett in ihrer Backstube' },
+      { k: 'Berufliche Vorsorge', t: 'Wann haben Sie Ihre BVG-Lösung zuletzt verglichen?', p: 'Kosten, Leistungen und Vorsorgeplan verständlich analysiert, für Unternehmen, die ihre berufliche Vorsorge nicht einfach laufen lassen wollen.', m: 'Zur BVG-Beratung', href: 'bvg', img: 'card-bvg', alt: 'Schreinermeister und Lernender besprechen ein Werkstück an der Hobelbank' },
+    ],
+    cmpK: 'Der Unterschied',
+    cmpH: 'Warum Coverd statt Direkt\u00ADversicherung oder Vergleichs\u00ADportal?',
+    cmpHead: ['Kriterium', 'Coverd', 'Vergleichsportal', 'Direkt bei Versicherer'],
+    cmp: [
+      ['Persönliche Beratung', 'Ja', 'Nein', 'Teilweise'],
+      ['Anbieterübergreifender Vergleich', 'Ja, mehrere Gesellschaften', 'Ja, aber ohne Beratung', 'Nein, nur ein Anbieter'],
+      ['Laufende Betreuung nach Abschluss', 'Ja', 'Nein', 'Teilweise'],
+      ['Zentrales Portal für alle Policen', 'soon', 'Nein', 'Nein'],
+      ['Fokus auf BVG-Beratung für KMU', 'Ja, eigener Schwerpunkt', 'Nein', 'Selten'],
+    ],
+    duoK: 'Mit und ohne Broker',
+    duoH: 'Was sich mit einem Broker ändert',
+    duoP: 'Jede Stunde, die Sie nicht mit Vergleichen, Anrufen und Formularen verbringen, ist eine Stunde für das, was Ihnen wirklich wichtig ist.',
+    duoA: 'Ohne Broker',
+    duoB: 'Mit Coverd',
+    without: ['Mehrere Anbieter selbst vergleichen', 'Fünf verschiedene Hotlines im Schadenfall', 'Kleingedrucktes allein entschlüsseln', 'Policen, die niemand mehr überprüft'],
+    withC: ['Wir vergleichen für Sie – Sie entscheiden', 'Ein Anruf, ein Ansprechpartner', 'Wir erklären, bevor Sie unterschreiben', 'Wir prüfen jährlich, ob es noch passt'],
+    procK: 'Unser Vorgehen',
+    procH: 'So arbeiten wir mit Ihnen',
+    procP: 'Fünf Schritte, damit Sie am Ende genau wissen, wo Sie stehen.',
+    procAlt: 'Dunkles Holztragwerk im Inneren einer gedeckten Brücke',
+    steps: [
+      { t: 'Kennenlernen', p: 'Wir lernen Sie und Ihre Situation in einem persönlichen Gespräch kennen.' },
+      { t: 'Analysieren', p: 'Wir prüfen Ihre bestehenden Lösungen und die Möglichkeiten am Markt.' },
+      { t: 'Vergleichen', p: 'Wir stellen passende Lösungen gegenüber und zeigen die Unterschiede auf.' },
+      { t: 'Entscheiden', p: 'Sie entscheiden, welche Lösung am besten zu Ihnen passt.' },
+      { t: 'Betreuen', p: 'Wir behalten Ihre Unterlagen und Policen im Blick und bleiben auch danach für Sie da.' },
+    ],
+    procLink: 'Unser Vergütungsmodell',
+    themesK: 'Unsere Themen',
+    themesH: 'Finanzen müssen nicht kompliziert sein.',
+    themesP: 'Bei vielen Kunden sehen wir dasselbe Bild: Policen bei vier verschiedenen Gesellschaften, Vorsorgeausweise in einem Ordner, die Steuererklärung bei jemand anderem. Niemand hat den Überblick, und deshalb merkt auch niemand, wenn etwas doppelt versichert ist oder eine wichtige Deckung fehlt. Genau das wollen wir ändern.',
+    themes: [
+      { t: 'Versicherungen', p: 'Richtig abgesichert – ohne unnötige Lösungen.', href: 'versicherungen' },
+      { t: 'Vorsorge', p: 'Heute wissen, ob morgen genug da ist.', href: 'vorsorge' },
+      { t: 'Finanzen', p: 'Aus einzelnen Entscheidungen wird ein Plan.', href: 'vorsorge' },
+      { t: 'Steuern', p: 'Erledigen, optimieren, vorausplanen.', href: 'steuern' },
+    ],
+    trustK: 'Unser Team',
+    trustH: 'Neu als Firma, nicht neu im Fach.',
+    trustP: 'Coverd wurde 2026 gegründet. Wir arbeiten aber seit Jahren in der Treuhand-, Steuer- und Versicherungsberatung und kennen die Fragen unserer Kunden aus der Praxis.',
+    trustBtn: 'Das Team kennenlernen',
+    trust: [
+      { t: 'Erfahrenes Team', p: 'Langjährige Erfahrung im Versicherungs-, Vorsorge- und Steuerwesen, inkl. dipl. Steuerexperte im Team.' },
+      site.finma.registered
+        ? { t: 'FINMA-registriert', p: 'Registrierter Versicherungsvermittler mit Berufshaftpflichtversicherung nach VAG.' }
+        : { t: 'Offen zur Vergütung', p: 'Wir legen Ihnen offen, wie wir in Ihrem konkreten Fall vergütet werden, bevor Sie sich entscheiden.' },
+      { t: 'Kein Risiko beim Einstieg', p: 'Das Erstgespräch ist kostenlos und unverbindlich. Sie entscheiden danach in Ruhe.' },
+    ],
+    quote: '„Was mich antreibt: Kunden sollen nach einem Gespräch mit mir genau wissen, wo sie stehen – ohne Fachchinesisch.“',
+    quoteBy: 'Jan Krapl',
+    quoteRole: 'Geschäftsführer, Mitinhaber',
+    blogK: 'Blog',
+    blogH: 'Aktuelles von Coverd.',
+    blogP: 'Einordnungen zu Versicherungen, Vorsorge, Finanzen und Steuern – verständlich erklärt, ohne Fachjargon.',
+    blogBtn: 'Alle Beiträge',
+    ctaH: 'Sie müssen heute nichts entscheiden.',
+    ctaP: 'Lernen Sie uns in einem unverbindlichen Erstgespräch kennen. Wir schauen gemeinsam, wo Sie stehen und ob Coverd Sie unterstützen kann.',
+  },
+  en: {
+    title: 'Coverd AG: Independent Insurance Broker in Olten',
+    desc: 'Insurance, pensions and taxes in one place: Coverd compares independently for private individuals and SMEs, in person in Olten or by video call.',
+    heroAlt: 'Covered wooden bridge across a river in a Swiss old town at blue hour',
+    eyebrow: 'Insurance · Pensions · Finance · Taxes',
+    h1: 'One partner.<br />Everything in view.',
+    lede: 'We are an independent insurance broker based in Olten. We compare insurance and pension solutions for private individuals and SMEs, explain clearly what you actually need, and remain your point of contact after the contract is signed.',
+    book: 'Book an Initial Consultation',
+    situation: 'Share Your Situation',
+    nudge: 'Free initial consultation · In person in Olten or by video call',
+    introKicker: 'About Coverd',
+    introH: 'Everything in one place.',
+    introP: "Insurance, pensions and taxes are more closely connected than most people realise. Anyone who gets married, buys a house or starts a company notices this quickly. That's why we look at your situation as a whole, not policy by policy.",
+    introBtn: 'More about Coverd',
+    introAlt: 'Two people at a window looking across the river to a covered wooden bridge',
+    facts: [
+      ['1', 'fixed point of contact for every topic'],
+      ['4', 'fields of expertise in one place'],
+      ['21', 'types of insurance at a glance'],
+      ['0', 'francs for the initial consultation'],
+    ],
+    whoK: 'Who we work with',
+    whoH: 'Who are you?',
+    who: [
+      { k: 'Private Clients', t: 'Your finances. Your insurance. Your overview.', p: 'From your first insurance policy through pension and wealth planning to your annual tax return, we support you long-term with your financial matters.', m: 'For Private Clients', href: 'privat', img: 'card-privat', alt: 'A father carrying his child on his shoulders through an autumn forest' },
+      { k: 'Business', t: 'So you can focus on running your business.', p: 'Coverd supports SMEs and businesses in analyzing, optimizing and continuously managing their insurance solutions, with personal advice.', m: 'For Businesses', href: 'unternehmen', img: 'card-unternehmen', alt: 'A bakery owner checking a clipboard in her bakehouse' },
+      { k: 'Occupational Pensions', t: 'When did you last compare your BVG pension solution?', p: "Costs, benefits and pension plan analyzed in plain language, for businesses that don't want to leave their occupational pension on autopilot.", m: 'To BVG Advisory', href: 'bvg', img: 'card-bvg', alt: 'A master carpenter and an apprentice discussing a workpiece at the bench' },
+    ],
+    cmpK: 'The difference',
+    cmpH: 'Why Coverd instead of a direct insurer or comparison portal?',
+    cmpHead: ['Criterion', 'Coverd', 'Comparison Portal', 'Direct with Insurer'],
+    cmp: [
+      ['Personal Advice', 'Yes', 'No', 'Partially'],
+      ['Cross-Provider Comparison', 'Yes, multiple companies', 'Yes, but without advice', 'No, only one provider'],
+      ['Ongoing Support After Signing', 'Yes', 'No', 'Partially'],
+      ['Central Portal for All Policies', 'soon', 'No', 'No'],
+      ['Focus on BVG Advice for SMEs', 'Yes, a dedicated focus', 'No', 'Rarely'],
+    ],
+    duoK: 'With and without a broker',
+    duoH: 'What changes with a broker',
+    duoP: "Every hour you don't spend comparing, calling and filling out forms is an hour for what actually matters to you.",
+    duoA: 'Without a Broker',
+    duoB: 'With Coverd',
+    without: ['Comparing multiple providers yourself', 'Five different hotlines in a claim', 'Deciphering the small print alone', 'Policies nobody reviews anymore'],
+    withC: ['We compare for you – you decide', 'One call, one point of contact', 'We explain before you sign', 'We check every year that it still fits'],
+    procK: 'Our process',
+    procH: 'How we work with you',
+    procP: 'Five steps, so that in the end you know exactly where you stand.',
+    procAlt: 'Dark timber framework inside a covered bridge',
+    steps: [
+      { t: 'Get Acquainted', p: 'We get to know you and your situation in a personal conversation.' },
+      { t: 'Analyze', p: 'We review your existing solutions and the options available on the market.' },
+      { t: 'Compare', p: 'We compare suitable solutions and show you the differences.' },
+      { t: 'Decide', p: 'You decide which solution suits you best.' },
+      { t: 'Support', p: 'We keep your documents and policies in view and remain available to you afterwards.' },
+    ],
+    procLink: 'Our Compensation Model',
+    themesK: 'Our topics',
+    themesH: "Finances don't have to be complicated.",
+    themesP: "We see the same picture with many clients: policies with four different companies, pension statements in a folder, the tax return handled by someone else. Nobody has the overview, which means nobody notices when something is insured twice or an important coverage is missing. That's exactly what we want to change.",
+    themes: [
+      { t: 'Insurance', p: 'Properly covered – without unnecessary products.', href: 'versicherungen' },
+      { t: 'Pension Planning', p: 'Know today whether there will be enough tomorrow.', href: 'vorsorge' },
+      { t: 'Finance', p: 'Individual decisions become a plan.', href: 'vorsorge' },
+      { t: 'Taxes', p: 'Get it done, optimize, plan ahead.', href: 'steuern' },
+    ],
+    trustK: 'Our team',
+    trustH: 'New as a company, not new to the field.',
+    trustP: "Coverd was founded in 2026. We have, however, worked for years in fiduciary, tax and insurance advisory, and we know our clients' questions from practical experience.",
+    trustBtn: 'Meet the Team',
+    trust: [
+      { t: 'Experienced Team', p: 'Many years of experience in insurance, pensions and tax, including a certified tax expert on the team.' },
+      site.finma.registered
+        ? { t: 'FINMA-Registered', p: 'Registered insurance broker with professional liability insurance under the Insurance Supervision Act (VAG).' }
+        : { t: 'Open About Compensation', p: 'We disclose to you how we are compensated in your specific case, before you decide.' },
+      { t: 'No Risk to Get Started', p: 'The initial consultation is free and non-binding. You decide afterwards, at your own pace.' },
+    ],
+    quote: '“What drives me: after talking with me, clients should know exactly where they stand – without any jargon.”',
+    quoteBy: 'Jan Krapl',
+    quoteRole: 'Managing Director, Co-Owner',
+    blogK: 'Blog',
+    blogH: 'News from Coverd.',
+    blogP: 'Perspectives on insurance, pensions, finance and taxes – explained clearly, without jargon.',
+    blogBtn: 'All Articles',
+    ctaH: "You don't have to decide anything today.",
+    ctaP: "Get to know us in a non-binding initial conversation. We'll look together at where you stand and whether Coverd can support you.",
+  },
+}[lang];
+
+const posts = (await getCollection('blog', (p) => p.data.lang === lang)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const [lead, ...rest] = posts;
+const jan = team[0];
+---
+<Base lang={lang} route="home" title={copy.title} description={copy.desc} jsonld={[organization(lang), website(lang)]}>
+  <section class="hero">
+    <Img class="hero__img" name="home-hero" alt={copy.heroAlt} priority />
+    <div class="wrap hero__in on-dark">
+      <div>
+        <Eyebrow>{copy.eyebrow}</Eyebrow>
+        <h1 class="h1" set:html={copy.h1} />
+        <p class="lede">{copy.lede}</p>
+      </div>
+      <div class="hero__aside">
+        <div class="btn-row">
+          <Btn href={bookingUrl()} variant="amber">{copy.book}</Btn>
+          <Btn href={url('kontakt', lang)} variant="line-light">{copy.situation}</Btn>
+        </div>
+        <p class="hero__nudge">{copy.nudge}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--paper">
+    <div class="wrap split split--5-7 split--top">
+      <div class="figure ratio-45" data-reveal><Img name="ueber-story" alt={copy.introAlt} sizes="(max-width: 860px) 100vw, 42vw" /></div>
+      <div data-reveal>
+        <Eyebrow>{copy.introKicker}</Eyebrow>
+        <h2 style="margin-top:14px">{copy.introH}</h2>
+        <p class="lede muted" style="margin-top:20px">{copy.introP}</p>
+        <div class="btn-row" style="margin-top:26px"><Btn href={url('ueber', lang)}>{copy.introBtn}</Btn></div>
+
+      </div>
+    </div>
+    <div class="wrap" data-reveal>
+      <ul class="facts">
+          {copy.facts.map(([n, l]) => (
+            <li class="fact"><span class="fact__n">{n}</span><span class="fact__l">{l}</span></li>
+          ))}
+        </ul>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap">
+      <SectionHead eyebrow={copy.whoK} title={copy.whoH} />
+      <div class="cards3">
+        {copy.who.map((c, i) => (
+          <a class="icard" href={url(c.href as 'privat', lang)} data-reveal style={`--d:${i * 80}ms`}>
+            <Img name={c.img} alt={c.alt} sizes="(max-width: 900px) 100vw, 33vw" />
+            <div class="icard__b">
+              <span class="icard__k">{c.k}</span>
+              <h3>{c.t}</h3>
+              <p class="icard__p">{c.p}</p>
+              <span class="icard__m">{c.m} <Icon name="arrow-up" /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--paper">
+    <div class="wrap">
+      <SectionHead eyebrow={copy.cmpK} title={copy.cmpH} />
+      <div data-reveal>
+        <table class="cmp">
+          <thead><tr>{copy.cmpHead.map((h, i) => <th scope="col" class={i === 1 ? 'cmp__us' : undefined}>{h}</th>)}</tr></thead>
+          <tbody>
+            {copy.cmp.map(([k, a, b, c]) => (
+              <tr>
+                <th scope="row">{k}</th>
+                <td class="cmp__us">{a === 'soon' ? <Badge lang={lang} /> : a}</td>
+                <td>{b}</td>
+                <td>{c}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div class="cmp-cards">
+          {copy.cmp.map(([k, a, b, c]) => (
+            <div class="cmp-card">
+              <h3>{k}</h3>
+              <dl>
+                <dt class="is-us">{copy.cmpHead[1]}</dt><dd class="is-us">{a === 'soon' ? <Badge lang={lang} /> : a}</dd>
+                <dt>{copy.cmpHead[2]}</dt><dd>{b}</dd>
+                <dt>{copy.cmpHead[3]}</dt><dd>{c}</dd>
+              </dl>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap">
+      <SectionHead eyebrow={copy.duoK} title={copy.duoH}><p class="lede muted">{copy.duoP}</p></SectionHead>
+      <div class="duo" data-reveal>
+        <div class="duo__a">
+          <h3>{copy.duoA}</h3>
+          <ul class="ticks">{copy.without.map((x) => <li><Icon name="cross" />{x}</li>)}</ul>
+        </div>
+        <div class="duo__b">
+          <h3>{copy.duoB}</h3>
+          <ul class="ticks">{copy.withC.map((x) => <li><Icon name="check" />{x}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Process id="vorgehen" eyebrow={copy.procK} title={copy.procH} text={copy.procP} steps={copy.steps} alt={copy.procAlt}>
+    <p style="margin-top:22px"><a class="tlink" href={url('transparenz', lang)}>{copy.procLink} <Icon name="arrow-up" /></a></p>
+  </Process>
+
+  <section class="sec sec--soft">
+    <div class="wrap">
+      <SectionHead eyebrow={copy.themesK} title={copy.themesH}><p class="muted">{copy.themesP}</p></SectionHead>
+      <div class="rows" data-reveal>
+        {copy.themes.map((t, i) => (
+          <a class="row" href={url(t.href as 'vorsorge', lang)}>
+            <span class="row__n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{t.t}</h3>
+            <p>{t.p}</p>
+            <Icon name="arrow-up" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--paper">
+    <div class="wrap">
+      <SectionHead eyebrow={copy.trustK} title={copy.trustH}>
+        <p class="muted">{copy.trustP}</p>
+        <Btn href={url('ueber', lang)} variant="line">{copy.trustBtn}</Btn>
+      </SectionHead>
+      <div class="team">{team.map((p) => <TeamCard person={p} lang={lang} />)}</div>
+      <div class="tiles tiles--3" style="margin-top:clamp(32px,4vw,56px)" data-reveal>
+        {copy.trust.map((x) => (
+          <div class="tile" style="min-height:0">
+            <h3>{x.t}</h3>
+            <p>{x.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--dark sec--tight">
+    <div class="wrap">
+      <figure class="quote" data-reveal style="max-width:60rem">
+        <blockquote>{copy.quote}</blockquote>
+        <figcaption class="quote__by">
+          <Img name={jan.photo} alt="" sizes="56px" />
+          <span><strong style="font-weight:500">{copy.quoteBy}</strong><br /><span class="muted small">{copy.quoteRole}</span></span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap">
+      <SectionHead eyebrow={copy.blogK} title={copy.blogH}>
+        <p class="muted">{copy.blogP}</p>
+        <Btn href={url('blog', lang)} variant="line">{copy.blogBtn}</Btn>
+      </SectionHead>
+      <div class="posts" data-reveal>
+        <a class="post-lg" href={postPath(lead)}>
+          <Img name={lead.data.image} alt="" sizes="(max-width: 900px) 100vw, 54vw" />
+          <div class="post-lg__b">
+            <div class="post-meta"><span>{categories[lead.data.category][lang]}</span><time datetime={lead.data.date.toISOString().slice(0, 10)}>{dateFmt(lead.data.date, lang)}</time></div>
+            <h3 class="h3">{lead.data.title}</h3>
+            <span class="icard__m">{ui[lang].readArticle} <Icon name="arrow-up" /></span>
+          </div>
+        </a>
+        <div class="post-list">
+          {rest.slice(0, 3).map((p) => (
+            <a class="post-sm" href={postPath(p)}>
+              <div class="post-sm__img"><Img name={p.data.image} alt="" sizes="(max-width: 900px) 40vw, 18vw" /></div>
+              <div>
+                <div class="post-meta"><span>{categories[p.data.category][lang]}</span><span>{readingTime(p.body ?? '')} {ui[lang].minutes}</span></div>
+                <h3>{p.data.title}</h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} title={copy.ctaH} text={copy.ctaP} />
+</Base>

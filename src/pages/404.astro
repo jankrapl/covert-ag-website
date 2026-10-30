@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Btn from '../components/Btn.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { url } from '../i18n';
+---
+<Base lang="de" title="Seite nicht gefunden | Coverd" description="Diese Seite gibt es nicht." header="solid" noindex>
+  <section class="plainhead" style="min-height:60vh">
+    <div class="wrap">
+      <Eyebrow>404</Eyebrow>
+      <h1>Diese Seite gibt es nicht.</h1>
+      <p class="lede muted" style="margin-top:14px" lang="en">This page does not exist.</p>
+      <div class="btn-row" style="margin-top:28px">
+        <Btn href={url('home', 'de')}>Zur Startseite</Btn>
+        <Btn href={url('home', 'en')} variant="line">To the homepage</Btn>
+      </div>
+    </div>
+  </section>
+</Base>

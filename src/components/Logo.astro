@@ -1,0 +1,7 @@
+---
+// Coverd wordmark, redrawn as a vector from the original artwork (circles, stems, horizontal cuts).
+// The word takes the text colour; the corner triangle takes --logo-accent.
+interface Props { class?: string; title?: string }
+const { class: className, title = 'Coverd' } = Astro.props;
+---
+<svg class={className} viewBox="0 0 336 94" role="img" aria-label={title} xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path fill-rule="evenodd" d="M64.18 50.6A30.2 30.2 0 1 0 64.44 63.4L47.63 63.4A13.9 13.4 0 1 1 46.95 50.6Z"/><path fill-rule="evenodd" d="M65 57.6A30.2 30.2 0 1 1 125.4 57.6A30.2 30.2 0 1 1 65 57.6ZM81.3 57.6A13.9 13.4 0 1 0 109.1 57.6A13.9 13.4 0 1 0 81.3 57.6Z"/><path fill-rule="evenodd" d="M119.2 28.4H136.9L150.5 61.2L164.1 28.4H181.8L158.6 86.2H142.4Z"/><path fill-rule="evenodd" d="M234.6 63.2L234.6 57.6A30.2 30.2 0 1 0 232.33 68.6L213.74 68.6A14.2 14.6 0 0 1 191.29 63.2ZM191.64 51.2A14.2 14.6 0 0 1 217.16 51.2Z"/><path fill-rule="evenodd" d="M237 28.6H253.4V36.6C256.6 31.4 261.8 28 270.2 27.8V44.8C260.4 44.9 253.4 49.4 253.4 59.6V86.2H237Z"/><path fill-rule="evenodd" d="M311.2 4.8H329V53.6L296.97 87.78A30.2 30.2 0 1 1 311.2 30.34ZM284.3 57.6A13.9 13.4 0 1 0 312.1 57.6A13.9 13.4 0 1 0 284.3 57.6Z"/></g><path fill="var(--logo-accent, #D98B2B)" d="M328.2 62.6V88.4H302Z"/></svg>

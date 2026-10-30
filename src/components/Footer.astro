@@ -1,0 +1,55 @@
+---
+import Logo from './Logo.astro';
+import Badge from './Badge.astro';
+import { ui, url, type Lang } from '../i18n';
+import { site } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = ui[lang];
+const year = new Date().getFullYear();
+---
+<footer class="ftr">
+  <div class="truss" aria-hidden="true"></div>
+  <div class="wrap ftr__in">
+    <div class="ftr__grid">
+      <div>
+        <p class="ftr__claim">{t.footerClaim}</p>
+        <div class="ftr__contact">
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          {site.phone && <a href={site.phone.href}>{site.phone.label}</a>}
+          <a href={site.whatsapp.href} target="_blank" rel="noopener">WhatsApp {site.whatsapp.label}</a>
+          {site.address && <span>{site.address.street}, {site.address.zip} {site.address.city}</span>}
+        </div>
+      </div>
+      <div class="ftr__col">
+        <h2>{t.footerForYou}</h2>
+        <a href={url('privat', lang)}>{t.privat}</a>
+        <a href={url('unternehmen', lang)}>{t.unternehmen}</a>
+        <span class="soon-item on-dark" aria-disabled="true">{t.kundenportal} <Badge lang={lang} /></span>
+      </div>
+      <div class="ftr__col">
+        <h2>{t.footerServices}</h2>
+        <a href={url('versicherungen', lang)}>{t.versicherungen}</a>
+        <a href={url('vorsorge', lang)}>{t.vorsorge}</a>
+        <a href={url('bvg', lang)}>{t.bvg}</a>
+        <a href={url('steuern', lang)}>{t.steuern}</a>
+      </div>
+      <div class="ftr__col">
+        <h2>Coverd</h2>
+        <a href={url('ueber', lang)}>{t.ueber}</a>
+        <a href={url('blog', lang)}>{t.blog}</a>
+        <a href={url('transparenz', lang)}>{t.transparenz}</a>
+        <a href={url('kontakt', lang)}>{t.kontakt}</a>
+      </div>
+    </div>
+    <div class="ftr__legal">
+      <span>© {year} {site.legalName}, {site.city}{site.finma.registered && ` · ${t.finmaLine}`}</span>
+      <nav aria-label={lang === 'de' ? 'Rechtliches' : 'Legal'}>
+        <a href={url('impressum', lang)}>{t.impressum}</a>
+        <a href={url('datenschutz', lang)}>{t.datenschutz}</a>
+      </nav>
+    </div>
+  </div>
+  <div class="wrap"><span class="ftr__mark" aria-hidden="true"><Logo title="" /></span></div>
+</footer>

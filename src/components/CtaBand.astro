@@ -1,0 +1,29 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import Img from './Img.astro';
+import Btn from './Btn.astro';
+import { ui, type Lang } from '../i18n';
+import { bookingUrl, type BookingTopic } from '../data/site';
+interface Props {
+  lang: Lang;
+  title: string;
+  text?: string;
+  eyebrow?: string;
+  topic?: BookingTopic;
+  image?: string;
+  alt?: string;
+}
+const { lang, title, text, eyebrow, topic, image = 'overview' } = Astro.props;
+const alt = Astro.props.alt ?? (lang === 'de'
+  ? 'Blick von einer Jurahöhe über das Mittelland im Morgennebel, am Horizont die Alpen'
+  : 'View from a Jura ridge across the Swiss plateau in morning mist, with the Alps on the horizon');
+---
+<section class="cta">
+  <Img class="cta__img" name={image} alt={alt} />
+  <div class="cta__in on-dark" data-reveal>
+    {eyebrow && <Eyebrow center>{eyebrow}</Eyebrow>}
+    <h2>{title}</h2>
+    {text && <p class="lede">{text}</p>}
+    <div class="btn-row"><Btn href={bookingUrl(topic)} variant="amber">{ui[lang].book}</Btn></div>
+  </div>
+</section>

@@ -1,0 +1,241 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { url, type Lang } from '../i18n';
+import { bookingUrl } from '../data/site';
+import { service } from '../lib/schema';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = {
+  de: {
+    title: 'Vorsorge & Finanzplanung: Säule 3a, Pensionierung | Coverd',
+    desc: 'Vorsorge, Vermögensaufbau und Pensionierung: heute planen, statt später überrascht zu werden. Mit Rechner zum Zinseszinseffekt und jährlichem Vorsorge-Check.',
+    eyebrow: 'Leistungen · Vorsorge & Finanzplanung',
+    crumb: 'Vorsorge & Finanzplanung',
+    h1: 'Wissen Sie, was später für Sie übrig bleibt?',
+    lede: 'Vorsorge, Vermögensaufbau und Pensionierung – heute planen, statt später überrascht zu werden.',
+    alt: 'Älteres Paar wandert im Abendlicht auf einem Höhenweg im Jura',
+    btn: 'Vorsorge prüfen',
+    nudge: 'Je früher Sie planen, desto mehr Möglichkeiten bleiben Ihnen',
+    spanK: 'Ihr Zeithorizont',
+    spanH: 'Was bedeutet Ihre Vorsorge langfristig?',
+    age: 'Ihr Alter',
+    ret: 'Pensionierung',
+    years: 'Jahre',
+    spanA: 'Eine Entscheidung, die heute klein erscheint, begleitet Sie möglicherweise die nächsten',
+    spanB: 'Jahre.',
+    spanP: 'Deshalb prüfen wir nicht nur den Abschluss – sondern die langfristige Entwicklung.',
+    pillars: [
+      { t: 'Vorsorge', p: 'Handlungsbedarf erkennen, bevor es zu spät ist.' },
+      { t: 'Vermögensaufbau', p: 'Strategie statt Zufall.' },
+      { t: 'Pensionsplanung', p: 'Szenarien statt Vermutungen.' },
+    ],
+    pillarBtn: 'Situation schildern',
+    checkK: 'Vorsorge-Check',
+    checkH: 'Abgeschlossen bedeutet nicht erledigt.',
+    checkP: 'Ihre Lebenssituation verändert sich. Ihre Ziele verändern sich. Ihre Vorsorgelösung sollte deshalb regelmässig überprüft werden.',
+    checkT: 'Jährlicher Vorsorge-Check',
+    checkS: 'Jährliche Überprüfung Ihrer bestehenden Lösung und Strategie.',
+    checkM: 'Mehr erfahren',
+    checkAlt: 'Hände einer Frau auf einem Dokument, daneben Lesebrille und Teekanne',
+    calcK: 'Rechner',
+    calcH: 'Kleine Unterschiede. Grosse Wirkung.',
+    calcP: 'Bei langfristiger Vorsorge können bereits wenige Prozentpunkte Unterschied über viele Jahre einen erheblichen Einfluss auf das Alterskapital haben. Tragen Sie Ihre eigenen Werte ein und sehen Sie den Effekt direkt.',
+    fOnce: 'Einmalige Einzahlung',
+    fMonth: 'Monatliche Einzahlung',
+    fYears: 'Anlagedauer',
+    fRate: 'Wertentwicklung',
+    rateUnit: '% p.a.',
+    legDep: 'Einzahlungen',
+    legGrow: 'Wertsteigerung',
+    legTotal: 'Vermögen',
+    chartCap: 'Fahren Sie über ein Jahr oder tippen Sie darauf, um die Aufteilung zu sehen.',
+    yearWord: 'Jahr',
+    diffK: 'Unterschied Ø 3 % vs. Ø 5 % Rendite',
+    diffA: 'Unterschied nach',
+    diffB: 'Jahren, bei exakt denselben Einzahlungen.',
+    table: 'Werte als Tabelle anzeigen',
+    note: 'Hinweis: Dieses Rechenbeispiel dient ausschliesslich der Veranschaulichung des Zinseszinseffekts anhand der von Ihnen eingetragenen Werte. Gebühren, Steuern, Risikoleistungen und weitere Einflussfaktoren sind nicht berücksichtigt. Die dargestellten Renditen sind weder Prognosen noch Garantien. Eine regelmässige Überprüfung einer Vorsorgelösung garantiert keine höhere Rendite.',
+    bizH: 'Sie führen ein Unternehmen?',
+    bizP: 'Für die berufliche Vorsorge (BVG) Ihrer Mitarbeitenden gilt vieles anders als für die private Vorsorge. Das ist bei Coverd ein eigener Schwerpunkt.',
+    bizBtn: 'Zur beruflichen Vorsorge (BVG)',
+    ctaH: 'Sie müssen heute nichts entscheiden.',
+    ctaP: 'Lernen Sie uns in einem unverbindlichen Erstgespräch kennen.',
+  },
+  en: {
+    title: 'Pension & Financial Planning: Pillar 3a, Retirement | Coverd',
+    desc: 'Pension planning, wealth building and retirement: plan today instead of being surprised later. With a compound interest calculator and an annual pension check.',
+    eyebrow: 'Services · Pension & Financial Planning',
+    crumb: 'Pension & Financial Planning',
+    h1: 'Do you know what will be left for you later?',
+    lede: 'Pension planning, wealth building and retirement – plan today instead of being surprised later.',
+    alt: 'An older couple walking along a ridge trail in the Jura in evening light',
+    btn: 'Review Pension Plan',
+    nudge: 'The earlier you plan, the more options you keep',
+    spanK: 'Your time horizon',
+    spanH: 'What does your pension plan mean long-term?',
+    age: 'Your Age',
+    ret: 'Retirement',
+    years: 'years',
+    spanA: 'A decision that seems small today may stay with you for the next',
+    spanB: 'years.',
+    spanP: "That's why we don't just review the contract – but its long-term development.",
+    pillars: [
+      { t: 'Pension Planning', p: 'Spot what needs doing before it is too late.' },
+      { t: 'Wealth Building', p: 'Strategy instead of chance.' },
+      { t: 'Retirement Planning', p: 'Scenarios instead of assumptions.' },
+    ],
+    pillarBtn: 'Share Your Situation',
+    checkK: 'Pension check',
+    checkH: "Signed doesn't mean sorted.",
+    checkP: 'Your life situation changes. Your goals change. Your pension solution should therefore be reviewed regularly.',
+    checkT: 'Annual Pension Check',
+    checkS: 'Annual review of your existing solution and strategy.',
+    checkM: 'Learn More',
+    checkAlt: "A woman's hands on a document, reading glasses and a teapot nearby",
+    calcK: 'Calculator',
+    calcH: 'Small differences. Big impact.',
+    calcP: 'In long-term pension planning, even a few percentage points of difference can have a significant impact on your retirement capital over many years. Enter your own figures and see the effect directly.',
+    fOnce: 'One-time deposit',
+    fMonth: 'Monthly deposit',
+    fYears: 'Investment period',
+    fRate: 'Growth',
+    rateUnit: '% p.a.',
+    legDep: 'Deposits',
+    legGrow: 'Growth',
+    legTotal: 'Assets',
+    chartCap: 'Hover over or tap a year to see the breakdown.',
+    yearWord: 'Year',
+    diffK: 'Difference avg. 3 % vs. avg. 5 % return',
+    diffA: 'Difference after',
+    diffB: 'years, with exactly the same deposits.',
+    table: 'Show values as a table',
+    note: 'Note: This calculation example is intended solely to illustrate the compound interest effect based on the figures you entered. Fees, taxes, risk benefits and other factors are not taken into account. The returns shown are neither forecasts nor guarantees. Regularly reviewing a pension solution does not guarantee a higher return.',
+    bizH: 'Do you run a business?',
+    bizP: "Much of what applies to your employees' occupational pension (BVG) differs from private pension planning. This is a dedicated specialty at Coverd.",
+    bizBtn: 'To Occupational Pensions (BVG)',
+    ctaH: "You don't have to decide anything today.",
+    ctaP: 'Get to know us in a non-binding initial conversation.',
+  },
+}[lang];
+
+const labels = { dep: c.legDep, grow: c.legGrow, total: c.legTotal, year: c.yearWord };
+---
+<Base lang={lang} route="vorsorge" title={c.title} description={c.desc} image="vorsorge-hero" crumb={[{ name: c.crumb }]} jsonld={[service(lang, c.crumb, c.desc, url('vorsorge', lang))]}>
+  <PageHero lang={lang} eyebrow={c.eyebrow} title={c.h1} lede={c.lede} nudge={c.nudge} image="vorsorge-hero" alt={c.alt} crumb={c.crumb} position="50% 40%">
+    <Btn href={bookingUrl('vorsorge')} variant="amber">{c.btn}</Btn>
+  </PageHero>
+
+  <section class="sec sec--paper">
+    <div class="wrap">
+      <SectionHead eyebrow={c.spanK} title={c.spanH} />
+      <div class="split split--top" data-reveal>
+        <div class="span-calc" id="spanCalc">
+          <div class="span-calc__in">
+            <div class="field"><label for="calcAge">{c.age}</label><input id="calcAge" type="number" inputmode="numeric" min="18" max="99" value="35" /></div>
+            <div class="field"><label for="calcRetire">{c.ret}</label><input id="calcRetire" type="number" inputmode="numeric" min="18" max="99" value="65" /></div>
+          </div>
+          <p class="span-out" aria-live="polite"><span data-span-years>30</span> {c.years}</p>
+          <div class="span-bar" aria-hidden="true"><div class="span-bar__f" data-span-bar style="width:45%"></div></div>
+          <p>{c.spanA} <strong style="font-weight:600"><span data-span-years>30</span></strong> {c.spanB}</p>
+          <p class="muted small">{c.spanP}</p>
+        </div>
+        <div>
+          <ul class="rows">
+            {c.pillars.map((x, i) => (
+              <li class="row" style="grid-template-columns:3rem minmax(0,1fr)">
+                <span class="row__n">{String(i + 1).padStart(2, '0')}</span>
+                <div><h3>{x.t}</h3><p>{x.p}</p></div>
+              </li>
+            ))}
+          </ul>
+          <div class="btn-row" style="margin-top:24px"><Btn href={url('kontakt', lang)} variant="line">{c.pillarBtn}</Btn></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap split">
+      <div data-reveal>
+        <Eyebrow>{c.checkK}</Eyebrow>
+        <h2 style="margin-top:14px">{c.checkH}</h2>
+        <p class="lede muted" style="margin-top:18px">{c.checkP}</p>
+        <div style="margin-top:26px;padding-top:18px;border-top:1px solid var(--line)">
+          <h3>{c.checkT}</h3>
+          <p class="muted" style="margin-top:6px">{c.checkS}</p>
+          <p style="margin-top:12px"><a class="tlink" href={`${url('kontakt', lang)}?thema=${encodeURIComponent(c.checkT)}`} rel="nofollow">{c.checkM} <Icon name="arrow-up" /></a></p>
+        </div>
+      </div>
+      <div class="figure ratio-43" data-reveal><Img name="vorsorge-check" alt={c.checkAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
+    </div>
+  </section>
+
+  <section class="sec sec--dark" id="rechner">
+    <div class="wrap">
+      <SectionHead eyebrow={c.calcK} title={c.calcH}><p class="muted">{c.calcP}</p></SectionHead>
+      <div class="calc" id="calc" data-lang={lang} data-labels={JSON.stringify(labels)}>
+        <div class="calc__in">
+          <div class="slider">
+            <div class="slider__h"><label for="cOnce">{c.fOnce}</label><span class="slider__v">CHF <input id="cOnceN" type="number" inputmode="numeric" min="0" step="500" value="10000" aria-label={c.fOnce} /></span></div>
+            <input id="cOnce" type="range" min="0" max="100000" step="1000" value="10000" />
+          </div>
+          <div class="slider">
+            <div class="slider__h"><label for="cMonth">{c.fMonth}</label><span class="slider__v">CHF <input id="cMonthN" type="number" inputmode="numeric" min="0" step="50" value="500" aria-label={c.fMonth} /></span></div>
+            <input id="cMonth" type="range" min="0" max="3000" step="50" value="500" />
+          </div>
+          <div class="slider">
+            <div class="slider__h"><label for="cYears">{c.fYears}</label><span class="slider__v"><input id="cYearsN" type="number" inputmode="numeric" min="1" max="40" step="1" value="12" aria-label={c.fYears} /> {c.years}</span></div>
+            <input id="cYears" type="range" min="1" max="40" step="1" value="12" />
+          </div>
+          <div class="slider">
+            <div class="slider__h"><label for="cRate">{c.fRate}</label><span class="slider__v"><input id="cRateN" type="number" inputmode="decimal" min="0" max="8" step="0.1" value="4" aria-label={c.fRate} /> {c.rateUnit}</span></div>
+            <input id="cRate" type="range" min="0" max="8" step="0.5" value="4" />
+          </div>
+          <div class="calc__diff" style="margin-top:6px">
+            <span class="small">{c.diffK}</span>
+            <strong id="cDiff" aria-live="polite">CHF 0</strong>
+            <span class="xs muted" style="grid-column:1/-1">{c.diffA} <span id="cDiffY">12</span> {c.diffB}</span>
+          </div>
+        </div>
+        <div>
+          <div class="calc__stats">
+            <div class="calc__stat"><strong id="cDep">CHF 0</strong><span><i class="calc__key" style="background:#2f9c82"></i>{c.legDep}</span></div>
+            <div class="calc__stat"><strong id="cGrow">CHF 0</strong><span><i class="calc__key" style="background:#cb7d22"></i>{c.legGrow}</span></div>
+            <div class="calc__stat"><strong id="cTotal">CHF 0</strong><span>{c.legTotal}</span></div>
+          </div>
+          <div class="calc__chart" style="position:relative">
+            <div id="cChart"></div>
+            <div class="calc__tip" id="cTip" hidden></div>
+          </div>
+          <p class="calc__cap">{c.chartCap}</p>
+          <details class="calc__tbl">
+            <summary>{c.table}</summary>
+            <div class="calc__tblwrap" id="cTable"></div>
+          </details>
+        </div>
+      </div>
+      <p class="calc__note">{c.note}</p>
+    </div>
+  </section>
+
+  <section class="sec sec--paper sec--tight">
+    <div class="wrap split split--7-5" data-reveal>
+      <div>
+        <h2>{c.bizH}</h2>
+        <p class="muted" style="margin-top:16px;max-width:44rem">{c.bizP}</p>
+      </div>
+      <div class="btn-row"><Btn href={url('bvg', lang)}>{c.bizBtn}</Btn></div>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} title={c.ctaH} text={c.ctaP} topic="vorsorge" />
+</Base>
+<script src="../scripts/vorsorge.ts"></script>

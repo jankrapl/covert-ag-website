@@ -1,0 +1,144 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Btn from '../components/Btn.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { type Lang } from '../i18n';
+import { bookingUrl } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = {
+  de: {
+    title: 'Transparenz & Vergütung: So verdient Coverd | Coverd',
+    desc: 'Was verdient Coverd eigentlich an mir? Beratungshonorar, Courtage, Mandatsgebühr und Zusatzleistungen offen erklärt, bevor Sie sich entscheiden.',
+    eyebrow: 'Transparenz & Vergütung',
+    h1: 'Was verdient Coverd eigentlich an mir?',
+    lede: 'Eine berechtigte Frage. Und eine, die wir Ihnen offen beantworten.',
+    alt: 'Zwei Personen im offenen Gespräch an einem runden Tisch, durch eine Glasscheibe gesehen',
+    btn: 'Unser Vergütungsmodell',
+    recK: 'Unsere Haltung',
+    recH: 'Unsere Empfehlung richtet sich nach Ihren Bedürfnissen, nicht nach der Provision.',
+    recP: 'Erst Ihre Situation, dann die Optionen – nie umgekehrt.',
+    recP2: 'Wir schaffen Transparenz. Sie treffen die Entscheidung.',
+    modK: 'Vergütungsmodelle',
+    modH: 'So können wir vergütet werden.',
+    modP: 'Es gibt nicht die eine Vergütungsform bei Coverd. Je nach Auftrag und Wunsch der Kundschaft kommt eines der folgenden Modelle zum Einsatz, oder eine Kombination daraus.',
+    mod: [
+      { t: 'Beratungshonorar', p: 'Sie bezahlen direkt für unsere Zeit und unser Fachwissen, unabhängig davon, ob und welche Lösung am Ende zustande kommt. Das schafft maximale Unabhängigkeit, da unsere Empfehlung in keinem Fall von einer Vermittlung abhängt.' },
+      { t: 'Courtage / Provision', p: 'Bei der erfolgreichen Vermittlung einer Lösung zahlt uns der jeweilige Anbieter eine Vergütung. Für Sie entstehen dadurch keine zusätzlichen Kosten. Welcher Anbieter gewählt wird, entscheidet Ihre Situation, nicht die Höhe der Courtage.' },
+      { t: 'Mandatsgebühr', p: 'Für Unternehmen mit laufendem Betreuungsbedarf vereinbaren wir einen fixen oder gestaffelten Betrag für klar definierte Leistungen, etwa die jährliche Überprüfung sämtlicher Policen oder die Begleitung bei Ausschreibungen.' },
+      { t: 'Zusatzleistungen', p: 'Einzelne Leistungen ausserhalb der laufenden Betreuung, etwa die Begleitung bei einem komplexen Schadenfall oder eine einmalige Vertragsanalyse, werden nach Aufwand separat verrechnet und vorgängig mit Ihnen abgesprochen.' },
+    ],
+    modN: 'Welches Modell bei Ihnen gilt, erfahren Sie transparent – vor Beginn der Zusammenarbeit, nicht danach.',
+    segK: 'Nach Zielgruppe',
+    segH: 'Wie Coverd vergütet wird',
+    segP: 'Je nach Kundensegment und Art der Zusammenarbeit unterscheidet sich, welche der oben genannten Modelle zum Tragen kommen. Hier die Übersicht nach Zielgruppe.',
+    seg: [
+      { t: 'Privatkunden', p: 'Für Sie als Privatperson steht die Beratung im Vordergrund, meist ohne direkte Kosten. Kommt es zur Vermittlung einer Versicherungs- oder Vorsorgelösung, erhält Coverd dafür eine Courtage bzw. Abschlussprovision der jeweiligen Gesellschaft. Bei reiner Beratung ohne Vermittlung (z. B. eine Zweitmeinung zu einer bestehenden Police) kann alternativ ein Beratungshonorar vereinbart werden.' },
+      { t: 'KMU', p: 'Die laufende Betreuung Ihrer Versicherungs- und Vorsorgelösungen wird primär über Courtagen bzw. Abschlussprovisionen der Anbieter finanziert. Zusätzliche, klar abgrenzbare Leistungen, etwa Mutationen, die Begleitung bei einem Schadenfall oder eine vertiefte Risikoanalyse, werden nach Aufwand separat verrechnet und vorab mit Ihnen besprochen.' },
+      { t: 'Grössere Unternehmen', p: 'Bei komplexeren Mandaten mit mehreren Ansprechpartnern und wiederkehrendem Betreuungsaufwand vereinbaren wir eine individuelle Mandatsgebühr. Gemeinsam legen wir fest, welche Leistungen darin enthalten sind (z. B. jährliche Ausschreibungen, Vorsorgekommission, Mitarbeiterkommunikation); darüber hinausgehender Aufwand wird transparent nach Zeit verrechnet.' },
+    ],
+    segN: 'Unabhängig vom Modell gilt: Wir legen Ihnen offen, wie wir in Ihrem konkreten Fall vergütet werden – bevor Sie sich entscheiden, nicht erst danach. Wenn mehrere Lösungen für Sie infrage kommen, wählen wir nicht automatisch diejenige mit der höchsten Vergütung für uns, sondern die, die zu Ihrer Situation passt.',
+    askH: 'Fragen Sie uns.',
+    askQ: '„Warum empfehlen Sie mir diese Lösung – und was verdient Coverd daran?“',
+    askP: 'Wir finden, darauf sollten Sie eine klare Antwort erhalten.',
+    ctaH: 'Sie müssen heute nichts entscheiden.',
+  },
+  en: {
+    title: 'Transparency & Compensation: How Coverd Earns | Coverd',
+    desc: 'What does Coverd actually earn from me? Advisory fees, commission, mandate fees and additional services explained openly, before you decide.',
+    eyebrow: 'Transparency & Compensation',
+    h1: 'What does Coverd actually earn from me?',
+    lede: "A fair question. And one we'll answer openly.",
+    alt: 'Two people in open conversation at a round table, seen through a pane of glass',
+    btn: 'Our Compensation Model',
+    recK: 'Our stance',
+    recH: 'Our recommendation is based on your needs, not on the commission.',
+    recP: 'Your situation first, then the options – never the other way around.',
+    recP2: 'We create transparency. You make the decision.',
+    modK: 'Compensation models',
+    modH: 'How we can be compensated.',
+    modP: "There isn't just one form of compensation at Coverd. Depending on the engagement and the client's preference, one of the following models applies, or a combination of them.",
+    mod: [
+      { t: 'Advisory Fee', p: 'You pay directly for our time and expertise, regardless of whether or which solution ultimately comes about. This creates maximum independence, since our recommendation never depends on a placement.' },
+      { t: 'Commission', p: 'When a solution is successfully placed, the respective provider pays us a commission. This creates no additional cost for you. Which provider is chosen is decided by your situation, not the size of the commission.' },
+      { t: 'Mandate Fee', p: 'For businesses with ongoing support needs, we agree on a fixed or tiered amount for clearly defined services, such as the annual review of all policies or support during tenders.' },
+      { t: 'Additional Services', p: 'Individual services outside of ongoing support, such as assistance with a complex claim or a one-time contract analysis, are billed separately based on effort and agreed with you in advance.' },
+    ],
+    modN: "You'll be told transparently which model applies to you – before the engagement begins, not after.",
+    segK: 'By target group',
+    segH: 'How Coverd Is Compensated',
+    segP: "Which of the models above applies depends on your customer segment and the type of engagement. Here's the overview by target group.",
+    seg: [
+      { t: 'Private Clients', p: 'As a private individual, advice is our main focus for you, usually at no direct cost. If an insurance or pension solution is placed, Coverd receives a commission from the respective company for that. For pure advice without a placement (e.g. a second opinion on an existing policy), an advisory fee can be agreed instead.' },
+      { t: 'SMEs', p: 'The ongoing support of your insurance and pension solutions is primarily financed through commissions from providers. Additional, clearly distinguishable services, such as changes, support with a claim, or an in-depth risk analysis, are billed separately based on effort and discussed with you in advance.' },
+      { t: 'Larger Businesses', p: 'For more complex mandates with multiple contacts and recurring support needs, we agree on an individual mandate fee. Together we define which services are included (e.g. annual tenders, pension committee support, employee communication); any effort beyond that is billed transparently by time.' },
+    ],
+    segN: "Regardless of the model: we disclose to you how we are compensated in your specific case – before you decide, not just afterwards. If several solutions could work for you, we don't automatically choose the one that pays us the most, but the one that fits your situation.",
+    askH: 'Ask us.',
+    askQ: '“Why do you recommend this solution to me – and what does Coverd earn from it?”',
+    askP: 'We believe you deserve a clear answer to that.',
+    ctaH: "You don't have to decide anything today.",
+  },
+}[lang];
+---
+<Base lang={lang} route="transparenz" title={c.title} description={c.desc} image="transparenz-hero" crumb={[{ name: c.eyebrow }]}>
+  <PageHero lang={lang} eyebrow={c.eyebrow} title={c.h1} lede={c.lede} image="transparenz-hero" alt={c.alt} crumb={c.eyebrow}>
+    <Btn href="#modelle" variant="amber" external={false}>{c.btn}</Btn>
+  </PageHero>
+
+  <section class="sec sec--paper sec--tight">
+    <div class="wrap split split--7-5" data-reveal>
+      <div>
+        <Eyebrow>{c.recK}</Eyebrow>
+        <h2 style="margin-top:14px">{c.recH}</h2>
+      </div>
+      <div class="stack">
+        <p class="lede">{c.recP}</p>
+        <p class="lede muted">{c.recP2}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--soft" id="modelle">
+    <div class="wrap">
+      <SectionHead eyebrow={c.modK} title={c.modH}><p class="muted">{c.modP}</p></SectionHead>
+      <div class="tiles tiles--2" data-reveal>
+        {c.mod.map((x, i) => (
+          <div class="tile">
+            <span class="tile__n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{x.t}</h3>
+            <p>{x.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="lede" style="margin-top:28px;max-width:46rem" data-reveal>{c.modN}</p>
+    </div>
+  </section>
+
+  <section class="sec sec--paper">
+    <div class="wrap">
+      <SectionHead eyebrow={c.segK} title={c.segH}><p class="muted">{c.segP}</p></SectionHead>
+      <div class="tiles tiles--3" data-reveal>
+        {c.seg.map((x) => <div class="tile"><h3>{x.t}</h3><p>{x.p}</p></div>)}
+      </div>
+      <p style="margin-top:28px;max-width:52rem" data-reveal>{c.segN}</p>
+      <div class="btn-row" style="margin-top:22px"><Btn href={bookingUrl()}>{lang === 'de' ? 'Erstgespräch vereinbaren' : 'Book an Initial Consultation'}</Btn></div>
+    </div>
+  </section>
+
+  <section class="sec sec--dark sec--tight">
+    <div class="wrap">
+      <figure class="quote" data-reveal style="max-width:60rem">
+        <Eyebrow>{c.askH}</Eyebrow>
+        <blockquote>{c.askQ}</blockquote>
+        <figcaption class="muted">{c.askP}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} title={c.ctaH} />
+</Base>

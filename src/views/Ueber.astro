@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import TeamCard from '../components/TeamCard.astro';
+import { type Lang } from '../i18n';
+import { bookingUrl, site } from '../data/site';
+import { team } from '../data/team';
+import { organization } from '../lib/schema';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = {
+  de: {
+    title: 'Über Coverd: Team & Gründer aus Olten | Coverd',
+    desc: 'Drei Gründer mit einem Ziel: Versicherungen und Vorsorge so erklären, dass man sie versteht. Lernen Sie das Team hinter Coverd in Olten kennen.',
+    eyebrow: 'Über Coverd',
+    h1: 'Versicherungen und Vorsorge so erklären, dass man sie versteht.',
+    lede: 'Drei Gründer mit einem Ziel.',
+    alt: 'Altstadt am Fluss mit gedeckter Holzbrücke und Kirchturm zur blauen Stunde',
+    whyK: 'Unsere Geschichte',
+    whyH: 'Warum wir Coverd aufgebaut haben.',
+    why1: 'Wir arbeiten seit Jahren mit KMU und Privatpersonen zusammen, bei der Buchhaltung, den Löhnen und den Steuern. Dabei sehen wir immer wieder dasselbe: Die Pensionskasse wurde vor zehn Jahren gewählt und seither nie verglichen. Die Betriebshaftpflicht passt nicht mehr zum heutigen Geschäft. Und privat weiss kaum jemand, was die eigenen Policen eigentlich abdecken.',
+    why2: 'Wir haben Coverd gegründet, weil wir überzeugt sind, dass das besser geht: mit einem Ansprechpartner, der unabhängig vergleicht, offenlegt, wie er bezahlt wird, und sich auch nach dem Abschluss meldet.',
+    whyAlt: 'Zwei Personen an einem Fenster mit Blick auf Fluss und Holzbrücke',
+    teamK: 'Team',
+    teamH: 'Die Menschen hinter Coverd.',
+    teamP: 'Bei uns haben Sie eine feste Ansprechperson, die Ihre Situation kennt.',
+    partK: 'Unser Partner',
+    partH: 'Treuhand aus einer Hand – zusammen mit Z83 AG.',
+    partP: 'Für Buchhaltung, Lohnwesen und weitere administrative Themen rund um Ihr Unternehmen arbeiten wir eng mit unserem Partner Z83 AG zusammen, damit Sie nicht noch einen weiteren Ansprechpartner brauchen.',
+    partL: ['Buchhaltung', 'Lohnbuchhaltung', 'Steuererklärungen für Unternehmen', 'Gesellschaftsgründung'],
+    partBtn: 'Erstgespräch vereinbaren',
+    ctaH: 'Lernen Sie uns kennen',
+    ctaP: 'Am einfachsten in einem kurzen, unverbindlichen Gespräch.',
+  },
+  en: {
+    title: 'About Coverd: Team & Founders from Olten | Coverd',
+    desc: 'Three founders with one goal: explaining insurance and pension planning so that people actually understand them. Meet the team behind Coverd in Olten.',
+    eyebrow: 'About Coverd',
+    h1: 'Explaining insurance and pensions so that people actually understand them.',
+    lede: 'Three founders with one goal.',
+    alt: 'An old town on the river with a covered wooden bridge and church tower at blue hour',
+    whyK: 'Our story',
+    whyH: 'Why we built Coverd.',
+    why1: "We have worked for years with SMEs and private individuals on bookkeeping, payroll and taxes. In doing so, we keep seeing the same picture: the pension fund was chosen ten years ago and never compared since. Business liability cover no longer fits today's business. And privately, hardly anyone knows what their own policies actually cover.",
+    why2: 'We founded Coverd because we are convinced there is a better way: with one point of contact who compares independently, discloses how they are paid, and stays in touch after the contract is signed.',
+    whyAlt: 'Two people at a window looking out over a river and a wooden bridge',
+    teamK: 'Team',
+    teamH: 'The people behind Coverd.',
+    teamP: 'With us, you have one fixed point of contact who knows your situation.',
+    partK: 'Our Partner',
+    partH: 'Fiduciary services under one roof – together with Z83 AG.',
+    partP: "For bookkeeping, payroll and other administrative matters around your business, we work closely with our partner Z83 AG, so you don't need yet another point of contact.",
+    partL: ['Bookkeeping', 'Payroll', 'Corporate tax returns', 'Company formation'],
+    partBtn: 'Book an Initial Consultation',
+    ctaH: 'Get to know us',
+    ctaP: 'The easiest way is a short, non-binding conversation.',
+  },
+}[lang];
+---
+<Base lang={lang} route="ueber" title={c.title} description={c.desc} image="ueber-hero" crumb={[{ name: c.eyebrow }]} jsonld={[organization(lang)]}>
+  <PageHero lang={lang} eyebrow={c.eyebrow} title={c.h1} lede={c.lede} image="ueber-hero" alt={c.alt} crumb={c.eyebrow} />
+
+  <section class="sec sec--paper">
+    <div class="wrap split split--flip">
+      <div class="figure ratio-43" data-reveal><Img name="ueber-story" alt={c.whyAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
+      <div data-reveal>
+        <Eyebrow>{c.whyK}</Eyebrow>
+        <h2 style="margin-top:14px">{c.whyH}</h2>
+        <p class="muted" style="margin-top:18px">{c.why1}</p>
+        <p style="margin-top:14px">{c.why2}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap">
+      <SectionHead eyebrow={c.teamK} title={c.teamH}><p class="lede muted">{c.teamP}</p></SectionHead>
+      <div class="team">{team.map((p) => <TeamCard person={p} lang={lang} full />)}</div>
+    </div>
+  </section>
+
+  <section class="sec sec--dark">
+    <div class="wrap split split--7-5" data-reveal>
+      <div>
+        <Eyebrow>{c.partK}</Eyebrow>
+        <h2 style="margin-top:14px">{c.partH}</h2>
+        <p class="muted" style="margin-top:18px;max-width:42rem">{c.partP}</p>
+        <div class="btn-row" style="margin-top:26px">
+          <Btn href={bookingUrl()} variant="amber">{c.partBtn}</Btn>
+          <a class="tlink" href={site.partner.href} target="_blank" rel="noopener" style="margin-left:8px">{site.partner.name} <Icon name="arrow-up" /></a>
+        </div>
+      </div>
+      <ul class="rows">
+        {c.partL.map((x) => <li class="row" style="grid-template-columns:minmax(0,1fr);padding-block:16px"><span class="h3">{x}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} title={c.ctaH} text={c.ctaP} />
+</Base>

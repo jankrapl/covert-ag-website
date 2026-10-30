@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { url, ui, type Lang } from '../i18n';
+import { site } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const de = lang === 'de';
+const name = de ? 'Datenschutzerklärung' : 'Privacy Policy';
+const crumb = de ? 'Datenschutz' : 'Privacy';
+---
+<Base lang={lang} route="datenschutz" title={`${crumb} | Coverd`} description={de ? 'Datenschutzerklärung der Coverd AG: keine Cookies, keine Tracker, Server in der Schweiz. Welche Daten wir bearbeiten und welche Rechte Sie haben.' : 'Privacy policy of Coverd AG: no cookies, no trackers, servers in Switzerland. What data we process and what rights you have.'} header="solid" crumb={[{ name: crumb }]}>
+  <section class="plainhead">
+    <div class="wrap">
+      <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href={url('home', lang)}>{ui[lang].home}</a></li><li aria-current="page">{crumb}</li></ol></nav>
+      <Eyebrow>{site.legalName}</Eyebrow>
+      <h1>{name}</h1>
+    </div>
+  </section>
+  <section class="sec sec--soft" style="padding-top:clamp(32px,4vw,56px)">
+    <div class="wrap">
+      {de ? (
+        <div class="art legal">
+          <p>Wir bearbeiten Personendaten nach dem Schweizer Datenschutzgesetz (DSG). Hier erfahren Sie, welche Daten beim Besuch dieser Website anfallen und wofür wir sie verwenden.</p>
+          <h2>Verantwortliche Stelle</h2>
+          <p>{site.legalName}, {site.address ? `${site.address.street}, ${site.address.zip} ${site.address.city}` : site.city}, Schweiz<br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+          <h2>Kurz gesagt</h2>
+          <ul>
+            <li>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Werbe-Tracker.</li>
+            <li>Schriften und Bilder werden von unserem eigenen Server geladen, nicht von Drittanbietern.</li>
+            <li>Der Server steht in der Schweiz.</li>
+          </ul>
+          <h2>Besuch der Website</h2>
+          <p>Die Website wird bei Infomaniak Network SA in der Schweiz betrieben. Beim Aufruf speichert der Webserver technisch notwendige Angaben in Protokolldateien: IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Herkunftsseite sowie Browser und Betriebssystem. Das dient dem sicheren Betrieb und der Fehlersuche. Die Protokolle werden nach 14 Tagen automatisch gelöscht.</p>
+          <h2>Kontakt per E-Mail und Formular</h2>
+          <p>Das Kontaktformular speichert nichts auf dieser Website: Es öffnet Ihr E-Mail-Programm mit einer vorbereiteten Nachricht. Wenn Sie uns schreiben, bearbeiten wir Ihre Angaben, um Ihre Anfrage zu beantworten. Unsere E-Mail-Postfächer werden bei Google betrieben. Ihre Nachricht kann dabei auch ausserhalb der Schweiz bearbeitet werden, insbesondere in der EU und den USA.</p>
+          <h2>Terminbuchung</h2>
+          <p>Für die Buchung eines Erstgesprächs leiten wir Sie auf eine Seite von Google Kalender weiter. Dort erfassen Sie Ihre Angaben direkt bei Google. Es gilt die Datenschutzerklärung von Google. Auch hier ist eine Bearbeitung ausserhalb der Schweiz möglich.</p>
+          <h2>WhatsApp und LinkedIn</h2>
+          <p>Links zu WhatsApp und LinkedIn sind einfache Verweise. Daten fliessen erst, wenn Sie den Link anklicken. Wenn Sie uns über WhatsApp schreiben, gelten die Bedingungen von WhatsApp.</p>
+          <h2>Aufbewahrung</h2>
+          <p>Wir bewahren Personendaten nur so lange auf, wie es für den jeweiligen Zweck nötig ist oder das Gesetz es verlangt.</p>
+          <h2>Ihre Rechte</h2>
+          <p>Sie können Auskunft über Ihre Personendaten verlangen und deren Berichtigung, Löschung oder Herausgabe beantragen. Schreiben Sie uns dazu an <a href={`mailto:${site.email}`}>{site.email}</a>. Sie können sich zudem beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) beschweren.</p>
+          <h2>Änderungen</h2>
+          <p>Wir passen diese Erklärung an, wenn sich die Website oder die Rechtslage ändert. Es gilt die jeweils hier veröffentlichte Fassung.</p>
+          <p class="art__note">Stand: Oktober 2026</p>
+        </div>
+      ) : (
+        <div class="art legal">
+          <p>We process personal data in accordance with the Swiss Federal Act on Data Protection (FADP). This page explains what data arises when you visit this website and what we use it for.</p>
+          <h2>Controller</h2>
+          <p>{site.legalName}, {site.address ? `${site.address.street}, ${site.address.zip} ${site.address.city}` : site.city}, Switzerland<br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+          <h2>In short</h2>
+          <ul>
+            <li>This website sets no cookies and uses no analytics or advertising trackers.</li>
+            <li>Fonts and images are loaded from our own server, not from third parties.</li>
+            <li>The server is located in Switzerland.</li>
+          </ul>
+          <h2>Visiting the website</h2>
+          <p>The website is hosted by Infomaniak Network SA in Switzerland. When you visit, the web server records technically necessary details in log files: IP address, date and time, page requested, referring page, and browser and operating system. This serves secure operation and troubleshooting. Logs are deleted automatically after 14 days.</p>
+          <h2>Contact by email and form</h2>
+          <p>The contact form stores nothing on this website: it opens your email program with a prepared message. When you write to us, we process your details to answer your enquiry. Our mailboxes are operated by Google. Your message may therefore also be processed outside Switzerland, in particular in the EU and the USA.</p>
+          <h2>Booking an appointment</h2>
+          <p>To book an initial consultation we refer you to a Google Calendar page, where you enter your details directly with Google. Google's privacy policy applies. Processing outside Switzerland is possible here too.</p>
+          <h2>WhatsApp and LinkedIn</h2>
+          <p>Links to WhatsApp and LinkedIn are simple links. No data flows until you click them. If you write to us via WhatsApp, WhatsApp's terms apply.</p>
+          <h2>Retention</h2>
+          <p>We keep personal data only as long as necessary for the purpose in question or as required by law.</p>
+          <h2>Your rights</h2>
+          <p>You may request information about your personal data and ask for it to be corrected, deleted or handed over. Write to us at <a href={`mailto:${site.email}`}>{site.email}</a>. You may also lodge a complaint with the Federal Data Protection and Information Commissioner (FDPIC).</p>
+          <h2>Changes</h2>
+          <p>We update this policy when the website or the law changes. The version published here applies.</p>
+          <p class="art__note">Last updated: October 2026</p>
+        </div>
+      )}
+    </div>
+  </section>
+</Base>

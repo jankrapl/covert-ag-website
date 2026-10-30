@@ -1,0 +1,221 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Process from '../components/Process.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { url, type Lang } from '../i18n';
+import { bookingUrl } from '../data/site';
+import { service } from '../lib/schema';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = {
+  de: {
+    title: 'BVG-Beratung für KMU: Pensionskasse vergleichen | Coverd',
+    desc: 'Wann haben Sie Ihre BVG-Lösung zuletzt verglichen? Coverd prüft Kosten, Leistungen und Vorsorgeplan für KMU und zeigt, wie Ihre Pensionskasse dasteht.',
+    eyebrow: 'Schwerpunkt · Berufliche Vorsorge (BVG)',
+    crumb: 'Berufliche Vorsorge (BVG)',
+    h1: 'Wann haben Sie Ihre BVG-Lösung zuletzt verglichen?',
+    lede: 'Sie erfahren innert weniger Wochen schwarz auf weiss, ob Ihre Mitarbeitenden zu fairen Konditionen versichert sind – und wie viel Sparpotenzial in Ihrer aktuellen BVG-Lösung steckt.',
+    alt: 'Berater bespricht mit drei Mitarbeitenden eines KMU die Vorsorgelösung am Sitzungstisch',
+    btn: 'BVG prüfen lassen',
+    nudge: 'Kostenlos & unverbindlich · Für Geschäftsführung, HR und Verwaltungsrat',
+    probK: 'Die Ausgangslage',
+    probH: 'Oft geprüft wird alles – ausser die berufliche Vorsorge.',
+    probP: 'Sach- und Haftpflichtversicherungen werden regelmässig verglichen. Die BVG oft jahrelang nicht, obwohl sie einer der grössten Kostenblöcke ist.',
+    obj: [
+      { q: '„Wir haben doch schon eine Pensionskasse.“', a: 'Genau das ist unser Ausgangspunkt: Wir vergleichen Ihre bestehende Lösung, ohne dass Sie vorher kündigen oder etwas ändern müssen.' },
+      { q: '„Ein Wechsel ist doch kompliziert.“', a: 'Die Kündigungsfrist beträgt meist 6 Monate; wir übernehmen die Koordination mit der Belegschaft und der neuen Sammelstiftung für Sie.' },
+    ],
+    feel: 'Die 2. Säule beeinflusst, wie sicher sich Ihre Mitarbeitenden fühlen.',
+    caseK: 'Beispiel',
+    caseH: 'Beispiel: KMU mit 25 Mitarbeitenden',
+    today: 'Heute',
+    todayRows: [['BVG-Kosten', "CHF 100'000"], ['Vorsorgeplan', 'bestehend'], ['Letzte Prüfung', 'vor 5 Jahren']],
+    analysis: 'Coverd-Analyse',
+    analysisRows: ['3 Varianten verglichen', 'Kosten geprüft', 'Leistungen verglichen', 'Vorsorgeplan analysiert'],
+    result: 'Ergebnis',
+    resultT: 'Entscheidungsgrundlage für die Geschäftsleitung',
+    caseN: 'Illustratives Beispiel: keine reale Kundensituation, keine Einsparversprechen.',
+    svcK: 'Unsere Leistungen',
+    svcH: 'BVG-Beratung, wie sie für KMU noch selten ist.',
+    svcP: 'Grössere Unternehmen haben oft eigene Vorsorgekommissionen oder externe Pensionskassenberater. KMU fehlt dafür häufig die Zeit oder das spezialisierte Fachwissen. Genau hier setzen wir an.',
+    svc: [
+      { t: 'BVG-Vergleich & Ausschreibung', p: 'Verschiedene Sammelstiftungen im Vergleich.' },
+      { t: 'Kosten- & Leistungsanalyse', p: 'Verständlich statt nur eine Zahl im Ausweis.' },
+      { t: 'Laufende Betreuung', p: 'Wir melden uns, wenn sich etwas ändert.' },
+      { t: 'Kommunikation für Mitarbeitende', p: 'Vorsorgeausweise verständlich erklärt.' },
+    ],
+    focusH: 'Ein Schwerpunkt, kein Nebenprodukt.',
+    focusP: 'BVG ist bei uns kein Nebenprodukt, mit gezieltem Fachwissenaufbau im Team.',
+    focusL: 'Unser Team kennenlernen',
+    procK: 'Unser Vorgehen',
+    procH: 'So gehen wir vor',
+    procAlt: 'Dunkles Holztragwerk im Inneren einer gedeckten Brücke',
+    steps: [
+      { t: 'Kennenlernen', p: 'Wir verstehen Ihr Unternehmen, Ihre Belegschaft und Ihre bestehende Vorsorgelösung.' },
+      { t: 'Analysieren', p: 'Wir prüfen Vorsorgereglement, Kosten, Leistungen und Anlagestrategie im Detail.' },
+      { t: 'Vergleichen', p: 'Wir stellen Angebote verschiedener Sammelstiftungen transparent gegenüber.' },
+      { t: 'Entscheiden', p: 'Gemeinsam wählen Sie die Lösung, die zu Unternehmen und Mitarbeitenden passt.' },
+      { t: 'Betreuen', p: 'Wir überprüfen Ihre BVG-Lösung laufend und sind Ansprechpartner bei Fragen.' },
+    ],
+    lastH: 'Und wann wurde Ihre Vorsorgelösung zuletzt überprüft?',
+    lastP: 'Eine Vorsorgelösung begleitet Mitarbeitende und Unternehmen oft über viele Jahre. In dieser Zeit können sich unter anderem verändern:',
+    lastList: ['Anlagestrategie', 'Kosten', 'Verzinsung', 'Vorsorgeplan', 'Anbieter', 'Unternehmensstruktur'],
+    lastE: 'Deshalb sollte eine langfristige Vorsorgelösung nicht einfach abgeschlossen und vergessen werden.',
+    revH: 'Coverd prüft. Sie entscheiden.',
+    revP1: 'Wir analysieren Ihre bestehende BVG-Lösung und zeigen transparent auf, wie sie bei Kosten, Leistungen und Struktur im Vergleich dasteht.',
+    revP2: 'Nicht mit dem Versprechen einer bestimmten Rendite. Sondern mit dem Ziel, regelmässig zu prüfen, ob Ihre Vorsorgelösung weiterhin zu Ihrem Unternehmen und Ihren Mitarbeitenden passt.',
+    revBtn: 'BVG überprüfen lassen',
+    ctaH: 'Lassen Sie uns Ihre berufliche Vorsorge analysieren.',
+    ctaP: 'Unverbindlich, transparent, auf Ihr Unternehmen ausgerichtet.',
+  },
+  en: {
+    title: 'BVG Advice for SMEs: Compare Your Pension Fund | Coverd',
+    desc: 'When did you last compare your BVG pension solution? Coverd reviews costs, benefits and pension plan for SMEs and shows how your pension fund compares.',
+    eyebrow: 'Specialty · Occupational Pension (BVG)',
+    crumb: 'Occupational Pension (BVG)',
+    h1: 'When did you last compare your BVG pension solution?',
+    lede: "Within a few weeks, you'll know in black and white whether your employees are insured on fair terms – and how much savings potential your current BVG solution holds.",
+    alt: 'An advisor discussing the pension solution with three employees of an SME at a meeting table',
+    btn: 'Get Your BVG Reviewed',
+    nudge: 'Free & non-binding · For management, HR and the board',
+    probK: 'The starting point',
+    probH: 'Everything gets reviewed – except occupational pensions.',
+    probP: "Property and liability insurance get compared regularly. BVG pensions often go unchecked for years, even though they're one of the largest cost items.",
+    obj: [
+      { q: '“But we already have a pension fund.”', a: "That's exactly our starting point: we compare your existing solution without you having to cancel or change anything first." },
+      { q: '“Switching is complicated, though.”', a: 'The notice period is usually 6 months; we handle the coordination with your workforce and the new collective pension foundation for you.' },
+    ],
+    feel: 'The 2nd pillar affects how secure your employees feel.',
+    caseK: 'Example',
+    caseH: 'Example: SME with 25 employees',
+    today: 'Today',
+    todayRows: [['BVG costs', 'CHF 100,000'], ['Pension plan', 'existing'], ['Last reviewed', '5 years ago']],
+    analysis: 'Coverd Analysis',
+    analysisRows: ['3 options compared', 'Costs reviewed', 'Benefits compared', 'Pension plan analyzed'],
+    result: 'Result',
+    resultT: 'Decision basis for management',
+    caseN: 'Illustrative example: not a real customer situation, no savings are promised.',
+    svcK: 'Our services',
+    svcH: 'BVG advisory the way SMEs rarely get it.',
+    svcP: "Larger companies often have their own pension committees or external pension fund advisors. SMEs frequently lack the time or specialized expertise for this. That's exactly where we come in.",
+    svc: [
+      { t: 'BVG Comparison & Tender', p: 'Comparing different collective pension foundations.' },
+      { t: 'Cost & Benefit Analysis', p: 'Explained clearly, not just a number on a statement.' },
+      { t: 'Ongoing Support', p: 'We reach out when something changes.' },
+      { t: 'Communication for Employees', p: 'Pension statements explained in plain language.' },
+    ],
+    focusH: 'A specialty, not a side offering.',
+    focusP: "BVG is not a side offering for us: we've built dedicated expertise within the team.",
+    focusL: 'Meet Our Team',
+    procK: 'Our Approach',
+    procH: 'How we proceed',
+    procAlt: 'Dark timber framework inside a covered bridge',
+    steps: [
+      { t: 'Get Acquainted', p: 'We get to know your company, your workforce and your existing pension solution.' },
+      { t: 'Analyze', p: 'We review pension regulations, costs, benefits and investment strategy in detail.' },
+      { t: 'Compare', p: 'We transparently compare offers from different collective pension foundations.' },
+      { t: 'Decide', p: 'Together, you choose the solution that fits your company and employees.' },
+      { t: 'Support', p: 'We continuously review your BVG solution and are your point of contact for questions.' },
+    ],
+    lastH: 'And when was your pension solution last reviewed?',
+    lastP: 'A pension solution often stays with employees and companies for many years. During that time, the following can change, among other things:',
+    lastList: ['Investment strategy', 'Costs', 'Interest rate', 'Pension plan', 'Provider', 'Company structure'],
+    lastE: "That's why a long-term pension solution shouldn't just be signed and forgotten.",
+    revH: 'Coverd reviews. You decide.',
+    revP1: 'We analyze your existing BVG solution and transparently show how it compares in terms of costs, benefits and structure.',
+    revP2: 'Not with the promise of a specific return. But with the goal of regularly checking whether your pension solution still fits your company and your employees.',
+    revBtn: 'Get Your BVG Reviewed',
+    ctaH: "Let's analyze your occupational pension.",
+    ctaP: 'Non-binding, transparent, tailored to your company.',
+  },
+}[lang];
+---
+<Base lang={lang} route="bvg" title={c.title} description={c.desc} image="bvg-hero" crumb={[{ name: c.crumb }]} jsonld={[service(lang, c.crumb, c.desc, url('bvg', lang))]}>
+  <PageHero lang={lang} eyebrow={c.eyebrow} title={c.h1} lede={c.lede} nudge={c.nudge} image="bvg-hero" alt={c.alt} crumb={c.crumb}>
+    <Btn href={bookingUrl('bvg')} variant="amber">{c.btn}</Btn>
+  </PageHero>
+
+  <section class="sec sec--paper">
+    <div class="wrap">
+      <SectionHead eyebrow={c.probK} title={c.probH}><p class="muted">{c.probP}</p></SectionHead>
+      <div class="tiles tiles--2" data-reveal>
+        {c.obj.map((o) => <div class="tile" style="min-height:0"><h3>{o.q}</h3><p>{o.a}</p></div>)}
+      </div>
+      <p class="lede" style="margin-top:28px" data-reveal>{c.feel}</p>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap">
+      <SectionHead eyebrow={c.caseK} title={c.caseH} />
+      <div class="case" data-reveal>
+        <div>
+          <span class="case__k">{c.today}</span>
+          <dl>{c.todayRows.map(([a, b]) => <div><dt>{a}</dt><dd>{b}</dd></div>)}</dl>
+        </div>
+        <div>
+          <span class="case__k">{c.analysis}</span>
+          <ul class="ticks ticks--copper" style="margin-top:-12px">{c.analysisRows.map((x, i) => <li style={i === 0 ? 'border-top:0' : undefined}><Icon name="check" />{x}</li>)}</ul>
+        </div>
+        <div class="on-dark">
+          <span class="case__k">{c.result}</span>
+          <p class="h3">{c.resultT}</p>
+        </div>
+      </div>
+      <p class="xs muted" style="margin-top:14px">{c.caseN}</p>
+    </div>
+  </section>
+
+  <section class="sec sec--paper">
+    <div class="wrap">
+      <SectionHead eyebrow={c.svcK} title={c.svcH}><p class="muted">{c.svcP}</p></SectionHead>
+      <div class="tiles" data-reveal>
+        {c.svc.map((x, i) => (
+          <div class="tile">
+            <span class="tile__n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{x.t}</h3>
+            <p>{x.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--dark sec--tight">
+    <div class="wrap split split--7-5" data-reveal>
+      <h2>{c.focusH}</h2>
+      <div class="stack">
+        <p class="lede">{c.focusP}</p>
+        <p><a class="tlink" href={url('ueber', lang)}>{c.focusL} <Icon name="arrow-up" /></a></p>
+      </div>
+    </div>
+  </section>
+
+  <Process eyebrow={c.procK} title={c.procH} steps={c.steps} alt={c.procAlt} />
+
+  <section class="sec sec--paper">
+    <div class="wrap split split--top">
+      <div data-reveal>
+        <h2>{c.lastH}</h2>
+        <p class="muted" style="margin-top:18px">{c.lastP}</p>
+        <div class="tags" style="margin-top:18px">{c.lastList.map((t) => <span class="tag">{t}</span>)}</div>
+        <p style="margin-top:20px">{c.lastE}</p>
+      </div>
+      <div class="sec--dark" style="padding:clamp(28px,3.4vw,48px)" data-reveal>
+        <h3 class="h2">{c.revH}</h3>
+        <p style="margin-top:18px">{c.revP1}</p>
+        <p class="muted" style="margin-top:12px">{c.revP2}</p>
+        <div class="btn-row" style="margin-top:24px"><Btn href={bookingUrl('bvg')} variant="amber">{c.revBtn}</Btn></div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} title={c.ctaH} text={c.ctaP} topic="bvg" />
+</Base>

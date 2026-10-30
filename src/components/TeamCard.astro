@@ -1,0 +1,23 @@
+---
+import Img from './Img.astro';
+import type { Person } from '../data/team';
+import type { Lang } from '../i18n';
+interface Props { person: Person; lang: Lang; full?: boolean; sizes?: string }
+const { person: p, lang, full = false, sizes = '(max-width: 1000px) 50vw, 300px' } = Astro.props;
+const contact = lang === 'de' ? 'Kontakt' : 'Contact';
+---
+<article class="tcard" data-reveal>
+  <div class="tcard__ph"><Img name={p.photo} alt={p.name} sizes={sizes} /></div>
+  <h3>{p.name}</h3>
+  <p class="tcard__r">{p.role[lang]}</p>
+  {full && (
+    <>
+      <p class="tcard__f">{p.focus[lang]}</p>
+      {p.tags[lang].length > 0 && <div class="tags">{p.tags[lang].map((t) => <span class="tag">{t}</span>)}</div>}
+      <div class="tcard__l">
+        {p.linkedin && <a class="tlink" href={p.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
+        <a class="tlink" href={`mailto:info@coverd.ch?subject=${encodeURIComponent(`${contact}: ${p.name}`)}`}>{contact}</a>
+      </div>
+    </>
+  )}
+</article>

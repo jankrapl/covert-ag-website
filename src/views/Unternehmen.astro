@@ -1,0 +1,180 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
+import Badge from '../components/Badge.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { url, type Lang } from '../i18n';
+import { bookingUrl } from '../data/site';
+import { service } from '../lib/schema';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = {
+  de: {
+    title: 'Unternehmensversicherungen für KMU | Coverd Olten',
+    desc: 'Wir analysieren, vergleichen und betreuen Ihre Unternehmensversicherungen, damit Sie sich auf Ihr Geschäft konzentrieren können. Kostenlos und unverbindlich.',
+    eyebrow: 'Unternehmen',
+    h1: 'Ihre Versicherungen laufen. Ihr Unternehmen auch.',
+    lede: 'Wir analysieren, vergleichen und betreuen Ihre Unternehmensversicherungen – damit Sie sich auf Ihr Geschäft konzentrieren können.',
+    alt: 'Inhaber einer Schreinerei prüft in seiner Werkstatt ein Tablet',
+    btn: 'Unternehmen analysieren lassen',
+    nudge: 'Kostenlos & unverbindlich · Antwort in der Regel innerhalb eines Werktages',
+    adminK: 'Administration',
+    adminH: 'Wie viel Zeit kostet Sie Ihre Versicherungs\u00ADadministration?',
+    adminAlt: 'Schreibtisch mit Aktenstapeln, Telefon und Briefumschlägen in einem kleinen Büro',
+    admin: [['Neuer Mitarbeiter', 'melden.'], ['Schadenfall', 'Ansprechpartner suchen.'], ['Police', 'Dokument suchen.'], ['Mutation', 'E-Mail schreiben.'], ['BVG', 'Offerte vergleichen.']],
+    adminP: 'Das geht einfacher. Coverd bündelt Ihre Versicherungsadministration an einem Ort.',
+    svcK: 'Unsere Leistungen',
+    svcH: 'Unsere Leistungen für Unternehmen',
+    svcP: 'Ob Handwerksbetrieb, Treuhandbüro, Bauunternehmen oder Startup: Die Risiken unterscheiden sich, die Systematik unserer Beratung bleibt gleich.',
+    svc: [
+      { t: 'Risiko- & Versicherungs\u00ADanalyse', p: 'Deckungen prüfen, Lücken schliessen.' },
+      { t: 'Ausschreibung & Vergleich', p: 'Beste Lösung, nicht nur beste Prämie.' },
+      { t: 'Laufende Betreuung', p: 'Auch nach Vertragsabschluss für Sie da.' },
+      { t: 'Steuern & Beratung', p: 'Fachwissen über einen Ansprechpartner.', href: 'steuern', m: 'Mehr zu Steuern' },
+    ],
+    grewH: 'Ist Ihre Versicherung mit Ihrem Unternehmen gewachsen?',
+    grewP: 'Unternehmen verändern sich. Versicherungen sollten mitziehen.',
+    grewBtn: 'Risiken überprüfen',
+    bvgK: 'Unser Schwerpunkt',
+    bvgH: 'Die 2. Säule: oft der grösste ungeprüfte Kostenblock.',
+    bvgBtn: 'BVG für Unternehmen entdecken',
+    bvgAlt: 'Schreinermeister und Lernender besprechen ein Werkstück',
+    portalK: 'Firmenportal',
+    portalH: 'Eine Plattform für Ihre Versicherungs\u00ADadministration.',
+    portalP: 'Alles zentral. Direkt mit Coverd verbunden.',
+    sizeK: 'Betreuungsmodelle',
+    sizeH: 'Lösungen passend zur Unternehmens\u00ADgrösse',
+    sizeP: 'Keine zwei Unternehmen benötigen dieselbe Betreuung.',
+    size: [
+      { t: 'KMU', p: 'Vergütung über Courtagen, Zusatzleistungen transparent verrechnet.' },
+      { t: 'Grössere Unternehmen', p: 'Individuelles Mandatsmodell nach Aufwand.' },
+    ],
+    sizeBtn: 'Betreuungsmodelle kennenlernen',
+    ctaH: 'Lassen Sie uns über Ihr Unternehmen sprechen.',
+  },
+  en: {
+    title: 'Business Insurance for SMEs | Coverd Olten',
+    desc: 'We analyze, compare and manage your business insurance so you can focus on your business. Free and non-binding, with a response usually within one business day.',
+    eyebrow: 'Business',
+    h1: 'Your insurance runs smoothly. So does your business.',
+    lede: 'We analyze, compare and manage your business insurance – so you can focus on your business.',
+    alt: 'The owner of a joinery checking a tablet in his workshop',
+    btn: 'Get Your Business Analyzed',
+    nudge: 'Free & non-binding · Response usually within one business day',
+    adminK: 'Administration',
+    adminH: 'How much time does your insurance admin cost you?',
+    adminAlt: 'A desk with stacks of files, a phone and envelopes in a small office',
+    admin: [['New employee', 'report it.'], ['Claim', 'find a contact.'], ['Policy', 'find the document.'], ['Change', 'write an email.'], ['BVG', 'compare quotes.']],
+    adminP: "There's a simpler way. Coverd brings your insurance administration together in one place.",
+    svcK: 'Our services',
+    svcH: 'Our Services for Businesses',
+    svcP: 'Whether a trade business, fiduciary office, construction company or startup, the risks differ, but our advisory approach stays the same.',
+    svc: [
+      { t: 'Risk & Insurance Analysis', p: 'Review coverage, close gaps.' },
+      { t: 'Tender & Comparison', p: 'The best solution, not just the best premium.' },
+      { t: 'Ongoing Support', p: 'Here for you even after the contract is signed.' },
+      { t: 'Tax & Advisory', p: 'Expertise through a single point of contact.', href: 'steuern', m: 'More on Taxes' },
+    ],
+    grewH: 'Has your insurance grown along with your business?',
+    grewP: 'Businesses change. Insurance should keep up.',
+    grewBtn: 'Review Risks',
+    bvgK: 'Our Focus',
+    bvgH: 'The 2nd pillar: often the largest unreviewed cost item.',
+    bvgBtn: 'Discover BVG for Businesses',
+    bvgAlt: 'A master carpenter and an apprentice discussing a workpiece',
+    portalK: 'Business Portal',
+    portalH: 'One platform for your insurance administration.',
+    portalP: 'Everything centralized. Directly connected to Coverd.',
+    sizeK: 'Service models',
+    sizeH: 'Solutions Matched to Company Size',
+    sizeP: 'No two businesses need the same level of support.',
+    size: [
+      { t: 'SMEs', p: 'Compensation via commissions, additional services billed transparently.' },
+      { t: 'Larger Businesses', p: 'Individual mandate model based on effort.' },
+    ],
+    sizeBtn: 'Explore Our Service Models',
+    ctaH: "Let's talk about your business.",
+  },
+}[lang];
+---
+<Base lang={lang} route="unternehmen" title={c.title} description={c.desc} image="unternehmen-hero" crumb={[{ name: c.eyebrow }]} jsonld={[service(lang, c.eyebrow, c.desc, url('unternehmen', lang))]}>
+  <PageHero lang={lang} eyebrow={c.eyebrow} title={c.h1} lede={c.lede} nudge={c.nudge} image="unternehmen-hero" alt={c.alt} crumb={c.eyebrow}>
+    <Btn href={bookingUrl('unternehmen')} variant="amber">{c.btn}</Btn>
+  </PageHero>
+
+  <section class="sec sec--paper">
+    <div class="wrap split">
+      <div data-reveal>
+        <Eyebrow>{c.adminK}</Eyebrow>
+        <h2 style="margin-top:14px">{c.adminH}</h2>
+        <ul class="rows" style="margin-top:28px">
+          {c.admin.map(([a, b]) => <li class="row" style="grid-template-columns:minmax(0,5fr) 20px minmax(0,7fr);padding-block:13px"><span>{a}</span><Icon name="arrow" /><strong style="font-weight:500">{b}</strong></li>)}
+        </ul>
+        <p class="lede" style="margin-top:24px">{c.adminP}</p>
+      </div>
+      <div class="figure ratio-43" data-reveal><Img name="unternehmen-admin" alt={c.adminAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap">
+      <SectionHead eyebrow={c.svcK} title={c.svcH}><p class="muted">{c.svcP}</p></SectionHead>
+      <div class="tiles" data-reveal>
+        {c.svc.map((x, i) => {
+          const Tag = x.href ? 'a' : 'div';
+          return (
+            <Tag class="tile" href={x.href ? url(x.href as 'steuern', lang) : undefined}>
+              <span class="tile__n">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{x.t}</h3>
+              <p>{x.p}</p>
+              {x.m && <span class="tlink">{x.m} <Icon name="arrow-up" /></span>}
+            </Tag>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="duo">
+    <div class="duo__a" style="display:grid;align-content:center;gap:16px;padding-block:clamp(56px,8vw,112px);padding-inline:max(var(--gutter),calc((100vw - 1328px)/2 + var(--gutter))) clamp(28px,4vw,56px)" data-reveal>
+      <h2 class="h2">{c.grewH}</h2>
+      <p class="lede muted">{c.grewP}</p>
+      <div class="btn-row"><Btn href={bookingUrl('unternehmen')}>{c.grewBtn}</Btn></div>
+    </div>
+    <div class="duo__b on-dark" style="display:grid;align-content:center;gap:16px;padding-block:clamp(56px,8vw,112px);padding-inline:clamp(28px,4vw,56px) max(var(--gutter),calc((100vw - 1328px)/2 + var(--gutter)))" data-reveal>
+      <Eyebrow>{c.bvgK}</Eyebrow>
+      <h2 class="h2">{c.bvgH}</h2>
+      <div class="btn-row"><Btn href={url('bvg', lang)} variant="amber">{c.bvgBtn}</Btn></div>
+    </div>
+  </section>
+
+  <section class="sec sec--paper sec--tight">
+    <div class="wrap split split--7-5" data-reveal>
+      <div>
+        <div style="display:flex;align-items:center;gap:12px"><Eyebrow>{c.portalK}</Eyebrow><Badge lang={lang} /></div>
+        <h2 style="margin-top:14px">{c.portalH}</h2>
+      </div>
+      <p class="lede muted">{c.portalP}</p>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap">
+      <SectionHead eyebrow={c.sizeK} title={c.sizeH}>
+        <p class="muted">{c.sizeP}</p>
+        <Btn href={url('transparenz', lang)} variant="line">{c.sizeBtn}</Btn>
+      </SectionHead>
+      <div class="tiles tiles--2" data-reveal>
+        {c.size.map((x) => <div class="tile" style="min-height:0"><h3>{x.t}</h3><p>{x.p}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} title={c.ctaH} topic="unternehmen" />
+</Base>

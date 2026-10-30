@@ -1,0 +1,246 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { url, type Lang } from '../i18n';
+import { bookingUrl } from '../data/site';
+import { privat, unternehmen, type Insurance } from '../data/insurances';
+import { service } from '../lib/schema';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = {
+  de: {
+    title: 'Versicherungen vergleichen: Privat & KMU | Coverd',
+    desc: 'Krankenkasse, Hausrat, Haftpflicht, BVG, Cyber und mehr: Coverd vergleicht Anbieter, Leistungen und Preise. Sie entscheiden, welche Lösung zu Ihnen passt.',
+    eyebrow: 'Leistungen · Versicherungen',
+    crumb: 'Versicherungen',
+    h1: 'Versicherungen vergleichen und richtig absichern',
+    lede: 'Wir vergleichen Anbieter, Leistungen und Preise – Sie entscheiden, welche Lösung zu Ihnen passt.',
+    alt: 'Offener Ordner mit Registern, Lesebrille und Hausschlüsseln auf einem Eichentisch',
+    btn: 'Versicherungen vergleichen',
+    nudge: 'Kostenlos & unverbindlich · Lücken lassen sich oft erst im Gespräch erkennen',
+    listK: 'Überblick',
+    listH: 'Alle Versicherungen im Überblick.',
+    listP: 'Wählen Sie, was für Sie relevant ist.',
+    tabP: 'Privatpersonen',
+    tabU: 'Unternehmen (KMU)',
+    ask: 'Beratung dazu anfragen',
+    toBvg: 'Zur BVG-Seite',
+    firstK: 'Unser Ansatz',
+    firstH: 'Zuerst verstehen, dann vergleichen',
+    firstP: 'Wir prüfen, was Sie wirklich brauchen, bevor wir über Produkte sprechen.',
+    firstAlt: 'Beraterin erklärt einem Paar am Holztisch eine Unterlage',
+    firstTags: ['Krankenkasse', 'Haftpflicht', 'Hausrat', 'Fahrzeug', 'Rechtsschutz', 'Betriebshaftpflicht'],
+    varK: 'Rechenbeispiel',
+    varH: 'Günstiger oder besser versichert?',
+    vars: [
+      { k: 'Variante A', p: "CHF 620", u: 'pro Jahr', l: ['Günstigere Prämie', 'Solide Deckung'] },
+      { k: 'Variante B', p: "CHF 790", u: 'pro Jahr', l: ['Höhere Deckung', 'Zusätzliche Leistungen'] },
+      { k: 'Variante C', p: "CHF 940", u: 'pro Jahr', l: ['Umfassende Absicherung', 'Tiefere Selbstbehalte'] },
+    ],
+    varP: 'Wir zeigen die Unterschiede. Sie entscheiden.',
+    varN: 'Konditionen illustrativ.',
+    recH: 'Unsere Empfehlung beginnt nicht bei der Provision.',
+    rec: ['Ihre Situation', 'Ihr Bedarf', 'Vergleich', 'Ihre Entscheidung'],
+    recBtn: 'So beraten wir',
+    cards: [
+      { k: 'Privatpersonen', t: 'Ihre Absicherung als Ganzes betrachtet', p: 'Bestehende Policen laufen bei uns mit, auch ohne Wechsel.', m: 'Zu Privatkunden', href: 'privat', img: 'privat-hero', alt: 'Paar am Küchentisch' },
+      { k: 'Unternehmen', t: 'Begleitung bei wachsenden Risiken', p: 'Wachstum verändert Risiken. Wir passen Ihre Absicherung laufend an.', m: 'Zu Unternehmen', href: 'unternehmen', img: 'unternehmen-hero', alt: 'Schreinerei am Morgen' },
+    ],
+    ctaH: 'Auch nach dem Abschluss: Ihre Policen bleiben im Blick.',
+  },
+  en: {
+    title: 'Compare Insurance: Private & SME | Coverd',
+    desc: 'Health, household, liability, BVG, cyber and more: Coverd compares providers, benefits and prices. You decide which solution fits you.',
+    eyebrow: 'Services · Insurance',
+    crumb: 'Insurance',
+    h1: 'Compare insurance and get properly covered',
+    lede: 'We compare providers, benefits and prices – you decide which solution fits you.',
+    alt: 'An open binder with tab dividers, reading glasses and house keys on an oak table',
+    btn: 'Compare Insurance',
+    nudge: 'Free & non-binding · Gaps often only become visible in conversation',
+    listK: 'Overview',
+    listH: 'All insurance at a glance.',
+    listP: "Choose what's relevant to you.",
+    tabP: 'Private Individuals',
+    tabU: 'Business (SMEs)',
+    ask: 'Request Advice',
+    toBvg: 'To the BVG Page',
+    firstK: 'Our approach',
+    firstH: 'First understand, then compare',
+    firstP: 'We check what you actually need, before we talk about products.',
+    firstAlt: 'An advisor explaining a document to a couple at a timber table',
+    firstTags: ['Health Insurance', 'Liability', 'Household Contents', 'Vehicle', 'Legal Protection', 'Business Liability'],
+    varK: 'Worked example',
+    varH: 'Cheaper, or better covered?',
+    vars: [
+      { k: 'Option A', p: 'CHF 620', u: 'per year', l: ['Lower premium', 'Solid coverage'] },
+      { k: 'Option B', p: 'CHF 790', u: 'per year', l: ['Higher coverage', 'Additional benefits'] },
+      { k: 'Option C', p: 'CHF 940', u: 'per year', l: ['Comprehensive coverage', 'Lower deductibles'] },
+    ],
+    varP: 'We show the differences. You decide.',
+    varN: 'Terms are illustrative.',
+    recH: "Our recommendation doesn't start with the commission.",
+    rec: ['Your situation', 'Your needs', 'Comparison', 'Your decision'],
+    recBtn: 'How We Advise',
+    cards: [
+      { k: 'Private Individuals', t: 'Your coverage, seen as a whole', p: 'Existing policies are managed alongside ours, even without switching.', m: 'To Private Clients', href: 'privat', img: 'privat-hero', alt: 'A couple at a kitchen table' },
+      { k: 'Business', t: 'Support as risks grow', p: 'Growth changes risk. We continuously adjust your coverage.', m: 'To Business', href: 'unternehmen', img: 'unternehmen-hero', alt: 'A joinery workshop in the morning' },
+    ],
+    ctaH: 'Even after signing: your policies stay in view.',
+  },
+}[lang];
+
+const contact = (x: Insurance) => `${url('kontakt', lang)}?thema=${encodeURIComponent(x.t[lang])}`;
+const groups = [
+  { id: 'privat', label: c.tabP, items: privat },
+  { id: 'unternehmen', label: c.tabU, items: unternehmen },
+];
+---
+<Base lang={lang} route="versicherungen" title={c.title} description={c.desc} image="versicherungen-hero" crumb={[{ name: c.crumb }]} jsonld={[service(lang, c.crumb, c.desc, url('versicherungen', lang))]}>
+  <PageHero lang={lang} eyebrow={c.eyebrow} title={c.h1} lede={c.lede} nudge={c.nudge} image="versicherungen-hero" alt={c.alt} crumb={c.crumb}>
+    <Btn href={bookingUrl('versicherungen')} variant="amber">{c.btn}</Btn>
+  </PageHero>
+
+  <section class="sec sec--paper" id="uebersicht">
+    <div class="wrap">
+      <SectionHead eyebrow={c.listK} title={c.listH}><p class="lede muted">{c.listP}</p></SectionHead>
+      <div class="tabs" role="tablist" aria-label={c.listH}>
+        {groups.map((g, i) => (
+          <button class="tab" type="button" role="tab" id={`tab-${g.id}`} aria-controls={`group-${g.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-tab={g.id}>{g.label}</button>
+        ))}
+      </div>
+      {groups.map((g, i) => (
+        <div class="ins-group" id={`group-${g.id}`} role="tabpanel" aria-labelledby={`tab-${g.id}`} data-group={g.id}>
+          <h3 class="ins-group__t">{g.label}</h3>
+          <div class="ins">
+            {g.items.map((x) => (
+              <details id={x.id}>
+                <summary>
+                  <h3>{x.t[lang]}</h3>
+                  <p>{x.s[lang]}</p>
+                  <span class="ins__plus" aria-hidden="true"></span>
+                </summary>
+                <div class="ins__body">
+                  <p>{x.p[lang]}</p>
+                  {x.link
+                    ? <a class="tlink" href={url('bvg', lang)}>{c.toBvg} <Icon name="arrow-up" /></a>
+                    : <a class="tlink" href={contact(x)} rel="nofollow">{c.ask} <Icon name="arrow-up" /></a>}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap split split--flip">
+      <div class="figure ratio-43" data-reveal><Img name="versicherungen-beratung" alt={c.firstAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
+      <div data-reveal>
+        <Eyebrow>{c.firstK}</Eyebrow>
+        <h2 style="margin-top:14px">{c.firstH}</h2>
+        <p class="lede muted" style="margin-top:18px">{c.firstP}</p>
+        <div class="tags" style="margin-top:22px">{c.firstTags.map((t) => <span class="tag">{t}</span>)}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--deep">
+    <div class="wrap">
+      <SectionHead eyebrow={c.varK} title={c.varH}><p class="lede">{c.varP}</p></SectionHead>
+      <div class="vars" data-reveal>
+        {c.vars.map((v, i) => (
+          <div class:list={['var', { 'var--mid': i === 1 }]}>
+            <span class="var__k">{v.k}</span>
+            <span class="var__p">{v.p}</span>
+            <span class="var__u">{v.u}</span>
+            <ul>{v.l.map((x) => <li>{x}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <p class="xs muted" style="margin-top:14px">{c.varN}</p>
+    </div>
+  </section>
+
+  <section class="sec sec--paper sec--tight">
+    <div class="wrap">
+      <SectionHead title={c.recH}><Btn href={url('transparenz', lang)} variant="line">{c.recBtn}</Btn></SectionHead>
+      <ol class="flow" data-reveal>{c.rec.map((x) => <li>{x}</li>)}</ol>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap">
+      <div class="tiles tiles--2" style="background:none;border:0;gap:clamp(16px,2vw,24px)">
+        {c.cards.map((x) => (
+          <a class="icard" href={url(x.href as 'privat', lang)} style="aspect-ratio:3/2" data-reveal>
+            <Img name={x.img} alt={x.alt} sizes="(max-width: 600px) 100vw, 50vw" />
+            <div class="icard__b">
+              <span class="icard__k">{x.k}</span>
+              <h3>{x.t}</h3>
+              <p class="icard__p">{x.p}</p>
+              <span class="icard__m">{x.m} <Icon name="arrow-up" /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} title={c.ctaH} topic="versicherungen" />
+</Base>
+
+<script>
+  // Tabs for private and business insurance. Without JS both lists are simply shown one after the other.
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')];
+
+  function select(id: string, focus = false) {
+    for (const t of tabs) {
+      const on = t.dataset.tab === id;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
+    }
+    for (const g of groups) g.hidden = g.dataset.group !== id;
+  }
+
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t.dataset.tab as string));
+    t.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      select(next.dataset.tab as string, true);
+    });
+  });
+
+  // Deep links: #unternehmen opens the business tab, #cyber opens that entry on its tab.
+  function fromHash() {
+    const id = location.hash.slice(1);
+    if (!id) { select('privat'); return; }
+    if (id === 'unternehmen' || id === 'privat') {
+      select(id);
+      if (id === 'unternehmen') document.getElementById('uebersicht')?.scrollIntoView();
+      return;
+    }
+    const entry = document.getElementById(id);
+    if (entry instanceof HTMLDetailsElement) {
+      select(entry.closest<HTMLElement>('[data-group]')?.dataset.group ?? 'privat');
+      entry.open = true;
+      entry.scrollIntoView({ block: 'center' });
+    } else {
+      select('privat');
+    }
+  }
+  fromHash();
+  window.addEventListener('hashchange', fromHash);
+</script>

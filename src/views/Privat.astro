@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
+import Badge from '../components/Badge.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { url, ui, type Lang } from '../i18n';
+import { bookingUrl } from '../data/site';
+import { service } from '../lib/schema';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = {
+  de: {
+    title: 'Versicherung & Vorsorge für Privatkunden | Coverd Olten',
+    desc: 'Versicherungen, Vorsorge, Finanzen und Steuern mit einem Ansprechpartner und einer zentralen Übersicht. Kostenloses Erstgespräch in Olten oder per Video.',
+    eyebrow: 'Privatkunden',
+    h1: 'Alles geregelt. Für heute und morgen.',
+    lede: 'Versicherungen, Vorsorge, Finanzen und Steuern – mit einem Ansprechpartner und einer zentralen Übersicht.',
+    alt: 'Paar sitzt am Küchentisch und geht gemeinsam Unterlagen durch',
+    book: 'Erstgespräch vereinbaren',
+    q: 'Wann haben Sie Ihre Versicherungen zuletzt wirklich überprüft?',
+    qp: 'Nicht nur die Prämie. Sondern ob die Leistungen noch zu Ihrem heutigen Leben passen.',
+    lifeK: 'Lebenssituation',
+    lifeH: 'Das Leben verändert sich. Ihre Absicherung auch.',
+    lifeLabel: 'Was hat sich bei Ihnen verändert?',
+    lifeAlt: 'Junges Paar trägt Umzugskartons die Holztreppe eines Altbaus hinauf',
+    events: ['Umzug', 'Familienzuwachs', 'Heirat', 'Neuer Job', 'Eigenheim', 'Mehr Einkommen', 'Pensionierung'],
+    lifeP: 'Eine Veränderung kann Auswirkungen auf Versicherungen, Vorsorge und Steuern haben.',
+    lifeBtn: 'Meine Situation prüfen',
+    lifeNote: 'Ihre Auswahl übernehmen wir direkt ins Kontaktformular.',
+    allK: 'Unsere Leistungen',
+    allH: 'Alles, was Ihre finanzielle Situation betrifft.',
+    all: [
+      { t: 'Versicherungen', p: 'Richtig abgesichert – ohne unnötige Lösungen.', m: 'Versicherungen prüfen', href: 'versicherungen' },
+      { t: 'Vorsorge', p: 'Heute wissen, ob morgen genug da ist.', m: 'Vorsorge analysieren', href: 'vorsorge' },
+      { t: 'Finanzen', p: 'Aus einzelnen Entscheidungen wird ein Plan.', m: 'Finanzplanung kennenlernen', href: 'vorsorge' },
+      { t: 'Steuern', p: 'Erledigen, optimieren, vorausplanen.', m: 'Steuerberatung anfragen', href: 'steuern' },
+    ],
+    moreH: 'Mehr Versicherungen bedeuten nicht automatisch mehr Sicherheit.',
+    moreQ: 'Zu viel versichert? Doppelt versichert? Eine wichtige Lücke übersehen?',
+    moreP: 'Wir prüfen Ihre bestehende Situation, bevor wir über neue Produkte sprechen.',
+    moreBtn: 'Bestehende Versicherungen prüfen',
+    portalK: 'Kundenportal',
+    portalH: 'Ihre Versicherungen. Ein Login.',
+    portal: [['Police gesucht?', 'Gefunden.'], ['Frage?', 'Direkt an Coverd.'], ['Dokument benötigt?', 'Im Portal.'], ['Änderung?', 'Digital melden.']],
+    how: 'So arbeiten wir mit Ihnen zusammen',
+    ctaH: 'Lernen Sie Coverd unverbindlich kennen.',
+  },
+  en: {
+    title: 'Insurance & Pensions for Private Clients | Coverd Olten',
+    desc: 'Insurance, pensions, finances and taxes with one point of contact and one central overview. Free initial consultation in Olten or by video call.',
+    eyebrow: 'Private Clients',
+    h1: 'Everything organized. For today and tomorrow.',
+    lede: 'Insurance, pensions, finances and taxes – with one point of contact and one central overview.',
+    alt: 'A couple at a kitchen table going through documents together',
+    book: 'Book an Initial Consultation',
+    q: 'When did you last really review your insurance?',
+    qp: 'Not just the premium. But whether the benefits still fit your life today.',
+    lifeK: 'Life situation',
+    lifeH: 'Life changes. So should your coverage.',
+    lifeLabel: 'What has changed for you?',
+    lifeAlt: 'A young couple carrying moving boxes up the wooden staircase of an old building',
+    events: ['Moving', 'New Child', 'Marriage', 'New Job', 'Home Ownership', 'More Income', 'Retirement'],
+    lifeP: 'A change can affect your insurance, pension planning and taxes.',
+    lifeBtn: 'Check My Situation',
+    lifeNote: 'We carry your selection straight over to the contact form.',
+    allK: 'Our services',
+    allH: 'Everything that affects your financial situation.',
+    all: [
+      { t: 'Insurance', p: 'Properly covered – without unnecessary products.', m: 'Review Insurance', href: 'versicherungen' },
+      { t: 'Pension Planning', p: 'Know today whether there will be enough tomorrow.', m: 'Analyze Pension Plan', href: 'vorsorge' },
+      { t: 'Finance', p: 'Individual decisions become a plan.', m: 'Discover Financial Planning', href: 'vorsorge' },
+      { t: 'Taxes', p: 'Get it done, optimize, plan ahead.', m: 'Request Tax Advice', href: 'steuern' },
+    ],
+    moreH: "More insurance doesn't automatically mean more security.",
+    moreQ: 'Over-insured? Double-insured? An important gap overlooked?',
+    moreP: 'We review your existing situation before we talk about new products.',
+    moreBtn: 'Review Existing Insurance',
+    portalK: 'Client Portal',
+    portalH: 'Your insurance. One login.',
+    portal: [['Looking for a policy?', 'Found.'], ['A question?', 'Straight to Coverd.'], ['Need a document?', 'In the portal.'], ['A change?', 'Report it digitally.']],
+    how: 'How we work with you',
+    ctaH: 'Get to know Coverd, no strings attached.',
+  },
+}[lang];
+---
+<Base lang={lang} route="privat" title={c.title} description={c.desc} image="privat-hero" crumb={[{ name: c.eyebrow }]} jsonld={[service(lang, c.eyebrow, c.desc, url('privat', lang))]}>
+  <PageHero lang={lang} eyebrow={c.eyebrow} title={c.h1} lede={c.lede} image="privat-hero" alt={c.alt} crumb={c.eyebrow}>
+    <Btn href={bookingUrl('privat')} variant="amber">{c.book}</Btn>
+  </PageHero>
+
+  <section class="sec sec--paper sec--tight">
+    <div class="wrap split split--7-5" data-reveal>
+      <h2>{c.q}</h2>
+      <p class="lede muted">{c.qp}</p>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <div class="wrap split split--flip">
+      <div class="figure ratio-45" data-reveal><Img name="privat-leben" alt={c.lifeAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
+      <div data-reveal>
+        <Eyebrow>{c.lifeK}</Eyebrow>
+        <h2 style="margin-top:14px">{c.lifeH}</h2>
+        <form action={url('kontakt', lang)} method="get" style="margin-top:28px">
+          <fieldset style="border:0;padding:0;margin:0">
+            <legend class="h4" style="padding:0;margin-bottom:14px">{c.lifeLabel}</legend>
+            <div class="chips">
+              {c.events.map((e) => (
+                <label class="chip"><input type="checkbox" name="thema" value={e} /><span>{e}</span></label>
+              ))}
+            </div>
+          </fieldset>
+          <p class="muted" style="margin-top:20px">{c.lifeP}</p>
+          <div class="btn-row" style="margin-top:18px">
+            <button class="btn" type="submit"><span class="btn__t">{c.lifeBtn}</span><span class="btn__i"><Icon name="arrow-up" /></span></button>
+          </div>
+          <p class="xs muted" style="margin-top:10px">{c.lifeNote}</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--paper">
+    <div class="wrap">
+      <SectionHead eyebrow={c.allK} title={c.allH} />
+      <div class="tiles" data-reveal>
+        {c.all.map((x, i) => (
+          <a class="tile" href={url(x.href as 'vorsorge', lang)}>
+            <span class="tile__n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{x.t}</h3>
+            <p>{x.p}</p>
+            <span class="tlink">{x.m} <Icon name="arrow-up" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--dark">
+    <div class="wrap split split--7-5" data-reveal>
+      <h2>{c.moreH}</h2>
+      <div class="stack">
+        <p class="lede">{c.moreQ}</p>
+        <p class="muted">{c.moreP}</p>
+        <div class="btn-row" style="margin-top:24px"><Btn href={bookingUrl('versicherungen')} variant="amber">{c.moreBtn}</Btn></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--soft sec--tight">
+    <div class="wrap split split--5-7" data-reveal>
+      <div>
+        <div style="display:flex;align-items:center;gap:12px"><Eyebrow>{c.portalK}</Eyebrow><Badge lang={lang} /></div>
+        <h2 style="margin-top:14px">{c.portalH}</h2>
+        <p style="margin-top:20px"><a class="tlink" href={`${url('home', lang)}#vorgehen`}>{c.how} <Icon name="arrow-up" /></a></p>
+      </div>
+      <ul class="rows">
+        {c.portal.map(([a, b]) => <li class="row" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr)"><span>{a}</span><strong style="font-weight:500">{b}</strong></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} title={c.ctaH} topic="privat" />
+</Base>
