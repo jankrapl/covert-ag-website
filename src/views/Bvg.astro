@@ -148,7 +148,7 @@ const c = {
       <div class="tiles tiles--2" data-reveal>
         {c.obj.map((o) => <div class="tile" style="min-height:0"><h3>{o.q}</h3><p>{o.a}</p></div>)}
       </div>
-      <p class="lede" style="margin-top:28px" data-reveal>{c.feel}</p>
+      <p class="lede mt-4" data-reveal>{c.feel}</p>
     </div>
   </section>
 
@@ -169,7 +169,7 @@ const c = {
           <p class="h3">{c.resultT}</p>
         </div>
       </div>
-      <p class="xs muted" style="margin-top:14px">{c.caseN}</p>
+      <p class="xs muted mt-2">{c.caseN}</p>
     </div>
   </section>
 
@@ -204,15 +204,15 @@ const c = {
     <div class="wrap split split--top">
       <div data-reveal>
         <h2>{c.lastH}</h2>
-        <p class="muted" style="margin-top:18px">{c.lastP}</p>
-        <div class="tags" style="margin-top:18px">{c.lastList.map((t) => <span class="tag">{t}</span>)}</div>
-        <p style="margin-top:20px">{c.lastE}</p>
+        <p class="muted mt-3">{c.lastP}</p>
+        <div class="tags mt-3">{c.lastList.map((t) => <span class="tag">{t}</span>)}</div>
+        <p class="mt-3">{c.lastE}</p>
       </div>
       <div class="sec--dark" style="padding:clamp(28px,3.4vw,48px)" data-reveal>
         <h3 class="h2">{c.revH}</h3>
-        <p style="margin-top:18px">{c.revP1}</p>
-        <p class="muted" style="margin-top:12px">{c.revP2}</p>
-        <div class="btn-row" style="margin-top:24px"><Btn href={bookingUrl('bvg')} variant="amber">{c.revBtn}</Btn></div>
+        <p class="mt-3">{c.revP1}</p>
+        <p class="muted mt-2">{c.revP2}</p>
+        <div class="btn-row mt-4"><Btn href={bookingUrl('bvg')} variant="amber">{c.revBtn}</Btn></div>
       </div>
     </div>
   </section>

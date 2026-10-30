@@ -3,12 +3,10 @@ import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Btn from '../components/Btn.astro';
 import Icon from '../components/Icon.astro';
-import Badge from '../components/Badge.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import SectionHead from '../components/SectionHead.astro';
 import Process from '../components/Process.astro';
 import CtaBand from '../components/CtaBand.astro';
-import TeamCard from '../components/TeamCard.astro';
 import { getCollection } from 'astro:content';
 import { url, ui, dateFmt, type Lang } from '../i18n';
 import { site, bookingUrl } from '../data/site';
@@ -45,7 +43,7 @@ const copy = {
     whoH: 'Wer sind Sie?',
     who: [
       { k: 'Privatkunden', t: 'Ihre Finanzen. Ihre Versicherungen. Ihre Übersicht.', p: 'Von der ersten Versicherung über Vorsorge und Vermögensplanung bis zur jährlichen Steuererklärung begleiten wir Sie langfristig in Ihren finanziellen Fragen.', m: 'Für Privatkunden', href: 'privat', img: 'card-privat', alt: 'Vater trägt sein Kind auf den Schultern durch einen Herbstwald' },
-      { k: 'Unternehmen', t: 'Damit Sie sich um Ihr Unternehmen kümmern können.', p: 'Coverd unterstützt KMU und Unternehmen bei der Analyse, Optimierung und laufenden Betreuung ihrer Versicherungslösungen, persönlich beraten.', m: 'Für Unternehmen', href: 'unternehmen', img: 'card-unternehmen', alt: 'Inhaberin einer Bäckerei prüft ein Klemmbrett in ihrer Backstube' },
+      { k: 'Unternehmen', t: 'Damit Sie sich um Ihr Unternehmen kümmern können.', p: 'Coverd unterstützt KMU und Unternehmen bei der Analyse, Optimierung und laufenden Betreuung ihrer Versicherungslösungen, persönlich beraten, digital verwaltet.', m: 'Für Unternehmen', href: 'unternehmen', img: 'card-unternehmen', alt: 'Inhaberin einer Bäckerei prüft ein Klemmbrett in ihrer Backstube' },
       { k: 'Berufliche Vorsorge', t: 'Wann haben Sie Ihre BVG-Lösung zuletzt verglichen?', p: 'Kosten, Leistungen und Vorsorgeplan verständlich analysiert, für Unternehmen, die ihre berufliche Vorsorge nicht einfach laufen lassen wollen.', m: 'Zur BVG-Beratung', href: 'bvg', img: 'card-bvg', alt: 'Schreinermeister und Lernender besprechen ein Werkstück an der Hobelbank' },
     ],
     cmpK: 'Der Unterschied',
@@ -55,7 +53,7 @@ const copy = {
       ['Persönliche Beratung', 'Ja', 'Nein', 'Teilweise'],
       ['Anbieterübergreifender Vergleich', 'Ja, mehrere Gesellschaften', 'Ja, aber ohne Beratung', 'Nein, nur ein Anbieter'],
       ['Laufende Betreuung nach Abschluss', 'Ja', 'Nein', 'Teilweise'],
-      ['Zentrales Portal für alle Policen', 'soon', 'Nein', 'Nein'],
+      ['Zentrales Portal für alle Policen', 'Ja', 'Nein', 'Nein'],
       ['Fokus auf BVG-Beratung für KMU', 'Ja, eigener Schwerpunkt', 'Nein', 'Selten'],
     ],
     duoK: 'Mit und ohne Broker',
@@ -74,7 +72,7 @@ const copy = {
       { t: 'Analysieren', p: 'Wir prüfen Ihre bestehenden Lösungen und die Möglichkeiten am Markt.' },
       { t: 'Vergleichen', p: 'Wir stellen passende Lösungen gegenüber und zeigen die Unterschiede auf.' },
       { t: 'Entscheiden', p: 'Sie entscheiden, welche Lösung am besten zu Ihnen passt.' },
-      { t: 'Betreuen', p: 'Wir behalten Ihre Unterlagen und Policen im Blick und bleiben auch danach für Sie da.' },
+      { t: 'Betreuen', p: 'Wir hinterlegen Ihre Unterlagen im Coverd-Portal und bleiben auch danach für Sie da.' },
     ],
     procLink: 'Unser Vergütungsmodell',
     themesK: 'Unsere Themen',
@@ -86,7 +84,7 @@ const copy = {
       { t: 'Finanzen', p: 'Aus einzelnen Entscheidungen wird ein Plan.', href: 'vorsorge' },
       { t: 'Steuern', p: 'Erledigen, optimieren, vorausplanen.', href: 'steuern' },
     ],
-    trustK: 'Unser Team',
+    trustK: 'Warum Coverd',
     trustH: 'Neu als Firma, nicht neu im Fach.',
     trustP: 'Coverd wurde 2026 gegründet. Wir arbeiten aber seit Jahren in der Treuhand-, Steuer- und Versicherungsberatung und kennen die Fragen unserer Kunden aus der Praxis.',
     trustBtn: 'Das Team kennenlernen',
@@ -132,7 +130,7 @@ const copy = {
     whoH: 'Who are you?',
     who: [
       { k: 'Private Clients', t: 'Your finances. Your insurance. Your overview.', p: 'From your first insurance policy through pension and wealth planning to your annual tax return, we support you long-term with your financial matters.', m: 'For Private Clients', href: 'privat', img: 'card-privat', alt: 'A father carrying his child on his shoulders through an autumn forest' },
-      { k: 'Business', t: 'So you can focus on running your business.', p: 'Coverd supports SMEs and businesses in analyzing, optimizing and continuously managing their insurance solutions, with personal advice.', m: 'For Businesses', href: 'unternehmen', img: 'card-unternehmen', alt: 'A bakery owner checking a clipboard in her bakehouse' },
+      { k: 'Business', t: 'So you can focus on running your business.', p: 'Coverd supports SMEs and businesses in analyzing, optimizing and continuously managing their insurance solutions, with personal advice and digital management.', m: 'For Businesses', href: 'unternehmen', img: 'card-unternehmen', alt: 'A bakery owner checking a clipboard in her bakehouse' },
       { k: 'Occupational Pensions', t: 'When did you last compare your BVG pension solution?', p: "Costs, benefits and pension plan analyzed in plain language, for businesses that don't want to leave their occupational pension on autopilot.", m: 'To BVG Advisory', href: 'bvg', img: 'card-bvg', alt: 'A master carpenter and an apprentice discussing a workpiece at the bench' },
     ],
     cmpK: 'The difference',
@@ -142,7 +140,7 @@ const copy = {
       ['Personal Advice', 'Yes', 'No', 'Partially'],
       ['Cross-Provider Comparison', 'Yes, multiple companies', 'Yes, but without advice', 'No, only one provider'],
       ['Ongoing Support After Signing', 'Yes', 'No', 'Partially'],
-      ['Central Portal for All Policies', 'soon', 'No', 'No'],
+      ['Central Portal for All Policies', 'Yes', 'No', 'No'],
       ['Focus on BVG Advice for SMEs', 'Yes, a dedicated focus', 'No', 'Rarely'],
     ],
     duoK: 'With and without a broker',
@@ -161,7 +159,7 @@ const copy = {
       { t: 'Analyze', p: 'We review your existing solutions and the options available on the market.' },
       { t: 'Compare', p: 'We compare suitable solutions and show you the differences.' },
       { t: 'Decide', p: 'You decide which solution suits you best.' },
-      { t: 'Support', p: 'We keep your documents and policies in view and remain available to you afterwards.' },
+      { t: 'Support', p: 'We store your documents in the Coverd Portal and remain available to you afterwards.' },
     ],
     procLink: 'Our Compensation Model',
     themesK: 'Our topics',
@@ -173,7 +171,7 @@ const copy = {
       { t: 'Finance', p: 'Individual decisions become a plan.', href: 'vorsorge' },
       { t: 'Taxes', p: 'Get it done, optimize, plan ahead.', href: 'steuern' },
     ],
-    trustK: 'Our team',
+    trustK: 'Why Coverd',
     trustH: 'New as a company, not new to the field.',
     trustP: "Coverd was founded in 2026. We have, however, worked for years in fiduciary, tax and insurance advisory, and we know our clients' questions from practical experience.",
     trustBtn: 'Meet the Team',
@@ -220,13 +218,13 @@ const jan = team[0];
   </section>
 
   <section class="sec sec--paper">
-    <div class="wrap split split--5-7 split--top">
+    <div class="wrap split split--5-7">
       <div class="figure ratio-45" data-reveal><Img name="ueber-story" alt={copy.introAlt} sizes="(max-width: 860px) 100vw, 42vw" /></div>
       <div data-reveal>
         <Eyebrow>{copy.introKicker}</Eyebrow>
-        <h2 style="margin-top:14px">{copy.introH}</h2>
-        <p class="lede muted" style="margin-top:20px">{copy.introP}</p>
-        <div class="btn-row" style="margin-top:26px"><Btn href={url('ueber', lang)}>{copy.introBtn}</Btn></div>
+        <h2 class="mt-2">{copy.introH}</h2>
+        <p class="lede muted mt-3">{copy.introP}</p>
+        <div class="btn-row mt-4"><Btn href={url('ueber', lang)}>{copy.introBtn}</Btn></div>
 
       </div>
     </div>
@@ -268,7 +266,7 @@ const jan = team[0];
             {copy.cmp.map(([k, a, b, c]) => (
               <tr>
                 <th scope="row">{k}</th>
-                <td class="cmp__us">{a === 'soon' ? <Badge lang={lang} /> : a}</td>
+                <td class="cmp__us">{a}</td>
                 <td>{b}</td>
                 <td>{c}</td>
               </tr>
@@ -280,7 +278,7 @@ const jan = team[0];
             <div class="cmp-card">
               <h3>{k}</h3>
               <dl>
-                <dt class="is-us">{copy.cmpHead[1]}</dt><dd class="is-us">{a === 'soon' ? <Badge lang={lang} /> : a}</dd>
+                <dt class="is-us">{copy.cmpHead[1]}</dt><dd class="is-us">{a}</dd>
                 <dt>{copy.cmpHead[2]}</dt><dd>{b}</dd>
                 <dt>{copy.cmpHead[3]}</dt><dd>{c}</dd>
               </dl>
@@ -308,7 +306,7 @@ const jan = team[0];
   </section>
 
   <Process id="vorgehen" eyebrow={copy.procK} title={copy.procH} text={copy.procP} steps={copy.steps} alt={copy.procAlt}>
-    <p style="margin-top:22px"><a class="tlink" href={url('transparenz', lang)}>{copy.procLink} <Icon name="arrow-up" /></a></p>
+    <p class="mt-3"><a class="tlink" href={url('transparenz', lang)}>{copy.procLink} <Icon name="arrow-up" /></a></p>
   </Process>
 
   <section class="sec sec--soft">
@@ -333,8 +331,7 @@ const jan = team[0];
         <p class="muted">{copy.trustP}</p>
         <Btn href={url('ueber', lang)} variant="line">{copy.trustBtn}</Btn>
       </SectionHead>
-      <div class="team">{team.map((p) => <TeamCard person={p} lang={lang} />)}</div>
-      <div class="tiles tiles--3" style="margin-top:clamp(32px,4vw,56px)" data-reveal>
+      <div class="tiles tiles--3" data-reveal>
         {copy.trust.map((x) => (
           <div class="tile" style="min-height:0">
             <h3>{x.t}</h3>
@@ -346,15 +343,13 @@ const jan = team[0];
   </section>
 
   <section class="sec sec--dark sec--tight">
-    <div class="wrap">
-      <figure class="quote" data-reveal style="max-width:60rem">
+    <figure class="wrap quote quote--person" data-reveal>
+      <div class="quote__photo"><Img name={jan.photo} alt={jan.name} sizes="(max-width: 640px) 120px, 280px" /></div>
+      <div class="quote__body">
         <blockquote>{copy.quote}</blockquote>
-        <figcaption class="quote__by">
-          <Img name={jan.photo} alt="" sizes="56px" />
-          <span><strong style="font-weight:500">{copy.quoteBy}</strong><br /><span class="muted small">{copy.quoteRole}</span></span>
-        </figcaption>
-      </figure>
-    </div>
+        <figcaption><strong>{copy.quoteBy}</strong><span class="muted small">{copy.quoteRole}</span></figcaption>
+      </div>
+    </figure>
   </section>
 
   <section class="sec sec--soft">

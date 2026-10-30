@@ -46,7 +46,7 @@ Neben der ordentlichen Kündigung gibt es Situationen, in denen ein Vertrag auss
 
 - Nach einem Schadenfall – meist innerhalb von zwei Wochen nach Auszahlung der Leistung.
 - Bei einer Prämien- oder Kostenerhöhung durch den Versicherer bzw. die Sammelstiftung.
-- Bei der BVG: Erhöht die Sammelstiftung die Verwaltungskosten innerhalb von drei Jahren um mindestens 10 %, steht dem Unternehmen ausnahmsweise eine kürzere Kündigungsfrist von einem Monat zu.
+- Bei der BVG: Erhöht die Sammelstiftung die nicht dem Sparkapital gutgeschriebenen Beiträge innerhalb von drei Jahren um mindestens 10 %, steht dem Unternehmen ausnahmsweise eine kürzere Kündigungsfrist von 30 Tagen zu.
 
 ## Trick 6: Betriebseinstellung rechtzeitig melden
 

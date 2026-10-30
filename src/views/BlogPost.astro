@@ -34,7 +34,7 @@ const more = lang === 'de' ? 'Weitere Beiträge' : 'More Articles';
       <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href={url('home', lang)}>{ui[lang].home}</a></li><li><a href={url('blog', lang)}>{blogName}</a></li></ol></nav>
       <Eyebrow>{categories[post.data.category][lang]}</Eyebrow>
       <h1>{post.data.title}</h1>
-      <div class="post-meta" style="margin-top:16px">
+      <div class="post-meta mt-2">
         <time datetime={post.data.date.toISOString().slice(0, 10)}>{dateFmt(post.data.date, lang)}</time>
         <span>{readingTime(post.body ?? '')} {ui[lang].minutes}</span>
       </div>
@@ -51,7 +51,7 @@ const more = lang === 'de' ? 'Weitere Beiträge' : 'More Articles';
         <p class="art__lead">{post.data.excerpt}</p>
         <Content />
       </article>
-      {cta && <div class="art" style="margin-top:36px"><Btn href={bookingUrl(cta.topic)}>{cta.label[lang]}</Btn></div>}
+      {cta && <div class="art mt-5"><Btn href={bookingUrl(cta.topic)}>{cta.label[lang]}</Btn></div>}
     </div>
   </section>
   <section class="sec sec--soft sec--tight">

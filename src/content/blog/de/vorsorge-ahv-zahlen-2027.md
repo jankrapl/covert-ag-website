@@ -17,7 +17,7 @@ Dezember 2026: Rund 2,6 Millionen Rentnerinnen und Rentner erhalten erstmals die
 
 ## Säule 3a: Mehr einzahlen, mehr sparen
 
-Neu dürfen Sie CHF 7'373 einzahlen (mit Pensionskasse) und vollständig von den Steuern abziehen. Ein Geheimtipp: Lücken aus 2025 und 2026 können Sie seit diesem Jahr nachzahlen.
+Neu dürfen Sie CHF 7'373 einzahlen (mit Pensionskasse) und vollständig von den Steuern abziehen. Ein Geheimtipp: Beitragslücken ab 2025 lassen sich seit diesem Jahr nachzahlen, 2027 also auch jene aus 2026.
 
 ## BVG: Kleine Zahlen, grosse Wirkung für KMU
 
@@ -43,4 +43,4 @@ Eintrittsschwelle und Koordinationsabzug steigen. Wer knapp über CHF 22'680 ver
 
 Punkt 3 übernehmen wir gerne für Sie, in 30 Minuten, kostenlos und unverbindlich.
 
-Stand: 12. Oktober 2026. Dieser Beitrag ersetzt keine individuelle Beratung. Quellen: Bundesrat, 2.10.2026, Bundesrat, 5.10.2026, BVG-Kommission, 31.8.2026.
+Stand: 12. Oktober 2026. Dieser Beitrag ersetzt keine individuelle Beratung. Quellen: [Bundesrat, 2.10.2026](https://www.admin.ch/de/newnsb/BqB41FVYi5FB), Bundesrat, 5.10.2026, [BVG-Kommission, 31.8.2026](https://www.bsv.admin.ch/de/newnsb/0OLsO33MmzIC).

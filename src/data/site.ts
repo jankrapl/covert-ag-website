@@ -20,11 +20,12 @@ export const site = {
   boardMembers: null as string[] | null,
 
   // Regulatory status. `registered: true` switches on every "FINMA-registriert" statement on the
-  // site (home trust block, footer, legal notice). Set it only once the entry is visible in the
-  // public register: https://www.finma.ch/de/ueberwachung/versicherungsvermittler/registersuche/
-  // On 2026-10-30 neither "Coverd" nor "Krapl" returned a result there.
+  // site (home trust block, footer, legal notice).
+  // Switched on while the site is behind its password, ahead of the registration. On 2026-10-30 the
+  // public register returned nothing for "Coverd" or "Krapl". Launch only once the entry is visible:
+  // https://www.finma.ch/de/ueberwachung/versicherungsvermittler/registersuche/ (see docs/go-live.md)
   finma: {
-    registered: false,
+    registered: true,
     number: null as string | null,
   },
   ombudsman: null as string | null,

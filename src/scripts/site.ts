@@ -50,7 +50,7 @@ burger?.addEventListener('click', () => setMenu(!hdr?.classList.contains('is-ope
 document.getElementById('mnav')?.addEventListener('click', (e) => {
   if ((e.target as HTMLElement).closest('a')) setMenu(false);
 });
-matchMedia('(min-width: 1141px)').addEventListener('change', (e) => e.matches && setMenu(false));
+matchMedia('(min-width: 1241px)').addEventListener('change', (e) => e.matches && setMenu(false));
 
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;

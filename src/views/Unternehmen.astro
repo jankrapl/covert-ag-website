@@ -4,7 +4,6 @@ import PageHero from '../components/PageHero.astro';
 import Img from '../components/Img.astro';
 import Btn from '../components/Btn.astro';
 import Icon from '../components/Icon.astro';
-import Badge from '../components/Badge.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import SectionHead from '../components/SectionHead.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -112,11 +111,11 @@ const c = {
     <div class="wrap split">
       <div data-reveal>
         <Eyebrow>{c.adminK}</Eyebrow>
-        <h2 style="margin-top:14px">{c.adminH}</h2>
-        <ul class="rows" style="margin-top:28px">
+        <h2 class="mt-2">{c.adminH}</h2>
+        <ul class="rows mt-4">
           {c.admin.map(([a, b]) => <li class="row" style="grid-template-columns:minmax(0,5fr) 20px minmax(0,7fr);padding-block:13px"><span>{a}</span><Icon name="arrow" /><strong style="font-weight:500">{b}</strong></li>)}
         </ul>
-        <p class="lede" style="margin-top:24px">{c.adminP}</p>
+        <p class="lede mt-4">{c.adminP}</p>
       </div>
       <div class="figure ratio-43" data-reveal><Img name="unternehmen-admin" alt={c.adminAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
     </div>
@@ -141,13 +140,13 @@ const c = {
     </div>
   </section>
 
-  <section class="duo">
-    <div class="duo__a" style="display:grid;align-content:center;gap:16px;padding-block:clamp(56px,8vw,112px);padding-inline:max(var(--gutter),calc((100vw - 1328px)/2 + var(--gutter))) clamp(28px,4vw,56px)" data-reveal>
+  <section class="duo duo--bleed">
+    <div class="duo__a" data-reveal>
       <h2 class="h2">{c.grewH}</h2>
       <p class="lede muted">{c.grewP}</p>
       <div class="btn-row"><Btn href={bookingUrl('unternehmen')}>{c.grewBtn}</Btn></div>
     </div>
-    <div class="duo__b on-dark" style="display:grid;align-content:center;gap:16px;padding-block:clamp(56px,8vw,112px);padding-inline:clamp(28px,4vw,56px) max(var(--gutter),calc((100vw - 1328px)/2 + var(--gutter)))" data-reveal>
+    <div class="duo__b on-dark" data-reveal>
       <Eyebrow>{c.bvgK}</Eyebrow>
       <h2 class="h2">{c.bvgH}</h2>
       <div class="btn-row"><Btn href={url('bvg', lang)} variant="amber">{c.bvgBtn}</Btn></div>
@@ -157,8 +156,8 @@ const c = {
   <section class="sec sec--paper sec--tight">
     <div class="wrap split split--7-5" data-reveal>
       <div>
-        <div style="display:flex;align-items:center;gap:12px"><Eyebrow>{c.portalK}</Eyebrow><Badge lang={lang} /></div>
-        <h2 style="margin-top:14px">{c.portalH}</h2>
+        <Eyebrow>{c.portalK}</Eyebrow>
+        <h2 class="mt-2">{c.portalH}</h2>
       </div>
       <p class="lede muted">{c.portalP}</p>
     </div>

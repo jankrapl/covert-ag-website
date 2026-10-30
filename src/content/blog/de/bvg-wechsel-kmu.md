@@ -36,7 +36,7 @@ Für KMU heisst das konkret: Der Wechsel ist kein reiner Entscheid der Geschäft
 
 ## Wechsel bei Prämien- oder Kostenerhöhung
 
-Erhöht die Sammelstiftung ihre Verwaltungskosten innerhalb von drei Jahren um mindestens 10 %, muss sie dies sechs Monate im Voraus ankündigen. In diesem Fall steht dem Unternehmen ausnahmsweise eine kürzere Kündigungsfrist von einem Monat zu – ein Detail, das viele KMU nicht kennen und dadurch ungenutzt lassen.
+Erhöht die Sammelstiftung die Beiträge, die nicht dem Sparkapital gutgeschrieben werden (etwa für Risiko und Verwaltung), innerhalb von drei Jahren um mindestens 10 %, muss sie dies sechs Monate im Voraus schriftlich ankündigen. In diesem Fall steht dem Unternehmen ausnahmsweise eine kürzere Kündigungsfrist von 30 Tagen zu – ein Detail, das viele KMU nicht kennen und dadurch ungenutzt lassen.
 
 ## So gehen wir mit KMU vor
 

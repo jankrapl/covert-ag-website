@@ -85,9 +85,9 @@ const experts = team.filter((p) => p.photo === 'luca' || p.photo === 'dominique'
       <div class="figure ratio-32" data-reveal><Img name="blog-steuern-sparen-saeule-3a" alt={c.optAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
       <div data-reveal>
         <Eyebrow>{c.optK}</Eyebrow>
-        <h2 style="margin-top:14px">{c.optH}</h2>
-        <p class="lede muted" style="margin-top:18px">{c.optP}</p>
-        <div class="btn-row" style="margin-top:24px"><Btn href={bookingUrl('steuern')} variant="line">{c.optBtn}</Btn></div>
+        <h2 class="mt-2">{c.optH}</h2>
+        <p class="lede muted mt-3">{c.optP}</p>
+        <div class="btn-row mt-4"><Btn href={bookingUrl('steuern')} variant="line">{c.optBtn}</Btn></div>
       </div>
     </div>
   </section>
@@ -96,8 +96,8 @@ const experts = team.filter((p) => p.photo === 'luca' || p.photo === 'dominique'
     <div class="wrap split split--top">
       <div data-reveal>
         <Eyebrow>{c.expK}</Eyebrow>
-        <h2 style="margin-top:14px">{c.expH}</h2>
-        <p class="lede muted" style="margin-top:18px">{c.expP}</p>
+        <h2 class="mt-2">{c.expH}</h2>
+        <p class="lede muted mt-3">{c.expP}</p>
       </div>
       <div class="team team--2">{experts.map((p) => <TeamCard person={p} lang={lang} sizes="300px" />)}</div>
     </div>

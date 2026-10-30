@@ -46,7 +46,7 @@ Besides ordinary cancellation, there are situations in which a contract can be c
 
 - After a claim – usually within two weeks of the benefit being paid out.
 - If the insurer or collective foundation raises premiums or costs.
-- For BVG: if the collective foundation raises administrative costs by at least 10% within three years, the company is exceptionally entitled to a shorter one-month notice period.
+- For BVG: if the collective foundation raises the contributions not credited to savings by at least 10% within three years, the company is exceptionally entitled to a shorter 30-day notice period.
 
 ## Trick 6: Report Business Closure on Time
 

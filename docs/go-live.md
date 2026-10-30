@@ -8,9 +8,9 @@ merge would fail the deploy and leave coverd.ch on the old site.
 
 Everything here goes into `src/data/site.ts`. Empty fields are simply not shown.
 
-- [ ] **FINMA registration.** On 2026-10-30 the public register returned nothing for "Coverd" or "Krapl".
-      Set `finma.registered: true` and `finma.number` only once the entry is visible. This turns on the
-      FINMA statements on the home page, in the footer and in the legal notice.
+- [ ] **FINMA registration: launch blocker.** The FINMA statements are switched on ahead of the
+      registration, while the site is behind its password. On 2026-10-30 the public register returned
+      nothing for "Coverd" or "Krapl". Do not launch until the entry is visible there. Add `finma.number`.
 - [ ] **Ombudsman** (`ombudsman`), if one applies to Coverd as an intermediary.
 - [ ] **Commercial register.** Coverd AG was not found in Zefix on 2026-10-30. Add `address`, `uid`,
       `registerOffice` and `boardMembers`. The legal notice needs them.
@@ -21,8 +21,12 @@ Everything here goes into `src/data/site.ts`. Empty fields are simply not shown.
 
 - [ ] Legal review of `src/views/Impressum.astro` and `src/views/Datenschutz.astro`.
 - [ ] Information duties for intermediaries under Art. 45 VAG: check what must be handed over and where.
-- [ ] Figures in the blog post on AHV, 3a and BVG values for 2027, against the official sources. The
-      previous site carried a note asking for this check before launch.
+- [ ] BVG minimum interest rate 2027: the Bundesrat had not decided on 2026-10-30. Update the table and
+      text in the blog post on the 2027 figures once it has. The rest of that post was checked against
+      the Bundesrat release of 2026-10-02 and the BSV on that date. Its wording on the vote of
+      29 November also needs updating after the vote.
+- [ ] Portal: the copy describes it as available, while the login links stay disabled with a badge.
+      Make these match before launch: either the portal is live, or the copy changes.
 - [ ] Surname and LinkedIn profile for Dominique in `src/data/team.ts`.
 - [ ] Higher resolution portraits for Luca, Nicolas and Dominique. Current files are about 300px wide.
 - [ ] Decide whether the contact form should deliver enquiries directly. It currently opens the visitor's

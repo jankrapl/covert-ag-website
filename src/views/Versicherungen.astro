@@ -146,9 +146,9 @@ const groups = [
       <div class="figure ratio-43" data-reveal><Img name="versicherungen-beratung" alt={c.firstAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
       <div data-reveal>
         <Eyebrow>{c.firstK}</Eyebrow>
-        <h2 style="margin-top:14px">{c.firstH}</h2>
-        <p class="lede muted" style="margin-top:18px">{c.firstP}</p>
-        <div class="tags" style="margin-top:22px">{c.firstTags.map((t) => <span class="tag">{t}</span>)}</div>
+        <h2 class="mt-2">{c.firstH}</h2>
+        <p class="lede muted mt-3">{c.firstP}</p>
+        <div class="tags mt-3">{c.firstTags.map((t) => <span class="tag">{t}</span>)}</div>
       </div>
     </div>
   </section>
@@ -166,7 +166,7 @@ const groups = [
           </div>
         ))}
       </div>
-      <p class="xs muted" style="margin-top:14px">{c.varN}</p>
+      <p class="xs muted mt-2">{c.varN}</p>
     </div>
   </section>
 
@@ -179,9 +179,9 @@ const groups = [
 
   <section class="sec sec--soft">
     <div class="wrap">
-      <div class="tiles tiles--2" style="background:none;border:0;gap:clamp(16px,2vw,24px)">
+      <div class="cards2">
         {c.cards.map((x) => (
-          <a class="icard" href={url(x.href as 'privat', lang)} style="aspect-ratio:3/2" data-reveal>
+          <a class="icard icard--wide" href={url(x.href as 'privat', lang)} data-reveal>
             <Img name={x.img} alt={x.alt} sizes="(max-width: 600px) 100vw, 50vw" />
             <div class="icard__b">
               <span class="icard__k">{x.k}</span>

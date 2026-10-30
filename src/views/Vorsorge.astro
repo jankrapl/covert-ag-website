@@ -156,7 +156,7 @@ const labels = { dep: c.legDep, grow: c.legGrow, total: c.legTotal, year: c.year
               </li>
             ))}
           </ul>
-          <div class="btn-row" style="margin-top:24px"><Btn href={url('kontakt', lang)} variant="line">{c.pillarBtn}</Btn></div>
+          <div class="btn-row mt-4"><Btn href={url('kontakt', lang)} variant="line">{c.pillarBtn}</Btn></div>
         </div>
       </div>
     </div>
@@ -166,12 +166,12 @@ const labels = { dep: c.legDep, grow: c.legGrow, total: c.legTotal, year: c.year
     <div class="wrap split">
       <div data-reveal>
         <Eyebrow>{c.checkK}</Eyebrow>
-        <h2 style="margin-top:14px">{c.checkH}</h2>
-        <p class="lede muted" style="margin-top:18px">{c.checkP}</p>
-        <div style="margin-top:26px;padding-top:18px;border-top:1px solid var(--line)">
+        <h2 class="mt-2">{c.checkH}</h2>
+        <p class="lede muted mt-3">{c.checkP}</p>
+        <div class="mt-4" style="padding-top:18px;border-top:1px solid var(--line)">
           <h3>{c.checkT}</h3>
-          <p class="muted" style="margin-top:6px">{c.checkS}</p>
-          <p style="margin-top:12px"><a class="tlink" href={`${url('kontakt', lang)}?thema=${encodeURIComponent(c.checkT)}`} rel="nofollow">{c.checkM} <Icon name="arrow-up" /></a></p>
+          <p class="muted mt-1">{c.checkS}</p>
+          <p class="mt-2"><a class="tlink" href={`${url('kontakt', lang)}?thema=${encodeURIComponent(c.checkT)}`} rel="nofollow">{c.checkM} <Icon name="arrow-up" /></a></p>
         </div>
       </div>
       <div class="figure ratio-43" data-reveal><Img name="vorsorge-check" alt={c.checkAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
@@ -199,7 +199,7 @@ const labels = { dep: c.legDep, grow: c.legGrow, total: c.legTotal, year: c.year
             <div class="slider__h"><label for="cRate">{c.fRate}</label><span class="slider__v"><input id="cRateN" type="number" inputmode="decimal" min="0" max="8" step="0.1" value="4" aria-label={c.fRate} /> {c.rateUnit}</span></div>
             <input id="cRate" type="range" min="0" max="8" step="0.5" value="4" />
           </div>
-          <div class="calc__diff" style="margin-top:6px">
+          <div class="calc__diff mt-1">
             <span class="small">{c.diffK}</span>
             <strong id="cDiff" aria-live="polite">CHF 0</strong>
             <span class="xs muted" style="grid-column:1/-1">{c.diffA} <span id="cDiffY">12</span> {c.diffB}</span>
@@ -230,7 +230,7 @@ const labels = { dep: c.legDep, grow: c.legGrow, total: c.legTotal, year: c.year
     <div class="wrap split split--7-5" data-reveal>
       <div>
         <h2>{c.bizH}</h2>
-        <p class="muted" style="margin-top:16px;max-width:44rem">{c.bizP}</p>
+        <p class="muted mt-2" style="max-width:44rem">{c.bizP}</p>
       </div>
       <div class="btn-row"><Btn href={url('bvg', lang)}>{c.bizBtn}</Btn></div>
     </div>

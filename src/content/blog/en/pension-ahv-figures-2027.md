@@ -17,7 +17,7 @@ December 2026: around 2.6 million pensioners receive the 13th AHV pension paymen
 
 ## Pillar 3a: Contribute More, Save More
 
-You can now contribute CHF 7,373 (if you have a pension fund) and deduct the full amount from your taxes. An insider tip: since this year, you can make back-payments to close gaps from 2025 and 2026.
+You can now contribute CHF 7,373 (if you have a pension fund) and deduct the full amount from your taxes. An insider tip: since this year, you can make back-payments to close gaps from 2025 onwards, so in 2027 that includes 2026 as well.
 
 ## BVG: Small Numbers, Big Impact for SMEs
 
@@ -43,4 +43,4 @@ The entry threshold and coordination deduction are both rising. Anyone earning j
 
 We're happy to take care of point 3 for you – in 30 minutes, free of charge and with no obligation.
 
-As of: October 12, 2026. This article does not replace individual advice. Sources: Federal Council, Oct. 2, 2026; Federal Council, Oct. 5, 2026; BVG Commission, Aug. 31, 2026.
+As of: October 12, 2026. This article does not replace individual advice. Sources: [Federal Council, Oct. 2, 2026](https://www.admin.ch/de/newnsb/BqB41FVYi5FB); Federal Council, Oct. 5, 2026; [BVG Commission, Aug. 31, 2026](https://www.bsv.admin.ch/de/newnsb/0OLsO33MmzIC).

@@ -94,7 +94,7 @@ const c = {
     <div class="wrap split split--7-5" data-reveal>
       <div>
         <Eyebrow>{c.recK}</Eyebrow>
-        <h2 style="margin-top:14px">{c.recH}</h2>
+        <h2 class="mt-2">{c.recH}</h2>
       </div>
       <div class="stack">
         <p class="lede">{c.recP}</p>
@@ -115,7 +115,7 @@ const c = {
           </div>
         ))}
       </div>
-      <p class="lede" style="margin-top:28px;max-width:46rem" data-reveal>{c.modN}</p>
+      <p class="lede mt-4" style="max-width:46rem" data-reveal>{c.modN}</p>
     </div>
   </section>
 
@@ -125,8 +125,8 @@ const c = {
       <div class="tiles tiles--3" data-reveal>
         {c.seg.map((x) => <div class="tile"><h3>{x.t}</h3><p>{x.p}</p></div>)}
       </div>
-      <p style="margin-top:28px;max-width:52rem" data-reveal>{c.segN}</p>
-      <div class="btn-row" style="margin-top:22px"><Btn href={bookingUrl()}>{lang === 'de' ? 'Erstgespräch vereinbaren' : 'Book an Initial Consultation'}</Btn></div>
+      <p class="mt-4" style="max-width:52rem" data-reveal>{c.segN}</p>
+      <div class="btn-row mt-3"><Btn href={bookingUrl()}>{lang === 'de' ? 'Erstgespräch vereinbaren' : 'Book an Initial Consultation'}</Btn></div>
     </div>
   </section>
 

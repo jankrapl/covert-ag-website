@@ -36,7 +36,7 @@ For SMEs, this means concretely: the switch is not purely a management decision,
 
 ## Switching when premiums or costs increase
 
-If a collective foundation raises its administrative costs by at least 10% within three years, it must announce this six months in advance. In this case, the company is exceptionally entitled to a shorter one-month notice period – a detail many SMEs don't know about and therefore never use.
+If a collective foundation raises the contributions that are not credited to savings (such as for risk and administration) by at least 10% within three years, it must announce this in writing six months in advance. In this case, the company is exceptionally entitled to a shorter 30-day notice period – a detail many SMEs don't know about and therefore never use.
 
 ## How we work with SMEs
 

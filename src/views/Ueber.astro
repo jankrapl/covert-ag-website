@@ -72,9 +72,9 @@ const c = {
       <div class="figure ratio-43" data-reveal><Img name="ueber-story" alt={c.whyAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
       <div data-reveal>
         <Eyebrow>{c.whyK}</Eyebrow>
-        <h2 style="margin-top:14px">{c.whyH}</h2>
-        <p class="muted" style="margin-top:18px">{c.why1}</p>
-        <p style="margin-top:14px">{c.why2}</p>
+        <h2 class="mt-2">{c.whyH}</h2>
+        <p class="muted mt-3">{c.why1}</p>
+        <p class="mt-2">{c.why2}</p>
       </div>
     </div>
   </section>
@@ -82,7 +82,7 @@ const c = {
   <section class="sec sec--soft">
     <div class="wrap">
       <SectionHead eyebrow={c.teamK} title={c.teamH}><p class="lede muted">{c.teamP}</p></SectionHead>
-      <div class="team">{team.map((p) => <TeamCard person={p} lang={lang} full />)}</div>
+      <div class="team team--full">{team.map((p) => <TeamCard person={p} lang={lang} full />)}</div>
     </div>
   </section>
 
@@ -90,9 +90,9 @@ const c = {
     <div class="wrap split split--7-5" data-reveal>
       <div>
         <Eyebrow>{c.partK}</Eyebrow>
-        <h2 style="margin-top:14px">{c.partH}</h2>
-        <p class="muted" style="margin-top:18px;max-width:42rem">{c.partP}</p>
-        <div class="btn-row" style="margin-top:26px">
+        <h2 class="mt-2">{c.partH}</h2>
+        <p class="muted mt-3" style="max-width:42rem">{c.partP}</p>
+        <div class="btn-row mt-4">
           <Btn href={bookingUrl()} variant="amber">{c.partBtn}</Btn>
           <a class="tlink" href={site.partner.href} target="_blank" rel="noopener" style="margin-left:8px">{site.partner.name} <Icon name="arrow-up" /></a>
         </div>

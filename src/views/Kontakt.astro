@@ -85,7 +85,7 @@ const c = {
       <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href={url('home', lang)}>{ui[lang].home}</a></li><li aria-current="page">{c.crumb}</li></ol></nav>
       <Eyebrow>{c.eyebrow}</Eyebrow>
       <h1>{c.h1}</h1>
-      <p class="lede muted" style="margin-top:14px">{c.lede}</p>
+      <p class="lede muted mt-2">{c.lede}</p>
     </div>
   </section>
 
@@ -93,8 +93,8 @@ const c = {
     <div class="wrap split split--top split--5-7">
       <div>
         <div class="btn-row"><Btn href={bookingUrl()}>{c.book}</Btn></div>
-        <p class="small muted" style="margin-top:10px">{c.bookP}</p>
-        <div class="contact-list" style="margin-top:28px">
+        <p class="small muted mt-1">{c.bookP}</p>
+        <div class="contact-list mt-4">
           <a class="contact-item" href={`mailto:${site.email}`}><h2 class="h4">{c.mail}: {site.email}</h2><Icon name="arrow-up" /><p>{c.mailP}</p></a>
           {site.phone && <a class="contact-item" href={site.phone.href}><h2 class="h4">{site.phone.label}</h2><Icon name="arrow-up" /></a>}
           <a class="contact-item" href={site.whatsapp.href} target="_blank" rel="noopener"><h2 class="h4">{c.wa}: {site.whatsapp.label}</h2><Icon name="arrow-up" /></a>
@@ -103,12 +103,12 @@ const c = {
             <p style="grid-column:1/-1">{c.placeP}</p>
           </div>
         </div>
-        <div class="figure ratio-32" style="margin-top:28px"><Img name="bridge-open" alt={c.alt} sizes="(max-width: 860px) 100vw, 40vw" /></div>
+        <div class="figure ratio-32 mt-4"><Img name="bridge-open" alt={c.alt} sizes="(max-width: 860px) 100vw, 40vw" /></div>
       </div>
       <div class="sec--soft" style="padding:clamp(22px,3vw,40px)">
         <h2 class="h3" style="font-size:clamp(1.5rem,2.4vw,2rem)">{c.formH}</h2>
-        <p class="muted" style="margin-top:8px">{c.formP}</p>
-        <form class="form" id="contactForm" style="margin-top:24px" data-email={site.email} data-subject={c.subject} data-prefill={c.prefill}>
+        <p class="muted mt-1">{c.formP}</p>
+        <form class="form mt-4" id="contactForm" data-email={site.email} data-subject={c.subject} data-prefill={c.prefill}>
           <div class="form__row">
             <div class="field"><label for="f-name">{c.name}</label><input id="f-name" name="name" type="text" autocomplete="name" required /></div>
             <div class="field"><label for="f-email">{c.email}</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
