@@ -72,6 +72,40 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
   targets.forEach((t) => t.classList.add('is-in'));
 }
 
+// Hero video: a muted loop of the bridge over the still photo. It is skipped with reduced motion or
+// data saver, starts after the page has loaded, pauses off-screen and has its own pause button.
+const hero = document.querySelector<HTMLElement>('[data-hero]');
+const video = hero?.querySelector<HTMLVideoElement>('.hero__video');
+const toggle = hero?.querySelector<HTMLButtonElement>('.hero__toggle');
+const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+if (hero && video && toggle && !matchMedia('(prefers-reduced-motion: reduce)').matches && !saveData) {
+  let userPaused = false;
+  let onScreen = true;
+  const label = toggle.querySelector('.hero__toggle-t');
+  const show = (playing: boolean) => {
+    toggle.classList.toggle('is-paused', !playing);
+    if (label) label.textContent = (playing ? toggle.dataset.pause : toggle.dataset.play) ?? '';
+  };
+  const start = () => {
+    const portrait = matchMedia('(max-aspect-ratio: 1/1)').matches;
+    video.src = (portrait ? video.dataset.srcPortrait : video.dataset.src) ?? '';
+    if (onScreen) video.play().catch(() => {});
+  };
+  video.addEventListener('playing', () => { video.classList.add('is-playing'); toggle.hidden = false; show(true); });
+  video.addEventListener('pause', () => show(false));
+  toggle.addEventListener('click', () => {
+    userPaused = !video.paused;
+    if (userPaused) video.pause(); else video.play().catch(() => {});
+  });
+  new IntersectionObserver(([e]) => {
+    onScreen = e.isIntersecting;
+    if (!video.src) return;
+    if (onScreen && !userPaused) video.play().catch(() => {});
+    else if (!onScreen) video.pause();
+  }).observe(hero);
+  if (document.readyState === 'complete') start(); else window.addEventListener('load', start, { once: true });
+}
+
 // Tables from Markdown scroll inside their own box on small screens.
 document.querySelectorAll('.art table').forEach((t) => {
   const box = document.createElement('div');

@@ -7,15 +7,13 @@ const hasSide = Astro.slots.has('default');
 {center ? (
   <header class="shead shead--center" data-reveal>
     {eyebrow && <Eyebrow center>{eyebrow}</Eyebrow>}
-    <h2 id={id} style={eyebrow ? 'margin-top:14px' : undefined}>{title}</h2>
+    <h2 id={id} style={eyebrow ? 'margin-top:20px' : undefined}>{title}</h2>
     {hasSide && <div class="lede muted"><slot /></div>}
   </header>
 ) : (
   <header class="shead" data-reveal>
-    <div>
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2 id={id}>{title}</h2>
-    </div>
+    {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+    <h2 id={id}>{title}</h2>
     {hasSide && <div class="shead__side"><slot /></div>}
   </header>
 )}

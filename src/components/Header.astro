@@ -4,7 +4,7 @@ import Btn from './Btn.astro';
 import Icon from './Icon.astro';
 import Badge from './Badge.astro';
 import { ui, url, type Lang, type RouteId } from '../i18n';
-import { bookingUrl } from '../data/site';
+import { site, bookingUrl } from '../data/site';
 
 interface Props { lang: Lang; mode: 'overlay' | 'solid'; route?: RouteId; altHref: string }
 const { lang, mode, route, altHref } = Astro.props;
@@ -15,6 +15,23 @@ const insBiz = `${url('versicherungen', lang)}#unternehmen`;
 ---
 <a class="skip" href="#main">{t.skip}</a>
 <header class="hdr" data-mode={mode} id="hdr">
+  <div class="hdr__bar">
+    <div class="wrap">
+      <p class="hdr__bar-l">{t.barClaim}</p>
+      <div class="hdr__bar-r">
+        <a href={site.whatsapp.href} target="_blank" rel="noopener">WhatsApp {site.whatsapp.label}</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <div class="drop drop--end" data-drop>
+          <button class="drop__btn" type="button" aria-expanded="false" aria-controls="drop-login">{t.kundenlogin} <Icon name="chev" /></button>
+          <div class="drop__panel" id="drop-login">
+            <span class="soon-item" aria-disabled="true">{t.loginPrivat} <Badge lang={lang} /></span>
+            <span class="soon-item" aria-disabled="true">{t.loginKmu} <Badge lang={lang} /></span>
+          </div>
+        </div>
+        <a class="lang" href={altHref} lang={otherLang} hreflang={otherLang === 'de' ? 'de-CH' : 'en'} aria-label={t.switchLangLabel}>{t.switchLang}</a>
+      </div>
+    </div>
+  </div>
   <div class="wrap hdr__in">
     <a class="hdr__logo" href={url('home', lang)} aria-label={`Coverd – ${t.home}`}><Logo title="Coverd" /></a>
     <nav class="nav" aria-label={lang === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
@@ -42,13 +59,6 @@ const insBiz = `${url('versicherungen', lang)}#unternehmen`;
     </nav>
     <div class="hdr__end">
       <a class="lang" href={altHref} lang={otherLang} hreflang={otherLang === 'de' ? 'de-CH' : 'en'} aria-label={t.switchLangLabel}>{t.switchLangShort}</a>
-      <div class="drop drop--end" data-drop>
-        <button class="drop__btn" type="button" aria-expanded="false" aria-controls="drop-login">{t.kundenlogin} <Icon name="chev" /></button>
-        <div class="drop__panel" id="drop-login">
-          <span class="soon-item" aria-disabled="true">{t.loginPrivat} <Badge lang={lang} /></span>
-          <span class="soon-item" aria-disabled="true">{t.loginKmu} <Badge lang={lang} /></span>
-        </div>
-      </div>
       <Btn href={bookingUrl()} size="sm">{t.book}</Btn>
       <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label={t.menu} data-open-label={t.menu} data-close-label={t.close}><span></span></button>
     </div>

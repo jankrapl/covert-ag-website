@@ -63,7 +63,7 @@ const posts = (await getCollection('blog', (p) => p.data.lang === lang)).sort((a
 
   <section class="sec sec--soft">
     <div class="wrap">
-      <SectionHead title={c.allH}><a class="tlink" href={`mailto:${site.email}?subject=${encodeURIComponent(c.suggestS)}`}>{c.suggest} <Icon name="arrow-up" /></a></SectionHead>
+      <SectionHead title={c.allH}><a class="tlink" href={`mailto:${site.email}?subject=${encodeURIComponent(c.suggestS)}`}>{c.suggest} <Icon name="arrow" /></a></SectionHead>
       <div class="pgrid">
         {posts.map((p) => (
           <a class="pcard" href={postPath(p)} data-reveal>
@@ -71,7 +71,7 @@ const posts = (await getCollection('blog', (p) => p.data.lang === lang)).sort((a
             <div class="post-meta"><span>{categories[p.data.category][lang]}</span><time datetime={p.data.date.toISOString().slice(0, 10)}>{dateFmt(p.data.date, lang)}</time></div>
             <h3>{p.data.title}</h3>
             <p>{p.data.excerpt}</p>
-            <span class="tlink">{ui[lang].readArticle} <Icon name="arrow-up" /></span>
+            <span class="tlink">{ui[lang].readArticle} <Icon name="arrow" /></span>
           </a>
         ))}
       </div>

@@ -130,8 +130,8 @@ const groups = [
                 <div class="ins__body">
                   <p>{x.p[lang]}</p>
                   {x.link
-                    ? <a class="tlink" href={url('bvg', lang)}>{c.toBvg} <Icon name="arrow-up" /></a>
-                    : <a class="tlink" href={contact(x)} rel="nofollow">{c.ask} <Icon name="arrow-up" /></a>}
+                    ? <a class="tlink" href={url('bvg', lang)}>{c.toBvg} <Icon name="arrow" /></a>
+                    : <a class="tlink" href={contact(x)} rel="nofollow">{c.ask} <Icon name="arrow" /></a>}
                 </div>
               </details>
             ))}
@@ -187,7 +187,7 @@ const groups = [
               <span class="icard__k">{x.k}</span>
               <h3>{x.t}</h3>
               <p class="icard__p">{x.p}</p>
-              <span class="icard__m">{x.m} <Icon name="arrow-up" /></span>
+              <span class="icard__m">{x.m} <Icon name="arrow" /></span>
             </div>
           </a>
         ))}

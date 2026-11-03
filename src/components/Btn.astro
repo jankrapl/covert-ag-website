@@ -9,4 +9,4 @@ interface Props {
 const { href, variant = 'solid', size = 'md', external = href.startsWith('http') } = Astro.props;
 const cls = ['btn', variant !== 'solid' && `btn--${variant}`, size === 'sm' && 'btn--sm'].filter(Boolean).join(' ');
 ---
-<a class={cls} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}><span class="btn__t"><slot /></span><span class="btn__i"><Icon name="arrow-up" /></span></a>
+<a class={cls} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}><span class="btn__t"><slot /></span><span class="btn__i"><Icon name={external ? 'arrow-up' : 'arrow'} /></span></a>

@@ -6,7 +6,7 @@ import Icon from '../components/Icon.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import SectionHead from '../components/SectionHead.astro';
 import Process from '../components/Process.astro';
-import CtaBand from '../components/CtaBand.astro';
+import Logo from '../components/Logo.astro';
 import { getCollection } from 'astro:content';
 import { url, ui, dateFmt, type Lang } from '../i18n';
 import { site, bookingUrl } from '../data/site';
@@ -23,11 +23,14 @@ const copy = {
     desc: 'Versicherungen, Vorsorge und Steuern aus einer Hand: Coverd vergleicht unabhängig für Privatpersonen und KMU, persönlich in Olten oder per Video.',
     heroAlt: 'Gedeckte Holzbrücke über einen Fluss in einer Schweizer Altstadt zur blauen Stunde',
     eyebrow: 'Versicherungen · Vorsorge · Finanzen · Steuern',
-    h1: 'Ein Partner.<br />Alles im Blick.',
+    h1: 'Ein Partner.<br /><em>Alles im Blick.</em>',
     lede: 'Wir sind ein unabhängiger Versicherungsbroker aus Olten. Wir vergleichen Versicherungen und Vorsorgelösungen für Privatpersonen und KMU, erklären verständlich, was Sie wirklich brauchen, und bleiben auch nach dem Abschluss Ihr Ansprechpartner.',
     book: 'Erstgespräch vereinbaren',
     situation: 'Situation schildern',
     nudge: 'Kostenloses Erstgespräch · Persönlich in Olten oder per Video',
+    waShort: 'Oder kurz auf WhatsApp schreiben',
+    videoPause: 'Video anhalten',
+    videoPlay: 'Video abspielen',
     introKicker: 'Über Coverd',
     introH: 'Alles aus einer Hand.',
     introP: 'Versicherungen, Vorsorge und Steuern hängen enger zusammen, als man denkt. Wer heiratet, ein Haus kauft oder eine Firma gründet, merkt das schnell. Deshalb schauen wir uns Ihre Situation als Ganzes an und nicht Police für Police.',
@@ -104,17 +107,21 @@ const copy = {
     blogBtn: 'Alle Beiträge',
     ctaH: 'Sie müssen heute nichts entscheiden.',
     ctaP: 'Lernen Sie uns in einem unverbindlichen Erstgespräch kennen. Wir schauen gemeinsam, wo Sie stehen und ob Coverd Sie unterstützen kann.',
+    ways: { wa: 'WhatsApp', mail: 'E-Mail', form: 'Kontaktformular' },
   },
   en: {
     title: 'Coverd AG: Independent Insurance Broker in Olten',
     desc: 'Insurance, pensions and taxes in one place: Coverd compares independently for private individuals and SMEs, in person in Olten or by video call.',
     heroAlt: 'Covered wooden bridge across a river in a Swiss old town at blue hour',
     eyebrow: 'Insurance · Pensions · Finance · Taxes',
-    h1: 'One partner.<br />Everything in view.',
+    h1: 'One partner.<br /><em>Everything in view.</em>',
     lede: 'We are an independent insurance broker based in Olten. We compare insurance and pension solutions for private individuals and SMEs, explain clearly what you actually need, and remain your point of contact after the contract is signed.',
     book: 'Book an Initial Consultation',
     situation: 'Share Your Situation',
     nudge: 'Free initial consultation · In person in Olten or by video call',
+    waShort: 'Or send us a quick WhatsApp',
+    videoPause: 'Pause video',
+    videoPlay: 'Play video',
     introKicker: 'About Coverd',
     introH: 'Everything in one place.',
     introP: "Insurance, pensions and taxes are more closely connected than most people realise. Anyone who gets married, buys a house or starts a company notices this quickly. That's why we look at your situation as a whole, not policy by policy.",
@@ -191,6 +198,7 @@ const copy = {
     blogBtn: 'All Articles',
     ctaH: "You don't have to decide anything today.",
     ctaP: "Get to know us in a non-binding initial conversation. We'll look together at where you stand and whether Coverd can support you.",
+    ways: { wa: 'WhatsApp', mail: 'Email', form: 'Contact form' },
   },
 }[lang];
 
@@ -199,57 +207,65 @@ const [lead, ...rest] = posts;
 const jan = team[0];
 ---
 <Base lang={lang} route="home" title={copy.title} description={copy.desc} jsonld={[organization(lang), website(lang)]}>
-  <section class="hero">
-    <Img class="hero__img" name="home-hero" alt={copy.heroAlt} priority />
+  <section class="hero" data-hero>
+    <div class="hero__bg">
+      <Img class="hero__img" name="home-hero" alt={copy.heroAlt} priority />
+      <video class="hero__video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
+        data-src="/video/hero-bridge-1080.mp4" data-src-portrait="/video/hero-bridge-portrait.mp4"></video>
+    </div>
     <div class="wrap hero__in on-dark">
-      <div>
+      <div class="hero__copy">
         <Eyebrow>{copy.eyebrow}</Eyebrow>
         <h1 class="h1" set:html={copy.h1} />
         <p class="lede">{copy.lede}</p>
+        <p class="hero__more"><a class="tlink" href={url('kontakt', lang)}>{copy.situation} <Icon name="arrow" /></a></p>
       </div>
-      <div class="hero__aside">
-        <div class="btn-row">
-          <Btn href={bookingUrl()} variant="amber">{copy.book}</Btn>
-          <Btn href={url('kontakt', lang)} variant="line-light">{copy.situation}</Btn>
+      <aside class="hero__card" aria-label={copy.book}>
+        <div class="hero__who">
+          <Img name={jan.photo} alt="" sizes="60px" />
+          <div><strong>{jan.name}</strong><span>{jan.role[lang]}</span></div>
         </div>
-        <p class="hero__nudge">{copy.nudge}</p>
+        <p>{copy.nudge}</p>
+        <Btn href={bookingUrl()} variant="amber">{copy.book}</Btn>
+        <a class="tlink" href={site.whatsapp.href} target="_blank" rel="noopener">{copy.waShort} <Icon name="arrow-up" /></a>
+      </aside>
+    </div>
+    <button class="hero__toggle" type="button" hidden data-pause={copy.videoPause} data-play={copy.videoPlay}><span class="hero__toggle-i" aria-hidden="true"></span><span class="hero__toggle-t">{copy.videoPause}</span></button>
+  </section>
+
+  <section class="slab">
+    <span class="slab__mark" aria-hidden="true"><Logo title="" /></span>
+    <div class="wrap slab__in">
+      <h2 data-reveal>{copy.introH}</h2>
+      <div class="slab__side" data-reveal style="--d:120ms">
+        <p>{copy.introP}</p>
+        <a class="tlink" href={url('ueber', lang)}>{copy.introBtn} <Icon name="arrow" /></a>
       </div>
     </div>
   </section>
 
-  <section class="sec sec--paper">
-    <div class="wrap split split--5-7">
-      <div class="figure ratio-45" data-reveal><Img name="ueber-story" alt={copy.introAlt} sizes="(max-width: 860px) 100vw, 42vw" /></div>
-      <div data-reveal>
-        <Eyebrow>{copy.introKicker}</Eyebrow>
-        <h2 class="mt-2">{copy.introH}</h2>
-        <p class="lede muted mt-3">{copy.introP}</p>
-        <div class="btn-row mt-4"><Btn href={url('ueber', lang)}>{copy.introBtn}</Btn></div>
-
-      </div>
-    </div>
-    <div class="wrap" data-reveal>
-      <ul class="facts">
-          {copy.facts.map(([n, l]) => (
-            <li class="fact"><span class="fact__n">{n}</span><span class="fact__l">{l}</span></li>
-          ))}
-        </ul>
+  <section class="intro">
+    <div class="wrap intro__in">
+      <div class="figure intro__img"><Img name="ueber-story" alt={copy.introAlt} sizes="(max-width: 900px) 84vw, 40vw" /></div>
+      <ul class="intro__facts" data-reveal>
+        {copy.facts.map(([n, l]) => (
+          <li class="stat"><span class="stat__n">{n}</span><span class="stat__l">{l}</span></li>
+        ))}
+      </ul>
     </div>
   </section>
 
-  <section class="sec sec--soft">
+  <section class="sp-b">
     <div class="wrap">
       <SectionHead eyebrow={copy.whoK} title={copy.whoH} />
-      <div class="cards3">
+      <div class="aud">
         {copy.who.map((c, i) => (
-          <a class="icard" href={url(c.href as 'privat', lang)} data-reveal style={`--d:${i * 80}ms`}>
-            <Img name={c.img} alt={c.alt} sizes="(max-width: 900px) 100vw, 33vw" />
-            <div class="icard__b">
-              <span class="icard__k">{c.k}</span>
-              <h3>{c.t}</h3>
-              <p class="icard__p">{c.p}</p>
-              <span class="icard__m">{c.m} <Icon name="arrow-up" /></span>
-            </div>
+          <a class="aud__c" href={url(c.href as 'privat', lang)} data-reveal style={`--d:${i * 90}ms`}>
+            <div class="aud__img"><Img name={c.img} alt={c.alt} sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 32vw" /></div>
+            <span class="aud__k">{c.k}</span>
+            <h3>{c.t}</h3>
+            <p>{c.p}</p>
+            <span class="tlink">{c.m} <Icon name="arrow" /></span>
           </a>
         ))}
       </div>
@@ -289,36 +305,41 @@ const jan = team[0];
     </div>
   </section>
 
-  <section class="sec sec--soft">
-    <div class="wrap">
-      <SectionHead eyebrow={copy.duoK} title={copy.duoH}><p class="lede muted">{copy.duoP}</p></SectionHead>
-      <div class="duo" data-reveal>
-        <div class="duo__a">
-          <h3>{copy.duoA}</h3>
-          <ul class="ticks">{copy.without.map((x) => <li><Icon name="cross" />{x}</li>)}</ul>
-        </div>
-        <div class="duo__b">
-          <h3>{copy.duoB}</h3>
-          <ul class="ticks">{copy.withC.map((x) => <li><Icon name="check" />{x}</li>)}</ul>
-        </div>
+  <section class="sp-a">
+    <div class="wrap swap-wrap">
+      <div data-reveal>
+        <Eyebrow>{copy.duoK}</Eyebrow>
+        <h2>{copy.duoH}</h2>
+        <p class="lede muted swap__intro">{copy.duoP}</p>
+      </div>
+      <div class="swap" data-reveal>
+        <p class="swap__cols" aria-hidden="true"><span>{copy.duoA}</span><span>{copy.duoB}</span></p>
+        <ul>
+          {copy.without.map((x, i) => (
+            <li class="swap__row" style={`--d:${300 + i * 160}ms`}>
+              <span class="swap__a"><span class="vh">{copy.duoA}: </span><s>{x}</s></span>
+              <span class="swap__b"><span class="vh">{copy.duoB}: </span>{copy.withC[i]}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>
 
   <Process id="vorgehen" eyebrow={copy.procK} title={copy.procH} text={copy.procP} steps={copy.steps} alt={copy.procAlt}>
-    <p class="mt-3"><a class="tlink" href={url('transparenz', lang)}>{copy.procLink} <Icon name="arrow-up" /></a></p>
+    <p class="mt-3"><a class="tlink" href={url('transparenz', lang)}>{copy.procLink} <Icon name="arrow" /></a></p>
   </Process>
 
-  <section class="sec sec--soft">
+  <section class="sp-c">
     <div class="wrap">
       <SectionHead eyebrow={copy.themesK} title={copy.themesH}><p class="muted">{copy.themesP}</p></SectionHead>
-      <div class="rows" data-reveal>
+      <div class="rows rows--lg" data-reveal>
         {copy.themes.map((t, i) => (
           <a class="row" href={url(t.href as 'vorsorge', lang)}>
             <span class="row__n">{String(i + 1).padStart(2, '0')}</span>
             <h3>{t.t}</h3>
             <p>{t.p}</p>
-            <Icon name="arrow-up" />
+            <Icon name="arrow" />
           </a>
         ))}
       </div>
@@ -329,11 +350,11 @@ const jan = team[0];
     <div class="wrap">
       <SectionHead eyebrow={copy.trustK} title={copy.trustH}>
         <p class="muted">{copy.trustP}</p>
-        <Btn href={url('ueber', lang)} variant="line">{copy.trustBtn}</Btn>
+        <a class="tlink" href={url('ueber', lang)}>{copy.trustBtn} <Icon name="arrow" /></a>
       </SectionHead>
       <div class="tiles tiles--3" data-reveal>
         {copy.trust.map((x) => (
-          <div class="tile" style="min-height:0">
+          <div class="tile">
             <h3>{x.t}</h3>
             <p>{x.p}</p>
           </div>
@@ -342,21 +363,11 @@ const jan = team[0];
     </div>
   </section>
 
-  <section class="sec sec--dark sec--tight">
-    <figure class="wrap quote quote--person" data-reveal>
-      <div class="quote__photo"><Img name={jan.photo} alt={jan.name} sizes="(max-width: 640px) 120px, 280px" /></div>
-      <div class="quote__body">
-        <blockquote>{copy.quote}</blockquote>
-        <figcaption><strong>{copy.quoteBy}</strong><span class="muted small">{copy.quoteRole}</span></figcaption>
-      </div>
-    </figure>
-  </section>
-
-  <section class="sec sec--soft">
+  <section class="sp-c">
     <div class="wrap">
       <SectionHead eyebrow={copy.blogK} title={copy.blogH}>
         <p class="muted">{copy.blogP}</p>
-        <Btn href={url('blog', lang)} variant="line">{copy.blogBtn}</Btn>
+        <a class="tlink" href={url('blog', lang)}>{copy.blogBtn} <Icon name="arrow" /></a>
       </SectionHead>
       <div class="posts" data-reveal>
         <a class="post-lg" href={postPath(lead)}>
@@ -364,7 +375,7 @@ const jan = team[0];
           <div class="post-lg__b">
             <div class="post-meta"><span>{categories[lead.data.category][lang]}</span><time datetime={lead.data.date.toISOString().slice(0, 10)}>{dateFmt(lead.data.date, lang)}</time></div>
             <h3 class="h3">{lead.data.title}</h3>
-            <span class="icard__m">{ui[lang].readArticle} <Icon name="arrow-up" /></span>
+            <span class="icard__m">{ui[lang].readArticle} <Icon name="arrow" /></span>
           </div>
         </a>
         <div class="post-list">
@@ -382,5 +393,23 @@ const jan = team[0];
     </div>
   </section>
 
-  <CtaBand lang={lang} title={copy.ctaH} text={copy.ctaP} />
+  <section class="desk">
+    <div class="wrap desk__in on-dark">
+      <figure class="desk__q" data-reveal>
+        <div class="desk__ph"><Img name={jan.photo} alt={jan.name} sizes="(max-width: 480px) 110px, 150px" /></div>
+        <figcaption><strong>{copy.quoteBy}</strong>{copy.quoteRole}</figcaption>
+        <blockquote>{copy.quote}</blockquote>
+      </figure>
+      <div class="desk__cta" data-reveal style="--d:120ms">
+        <h2>{copy.ctaH}</h2>
+        <p class="lede">{copy.ctaP}</p>
+        <div class="btn-row"><Btn href={bookingUrl()} variant="amber">{copy.book}</Btn></div>
+        <nav class="desk__ways" aria-label={copy.situation}>
+          <a href={site.whatsapp.href} target="_blank" rel="noopener"><span>{copy.ways.wa}</span><span>{site.whatsapp.label}</span><Icon name="arrow-up" /></a>
+          <a href={`mailto:${site.email}`}><span>{copy.ways.mail}</span><span>{site.email}</span><Icon name="arrow-up" /></a>
+          <a href={url('kontakt', lang)}><span>{copy.ways.form}</span><span>{copy.situation}</span><Icon name="arrow" /></a>
+        </nav>
+      </div>
+    </div>
+  </section>
 </Base>

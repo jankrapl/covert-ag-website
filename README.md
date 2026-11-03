@@ -26,13 +26,26 @@ npm run build   # output in dist/
 | `src/content/blog/{de,en}/` | Blog posts in Markdown. `translationKey` links the two language versions |
 | `src/data/insurances.ts` | The insurance directory |
 | `src/styles/global.css` | The design system |
-| `assets/` | Image masters. Generated files in `public/img` and `public/og` come from these |
+| `assets/` | Image and video masters. Generated files in `public/img`, `public/og` and `public/video` come from these |
 
 ## Adding an image
 
 Put the master in `assets/photos/` (JPEG, at least 1600px wide), run `npm run images`, and commit the
 results. Then use it with `<Img name="file-name" alt="..." sizes="..." />`. Every image needs a real
 `alt` text in both languages, unless it is purely decorative.
+
+## Hero video
+
+The homepage hero plays a muted loop of the bridge over the still photo. It is a fal.ai clip generated
+from `assets/photos/home-hero.jpg`; `scripts/hero-video.sh` turns the source in `assets/video/` into the
+two files in `public/video/` (landscape and a portrait crop for phones) and documents the prompt. The
+video is skipped for visitors with reduced motion or data saver, pauses when scrolled out of view and
+has a pause button.
+
+## Type
+
+Headlines, quotes and large numbers use Newsreader (serif), everything else Schibsted Grotesk. Both are
+self-hosted in `public/fonts`.
 
 ## Adding a blog post
 
