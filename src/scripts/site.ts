@@ -84,7 +84,9 @@ if (hero && video && toggle && !matchMedia('(prefers-reduced-motion: reduce)').m
   const label = toggle.querySelector('.hero__toggle-t');
   const show = (playing: boolean) => {
     toggle.classList.toggle('is-paused', !playing);
-    if (label) label.textContent = (playing ? toggle.dataset.pause : toggle.dataset.play) ?? '';
+    const text = (playing ? toggle.dataset.pause : toggle.dataset.play) ?? '';
+    if (label) label.textContent = text;
+    toggle.title = text;
   };
   const start = () => {
     const portrait = matchMedia('(max-aspect-ratio: 1/1)').matches;

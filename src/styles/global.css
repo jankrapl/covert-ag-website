@@ -34,6 +34,7 @@
   --paper: #f6f1e7;
   --paper-soft: #fbf8f1;
   --paper-deep: #ebe4d4;
+  --sand: #e7dac1;
   --line: #dcd4c2;
   --ink: #0f2420;
   --ink-soft: #4a5a54;
@@ -44,7 +45,7 @@
   --serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
   --font: 'Schibsted Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --gutter: clamp(20px, 5vw, 64px);
-  --section: clamp(72px, 10vw, 136px);
+  --section: clamp(56px, 7vw, 100px);
   --header: 76px;
   --bar: 0px; /* utility bar above the main header, desktop only */
   --edge: max(var(--gutter), calc((100vw - 1328px) / 2 + var(--gutter)));
@@ -104,7 +105,7 @@ h3, .h3 { font-size: clamp(1.375rem, 1.85vw, 1.75rem); line-height: 1.14; letter
 .wrap { width: 100%; max-width: 1328px; margin-inline: auto; padding-inline: var(--gutter); }
 .narrow { max-width: 860px; }
 .sec { padding-block: var(--section); position: relative; }
-.sec--tight { padding-block: clamp(56px, 7vw, 96px); }
+.sec--tight { padding-block: clamp(44px, 5.5vw, 76px); }
 .sec--paper { background: var(--paper); }
 .sec--soft { background: var(--paper-soft); }
 .sec--deep { background: var(--paper-deep); }
@@ -125,7 +126,7 @@ h3, .h3 { font-size: clamp(1.375rem, 1.85vw, 1.75rem); line-height: 1.14; letter
 .eyebrow--center { text-align: center; }
 .sec--dark .eyebrow::after, .on-dark .eyebrow::after { background: var(--amber); }
 .sec--dark + .cta { border-top: 1px solid rgba(246, 241, 231, 0.12); }
-.slab .eyebrow::after { background: var(--pine-900); }
+.slab .eyebrow::after { background: var(--amber-deep); }
 
 /* Buttons: square blocks, the arrow nudges on hover. ↗ marks links that leave the site. */
 .btn {
@@ -294,17 +295,17 @@ h3, .h3 { font-size: clamp(1.375rem, 1.85vw, 1.75rem); line-height: 1.14; letter
 .hero__card .tlink { font-size: 0.9375rem; }
 .hero__toggle {
   position: absolute; z-index: 2; right: var(--edge); top: calc(var(--header) + var(--bar) + 18px);
-  display: inline-flex; align-items: center; gap: 10px; min-height: 36px; padding: 0 12px;
-  color: var(--paper); font-size: 0.8125rem; background: rgba(7, 30, 27, 0.35); border: 1px solid rgba(246, 241, 231, 0.28);
+  display: grid; place-items: center; width: 40px; height: 40px; opacity: 0.75;
+  color: var(--paper); background: rgba(7, 30, 27, 0.3); border: 1px solid rgba(246, 241, 231, 0.24);
   -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: background-color 0.2s;
 }
 .hero__toggle[hidden] { display: none; }
-.hero__toggle:hover { background: rgba(7, 30, 27, 0.6); }
+.hero__toggle:hover, .hero__toggle:focus-visible { opacity: 1; background: rgba(7, 30, 27, 0.6); }
+.hero__toggle-t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .hero__toggle-i { width: 9px; height: 10px; border-inline: 3px solid currentColor; }
 .hero__toggle.is-paused .hero__toggle-i { border: 0; width: 0; height: 0; border-left: 9px solid currentColor; border-block: 5px solid transparent; }
 @media (max-width: 640px) {
-  .hero__toggle { min-width: 44px; min-height: 44px; justify-content: center; padding: 0; top: calc(var(--header) + 12px); }
-  .hero__toggle-t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .hero__toggle { width: 44px; height: 44px; top: calc(var(--header) + 12px); }
 }
 @media (max-width: 960px) {
   .hero__in { grid-template-columns: 1fr; }
@@ -345,8 +346,8 @@ h3, .h3 { font-size: clamp(1.375rem, 1.85vw, 1.75rem); line-height: 1.14; letter
 .plainhead .crumbs { color: var(--ink-soft); }
 
 /* Section heads */
-.shead { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 20px clamp(32px, 6vw, 96px); align-items: end; margin-bottom: clamp(36px, 5vw, 64px); }
-.shead > .eyebrow { grid-column: 1 / -1; margin-bottom: clamp(4px, 1.4vw, 18px); }
+.shead { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 20px clamp(32px, 6vw, 96px); align-items: end; margin-bottom: clamp(28px, 3.6vw, 48px); }
+.shead > .eyebrow { grid-column: 1 / -1; margin-bottom: clamp(0px, 0.8vw, 10px); }
 .shead h2 { margin-top: 0; }
 .shead__side { display: grid; gap: 20px; justify-items: start; align-self: end; }
 .shead--center { display: block; text-align: center; max-width: 52rem; margin-inline: auto; }
@@ -532,7 +533,7 @@ a.row:hover svg { transform: translateX(3px); }
 
 /* CTA band: pine panel beside a landscape, with the direct ways to reach us. */
 .cta { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); background: var(--pine-900); color: var(--paper); }
-.cta__in { padding: clamp(64px, 8vw, 120px) clamp(28px, 5vw, 80px) clamp(56px, 7vw, 104px) var(--edge); display: grid; gap: 18px; justify-items: start; align-content: center; }
+.cta__in { padding: clamp(52px, 6.5vw, 96px) clamp(28px, 5vw, 80px) clamp(48px, 6vw, 88px) var(--edge); display: grid; gap: 18px; justify-items: start; align-content: center; }
 .cta__in h2 { max-width: 15ch; }
 .cta__in .lede { max-width: 34rem; color: #d9e2da; }
 .cta__in .btn-row { margin-top: 10px; }
@@ -819,11 +820,11 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; }
 /* ---------- Homepage ---------- */
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* Amber field: one warm block in the page, with the logo's outline ghosted behind it. */
-.slab { position: relative; overflow: hidden; background: var(--amber); color: var(--pine-950); }
-.slab__mark { position: absolute; right: -1.5%; bottom: -1px; width: min(64vw, 980px); line-height: 0; color: rgba(7, 30, 27, 0.06); --logo-accent: rgba(7, 30, 27, 0.09); pointer-events: none; }
+/* Sand block: one warm, quiet block in the page, with the logo ghosted behind it. */
+.slab { position: relative; overflow: hidden; background: var(--sand); color: var(--pine-950); }
+.slab__mark { position: absolute; right: -1.5%; bottom: -1px; width: min(64vw, 980px); line-height: 0; color: rgba(7, 30, 27, 0.045); --logo-accent: rgba(217, 139, 43, 0.22); pointer-events: none; }
 .slab__mark svg { width: 100%; height: auto; }
-.slab__in { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px clamp(20px, 3vw, 40px); padding-block: clamp(76px, 9vw, 132px) clamp(170px, 19vw, 280px); }
+.slab__in { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px clamp(20px, 3vw, 40px); padding-block: clamp(60px, 7vw, 104px) clamp(150px, 16vw, 232px); }
 .slab h2 { grid-column: 1 / span 7; font-size: clamp(2.625rem, 6vw, 5.25rem); line-height: 0.98; letter-spacing: -0.024em; }
 .slab__side { grid-column: 9 / span 4; align-self: end; display: grid; gap: 18px; justify-items: start; border-top: 3px solid var(--pine-950); padding-top: 18px; }
 .slab__side p { font-size: 1.125rem; line-height: 1.5; text-wrap: pretty; }
@@ -833,9 +834,9 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; }
 }
 
 /* The intro photo hangs out of the amber field; the facts sit beside it. */
-.intro { padding-bottom: clamp(48px, 6vw, 80px); }
+.intro { padding-bottom: clamp(28px, 3.5vw, 48px); }
 .intro__in { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px clamp(20px, 3vw, 40px); }
-.intro__img { grid-column: 2 / span 5; margin-top: calc(-1 * clamp(140px, 16vw, 236px)); position: relative; aspect-ratio: 4 / 5; }
+.intro__img { grid-column: 2 / span 5; margin-top: calc(-1 * clamp(120px, 13vw, 196px)); position: relative; aspect-ratio: 4 / 5; }
 .intro__facts { grid-column: 8 / span 5; align-self: end; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 4vw, 52px) clamp(20px, 3vw, 40px); }
 .stat { padding-bottom: 16px; border-bottom: 3px solid var(--amber-deep); }
 .stat__n { display: block; font-family: var(--serif); font-size: clamp(3rem, 5.4vw, 4.75rem); line-height: 0.9; letter-spacing: -0.02em; font-variant-numeric: lining-nums; }
@@ -849,8 +850,8 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; }
 /* Audience cards: photo above, text below, staggered like a magazine spread. */
 .aud { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.6vw, 40px); align-items: start; }
 .aud__c { display: grid; gap: 12px; text-decoration: none; }
-.aud__c:nth-child(2) { margin-top: clamp(48px, 7vw, 112px); }
-.aud__c:nth-child(3) { margin-top: clamp(24px, 3.5vw, 56px); }
+.aud__c:nth-child(2) { margin-top: clamp(40px, 5vw, 80px); }
+.aud__c:nth-child(3) { margin-top: clamp(20px, 2.5vw, 40px); }
 .aud__img { aspect-ratio: 4 / 5; overflow: hidden; overflow: clip; background: var(--paper-deep); margin-bottom: 6px; }
 .aud__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
 .aud__c:hover .aud__img img { transform: scale(1.03); }
@@ -900,7 +901,7 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; }
 
 /* Closing desk: a person and the direct ways to reach the firm. */
 .desk { background: var(--pine-900); color: var(--paper); }
-.desk__in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 56px clamp(40px, 8vw, 136px); padding-block: clamp(72px, 9vw, 136px); align-items: start; }
+.desk__in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px clamp(40px, 8vw, 136px); padding-block: clamp(56px, 7vw, 104px); align-items: start; }
 .desk__q { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: 18px 24px; align-items: end; }
 .desk__ph { aspect-ratio: 4 / 5; background: var(--paper); overflow: hidden; }
 .desk__ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 6%; mix-blend-mode: multiply; }
@@ -924,6 +925,6 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; }
 }
 
 /* Section spacing on the homepage is set per section rather than one value for all. */
-.sp-a { padding-block: clamp(80px, 10vw, 148px) clamp(64px, 8vw, 112px); }
-.sp-b { padding-block: clamp(56px, 7vw, 96px) clamp(80px, 11vw, 160px); }
-.sp-c { padding-block: clamp(64px, 8vw, 120px); }
+.sp-a { padding-block: clamp(60px, 7vw, 104px) clamp(52px, 6vw, 88px); }
+.sp-b { padding-block: clamp(40px, 5vw, 72px) clamp(60px, 7.5vw, 108px); }
+.sp-c { padding-block: clamp(52px, 6.5vw, 92px); }
