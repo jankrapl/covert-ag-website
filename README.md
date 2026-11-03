@@ -34,18 +34,12 @@ Put the master in `assets/photos/` (JPEG, at least 1600px wide), run `npm run im
 results. Then use it with `<Img name="file-name" alt="..." sizes="..." />`. Every image needs a real
 `alt` text in both languages, unless it is purely decorative.
 
-## Hero video
+## Hero video (off for now)
 
-The homepage hero plays a muted loop of the bridge over the still photo: a 4K fal.ai clip (Gemini Omni
-Flash) generated from `assets/photos/home-hero.jpg`, turned into a cinemagraph. The bridge, the town and
-the clock are frozen from one frame using `assets/video/hero-bridge-freeze-mask.png`; only sky, mist
-and water move. `scripts/hero-video.sh` builds the two files in `public/video/` (landscape, and a
-portrait crop for phones) and documents the prompt and the steps. The 43 MB source is not in git (on
-dev2: `~/coverd/video-sources/`). The script caps ffmpeg's memory, because an uncapped run took the
-shared server down.
-
-The video is skipped for visitors with reduced motion or data saver, pauses when scrolled out of view and
-has a small pause button.
+The homepage hero shows the still photo. A video version (a looping cinemagraph of the bridge) was taken
+off on 2026-11-03; commit `81f73da` has the markup, script and styles to bring it back.
+`scripts/hero-video.sh` and `assets/video/hero-bridge-freeze-mask.png` are kept for that. The script
+documents the fal.ai prompt and caps ffmpeg's memory, because an uncapped run took the shared server down.
 
 ## Type
 

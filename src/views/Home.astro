@@ -29,8 +29,6 @@ const copy = {
     situation: 'Situation schildern',
     nudge: 'Kostenloses Erstgespräch · Persönlich in Olten oder per Video',
     waShort: 'Oder kurz auf WhatsApp schreiben',
-    videoPause: 'Video anhalten',
-    videoPlay: 'Video abspielen',
     introKicker: 'Über Coverd',
     introH: 'Alles aus einer Hand.',
     introP: 'Versicherungen, Vorsorge und Steuern hängen enger zusammen, als man denkt. Wer heiratet, ein Haus kauft oder eine Firma gründet, merkt das schnell. Deshalb schauen wir uns Ihre Situation als Ganzes an und nicht Police für Police.',
@@ -120,8 +118,6 @@ const copy = {
     situation: 'Share Your Situation',
     nudge: 'Free initial consultation · In person in Olten or by video call',
     waShort: 'Or send us a quick WhatsApp',
-    videoPause: 'Pause video',
-    videoPlay: 'Play video',
     introKicker: 'About Coverd',
     introH: 'Everything in one place.',
     introP: "Insurance, pensions and taxes are more closely connected than most people realise. Anyone who gets married, buys a house or starts a company notices this quickly. That's why we look at your situation as a whole, not policy by policy.",
@@ -207,11 +203,9 @@ const [lead, ...rest] = posts;
 const jan = team[0];
 ---
 <Base lang={lang} route="home" title={copy.title} description={copy.desc} jsonld={[organization(lang), website(lang)]}>
-  <section class="hero" data-hero>
+  <section class="hero">
     <div class="hero__bg">
       <Img class="hero__img" name="home-hero" alt={copy.heroAlt} priority />
-      <video class="hero__video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
-        data-src="/video/hero-bridge-1080.mp4" data-src-portrait="/video/hero-bridge-portrait.mp4"></video>
     </div>
     <div class="wrap hero__in on-dark">
       <div class="hero__copy">
@@ -230,7 +224,6 @@ const jan = team[0];
         <a class="tlink" href={site.whatsapp.href} target="_blank" rel="noopener">{copy.waShort} <Icon name="arrow-up" /></a>
       </aside>
     </div>
-    <button class="hero__toggle" type="button" hidden data-pause={copy.videoPause} data-play={copy.videoPlay} title={copy.videoPause}><span class="hero__toggle-i" aria-hidden="true"></span><span class="hero__toggle-t">{copy.videoPause}</span></button>
   </section>
 
   <section class="slab">
