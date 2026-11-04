@@ -29,8 +29,11 @@ Everything here goes into `src/data/site.ts`. Empty fields are simply not shown.
       Make these match before launch: either the portal is live, or the copy changes.
 - [ ] Surname and LinkedIn profile for Dominique in `src/data/team.ts`.
 - [ ] Higher resolution portraits for Luca, Nicolas and Dominique. Current files are about 300px wide.
-- [ ] Decide whether the contact form should deliver enquiries directly. It currently opens the visitor's
-      email program, because a static site has no mail backend. Delivering directly needs a mail provider.
+- [x] The contact form delivers enquiries directly: the browser posts them to the Z83 cockpit
+      (`site.formEndpoint`, portal.z83.ch), where they appear under "Coverd-Formulare". The cockpit already
+      accepts `https://coverd.ch` and `https://www.coverd.ch` as origins, so nothing changes there at launch.
+- [ ] Legal review of the privacy wording on the contact form: enquiries are stored on the Z83 cockpit
+      server (Infomaniak, Switzerland). Check whether Z83 AG has to be named as processor.
 
 ## Server changes on dev2
 

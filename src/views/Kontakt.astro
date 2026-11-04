@@ -10,6 +10,7 @@ import { organization } from '../lib/schema';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || site.formEndpoint;
 const c = {
   de: {
     title: 'Kontakt & Erstgespräch | Coverd Olten',
@@ -38,9 +39,11 @@ const c = {
     prefill: 'Mein Anliegen:',
     consent: 'Ich bin einverstanden, dass Coverd meine Angaben zur Bearbeitung meiner Anfrage verwendet.',
     privacy: 'Mehr dazu im Datenschutz',
-    send: 'E-Mail vorbereiten',
-    note: 'Beim Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Nachricht. Auf dieser Website wird nichts gespeichert.',
-    ok: `Öffnet sich kein E-Mail-Programm? Schreiben Sie uns direkt an ${site.email}.`,
+    send: 'Nachricht senden',
+    sending: 'Wird gesendet …',
+    note: 'Ihre Angaben gehen verschlüsselt direkt an uns.',
+    ok: 'Danke für Ihre Nachricht. Wir melden uns in der Regel innerhalb eines Werktages.',
+    err: 'Das hat leider nicht geklappt. Schreiben Sie uns bitte direkt an',
     subject: 'Anfrage über coverd.ch',
     alt: 'Blick durch eine gedeckte Holzbrücke in die Altstadt',
   },
@@ -71,9 +74,11 @@ const c = {
     prefill: 'My request:',
     consent: 'I agree that Coverd may use my details to process my enquiry.',
     privacy: 'More in our privacy policy',
-    send: 'Prepare Email',
-    note: 'When you submit, your email program opens with the finished message. Nothing is stored on this website.',
-    ok: `Email client did not open? Write to us directly at ${site.email}.`,
+    send: 'Send message',
+    sending: 'Sending …',
+    note: 'Your details are sent to us directly over an encrypted connection.',
+    ok: 'Thank you for your message. We usually reply within one business day.',
+    err: 'Sorry, that did not work. Please write to us directly at',
     subject: 'Enquiry via coverd.ch',
     alt: 'View through a covered wooden bridge towards the old town',
   },
@@ -108,7 +113,7 @@ const c = {
       <div class="sec--soft" style="padding:clamp(22px,3vw,40px)">
         <h2 class="h3" style="font-size:clamp(1.5rem,2.4vw,2rem)">{c.formH}</h2>
         <p class="muted mt-1">{c.formP}</p>
-        <form class="form mt-4" id="contactForm" data-email={site.email} data-subject={c.subject} data-prefill={c.prefill}>
+        <form class="form mt-4" id="contactForm" data-endpoint={endpoint} data-lang={lang} data-sending={c.sending} data-email={site.email} data-subject={c.subject} data-prefill={c.prefill}>
           <div class="form__row">
             <div class="field"><label for="f-name">{c.name}</label><input id="f-name" name="name" type="text" autocomplete="name" required /></div>
             <div class="field"><label for="f-email">{c.email}</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
@@ -125,10 +130,12 @@ const c = {
             <select id="f-topic" name="topic">{c.topics.map((o) => <option>{o}</option>)}</select>
           </div>
           <div class="field"><label for="f-msg">{c.msg}</label><textarea id="f-msg" name="message" required></textarea></div>
+          <div class="form__hp" aria-hidden="true"><label for="f-hp">Website</label><input id="f-hp" name="hp" type="text" tabindex="-1" autocomplete="off" /></div>
           <label class="check"><input type="checkbox" name="consent" required /><span>{c.consent} <a href={url('datenschutz', lang)}>{c.privacy}</a>.</span></label>
           <div class="btn-row"><button class="btn" type="submit"><span class="btn__t">{c.send}</span><span class="btn__i"><Icon name="arrow" /></span></button></div>
           <p class="form__note">{c.note}</p>
           <p class="form__ok" id="formOk" role="status">{c.ok}</p>
+          <p class="form__ok form__err" id="formErr" role="alert">{c.err} <a id="formErrMail" href={`mailto:${site.email}`}>{site.email}</a>.</p>
         </form>
       </div>
     </div>
@@ -136,25 +143,73 @@ const c = {
 </Base>
 
 <script>
-  // The form composes an email in the visitor's mail program. To collect enquiries directly later,
-  // point the submit handler at an endpoint; the markup does not need to change.
+  // The form posts the enquiry as JSON to the Z83 cockpit (site.formEndpoint), where it appears
+  // under "Coverd-Formulare". The browser calls the cockpit directly: the site is static. If that
+  // fails, the error message links to a prepared email instead, so no enquiry is lost.
   const form = document.getElementById('contactForm') as HTMLFormElement | null;
   if (form) {
     const topics = new URLSearchParams(location.search).getAll('thema').filter(Boolean);
     const msg = form.elements.namedItem('message') as HTMLTextAreaElement;
     if (topics.length) msg.value = `${form.dataset.prefill} ${topics.join(', ')}\n\n`;
 
-    form.addEventListener('submit', (e) => {
+    const ok = document.getElementById('formOk');
+    const err = document.getElementById('formErr');
+    const errMail = document.getElementById('formErrMail') as HTMLAnchorElement | null;
+    const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const buttonText = button.querySelector('.btn__t') as HTMLElement;
+    const label = (id: string) => form.querySelector(`label[for="${id}"]`)?.textContent?.trim() ?? id;
+    let busy = false;
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (busy) return;
       const d = new FormData(form);
-      const body = [
-        d.get('message'),
-        '',
-        `${d.get('name')} · ${d.get('email')}${d.get('phone') ? ` · ${d.get('phone')}` : ''}`,
-        `${d.get('who')} · ${d.get('topic')}`,
-      ].join('\n');
-      location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(`${form.dataset.subject}: ${d.get('topic')}`)}&body=${encodeURIComponent(body)}`;
-      document.getElementById('formOk')?.classList.add('is-on');
+      const v = (key: string) => String(d.get(key) ?? '').trim();
+
+      busy = true;
+      button.disabled = true;
+      const sendText = buttonText.textContent;
+      buttonText.textContent = form.dataset.sending ?? sendText;
+      ok?.classList.remove('is-on');
+      err?.classList.remove('is-on');
+      try {
+        const res = await fetch(form.dataset.endpoint ?? '', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            formular: 'kontakt',
+            name: v('name'),
+            email: v('email'),
+            telefon: v('phone'),
+            nachricht: v('message'),
+            felder: [
+              { label: label('f-who'), wert: v('who') },
+              { label: label('f-topic'), wert: v('topic') },
+            ],
+            sprache: form.dataset.lang,
+            seite: location.pathname,
+            hp: v('hp'),
+          }),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        form.reset();
+        ok?.classList.add('is-on');
+      } catch {
+        const body = [
+          v('message'),
+          '',
+          `${v('name')} · ${v('email')}${v('phone') ? ` · ${v('phone')}` : ''}`,
+          `${v('who')} · ${v('topic')}`,
+        ].join('\n');
+        if (errMail) {
+          errMail.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(`${form.dataset.subject}: ${v('topic')}`)}&body=${encodeURIComponent(body)}`;
+        }
+        err?.classList.add('is-on');
+      } finally {
+        busy = false;
+        button.disabled = false;
+        buttonText.textContent = sendText;
+      }
     });
   }
 </script>

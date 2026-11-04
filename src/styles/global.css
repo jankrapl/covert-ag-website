@@ -608,6 +608,9 @@ a.row:hover svg { transform: translateX(3px); }
 .form__note { font-size: 0.875rem; color: var(--ink-soft); }
 .form__ok { display: none; padding: 14px 16px; background: var(--paper-deep); font-size: 0.9375rem; }
 .form__ok.is-on { display: block; }
+.form__err { border-left: 3px solid currentColor; }
+/* Honeypot: hidden from people and screen readers, filled in only by bots. */
+.form__hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 
 .contact-list { border-top: 1px solid var(--line); }
 .contact-item { display: grid; grid-template-columns: minmax(0, 1fr) 20px; gap: 2px 16px; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; align-items: center; }

@@ -43,6 +43,11 @@ export const site = {
   },
 
   partner: { name: 'Z83 AG', href: 'https://www.z83.ch' },
+
+  // The contact form posts here; enquiries land in the Z83 cockpit under "Coverd-Formulare". The
+  // cockpit only accepts staging.coverd.ch, coverd.ch and www.coverd.ch as origins. For a local test
+  // against a local cockpit, set PUBLIC_FORM_ENDPOINT (e.g. http://localhost:3001/api/coverd-formular).
+  formEndpoint: 'https://portal.z83.ch/api/coverd-formular',
 };
 
 export type BookingTopic = Exclude<keyof typeof site.booking, 'general'>;
