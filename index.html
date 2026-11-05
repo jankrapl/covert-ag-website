@@ -209,7 +209,9 @@
     box-shadow:0 10px 24px rgba(11,11,12,.06); cursor:pointer; z-index:1;
     transition:border-color .2s ease, color .2s ease, transform .2s ease;
   }
-  .hub-node:hover{ border-color:var(--pine); color:var(--pine); transform:translate(-50%,-50%) scale(1.05); animation-play-state:paused; }
+  @media (hover:hover){
+    .hub-node:hover{ border-color:var(--pine); color:var(--pine); transform:translate(-50%,-50%) scale(1.05); animation-play-state:paused; }
+  }
   @media (max-width:720px){
     .hub-diagram{ aspect-ratio:auto; max-width:420px; display:flex; flex-direction:column; gap:14px; }
     .hub-lines{ display:none; }
@@ -266,9 +268,11 @@
   @media (max-width:600px){ .services{ grid-template-columns:1fr; } }
   .service{ padding:0; border:0; }
   .services > .service{ border:0; padding:0; }
-  .service-icon{ width:56px; height:56px; margin:0 auto 22px; background:var(--pine); border-radius:0 20px 20px 20px; display:flex; align-items:center; justify-content:center; position:relative; box-shadow:0 3px 0 #2e20c9, 0 6px 0 #241a9e, 0 14px 22px rgba(11,11,12,.22); }
+  .service-icon{ width:56px; height:56px; margin:0 auto 22px; background:var(--pine); border-radius:0 20px 20px 20px; display:flex; align-items:center; justify-content:center; position:relative; box-shadow:0 3px 0 #2e20c9, 0 6px 0 #241a9e, 0 14px 22px rgba(11,11,12,.22); transition:transform .3s ease; }
   @media (prefers-reduced-motion: no-preference){
     .service-icon{ animation:iconTilt3d 5s ease-in-out infinite; }
+  }
+  @media (prefers-reduced-motion: no-preference) and (hover:hover){
     .service-icon:hover{ animation-play-state:paused; transform:perspective(500px) rotateX(10deg) rotateY(-14deg); }
   }
   @keyframes iconTilt3d{
@@ -360,6 +364,17 @@
   /* ---------- Blog articles ---------- */
   .article{ max-width:720px; margin:0 auto; }
   .article-tag{ display:inline-block; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--pine); margin-bottom:14px; }
+
+  /* ---- Z83 partnership card ---- */
+  .z83-card{ background:linear-gradient(155deg, var(--pine) 0%, var(--ink) 120%); border-radius:16px; padding:34px 30px; color:#fff; }
+  .z83-lockup{ display:flex; align-items:center; gap:14px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.3rem; }
+  .z83-lockup .x{ color:rgba(255,255,255,.4); font-weight:500; }
+  .z83-stats{ display:flex; gap:28px; margin-top:28px; flex-wrap:wrap; }
+  .z83-stats strong{ display:block; font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.3rem; }
+  .z83-stats span{ display:block; font-size:0.78rem; color:rgba(255,255,255,.65); margin-top:2px; }
+  .z83-check{ list-style:none; margin:22px 0 0; padding:0; }
+  .z83-check li{ position:relative; padding-left:28px; margin-bottom:12px; line-height:1.5; font-size:0.94rem; }
+  .z83-check li::before{ content:"✓"; position:absolute; left:0; top:0; color:var(--pine); font-weight:700; }
   .article h2{ margin-bottom:24px; }
   .article p{ margin:0 0 20px; line-height:1.7; }
   .article h3{ margin:40px 0 14px; font-size:1.2rem; }
@@ -2369,18 +2384,30 @@
     </div>
   </section>
 
-  <section class="deep" style="text-align:center;">
-    <div class="wrap" style="max-width:720px;">
-      <div class="article-tag" style="margin-bottom:14px;" data-de="Unser Partner" data-en="Our Partner">Unser Partner</div>
-      <h2 data-de="Treuhand aus einer Hand – zusammen mit Z83 AG." data-en="Fiduciary services under one roof – together with Z83 AG.">Treuhand aus einer Hand – zusammen mit Z83 AG.</h2>
-      <p class="lede" style="margin:16px auto 0;" data-de="Für Buchhaltung, Lohnwesen und weitere administrative Themen rund um Ihr Unternehmen arbeiten wir eng mit unserem Partner Z83 AG zusammen — damit Sie nicht noch einen weiteren Ansprechpartner brauchen." data-en="For bookkeeping, payroll and other administrative matters around your business, we work closely with our partner Z83 AG — so you don't need yet another point of contact.">Für Buchhaltung, Lohnwesen und weitere administrative Themen rund um Ihr Unternehmen arbeiten wir eng mit unserem Partner Z83 AG zusammen — damit Sie nicht noch einen weiteren Ansprechpartner brauchen.</p>
-      <div class="chips" style="justify-content:center; margin-top:22px;">
-        <span class="chip" data-de="Buchhaltung" data-en="Bookkeeping">Buchhaltung</span>
-        <span class="chip" data-de="Lohnbuchhaltung" data-en="Payroll">Lohnbuchhaltung</span>
-        <span class="chip" data-de="Steuererklärungen für Unternehmen" data-en="Corporate tax returns">Steuererklärungen für Unternehmen</span>
-        <span class="chip" data-de="Gesellschaftsgründung" data-en="Company formation">Gesellschaftsgründung</span>
+  <section class="deep">
+    <div class="wrap cols2">
+      <div>
+        <div class="z83-card">
+          <div class="z83-lockup"><span>coverd<span style="color:var(--pine-light);">.</span></span><span class="x">×</span><span>Z83</span></div>
+          <div class="z83-stats">
+            <div><!-- TODO: Zahl mit Z83 AG verifizieren --><strong>+200</strong><span data-de="Kunden bei Z83" data-en="Clients at Z83">Kunden bei Z83</span></div>
+            <div><!-- TODO: Zahl mit Z83 AG verifizieren --><strong>30</strong><span data-de="Team-Mitglieder" data-en="Team members">Team-Mitglieder</span></div>
+            <div><!-- TODO: Adresse mit Z83 AG verifizieren --><strong>Olten</strong><span>Hauptgasse 30</span></div>
+          </div>
+        </div>
       </div>
-      <div class="cta-row" style="justify-content:center; margin-top:22px;"><button class="btn btn-ghost" onclick="openBooking()" data-de="Erstgespräch vereinbaren" data-en="Book an Initial Consultation">Erstgespräch vereinbaren</button></div>
+      <div>
+        <div class="article-tag" data-de="Partnerschaft" data-en="Partnership">Partnerschaft</div>
+        <h2 data-de="Stark im Verbund mit der Z83 AG." data-en="Strong together with Z83 AG.">Stark im Verbund mit der Z83 AG.</h2>
+        <p class="lede" style="margin-top:16px;" data-de="Für Buchhaltung, Lohn, Steuern und CFO-Services arbeiten wir eng mit der Z83 AG zusammen, dem digitalen Treuhandbüro aus Olten. So bekommen Sie Versicherung, Vorsorge und Treuhand aus einem abgestimmten Netzwerk." data-en="For bookkeeping, payroll, tax and CFO services, we work closely with Z83 AG, the digital fiduciary office from Olten. This gives you insurance, pension planning and fiduciary services from one coordinated network.">Für Buchhaltung, Lohn, Steuern und CFO-Services arbeiten wir eng mit der Z83 AG zusammen, dem digitalen Treuhandbüro aus Olten. So bekommen Sie Versicherung, Vorsorge und Treuhand aus einem abgestimmten Netzwerk.</p>
+        <ul class="z83-check">
+          <li data-de="Treuhand &amp; Revision, Lohn und Steuern für Startups und KMU" data-en="Fiduciary &amp; audit, payroll and tax for startups and SMEs">Treuhand &amp; Revision, Lohn und Steuern für Startups und KMU</li>
+          <li data-de="CFO-Services und IT-Consulting mit eigenen Entwicklern" data-en="CFO services and IT consulting with in-house developers">CFO-Services und IT-Consulting mit eigenen Entwicklern</li>
+          <li data-de="Kurze Wege: beide Teams sind in Olten zuhause" data-en="Short distances: both teams are based in Olten">Kurze Wege: beide Teams sind in Olten zuhause</li>
+        </ul>
+        <!-- TODO: echten Link zur Z83-Website eintragen -->
+        <a class="go" style="display:inline-block; margin-top:22px;" data-de="Mehr über Z83" data-en="More about Z83">Mehr über Z83 →</a>
+      </div>
     </div>
   </section>
 
