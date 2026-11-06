@@ -267,10 +267,12 @@ h3, .h3 { font-size: clamp(1.375rem, 1.85vw, 1.75rem); line-height: 1.14; letter
 .hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
 .hero::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
+  /* The shade sits behind the text block; the town and the mist on the right stay in their own light. */
   background:
-    linear-gradient(180deg, rgba(7, 30, 27, 0.55) 0, rgba(7, 30, 27, 0) 22%),
-    linear-gradient(0deg, rgba(7, 30, 27, 0.94) 0, rgba(7, 30, 27, 0.62) 30%, rgba(7, 30, 27, 0) 60%),
-    linear-gradient(90deg, rgba(7, 30, 27, 0.5) 0, rgba(7, 30, 27, 0) 58%);
+    radial-gradient(64% 58% at 24% 66%, rgba(7, 30, 27, 0.62) 0, rgba(7, 30, 27, 0) 100%),
+    linear-gradient(180deg, rgba(7, 30, 27, 0.5) 0, rgba(7, 30, 27, 0) 20%),
+    linear-gradient(0deg, rgba(7, 30, 27, 0.9) 0, rgba(7, 30, 27, 0.42) 30%, rgba(7, 30, 27, 0) 55%),
+    linear-gradient(90deg, rgba(7, 30, 27, 0.45) 0, rgba(7, 30, 27, 0) 55%);
 }
 @keyframes settle { from { transform: scale(1.04); } to { transform: none; } }
 .hero__in {
@@ -357,6 +359,10 @@ h3, .h3 { font-size: clamp(1.375rem, 1.85vw, 1.75rem); line-height: 1.14; letter
 .figure { position: relative; overflow: hidden; background: var(--paper-deep); }
 .figure img { width: 100%; height: 100%; object-fit: cover; }
 .ratio-45 { aspect-ratio: 4 / 5; }
+/* A photo with a credit line under it (archive and third-party photos). */
+.capfig figcaption { margin-top: 10px; font-size: 0.8125rem; line-height: 1.45; color: var(--ink-soft); }
+.capfig figcaption a { text-decoration: none; }
+.capfig figcaption a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 .ratio-43 { aspect-ratio: 4 / 3; }
 .ratio-32 { aspect-ratio: 3 / 2; }
 
@@ -558,6 +564,7 @@ a.row:hover svg { transform: translateX(3px); }
 .art__note { font-size: 0.875rem; color: var(--ink-soft); }
 .legal h2 { font-size: 1.5rem; }
 .legal h3 { font-size: 1.125rem; margin-top: 1.6em; }
+.legal a[rel~='license'] { white-space: nowrap; }
 
 /* Forms and pickers */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }

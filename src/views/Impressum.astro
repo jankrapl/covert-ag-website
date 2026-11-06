@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import { url, ui, type Lang } from '../i18n';
 import { site } from '../data/site';
+import { credits } from '../data/credits';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -76,10 +77,18 @@ const finma = site.finma;
         )}
         <h2>{de ? 'Urheberrechte und Bilder' : 'Copyright and images'}</h2>
         {de ? (
-          <p>Texte, Grafiken und Bilder dieser Website sind urheberrechtlich geschützt. Die Porträts im Team zeigen unsere Mitarbeitenden. Alle übrigen Bilder sind mit künstlicher Intelligenz erzeugte Stimmungsbilder und zeigen keine realen Kundinnen, Kunden oder Orte.</p>
+          <p>Texte, Grafiken und Bilder dieser Website sind urheberrechtlich geschützt. Die Porträts im Team zeigen unsere Mitarbeitenden. Die Fotos von Olten stammen von anderen Fotografinnen und Fotografen und stehen unter freien Lizenzen (siehe Bildnachweis). Alle übrigen Bilder sind mit künstlicher Intelligenz erzeugte Stimmungsbilder und zeigen keine realen Kundinnen, Kunden oder Orte.</p>
         ) : (
-          <p>The text, graphics and images on this website are protected by copyright. The team portraits show our staff. All other images are AI-generated mood images and do not show real clients or places.</p>
+          <p>The text, graphics and images on this website are protected by copyright. The team portraits show our staff. The photos of Olten were taken by other photographers and are used under free licences (see image credits). All other images are AI-generated mood images and do not show real clients or places.</p>
         )}
+        <h2 id="bildnachweis">{de ? 'Bildnachweis' : 'Image credits'}</h2>
+        <ul>
+          {credits.map((x) => (
+            <li>
+              {x.subject[lang]} ({x.used[lang]}). {de ? 'Foto' : 'Photo'}: {x.author}, <a href={x.licenseUrl} rel="license noopener" target="_blank">{x.license}</a>, {de ? 'via' : 'via'} <a href={x.source} target="_blank" rel="noopener">Wikimedia Commons</a>; {x.changes[lang]}.
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>

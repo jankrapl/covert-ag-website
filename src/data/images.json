@@ -60,8 +60,8 @@
   ]
  },
  "bridge-inside": {
-  "width": 2048,
-  "height": 1152,
+  "width": 2560,
+  "height": 1922,
   "widths": [
    480,
    800,
@@ -120,8 +120,19 @@
   ]
  },
  "home-hero": {
-  "width": 2048,
-  "height": 1152,
+  "width": 2560,
+  "height": 1877,
+  "widths": [
+   480,
+   800,
+   1200,
+   1600,
+   2048
+  ]
+ },
+ "olten-1955": {
+  "width": 2560,
+  "height": 1785,
   "widths": [
    480,
    800,

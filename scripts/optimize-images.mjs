@@ -27,8 +27,9 @@ for (const [dir, widths, q] of [['assets/photos', WIDTHS, 76], ['assets/team', T
     const name = path.basename(file, '.jpg');
     const src = path.join(dir, file);
     const meta = await sharp(src).metadata();
-    const use = widths.filter((w) => w < meta.width);
-    use.push(Math.min(meta.width, widths.at(-1)));
+    const top = Math.min(meta.width, widths.at(-1));
+    const use = widths.filter((w) => w < top);
+    use.push(top);
     for (const w of use) await variant(src, path.join(OUT, `${name}-${w}.webp`), w, q);
     manifest[name] = { width: meta.width, height: meta.height, widths: use };
     if (OG_NAMES.test(name)) {

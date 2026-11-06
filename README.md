@@ -34,6 +34,9 @@ Put the master in `assets/photos/` (JPEG, at least 1600px wide), run `npm run im
 results. Then use it with `<Img name="file-name" alt="..." sizes="..." />`. Every image needs a real
 `alt` text in both languages, unless it is purely decorative.
 
+Photos by other people (the Olten photos from Wikimedia Commons) need an entry in `src/data/credits.ts`:
+the legal notice lists author, licence and source from there, as their licences require.
+
 ## Hero video (off for now)
 
 The homepage hero shows the still photo. A video version (a looping cinemagraph of the bridge) was taken

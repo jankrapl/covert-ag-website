@@ -8,7 +8,7 @@ import Eyebrow from '../components/Eyebrow.astro';
 import SectionHead from '../components/SectionHead.astro';
 import CtaBand from '../components/CtaBand.astro';
 import TeamCard from '../components/TeamCard.astro';
-import { type Lang } from '../i18n';
+import { url, type Lang } from '../i18n';
 import { bookingUrl, site } from '../data/site';
 import { team } from '../data/team';
 import { organization } from '../lib/schema';
@@ -27,7 +27,8 @@ const c = {
     whyH: 'Warum wir Coverd aufgebaut haben.',
     why1: 'Wir arbeiten seit Jahren mit KMU und Privatpersonen zusammen, bei der Buchhaltung, den Löhnen und den Steuern. Dabei sehen wir immer wieder dasselbe: Die Pensionskasse wurde vor zehn Jahren gewählt und seither nie verglichen. Die Betriebshaftpflicht passt nicht mehr zum heutigen Geschäft. Und privat weiss kaum jemand, was die eigenen Policen eigentlich abdecken.',
     why2: 'Wir haben Coverd gegründet, weil wir überzeugt sind, dass das besser geht: mit einem Ansprechpartner, der unabhängig vergleicht, offenlegt, wie er bezahlt wird, und sich auch nach dem Abschluss meldet.',
-    whyAlt: 'Zwei Personen an einem Fenster mit Blick auf Fluss und Holzbrücke',
+    whyAlt: 'Schwarzweisse Luftaufnahme von Olten im Juni 1955: die Altstadt mit der Holzbrücke, die Aare und der Bahnhof',
+    whyCap: 'Olten aus der Luft, 3. Juni 1955. Foto: Werner Friedli, ETH-Bibliothek Zürich (CC BY-SA 4.0)',
     teamK: 'Team',
     teamH: 'Die Menschen hinter Coverd.',
     teamP: 'Bei uns haben Sie eine feste Ansprechperson, die Ihre Situation kennt.',
@@ -50,7 +51,8 @@ const c = {
     whyH: 'Why we built Coverd.',
     why1: "We have worked for years with SMEs and private individuals on bookkeeping, payroll and taxes. In doing so, we keep seeing the same picture: the pension fund was chosen ten years ago and never compared since. Business liability cover no longer fits today's business. And privately, hardly anyone knows what their own policies actually cover.",
     why2: 'We founded Coverd because we are convinced there is a better way: with one point of contact who compares independently, discloses how they are paid, and stays in touch after the contract is signed.',
-    whyAlt: 'Two people at a window looking out over a river and a wooden bridge',
+    whyAlt: 'Black-and-white aerial photograph of Olten in June 1955: the old town with the wooden bridge, the Aare and the station',
+    whyCap: 'Olten from the air, 3 June 1955. Photo: Werner Friedli, ETH-Bibliothek Zürich (CC BY-SA 4.0)',
     teamK: 'Team',
     teamH: 'The people behind Coverd.',
     teamP: 'With us, you have one fixed point of contact who knows your situation.',
@@ -69,7 +71,10 @@ const c = {
 
   <section class="sec sec--paper">
     <div class="wrap split split--flip">
-      <div class="figure ratio-43" data-reveal><Img name="ueber-story" alt={c.whyAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
+      <figure class="capfig" data-reveal>
+        <div class="figure ratio-43"><Img name="olten-1955" alt={c.whyAlt} sizes="(max-width: 860px) 100vw, 48vw" /></div>
+        <figcaption><a href={`${url('impressum', lang)}#bildnachweis`}>{c.whyCap}</a></figcaption>
+      </figure>
       <div data-reveal>
         <Eyebrow>{c.whyK}</Eyebrow>
         <h2 class="mt-2">{c.whyH}</h2>
