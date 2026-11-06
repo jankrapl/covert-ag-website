@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import { routes, ui, url, type Lang, type RouteId } from '../i18n';
 import { site } from '../data/site';
 import { breadcrumbs as crumbSchema } from '../lib/schema';
+import images from '../data/images.json';
 
 interface Props {
   lang: Lang;
@@ -23,7 +24,9 @@ interface Props {
 const { lang, title, description, route, image = 'home-hero', header = 'overlay', jsonld = [], crumb, type = 'website', noindex = false } = Astro.props;
 const alternates = Astro.props.alternates ?? (route ? { de: routes[route].de, en: routes[route].en } : { de: '/', en: '/en/' });
 const canonical = new URL(alternates[lang], site.url).href;
-const ogImage = new URL(`/og/${image}.jpg`, site.url).href;
+// Same version as the page images, so link previews pick up a replaced share image too.
+const ogV = (images as Record<string, { v?: string }>)[image]?.v;
+const ogImage = new URL(`/og/${image}.jpg${ogV ? `?v=${ogV}` : ''}`, site.url).href;
 const altHref = lang === 'de' ? alternates.en : alternates.de;
 
 const trail = crumb
