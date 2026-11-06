@@ -1,5 +1,5 @@
 ---
-// Five-step process on the dark timber photo. Cards stack as they scroll past.
+// Five-step process on the dark timber photo: the steps on one sheet beside a sticky heading.
 import Eyebrow from './Eyebrow.astro';
 import Img from './Img.astro';
 interface Props {
@@ -21,9 +21,9 @@ const { eyebrow, title, text, steps, alt, id } = Astro.props;
       {text && <p>{text}</p>}
       <slot />
     </div>
-    <ol>
+    <ol class="steps">
       {steps.map((s, i) => (
-        <li class="step" style={`top:calc(var(--header) + ${24 + i * 14}px)`}>
+        <li class="step">
           <span class="step__n">{String(i + 1).padStart(2, '0')}</span>
           <h3>{s.t}</h3>
           <p>{s.p}</p>

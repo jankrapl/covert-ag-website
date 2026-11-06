@@ -26,7 +26,7 @@ npm run build   # output in dist/
 | `src/content/blog/{de,en}/` | Blog posts in Markdown. `translationKey` links the two language versions |
 | `src/data/insurances.ts` | The insurance directory |
 | `src/styles/global.css` | The design system |
-| `assets/` | Image and video masters. Generated files in `public/img`, `public/og` and `public/video` come from these |
+| `assets/` | Image masters. The generated files in `public/img` and `public/og` come from these |
 
 ## Adding an image
 
@@ -37,9 +37,10 @@ results. Then use it with `<Img name="file-name" alt="..." sizes="..." />`. Ever
 ## Hero video (off for now)
 
 The homepage hero shows the still photo. A video version (a looping cinemagraph of the bridge) was taken
-off on 2026-11-03; commit `81f73da` has the markup, script and styles to bring it back.
-`scripts/hero-video.sh` and `assets/video/hero-bridge-freeze-mask.png` are kept for that. The script
-documents the fal.ai prompt and caps ffmpeg's memory, because an uncapped run took the shared server down.
+off on 2026-11-03. Commit `81f73da` has everything to bring it back: the markup, styles, the encoded
+videos (`public/video/`), `scripts/hero-video.sh` and the freeze mask (`assets/video/`). The script
+documents the fal.ai prompt and caps ffmpeg's memory, because an uncapped run took the shared server
+down. The 4K source clip was deleted on 2026-11-06; re-encoding needs a new clip.
 
 ## Type
 
