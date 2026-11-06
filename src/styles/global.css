@@ -455,7 +455,7 @@ a.row:hover svg { transform: translateX(3px); }
 .duo--bleed > :last-child { padding-inline: clamp(28px, 4vw, 56px) var(--edge); }
 @media (max-width: 760px) { .duo--bleed > :first-child, .duo--bleed > :last-child { padding-inline: var(--gutter); } }
 
-/* Process: the steps on one sheet of paper over the dark timber photo */
+/* Process: dark timber photo with stacking step cards */
 .process { position: relative; background: var(--pine-950); color: var(--paper); }
 .process__bg { position: absolute; inset: 0; overflow: hidden; }
 .process__bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
@@ -464,14 +464,15 @@ a.row:hover svg { transform: translateX(3px); }
 .process__head { grid-column: 1 / span 5; position: sticky; top: calc(var(--header) + 40px); align-self: start; }
 .process__head .eyebrow + h2 { margin-top: 14px; }
 .process__head p { margin-top: 18px; color: #d9e2da; max-width: 28rem; }
-.steps { grid-column: 7 / -1; background: var(--paper); color: var(--ink); padding: 6px clamp(22px, 2.6vw, 36px); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5); }
-.step { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr); gap: 4px 12px; padding-block: clamp(20px, 2.3vw, 28px); }
-.step + .step { border-top: 1px solid var(--line); }
+.steps { grid-column: 7 / -1; }
+.step { position: sticky; background: var(--paper); color: var(--ink); padding: clamp(22px, 2.6vw, 32px); display: grid; grid-template-columns: 3.25rem minmax(0, 1fr); gap: 4px 12px; box-shadow: 0 -18px 32px -24px rgba(7, 30, 27, 0.5); }
+.step + .step { margin-top: 16px; }
 .step__n { grid-row: span 2; font-family: var(--serif); font-size: 2rem; line-height: 1; letter-spacing: -0.02em; color: var(--copper); font-variant-numeric: lining-nums tabular-nums; }
 .step p { color: var(--ink-soft); }
 @media (max-width: 900px) {
   .process__head, .steps { grid-column: 1 / -1; }
   .process__head { position: static; }
+  .step { position: static; }
 }
 
 /* Team */
@@ -771,23 +772,21 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* "Alles aus einer Hand": one grid with two columns that hold all the way down. Left: the headline,
-   then the photo. Right: the text, the wordmark, then the four fields. The sand field ends on the line
-   the wordmark stands on, and the photo starts at the wordmark's top and hangs out of the field. From
-   1200px the photo also stretches down to the last rule of the list; narrower, that would crop it too
-   thin, so it keeps 4:5. Below 1024px the section stacks.
-   Wordmark: --g is the width of the letters. The SVG (viewBox 336 x 94) has the letters from x 4.6 to
-   329 (324.4 units) and from y 4.8 down to the baseline at y 86.2, so the margins below, in units of
-   --g, put the letters (not the SVG box) on the column edges, the photo's top and the sand's edge.
-   The clip cuts the round letters' overshoot below the baseline. */
+   then the photo. Right: the two paragraphs, then the four fields. The sand field runs to the end of
+   the second paragraph; the photo starts level with that paragraph and hangs out of the field, next
+   to the list, whose first rule is the field's edge. From 1200px the photo also stretches to the
+   list's last rule (never wider than tall); narrower, that would crop it too thin, so it keeps 4:5.
+   Below 1024px the section stacks. */
 .whole__in {
-  --whole-top: clamp(64px, 8vw, 120px);
+  --whole-top: clamp(64px, 7vw, 104px);
+  --whole-step: clamp(40px, 4.4vw, 64px);
   display: grid; isolation: isolate;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: auto auto 1fr;
   grid-template-areas:
     "h h h h h h . l l l l l"
-    "p p p p p p . m m m m m"
-    "p p p p p p . b b b b b";
+    "p p p p p p . t t t t t"
+    "p p p p p p . f f f f f";
   column-gap: var(--gap);
   padding-top: var(--whole-top);
 }
@@ -795,36 +794,27 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; }
   content: ''; grid-area: 1 / 1 / 3 / -1; z-index: -1; margin-top: calc(-1 * var(--whole-top));
   background: var(--sand); box-shadow: 0 0 0 100vmax var(--sand); clip-path: inset(0 -100vmax);
 }
-.whole__h { grid-area: h; align-self: baseline; margin-bottom: clamp(56px, 7vw, 104px); font-size: clamp(2.625rem, 6vw, 5.25rem); line-height: 0.98; letter-spacing: -0.024em; color: var(--pine-950); }
-.whole__lead { grid-area: l; align-self: baseline; margin-bottom: clamp(56px, 7vw, 104px); display: grid; gap: 18px; justify-items: start; color: var(--pine-950); }
+.whole__h { grid-area: h; align-self: baseline; margin-bottom: var(--whole-step); font-size: clamp(2.625rem, 6vw, 5.25rem); line-height: 0.98; letter-spacing: -0.024em; color: var(--pine-950); }
+.whole__lead { grid-area: l; align-self: baseline; margin-bottom: var(--whole-step); display: grid; gap: 18px; justify-items: start; color: var(--pine-950); }
 .whole__lead p { font-size: 1.125rem; line-height: 1.5; text-wrap: pretty; }
-.whole__mark {
-  --g: 100%;
-  grid-area: m; align-self: end; justify-self: start;
-  width: calc(var(--g) * 1.03576);
-  margin: calc(var(--g) * -0.0148) 0 calc(var(--g) * -0.02404) calc(var(--g) * -0.01418);
-  line-height: 0; color: rgba(7, 30, 27, 0.055); --logo-accent: rgba(217, 139, 43, 0.28); pointer-events: none;
-}
-.whole__mark svg { width: 100%; height: auto; clip-path: inset(0 0 8.3% 0); }
-.whole__img { grid-area: p; align-self: stretch; width: 100%; aspect-ratio: 4 / 5; }
-.whole__body { grid-area: b; padding-top: clamp(32px, 3.6vw, 52px); }
-.whole__body > p { color: var(--ink-soft); text-wrap: pretty; }
-.fields { margin-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--ink); }
-.fields a { display: grid; grid-template-columns: minmax(0, 1fr) 16px; gap: 4px 20px; padding: 18px 0 20px; border-bottom: 1px solid var(--line); text-decoration: none; }
+.whole__note { grid-area: t; margin-bottom: var(--whole-step); color: var(--ink-soft); text-wrap: pretty; }
+.whole__img { grid-area: p; align-self: stretch; width: 100%; aspect-ratio: 1 / 1; }
+.fields { grid-area: f; padding-top: 6px; }
+.fields a { display: grid; grid-template-columns: minmax(0, 1fr) 16px; gap: 4px 20px; padding: 20px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
 .fields h3 { font-size: clamp(1.5rem, 2.1vw, 1.875rem); line-height: 1.1; }
 .fields p { color: var(--ink-soft); text-wrap: pretty; }
 .fields svg { grid-column: 2; grid-row: 1 / span 2; align-self: center; width: 16px; height: 16px; transition: transform 0.3s var(--ease); }
 .fields a:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.14em; }
 .fields a:hover svg { transform: translateX(3px); }
-@media (max-width: 1199px) { .whole__img { align-self: start; } }
+@media (max-width: 1199px) { .whole__img { align-self: start; aspect-ratio: 4 / 5; } }
 @media (max-width: 1023px) {
-  .whole__in { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "h" "l" "m" "p" "b"; }
-  .whole__in::before { grid-area: 1 / 1 / 4 / -1; }
+  .whole__in { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "h" "l" "p" "t" "f"; }
   .whole__h { margin-bottom: 22px; }
   .whole__lead { margin-bottom: clamp(44px, 9vw, 72px); }
-  .whole__lead p, .whole__body > p { max-width: 36rem; }
-  .whole__mark { --g: min(100%, 30rem); }
+  .whole__lead p, .whole__note { max-width: 36rem; }
   .whole__img { margin-top: clamp(32px, 6vw, 48px); aspect-ratio: 4 / 3; }
+  .whole__note { margin: clamp(28px, 5vw, 40px) 0 0; }
+  .fields { margin-top: clamp(24px, 4vw, 32px); padding-top: 0; border-top: 1px solid var(--ink); }
 }
 
 /* Audience: the two kinds of clients side by side, then BVG as a row of its own. It is a topic for
