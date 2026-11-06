@@ -17,16 +17,6 @@ const resized = { de: 'verkleinert und zugeschnitten', en: 'resized and cropped'
 
 export const credits: Credit[] = [
   {
-    image: 'home-hero',
-    subject: { de: 'Altstadt Olten mit der Holzbrücke, 28. Dezember 2009', en: 'Olten old town with the wooden bridge, 28 December 2009' },
-    used: { de: 'Startseite', en: 'Home page' },
-    author: 'Konweb4460',
-    license: 'CC BY-SA 4.0',
-    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
-    source: 'https://commons.wikimedia.org/wiki/File:Olten_Aare.jpg',
-    changes: resized,
-  },
-  {
     image: 'bridge-inside',
     subject: { de: 'Im Inneren der Alten Brücke, Olten, 2012', en: 'Inside the old wooden bridge, Olten, 2012' },
     used: { de: 'Startseite und Berufliche Vorsorge, Abschnitt zum Vorgehen', en: 'Home page and occupational pensions, process section' },
